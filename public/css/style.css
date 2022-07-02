@@ -672,14 +672,151 @@ body.dark .home .text{
 }
 }
 
+/* cherry (base landing page css /new) */
+
+/* -----------------------------------------------------------------------------
+                MOST OUTER DIV
+----------------------------------------------------------------------------- */
+
+.bg{
+  position: relative;
+  background-color: #5e1efe;
+  height: 85vh;
+}
+.bgp{
+  position: relative;
+  background-color: #FE5F1E;
+  height: 90vh;
+}
+/* -----------------------------------------------------------------------------
+                 This div contains background image.
+----------------------------------------------------------------------------- */
+.contain-img{
+  position: absolute;
+  top: 58%;
+  left: 0%;
+  transform: rotate(20deg) translate(-50%, -50%);
+  z-index: 3;
+  width: auto;
+  height: 85%;
+  overflow:auto;
+}
+
+/* -----------------------------------------------------------------------------
+                 This div contains all foreground elements
+----------------------------------------------------------------------------- */
+.mycontain.center-text {
+  text-align: center;
+  position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+z-index: 3;
+}
+/* -----------------------------------------------------------------------------
+                Button Styles
+----------------------------------------------------------------------------- */
+.cta-button.light-button {
+  background-color: #ffd9d9;
+  color: #5928e5;
+}
+.cta-button {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  display: inline-block;
+  overflow: hidden;
+  padding: 9px 15px;
+  -webkit-transition: 350ms;
+  transition: 350ms;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-decoration: none;
+}
+.cta-button:hover{
+background-color:#ffd9d9;
+color:#3317ba;
+letter-spacing:1px;}
+.cta-button.light-button:hover
+{background-color:#fff;
+  color:#5928e5}
 
 
+/* -----------------------------------------------------------------------------
+                text Styles
+----------------------------------------------------------------------------- */
 
+   .white-heading {
+      font-family: IntegralCF,sans-serif;
+      color: #fff;
+      font-size: 80px;
+      align-items: flex-start;
+      text-align: center;
+      line-height: 68px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+  }
+  .desc{
+      font-family: 'Sofia Pro', sans-serif;
+      color: #fff ;
+      margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 300;
+  }
+  /* -----------------------------------------------------------------------------
+                Used Fonts
+----------------------------------------------------------------------------- */
 
+  @font-face {
+font-family: 'IntegralCF';
+src: url('https://assets.website-files.com/5f3a64853eba5d020f364879/5f3a66cf88aaa03b3fa3b774_font.woff2') format('woff2'), url('https://assets.website-files.com/5f3a64853eba5d020f364879/5f3a66cf3ec5c1929fe756c0_font.woff') format('woff'), url('https://assets.website-files.com/5f3a64853eba5d020f364879/5f3a66eca57065b43ee5acce_Connary%20Fagen%20-%20Integral%20CF%20Heavy.otf') format('opentype');
+font-weight: 900;
+font-style: normal;
+font-display: auto;
+}
+@font-face {
+font-family: 'Sofia Pro';
+src: url('https://assets.website-files.com/5f3a64853eba5d020f364879/5f3a6776598ce695680be6f3_font.woff2') format('woff2'), url('https://assets.website-files.com/5f3a64853eba5d020f364879/5f3a67753eba5d5b5a364f9e_font.woff') format('woff'), url('https://assets.website-files.com/5f3a64853eba5d020f364879/5f3a67679a782368409ab431_Mostardesign%20-%20Sofia%20Pro%20Light.otf') format('opentype');
+font-weight: 300;
+font-style: normal;
+font-display: auto;}
+/* -----------------------------------------------------------------------------
+               Responsive Styles
+----------------------------------------------------------------------------- */
+@media only screen and (max-width: 1022px){
+  .white-heading {
+      font-size: 50px;
+      line-height: 42px;
+  }
+  .bgp , .bg{
+    height: 70vh;
+}
 
+}
+@media only screen and (max-width: 888px){
+  .white-heading {
+      font-size: 50px;
+      line-height: 42px;
+  }
 
+}
 
-
+@media only screen and (max-width: 498px) {
+  .white-heading {
+      font-size: 30px;
+      line-height: 25px;
+  }
+  .desc{
+      font-size: 14px;
+      line-height: 18px; 
+  }
+  .bgp , .bg{
+      height: 70vh;
+  }
+}
 
 
 

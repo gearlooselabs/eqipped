@@ -22,13 +22,13 @@ const admin = require('../app/http/middlewares/admin')
 
 function initRoutes(app) {
     
-    // if(auth){
-    //     app.get('/', auth, homeController().grandIndex)
-    // }
-    // else{
-    //     app.get('/', homeController().index)
-    // }
-    app.get('/', homeController().index)
+    if(auth){
+        app.get('/', auth, homeController().grandIndex)
+    }
+    else{
+        app.get('/new', homeController().index)
+    }
+    app.get('/new', homeController().index)
 
     app.post('/sub-categories', auth, homeController().grandIndex)
     app.get('/login', guest, authController().login)
