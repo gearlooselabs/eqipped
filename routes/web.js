@@ -93,7 +93,9 @@ function initRoutes(app) {
 
     // Categories route
     app.get('/allcategory', auth, categoriesController().categories)
-
+    app.get('/subcat/', categoriesController().subcat)
+    app.post('/create/subcat/', categoriesController().createSubcat);
+    app.post('/fetch/subcat/', categoriesController().findSubcat);
 
     //Product Route
     app.post('/allcategory/products', auth, productController().productfetch)
