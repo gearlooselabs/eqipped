@@ -34,15 +34,12 @@
 
                                     <div class="w-full lg:w-80 mt-4">
                                         <label class="block mb-3 text-sm font-semibold text-gray-500"
-                                            for="categoryName">Category Name</label>
-                                        <select name="categoryName"
-                                            class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                            for="categoryName">Category Name,';,</label>
+                                        <select name="categoryName" id="category-dropdown" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                             <option value="">select</option>
-                                            <option value="Glassware">Glassware</option>
-                                            <option value="Plasticware">Plasticware</option>
-                                            <option value="Equipment">Equipment</option>
-                                            <option value="Cable">Cable</option>
-                                            <option value="Chemical">Chemical</option>
+                                            <% categories.forEach((category) => { %>
+                                                <option value="<%= category._id %>"><%= category.pcategory %></option>
+                                            <% }) %> 
                                         </select>
                                     </div>
                                 </div>
@@ -144,10 +141,13 @@
                                     <div class="w-full lg:w-80 mt-4">
                                         <label for="subCategory" class="block mb-3 text-sm font-semibold text-gray-500">
                                             SubCategory</label>
-                                        <input name="subCategory" type="text" required placeholder="Sub-Category"
+                                        <!-- <input name="subCategory" type="text" required placeholder="Sub-Category"
                                             id="subCategory"
-                                            class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
-                                    </div>
+                                            class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"> -->
+                                            <select name = "subcategory" id = "subcategory-dropdown" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option>Select Subcategory</option>
+                                            </select>
+                                        </div>
                                 </div>
 
                                 <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
@@ -204,4 +204,26 @@
     }
 
 
+</script>
+<script >
+    $(document).ready(function() {
+    $('#category-dropdown').on('change', function() {
+    var category_id = this.value;
+    $("#subcategory-dropdown").html('');
+    $.ajax({
+    url: "/fetch/subcat/",
+    type: "POST",
+    data: {
+    category_id: category_id,
+    },
+    dataType: 'json',
+    success: function(result) {
+    $('#subcategory-dropdown').html('<option value="">Select Subcategory</option>');
+    $.each(result.subcats, function(key, value) {
+    $("#subcategory-dropdown").append('<option value="' + value._id + '">' + value.name + '</option>');
+    });
+    }
+    });
+    });
+    }); 
 </script>
