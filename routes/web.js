@@ -121,8 +121,8 @@ function initRoutes(app) {
     app.post('/edit', authController().postedit)
 
     // Footer documents 
-    app.get('/privacy-policy', auth, homeController().pripolicy)
-    app.get('/term-condition', auth, homeController().termcondition)
+    app.get('/privacy-policy',  homeController().pripolicy)
+    app.get('/term-condition',  homeController().termcondition)
     
 
 
