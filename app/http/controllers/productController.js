@@ -25,8 +25,8 @@ function productController() {
             res.locals.session.current_Category = product_Category;
             // const chai = await Menu.find({ 'categoryName': ${product_Category}, 'isverified': 'Yes' })
             // const chai = await Menu.find({ '_id': `${product_Category}`});
-            const chai = await Category.find({}).populate({ path: 'psubcat', populate: [{ path: 'product', model: 'Product'}], model: 'Sub'}).exec();
-            return res.render('menus/product', { chai: chai})
+            const categories = await Category.find({_id: req.params.categoryId}).populate({ path: 'psubcat', populate: [{ path: 'product', model: 'Product'}], model: 'Sub'}).exec();
+            return res.render('menus/product', { categories: categories})
         },
 
 
@@ -49,13 +49,13 @@ function productController() {
         async productDetails(req, res) {
             let productKiIdDe = req.params._id;
             let categoryName = req.params.categoryName;
-            const chai = await Menu.find({ '_id': `${productKiIdDe}` })
-            const samose = await Menu.find({ 'categoryName': `${categoryName}` })
+            const chai = await Menu.find({ '_id': `${productKiIdDe}` })   // Fetch details of single products
+            const samose = await Menu.find({ 'categoryName': `${categoryName}` }) //related products
             return res.render('menus/productdetails', { chai: chai, samose: samose })
         },
     }
 }
-
+ 
 
 
 module.exports = productController
