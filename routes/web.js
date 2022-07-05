@@ -93,11 +93,13 @@ function initRoutes(app) {
 
     // Categories route
     app.get('/allcategory', auth, categoriesController().categories)
-
+    app.get('/subcat/', categoriesController().subcat)
+    app.post('/create/subcat/', categoriesController().createSubcat);
+    app.post('/fetch/subcat/', categoriesController().findSubcat);
 
     //Product Route
     app.post('/allcategory/products', auth, productController().productfetch)
-    app.get('/allcategory/products/:categoryName', auth, productController().catProduct)
+    app.get('/allcategory/products/:categoryId', auth, productController().catProduct)
     app.get('/productDetails/:categoryName/:_id', auth, productController().productDetails)
     
     app.get('/brand/:subCategory', auth, productController().brandProduct)
@@ -119,8 +121,8 @@ function initRoutes(app) {
     app.post('/edit', authController().postedit)
 
     // Footer documents 
-    app.get('/privacy-policy', auth, homeController().pripolicy)
-    app.get('/term-condition', auth, homeController().termcondition)
+    app.get('/privacy-policy',  homeController().pripolicy)
+    app.get('/term-condition',  homeController().termcondition)
     
 
 

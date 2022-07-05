@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+    <form action="/create/subcat/" method = "POST">
+        <select name="category" id="">
+            <% categories.forEach((category) => { %>
+                <option value="<%= category._id %>"><%= category.pcategory %></option>
+            <% }) %>
+        </select>
+        <input type="text" name="name" id="">
+        <button type = "submit">Submit</button>
+    </form>
+</body>
+</html>

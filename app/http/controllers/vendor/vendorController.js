@@ -1,4 +1,5 @@
 const Product = require('../../../models/product')
+const Category = require('../../../models/categories')
 const User = require('../../../models/user')
 
 const moment = require('moment')
@@ -16,8 +17,9 @@ function vendorController() {
         },
 
 
-        addproduct(req, res) {
-            return res.render('vendor/addproduct')
+        async addproduct(req, res) {
+            const categories = await Category.find({}).exec();
+            return res.render('vendor/addproduct', { categories: categories});
         },
 
         async editProduct(req, res) {

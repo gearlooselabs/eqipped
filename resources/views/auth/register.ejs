@@ -35,9 +35,8 @@
 </script>
 
 
-<section class="login flex">
 
-  <div id="band" class="min-h-full w-96 flex items-cente justify-center py-12 px-4 sm:px-6 lg:px-2">
+<!-- <div id="band" class="min-h-full w-96 flex items-cente justify-center py-12 px-4 sm:px-6 lg:px-2">
     <div class="modal-content max-w-lg w-full space-y-8">
       <div>
         <h2 class="m-6 text-center text-lg font-extrabold text-gray-900 underline">
@@ -81,10 +80,35 @@
           </form>
 
     </div>
-  </div>
+  </div> -->
 
 
-<div id="ideal" class="py-3 px-4 w-8/12 sm:px-6 lg:px-8" style="display: non;">
+
+
+
+
+
+<!-- 
+  -----------------------------------------------------------------------------
+                                REGISTERATION FORM STEP -1   
+-----------------------------------------------------------------------------  -->
+<!-- <style>
+    .form-step{
+    display: none;
+    justify-content: center;
+  }
+  .form-step-active{
+    display: block; 
+    justify-content: center;
+  }
+
+</style>
+
+
+
+
+<div class="form-step form-step-active">
+<div id="ideal" class="py-3 px-4 w-8/12 sm:px-6 lg:px-8" style="width: 100%; display: flex; justify-content: center;">
 
   <div class="modal-content animate rounded-xl">
     <div>
@@ -156,18 +180,7 @@
 
             </div>
 
-            <div class="space-x-0 lg:flex lg:space-x-4 mt-">
-
-              <div class="w-full lg:w-80 mt-4">
-                <label for="notp" class="block mb- text-sm font-semibold text-gray-500">Phone
-                  OTP*</label>
-                <input id="otp" name="otp" type="text" required
-                  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
-                  placeholder="verification code">
-              </div>
-
-
-
+            <!--
               <div class="w-full lg:w-80 mt-4">
                 <label for="eotp" class="block mb- text-sm font-semibold text-gray-500">
                   Email OTP*</label>
@@ -176,9 +189,9 @@
                   placeholder="verification code">
               </div>
 
-            </div>
+            </div> -->
 
-            <div class="space-x-0 lg:flex lg:space-x-4 mt-">
+<!-- <div class="space-x-0 lg:flex lg:space-x-4 mt-">
 
               <div class="w-full lg:w-80 mt-4">
                 <label for="RegisteredAs" class="block mb- text-sm font-semibold text-gray-500">
@@ -225,35 +238,34 @@
                   placeholder="Area pincode">
               </div>
             </div>
-            <div class="space-x-0 lg:flex lg:space-x-4 mt-">
+            <div class="space-x-0 lg:flex lg:space-x-4 mt-"> -->
 
-              <div class="w-full lg:w-80 mt-4">
+<!-- <div class="w-full lg:w-80 mt-4">
                 <label for="city" class="block mb- text-sm font-semibold text-gray-500">
                   City</label>
                 <input id="city" name="city" type="text" required readonly="readonly" value="<%= messages.city%>"
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
                   placeholder=>
-              </div>
+              </div> -->
 
-              <div class="w-full lg:w-80 mt-4">
+<!-- <div class="w-full lg:w-80 mt-4">
                 <label for="state" class="block mb- text-sm font-semibold text-gray-500">
                   State</label>
                 <input id="state" name="state"  type="text" required readonly="readonly" value="<%= messages.state%>"
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm">
-              </div>
-            </div>
+              </div> -->
+<!-- </div> -->
 
-            <div class="space-x-0 lg:flex lg:space-x-4 mt-">
+<!-- <div class="space-x-0 lg:flex lg:space-x-4 mt-">
               <div class="w-full mt-4">
                 <label for="address" class="sr-onl block mb- text-sm font-semibold text-gray-500">Address</label>
                 <textarea class="w-full px-4 py-3 text-xs border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
                   name="address" value="<%= messages.address%>" type="text" required cols="20" rows="3"
                   placeholder="Address"></textarea>
               </div>
-            </div>
-
+            </div> -->
+<!-- 
             <div class="flex items-center justify-between m-3">
-              <!-- <a class="cursor-pointer px-4 py-2 ml-10 rounded-full text-white text-sm font-bold btn-primary" href="#band">Resend Otp</a> -->
               <span></span>
               <div class="text-sm">
                 Already have account? <a href="/login" class="font-bold font-medium">
@@ -261,9 +273,41 @@
                 </a>
               </div>
             </div>
-
             <div class="mt-1">
-              <button type="submit"
+              <a type="button" style="color: white"
+                class="btn-next group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <span class="absolute left-0 inset-y-0 flex items-center pl-3" style="color: white">
+                 
+                  <svg class="h-5 w-5 text-white-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                    d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </span>
+                Next
+              </a>
+            </div>
+          </div> -->
+
+
+<!-- -----------------------------------------------------------------------------
+                 PAGE -2 
+-----------------------------------------------------------------------------  -->
+<!-- 
+<div class="form-step">
+<div class="space-x-0 lg:flex lg:space-x-4 mt-">
+<div class="w-full lg:w-80 mt-4">
+  <label for="notp" class="block mb- text-sm font-semibold text-gray-500">Phone
+    OTP*</label>
+  <input id="otp" name="otp" type="text" required
+    class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+    placeholder="verification code">
+</div></div>
+
+
+             <div class="mt-1">
+              <button type="submit" href="/login"
                 class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                  
@@ -276,8 +320,8 @@
                 </span>
                 Register
               </button>
-            </div>
-
+            </div> 
+          </div> 
       </div>
 
     </form>
@@ -285,14 +329,457 @@
 </div>
 
 
-</section>
+</section> -->
+
+
+<style>
+  #multi-step-form-container {
+    margin-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .form-border {
+    display: flex;
+    justify-content: center;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pl-0 {
+    padding-left: 0;
+  }
+
+  .button {
+    border: 1px solid #FE5F1E;
+    background-color: #FE5F1E;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .submit-btn {
+    border: 1px solid #0e9594;
+    background-color: #0e9594;
+  }
+
+  .mt-3 {
+    margin-top: 2rem;
+  }
+
+  .d-none {
+    display: none;
+  }
+
+  .form-step {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 3rem;
+    padding-bottom: 4rem;
+  }
+
+  .font-normal {
+    font-weight: normal;
+  }
+
+  ul.form-stepper {
+    counter-reset: section;
+    margin-bottom: 3rem;
+    max-width: 400px;
+  }
+
+  ul.form-stepper .form-stepper-circle {
+    position: relative;
+  }
+
+  ul.form-stepper .form-stepper-circle span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
+
+  .form-stepper-horizontal {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+
+  ul.form-stepper>li:not(:last-of-type) {
+    margin-bottom: 0.625rem;
+    -webkit-transition: margin-bottom 0.4s;
+    -o-transition: margin-bottom 0.4s;
+    transition: margin-bottom 0.4s;
+  }
+
+  .form-stepper-horizontal>li:not(:last-of-type) {
+    margin-bottom: 0 !important;
+  }
+
+  .form-stepper-horizontal li {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: start;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+  }
+
+  .form-stepper-horizontal li:not(:last-child):after {
+    position: relative;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    height: 1px;
+    content: "";
+    top: 24%;
+    left: -5.15%;
+  }
+
+  .form-stepper-horizontal li:after {
+    background-color: #dee2e6;
+  }
+
+  .form-stepper-horizontal li.form-stepper-completed:after {
+    background-color: #4da3ff;
+  }
+
+  .form-stepper-horizontal li:last-child {
+    flex: unset;
+  }
+
+  ul.form-stepper li a .form-stepper-circle {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-right: 0;
+    line-height: 1.7rem;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.38);
+    border-radius: 50%;
+  }
+
+  .form-stepper .form-stepper-active .form-stepper-circle {
+    background-color: #FE5F1E !important;
+    color: #fff;
+  }
+
+  .form-stepper .form-stepper-active .label {
+    color: #FE5F1E !important;
+  }
+
+  .form-stepper .form-stepper-active .form-stepper-circle:hover {
+    background-color: #FE5F1E !important;
+    color: #fff !important;
+  }
+
+  .form-stepper .form-stepper-unfinished .form-stepper-circle {
+    background-color: #f8f7ff;
+  }
+
+  .form-stepper .form-stepper-completed .form-stepper-circle {
+    background-color: #0e9594 !important;
+    color: #fff;
+  }
+
+  .form-stepper .form-stepper-completed .label {
+    color: #0e9594 !important;
+  }
+
+  .form-stepper .form-stepper-completed .form-stepper-circle:hover {
+    background-color: #0e9594 !important;
+    color: #fff !important;
+  }
+
+  .form-stepper .form-stepper-active span.text-muted {
+    color: #fff !important;
+  }
+
+  .form-stepper .form-stepper-completed span.text-muted {
+    color: #fff !important;
+  }
+
+  .form-stepper .label {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .form-stepper a {
+    cursor: default;
+  }
+
+
+</style>
+<div class="form-border">
+  <div style="min-width: 50%">
+    <div>
+      <h2 class="m-10 text-center text-3xl font-extrabold text-gray-900 ">
+        Create Account
+      </h2>
+    </div>
+    <div id="multi-step-form-container">
+      <!-- Form Steps / Progress Bar -->
+      <ul class="form-stepper form-stepper-horizontal text-center mx-auto pl-0">
+        <!-- Step 1 -->
+        <li class="form-stepper-active text-center form-stepper-list" step="1">
+          <a class="mx-2">
+            <span class="form-stepper-circle">
+              <span>1</span>
+            </span>
+            <div class="label">Account Details</div>
+          </a>
+        </li>
+        <!-- Step 2 -->
+
+        <!-- Step 3 -->
+        <li class="form-stepper-unfinished text-center form-stepper-list" step="2">
+          <a class="mx-2">
+            <span class="form-stepper-circle text-muted">
+              <span>2</span>
+            </span>
+            <div class="label text-muted">Verify</div>
+          </a>
+        </li>
+      </ul>
+      <!-- Step Wise Form Content -->
+      <form id="userAccountSetupForm" name="userAccountSetupForm" action="/register" method="POST">
+        <!-- Step 1 Content -->
+        <section id="step-1" class="form-step">
+          <h2 class="font-normal">Account Details</h2>
+          <!-- Step 1 input fields -->
+
+          <div class="mt-3 pb-12 border-gray-500 ">
+
+            <div class="space-x-0 lg:flex lg:space-x-4 mt-2">
+              <div class="w-full lg:w-80 mt-4">
+                <label for="first-name" class="sr-onl block mb- text-sm font-semibold text-gray-500">First Name</label>
+                <input id="first-name" name="fname" value="<%= messages.fname%>" type="text"
+                  required
+                  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="First Name">
+              </div>
+
+              <div class="w-full lg:w-80 mt-4">
+                <label for="last-name" class="block mb- text-sm font-semibold text-gray-500">
+                 Last Name</label>
+                <input id="last-name" name="lname" value="<%= messages.lname%>" type="text" required
+                  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="Last name">
+              </div>
+            </div>
+
+
+            <div class="space-x-0 lg:flex lg:space-x-4 mt-">
+              <div class="w-full lg:w-80 mt-4">
+                <label class="block mb- text-sm font-semibold text-gray-500" for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" pattern="[0-9]{10}" value="<%= messages.phone%>" type="text"
+                  required
+                  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="Phone">
+              </div>
+
+
+              <div class="w-full lg:w-80 mt-4">
+                <label for="email" class="block mb- text-sm font-semibold text-gray-500">
+                  Email</label>
+                <input id="email-address" name="email" value="<%= messages.email%>" type="email" autocomplete="email"
+                  required
+                  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="Email">
+              </div>
+            </div>
+
+
+            <div class="space-x-0 lg:flex lg:space-x-4 mt-2">
+              <div class="w-full lg:w-80 mt-4">
+                <label for="institution-name"
+                  class="sr-onl block mb- text-sm font-semibold text-gray-500">Organization's name</label>
+                <input id="institution-name" name="institutionName" value="<%= messages.institutionName%>" type="text"
+                  required
+                  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="Institution name">
+
+              </div>
+
+
+              <div class="w-full lg:w-80 mt-4">
+                <label for="RegisteredAs" class="block mb- text-sm font-semibold text-gray-500">
+                  Register as</label>
+                <select name="role"
+                  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm">
+                  <option value="customer">User</option>
+                  <option value="vendor">Vendor & Other</option>
+                </select>
+              </div>
+            </div>
 
 
 
 
 
+            <div class="space-x-0 lg:flex lg:space-x-4">
+              <div class="w-full lg:w-80 mt-4">
+                <label for="designation" class="block mb- text-sm font-semibold text-gray-500">
+                  Designation</label>
+                <input id="user-designation" name="designation" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)"
+                  value="<%= messages.designation%>" type="text" required
+                  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="Designation">
+              </div>
+
+              <div class="w-full lg:w-80 mt-4">
+                <label for="pincode" class="block mb- text-sm font-semibold text-gray-500">
+                  Area Pincode</label>
+                <input id="pincode" name="pincode" value="<%= messages.pincode%>" type="text" required
+                  pattern="[0-9]{6}" minlength="6" maxlength="6"
+                  onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeyup="callAjax()"
+                  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="Area pincode">
+              </div>
+            </div>
+
+            <div class="mt-3 space-x-0 lg:flex lg:space-x-4">
+
+              <button class="button btn-navigate-form-step group relative w-full flex justify-center py-2 px-4  border border-transparent text-sm font-medium rounded-md text-white btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" type="button" step_number="2">Save & Continue</button>
+            </div>
+        </section>
+        <!-- Step 2 Content, default hidden on page load. -->
+        <!-- <section id="step-2" class="form-step d-none">
+              <h2 class="font-normal">Social Profiles</h2>
+              <!-- Step 2 input fields -->
+        <!-- <div class="mt-3">
+                  Step 2 input fields goes here..
+              </div>
+              <div class="mt-3">
+                  <button class="button btn-navigate-form-step" type="button" step_number="1">Prev</button>
+                  <button class="button btn-navigate-form-step" type="button" step_number="3">Next</button>
+              </div>
+          </section> -->
+        <!-- Step 3 Content, default hidden on page load. -->
+        <section id="step-2" class="form-step d-none">
+          <h2 class="font-normal">Verify</h2>
+          <!-- Step 3 input fields -->
+          <div class="mt-3">
+            <div class="space-x-0 lg:flex lg:space-x-4 pb-">
+
+              <div class="w-full lg:w-80 mt-4">
+                <label for="notp" class="block mb- text-sm font-semibold text-gray-500">Phone
+                  OTP*</label>
+                <input id="otp" name="otp" type="text" required
+                  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="verification code">
+              </div>
+
+
+
+              <div class="w-full lg:w-80 mt-4">
+                <label for="eotp" class="block mb- text-sm font-semibold text-gray-500">
+                  Email OTP*</label>
+                <input id="eotp" name="eotp" type="text" required
+                  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="verification code">
+              </div>
+
+            </div>
+          </div>
+
+          <div class="mt-3 flex justify-evenly" >
+            <button class="button btn-navigate-form-step mr-3 px-3 py-2" type="button" step_number="1">Back</button>
+            <button class="button submit-btn ml-3 px-3 py-2" type="submit">Submit</button>
+          </div>
+
+        </section>
+      </form>
+    </div>
+  </div>
+</div>
 
 <script>
+  const navigateToFormStep = (stepNumber) => {
+    /**
+     * Hide all form steps.
+     */
+    document.querySelectorAll(".form-step").forEach((formStepElement) => {
+      formStepElement.classList.add("d-none");
+    });
+    /**
+     * Mark all form steps as unfinished.
+     */
+    document.querySelectorAll(".form-stepper-list").forEach((formStepHeader) => {
+      formStepHeader.classList.add("form-stepper-unfinished");
+      formStepHeader.classList.remove("form-stepper-active", "form-stepper-completed");
+    });
+    /**
+     * Show the current form step (as passed to the function).
+     */
+    document.querySelector("#step-" + stepNumber).classList.remove("d-none");
+    /**
+     * Select the form step circle (progress bar).
+     */
+    const formStepCircle = document.querySelector('li[step="' + stepNumber + '"]');
+    /**
+     * Mark the current form step as active.
+     */
+    formStepCircle.classList.remove("form-stepper-unfinished", "form-stepper-completed");
+    formStepCircle.classList.add("form-stepper-active");
+    /**
+     * Loop through each form step circles.
+     * This loop will continue up to the current step number.
+     * Example: If the current step is 3,
+     * then the loop will perform operations for step 1 and 2.
+     */
+    for (let index = 0; index < stepNumber; index++) {
+      /**
+       * Select the form step circle (progress bar).
+       */
+      const formStepCircle = document.querySelector('li[step="' + index + '"]');
+      /**
+       * Check if the element exist. If yes, then proceed.
+       */
+      if (formStepCircle) {
+        /**
+         * Mark the form step as completed.
+         */
+        formStepCircle.classList.remove("form-stepper-unfinished", "form-stepper-active");
+        formStepCircle.classList.add("form-stepper-completed");
+      }
+    }
+  };
+  /**
+   * Select all form navigation buttons, and loop through them.
+   */
+  document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {
+    /**
+     * Add a click event listener to the button.
+     */
+    formNavigationBtn.addEventListener("click", () => {
+      /**
+       * Get the value of the step.
+       */
+      const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
+      /**
+       * Call the function to navigate to the target form step.
+       */
+      navigateToFormStep(stepNumber);
+    });
+  });
+
   function myFunction() {
     var x = document.getElementById("password");
 
