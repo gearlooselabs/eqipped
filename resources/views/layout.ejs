@@ -125,7 +125,7 @@
                       <li class="nav-link">
                         <a href="/documentupload">
                           <i class='bx bx-user icon'></i>
-                          <span class="text nav-text">Complete Profile</span>
+                          <span class="text nav-text">KYC Verification</span>
                         </a>
                       </li>
                       <% } %>
@@ -138,7 +138,7 @@
 
       <% } %>
 
-        <nav class="bg-white border-gray-200 px-2 sm:px-4  md:py-2.5 rounded dark:bg-gray-800">
+        <section class="cherry bg-white border-gray-200 px-2 sm:px-4  md:py-2.5 rounded dark:bg-gray-800">
           <div class="container flex flex-wrap justify-evenly items-center mx-auto">
             <a href="/" class="flex items-center">
               <img src="/img/NavLogoC.png" class="mr-0 h-14" alt="Equipped Logo">
@@ -168,7 +168,8 @@
                           </svg>
                         </div>
                         <div>
-                          <%= user.name %><% if(user.isverified =='Yes' ) { %> <img src="https://img.icons8.com/material-outlined/24/000000/verified-account.png"/><% } %> <br>
+                          <span><%= user.fname %></span>
+                          <% if(user.isverified =='Yes' ) { %> <img src="https://img.icons8.com/material-outlined/24/000000/verified-account.png"/><% } %> <br>
                           <span style="font-size: 10px;">(Registered as <%= user.role %>)</span>
                         </div>
                       </a>
@@ -257,7 +258,7 @@
                   </li>
                 </ul>
                 <% } %>
-        </nav>
+        </section>
 
 
 

@@ -247,7 +247,7 @@ const Product = require('./app/models/product')
 const User = require('./app/models/user')
 
 
-var maxiSize = 2000000
+var maxiSize = 1000000
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -266,7 +266,7 @@ app.post('/addproduct', function (req, res) {
     upload(req, res, function (err) {
       if (err instanceof multer.MulterError) {
         // A Multer error occurred when uploading.
-        req.flash('error', 'Image Size Too Large (Max-size: 2mb)')
+        req.flash('error', 'Image Size Too Large (Max-size: 1mb)')
         return res.redirect('/addproduct')
       } else if (err) {
         // An unknown error occurred when uploading.

@@ -281,25 +281,18 @@ body {
   color: #232323;
 }
 
-.lastli a {
-  background: #FE5F1E;
-}
-.lastli a:hover {
-  background: #b23301;
-}
-
-.c-card img {
-  transition: transform 0.3s ease-in-out;
-}
-.c-card:hover img {
-  transform: scale(1.05);
-}
-
 nav li a {
   transition: all 0.3s ease-in-out;
 }
 nav li a:hover {
   color: #FE5F1E;
+}
+
+.cherry li a {
+  transition: all 0.3s ease-in-out;
+}
+.cherry li a:hover {
+  color: #0006ba;
 }
 
 section.hero {
@@ -458,7 +451,6 @@ section.status {
   .container {
     max-width: 90%;
   }
-
   table {
     display: block;
     overflow-x: auto;

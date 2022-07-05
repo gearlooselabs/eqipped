@@ -25,10 +25,8 @@ function initRoutes(app) {
     if(auth){
         app.get('/', auth, homeController().grandIndex)
     }
-    else{
-        app.get('/new', homeController().index)
-    }
-    app.get('/new', homeController().index)
+
+    app.get('/home', homeController().index)
 
     app.post('/sub-categories', auth, homeController().grandIndex)
     app.get('/login', guest, authController().login)
@@ -121,8 +119,8 @@ function initRoutes(app) {
     app.post('/edit', authController().postedit)
 
     // Footer documents 
-    app.get('/privacy-policy', auth, homeController().pripolicy)
-    app.get('/term-condition', auth, homeController().termcondition)
+    app.get('/privacy-policy', homeController().pripolicy)
+    app.get('/term-condition', homeController().termcondition)
     
 
 
