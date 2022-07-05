@@ -1,6 +1,8 @@
 const Menu = require('../../models/product'); //chai
+const Category = require('../../models/categories');
 const subCategory = require('../../models/subcategory') //pani
-const Brand = require('../../models/brand')
+const Brand = require('../../models/brand');
+// const paginate= require('express-paginate');
 
 
 function productController() {
@@ -19,12 +21,12 @@ function productController() {
         },
 
         async catProduct(req, res) {
-            let product_Category = req.params.categoryName;
-            res.locals.session.current_Category = product_Category
-            // const chai = await Menu.find({ 'categoryName': `${product_Category}`, 'isverified': 'Yes' })
-            const chai = await Menu.find({ 'categoryName': `${product_Category}`})
-            const pani = await subCategory.find({ 'parentCategory': `${product_Category}` })
-            return res.render('menus/product', { chai: chai, pani: pani })
+            let product_Category = req.params.categoryId;
+            res.locals.session.current_Category = product_Category;
+            // const chai = await Menu.find({ 'categoryName': ${product_Category}, 'isverified': 'Yes' })
+            // const chai = await Menu.find({ '_id': `${product_Category}`});
+            const chai = await Category.find({}).populate({ path: 'psubcat', populate: [{ path: 'product', model: 'Product'}], model: 'Sub'}).exec();
+            return res.render('menus/product', { chai: chai})
         },
 
 

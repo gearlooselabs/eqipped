@@ -1,39 +1,4 @@
 <section class="menu container mx-auto py-8">
-
-    <div class="grid grid-cols-1 flex md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 col-gap-12 row-gap-16 w-9/12 mx-auto relativ left-44">
-
-        <% pani.forEach(function(pani){ %>            
-
-
-            <% if(pani.subCategory!='Borosil') { %>
-                <% if(pani.subCategory!='Norosil') { %>
-                    <% if(pani.subCategory!='Remi') { %>
-                        <% if(pani.subCategory!='Tarson') { %>
-
-            <div style="display: flex; justify-content: center;" class="p-2">
-
-                    <a href="/products/<%= pani.subCategory %>"> <!-- ye category vise kaam kr rhi -->
-
-                  <!--  <a href="/brand/<%= pani.subCategory %>">    ye brand ke lie kaam kr rhi .... pr dono kaam ban pae esa ek hi route kese use kru -->
-
-                <div class="btn-primary text-white cursor-pointer inline-block relative border border-white-500 rounded-full px-6 py-4">
-                    <h1 class="text-center">
-                        <%= pani.subCategory %>
-                    </h1>
-                </div>
-                </a>
-            </div> 
-                        <% } %>
-                    <% } %>
-                <% } %>
-            <% } %>
-
-
-        <% }) %>
-
-    </div>
-
-
     <h1 class="text-xl font-bold mt-8 mb-8 heading">Products</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 col-gap-12 row-gap-16">
         <% chai.forEach(function(chai){ %>
@@ -67,6 +32,6 @@
                 </div> -->
             </div>
 
-            <% }) %>
+            <% }) %>       
     </div>
 </section>

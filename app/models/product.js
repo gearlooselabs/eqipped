@@ -24,7 +24,7 @@ const productSchema = new Schema(
         HSN :{type: Number, required: true },
         GST :{type: Number, required: true },
         netQuantity: {type: String, required: true},
-        containedLiquid: {type: String, required: true},
+        containedLiquid: {type: String, required: false},
         isverified: {type: String , default: "No"},
     },
     { timestamps: true }

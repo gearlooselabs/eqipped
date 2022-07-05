@@ -19,7 +19,7 @@ function categoriesController() {
 
         async createSubcat(req, res){
             const newSub = new Sub({
-                category: req.body.categoryid,
+                category: req.body.category,
                 name: req.body.name
             });
 
@@ -28,7 +28,7 @@ function categoriesController() {
             });
 
             Category.updateOne({
-                _id: req.body.categoryid
+                _id: req.body.category
             }, {
                 $push: {
                     psubcat: newSub._id

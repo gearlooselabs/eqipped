@@ -278,7 +278,7 @@ app.post('/addproduct', function (req, res) {
   
       const { name, price, categoryName, size, itemWeight, volume, brand, piecePerPack, netQuantity, HSN , GST ,containedLiquid, description, subCategory} = req.body
   
-              if (!name || !price || !categoryName || !size || !itemWeight || !brand || !piecePerPack || !netQuantity || !HSN || !GST || !containedLiquid || !description || !subCategory) {
+              if (!name || !price || !categoryName || !size || !itemWeight || !brand || !piecePerPack || !netQuantity || !HSN || !GST || !containedLiquid || !description) {
                   req.flash('error', 'All fields are required')
                   return res.redirect('/addproduct')
               }
