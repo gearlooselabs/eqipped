@@ -5,7 +5,7 @@
             <% category.psubcat.forEach((subcat) => { %>
                 <% subcat.product.forEach((product) => { %>
                     <div class="c-card w-full md:w-72 mb-8 mx-auto rounded-2xl border-gray-200 border">
-                        <a href="/productDetails/<%= category.categoryName %>/<%= category._id %>">
+                        <a href="/productDetails/<%= product._id %>">
                             <img class="h-40 mb-4 mx-auto" src="/img/<%= product.image %>" alt="">
                         </a>
                             <div class="text-center">

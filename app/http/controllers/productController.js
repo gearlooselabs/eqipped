@@ -47,11 +47,11 @@ function productController() {
         },
 
         async productDetails(req, res) {
-            let productKiIdDe = req.params._id;
-            let categoryName = req.params.categoryName;
-            const chai = await Menu.find({ '_id': `${productKiIdDe}` })   // Fetch details of single products
-            const samose = await Menu.find({ 'categoryName': `${categoryName}` }) //related products
-            return res.render('menus/productdetails', { chai: chai, samose: samose })
+            let productId = req.params.id;
+            const product = await Menu.findOne({ '_id': productId });
+            const suggested = await Menu.find({ categoryName: product.categoryName, _id: {$ne: product._id}});
+            // Fetch details of single products
+            return res.render('menus/productdetails', { product: product, suggested: suggested });
         },
     }
 }
