@@ -48,10 +48,20 @@ function productController() {
 
         async productDetails(req, res) {
             let productId = req.params.id;
+            var perPage = 4
+            var page = req.params.page || 1;
             const product = await Menu.findOne({ '_id': productId });
-            const suggested = await Menu.find({ categoryName: product.categoryName, _id: {$ne: product._id}});
-            // Fetch details of single products
-            return res.render('menus/productdetails', { product: product, suggested: suggested });
+            Menu.find({ categoryName: product.categoryName, _id: {$ne: product._id}}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, suggested) {
+                Menu.count().exec(function(err, count) {
+                    if (err) return next(err)
+                    res.render('menus/productdetails', {
+                        product: product,
+                        suggested: suggested,
+                        current: page,
+                        pages: Math.ceil(count / perPage)
+                    })
+                })
+            });
         },
     }
 }
