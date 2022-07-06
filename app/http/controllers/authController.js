@@ -36,9 +36,10 @@ function authController() {
         },
 
         async postedit(req, res) {
-            const { id, institutionName, designation, address } = req.body
-
-            User.findByIdAndUpdate({ _id: id }, { institutionName, designation, address }, (err, data) => {
+            // const { id, institutionName, designation, address } = req.body
+            // User.findByIdAndUpdate({ _id: id }, { institutionName, designation, address }, (err, data) => {
+            const { id, institutionName, designation} = req.body
+            User.findByIdAndUpdate({ _id: id }, { institutionName, designation}, (err, data) => {
                 if (!err) {
                     return res.redirect('/home')
                 } else {
@@ -97,16 +98,15 @@ function authController() {
 
                     const transporter = nodemailer.createTransport({
                         service: 'gmail',
-                        type: "SMTP",
-                        host: "smtp.gmail.com",
-                        port: 587,
-                        ignoreTLS: false,
-                        secure: false,
                         auth: {
                             user: 'equipped.gearloose@gmail.com',
-                            pass: 'Asdfqwer1234'
-                        }
+                            pass: 'gzgossoykfwflkrg'
+                            // pass: 'Asdfqwer1234'
+                        },
+                        port: 465,
+                        host: "smtp.gmail.com"
                     });
+                    
                     const mailOptions = {
                         from: 'equipped.gearloose@gmail.com',
                         to: doc.email,
@@ -197,81 +197,172 @@ function authController() {
         },
 
 
-        // Verification code sent function start 
-        async forOtp(req, res) {
+
+        async forOtpTest(req, res){
             const user = await User.findOne({
                 phone: req.body.phone,
                 email: req.body.email
             })
-
+  
             if (user) {
-                req.flash('success', 'User already registered')
-                return res.redirect('/register')
+                return res.json({msg : "User already registered. Login yourself"})
             }
+
+            const checkAttempt = await Otp.findOne({  
+                phone: req.body.phone,
+                email: req.body.email,        
+                attempts: 1,
+            })
+
+            if (checkAttempt) {
+                return res.json({msg : "OTP already send"})
+            }
+            
             var OTP = Math.floor(10000 + Math.random() * 49999);
             var EOTP = Math.floor(10000 + Math.random() * 90000);
-
             const phone = req.body.phone;
             const email = req.body.email;
-            // console.log("otp for phone", OTP);
-            // console.log("otp for email", EOTP);
 
-            // Code for http request
-            axios
-                .get(`https://www.txtguru.in/imobile/api.php?username=gearloose.lab&password=71703091&source=GRLABS&dmobile=91${phone}&dlttempid=1507165000853446536&message=${OTP} is your eqipped.com verification code. It is valid for only 3 minutes. Do not share it with anyone. GRLABS`)
-                .then(res => {
+            
+            console.log(phone);            
+            console.log("otp for phone", OTP);
+
+            if (!phone || !email) {
+                return res.json({msg : "Enter phone or email carefully"})
+            }
+
+            await axios
+            .get(`https://www.txtguru.in/imobile/api.php?username=gearloose.lab&password=71703091&source=GRLABS&dmobile=91${phone}&dlttempid=1507165000853446536&message=${OTP} is your eqipped.com verification code. It is valid for only 3 minutes. Do not share it with anyone. GRLABS`)
+            .then(async (res) => {
                     console.log(`statusCode: ${res.status}`)
-                })
-                .catch(error => {
-                    console.error(error)
-                })
+            })
+            .catch(error => {
+               return res.send({ msg: "Major Failure"})
+            })
 
-
-            const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                type: "SMTP",
-                host: "smtp.gmail.com",
-                port: 587,
-                ignoreTLS: false,
-                secure: false,
-                auth: {
-                    user: 'equipped.gearloose@gmail.com',
-                    pass: 'Asdfqwer1234'
-                }
-            });
+            console.log(email);
+            console.log("otp for email", EOTP);
+            
             const mailOptions = {
                 from: 'equipped.gearloose@gmail.com',
                 to: email,
                 subject: 'Verification code by eqipped',
-                text: "Your 5 digit verification code is " + EOTP
-
+                text: "Your 5 digit verification code is " + EOTP 
             };
+
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'equipped.gearloose@gmail.com',
+                    pass: 'gzgossoykfwflkrg'
+                    // pass: 'Asdfqwer1234'
+                },
+                port: 465,
+                host: "smtp.gmail.com"
+            });
+
             transporter.sendMail(mailOptions, function (err, info) {
                 if (err) {
                     req.flash('success', 'Something Went Wrong')
-                    return res.redirect('/register')
+                    return;
                 } else {
                     req.flash('success', 'Code sent successfully')
-                    // return res.redirect('/register')
+                    return;
                 }
             })
 
-            const otp = new Otp({ phone: phone, otp: OTP, email: email, eotp: EOTP })
+            const otp = new Otp({ phone: phone, otp: OTP, email: email, eotp: EOTP, attempts: 1 })
             const salt = await bcrypt.genSalt(10)
             otp.otp = await bcrypt.hash(otp.otp, salt)
             otp.eotp = await bcrypt.hash(otp.eotp, salt)
             otp.save().then((user) => {
-                req.flash('success', 'Otp send successfully!')
-                req.flash('phone', phone)
-                req.flash('email', email)
-                return res.redirect('/register')
+                return res.json({msg : "Success"})
             }).catch(err => {
-                req.flash('success', 'Something went wrong please try again later')
-                return res.redirect('/register')
-            })
+                return res.json({msg : "Failure"})
+            });
+            
         },
 
+
+
+
+
+        // Verification code sent function start 
+        // async forOtp(req, res) {
+        //     const user = await User.findOne({
+        //         phone: req.body.phone,
+        //         email: req.body.email
+        //     })
+
+        //     if (user) {
+        //         req.flash('success', 'User already registered')
+        //         return res.redirect('/register')
+        //     }
+        //     var OTP = Math.floor(10000 + Math.random() * 49999);
+        //     var EOTP = Math.floor(10000 + Math.random() * 90000);
+
+        //     const phone = req.body.phone;
+        //     const email = req.body.email;
+        //     console.log("otp for phone", OTP);
+        //     console.log("otp for email", EOTP);
+
+        //     axios
+        //         .get(`https://www.txtguru.in/imobile/api.php?username=gearloose.lab&password=71703091&source=GRLABS&dmobile=91${phone}&dlttempid=1507165000853446536&message=${OTP} is your eqipped.com verification code. It is valid for only 3 minutes. Do not share it with anyone. GRLABS`)
+        //         .then(res => {
+        //             console.log(`statusCode: ${res.status}`)
+        //         })
+        //         .catch(error => {
+        //             console.error(error)
+        //         })
+
+        //     const mailOptions = {
+        //         from: 'equipped.gearloose@gmail.com',
+        //         to: email,
+        //         subject: 'Verification code by eqipped',
+        //         text: "Your 5 digit verification code is " + EOTP
+
+        //     };
+
+        //     const transporter = nodemailer.createTransport({
+        //         service: 'gmail',
+        //         auth: {
+        //             user: 'equipped.gearloose@gmail.com',
+        //             pass: 'gzgossoykfwflkrg'
+        //         },
+        //         port: 465,
+        //         host: "smtp.gmail.com"
+        //     });
+
+        //     transporter.sendMail(mailOptions, function (err, info) {
+        //         if (err) {
+        //             req.flash('success', 'Something Went Wrong')
+        //             return;
+        //         } else {
+        //             req.flash('success', 'Code sent successfully')
+        //             return;
+        //         }
+        //     })
+
+        //     const otp = new Otp({ phone: phone, otp: OTP, email: email, eotp: EOTP })
+        //     const salt = await bcrypt.genSalt(10)
+        //     otp.otp = await bcrypt.hash(otp.otp, salt)
+        //     otp.eotp = await bcrypt.hash(otp.eotp, salt)
+        //     otp.save().then((user) => {
+        //         req.flash('success', 'Otp send successfully!')
+        //         req.flash('phone', phone)
+        //         req.flash('email', email)
+        //         return res.redirect('/register')
+        //     }).catch(err => {
+        //         req.flash('success', 'Something went wrong please try again later')
+        //         return res.redirect('/register')
+        //     })
+        // },
         // Verification code sent function end
+
+
+
+
+
 
         async fetchpincode(req, res) {
             var p_pincode = req.body.pincode
@@ -301,19 +392,19 @@ function authController() {
 
 
         async postRegister(req, res) {
-            const { name, phone, email, password, institutionName, designation, address, role, pincode, city, state } = req.body
+            const { fname, lname, phone, email, password, institutionName, designation, role, pincode, city, state, password2 } = req.body
+            console.log(fname, lname, phone, email, password, institutionName, designation, role, pincode, city, state, password2);
             // Validate request 
-            if (!name || !phone || !email || !password || !institutionName || !designation || !address || !role || !pincode || !city || !state) {
-                req.flash('error', 'All fields are required')
-                req.flash('name', name)
+            if (!fname || !lname || !phone || !email || !password || institutionName || designation || role) {
+                req.flash('error', 'Sbb dal')
+                req.flash('fname', fname)
+                req.flash('lname', lname)
                 req.flash('phone', phone)
                 req.flash('email', email)
                 req.flash('institutionName', institutionName)
                 req.flash('designation', designation)
-                req.flash('address', address)
+                // req.flash('address', address)
                 req.flash('pincode', pincode)
-                req.flash('city', city)
-                req.flash('state', state)
                 return res.redirect('/register')
             }
 
@@ -321,12 +412,13 @@ function authController() {
             User.exists({ email: email }, (err, result) => {
                 if (result) {
                     req.flash('error', 'Email already taken')
-                    req.flash('name', name)
+                    req.flash('fname', fname)
+                    req.flash('lname', lname)
                     req.flash('phone', phone)
                     req.flash('email', email)
                     req.flash('institutionName', institutionName)
                     req.flash('designation', designation)
-                    req.flash('address', address)
+                    // req.flash('address', address)
                     req.flash('pincode', pincode)
                     req.flash('city', city)
                     req.flash('state', state)
@@ -348,19 +440,28 @@ function authController() {
             var final_password = schema.validate(password)
             if (final_password != true) {
                 req.flash('password', "Password must contain atleast 1 Upper-Case, 1 Lower-Case Letter, 1 Number & 1 Sepcial Charcter")
-                return res.redirect(`/register`)
+                return res.redirect('/register')
             }
+
+            
+            if (password != password2) {
+            req.flash('password', "Password Mismatch")
+            return res.redirect('/register')
+            }
+
+
             // Hash password 
             const hashedPassword = await bcrypt.hash(password, 10)
             // Create a user 
             const user = new User({
-                name,
+                fname,
+                lname,
                 phone,
                 email,
                 password: hashedPassword,
                 institutionName,
                 designation,
-                address,
+                // address,
                 state,
                 city,
                 role,
