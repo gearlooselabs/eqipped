@@ -1,37 +1,40 @@
 <section class="menu container mx-auto py-8">
     <h1 class="text-xl font-bold mt-8 mb-8 heading">Products</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 col-gap-12 row-gap-16">
-        <% chai.forEach(function(chai){ %>
-            <div class="c-card w-full md:w-72 mb-8 mx-auto rounded-2xl border-gray-200 border">
-                <a href="/productDetails/<%= chai.categoryName %>/<%= chai._id %>">
-                    <img class="h-40 mb-4 mx-auto" src="/img/<%= chai.image %>" alt="">
-                </a>
-                    <div class="text-center">
-                        <h2 style="font-family: 'Ubuntu', sans-serif;" class="mb-2 font-bold text-lg">
-                            <%= chai.name %>
-                        </h2>
-                        <div> <span class="text-xs">Brand: </span><span style="font-size: 10px;" class="size py-1 px-2 rounded-full uppercase">
-                                <%= chai.brand %>
-                            </span></div>
-                        <div class="flex items-center justify-around my-4">
-                            <span class="font-bold text-sm">₹<%= chai.price %></span>
-                            <button data-chai="<%= JSON.stringify(chai) %>"
-                                class="add-to-cart py-1 px-2 rounded-full flex items-center font-bold">
-                                <span class="text-sm">+ Add to cart</span>
-                            </button>
-                        </div>
+        <% categories.forEach(function(category){ %>
+            <% category.psubcat.forEach((subcat) => { %>
+                <% subcat.product.forEach((product) => { %>
+                    <div class="c-card w-full md:w-72 mb-8 mx-auto rounded-2xl border-gray-200 border">
+                        <a href="/productDetails/<%= product._id %>/1">
+                            <img class="h-40 mb-4 mx-auto" src="/img/<%= product.image %>" alt="">
+                        </a>
+                            <div class="text-center">
+                                <h2 style="font-family: 'Ubuntu', sans-serif;" class="mb-2 font-bold text-lg">
+                                    <%= product.name %>
+                                </h2>
+                                <div> <span class="text-xs">Brand: </span><span style="font-size: 10px;" class="size py-1 px-2 rounded-full uppercase">
+                                        <%= product.brand %>
+                                    </span></div>
+                                <div class="flex items-center justify-around my-4">
+                                    <span class="font-bold text-sm">₹<%= product.price %></span>
+                                    <button data-category="<%= JSON.stringify(product) %>"
+                                        class="add-to-cart py-1 px-2 rounded-full flex items-center font-bold">
+                                        <span class="text-sm">+ Add to cart</span>
+                                    </button>
+                                </div>
+                            </div>
+                       
+                        <!-- <div class="text-center">
+                            <div class="flex items-center justify-around mt-">
+                                <button data-category="<%= JSON.stringify(category) %>"
+                                    class="add-to-cart py-1 px-2 rounded-full flex items-center font-bold">
+                                    <span class="text-sm">+ Add to cart</span>
+                                </button>
+                            </div>
+                        </div> -->
                     </div>
-               
-                <!-- <div class="text-center">
-                    <div class="flex items-center justify-around mt-">
-                        <button data-chai="<%= JSON.stringify(chai) %>"
-                            class="add-to-cart py-1 px-2 rounded-full flex items-center font-bold">
-                            <span class="text-sm">+ Add to cart</span>
-                        </button>
-                    </div>
-                </div> -->
-            </div>
-
-            <% }) %>       
+                <% }) %>
+            <% }) %>
+        <% }) %>       
     </div>
 </section>

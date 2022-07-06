@@ -245,9 +245,10 @@ app.post('/paynow', [parseUrl, parseJson], async (req, res) => {
 const admin = require('./app/http/middlewares/admin')
 const Product = require('./app/models/product')
 const User = require('./app/models/user')
+const Sub = require('./app/models/subcategories');
 
 
-var maxiSize = 2000000
+var maxiSize = 1000000
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -266,7 +267,7 @@ app.post('/addproduct', function (req, res) {
     upload(req, res, function (err) {
       if (err instanceof multer.MulterError) {
         // A Multer error occurred when uploading.
-        req.flash('error', 'Image Size Too Large (Max-size: 2mb)')
+        req.flash('error', 'Image Size Too Large (Max-size: 1mb)')
         return res.redirect('/addproduct')
       } else if (err) {
         // An unknown error occurred when uploading.
@@ -278,11 +279,10 @@ app.post('/addproduct', function (req, res) {
   
       const { name, price, categoryName, size, itemWeight, volume, brand, piecePerPack, netQuantity, HSN , GST ,containedLiquid, description, subCategory} = req.body
   
-              if (!name || !price || !categoryName || !size || !itemWeight || !brand || !piecePerPack || !netQuantity || !HSN || !GST || !containedLiquid || !description) {
+              if (!name || !price || !categoryName || !size || !itemWeight || !brand || !piecePerPack || !netQuantity || !HSN || !GST || !containedLiquid || !description || !subCategory) {
                   req.flash('error', 'All fields are required')
                   return res.redirect('/addproduct')
               }
-    
   
               const product = new Product({
                   customerId: req.user._id,
@@ -304,6 +304,19 @@ app.post('/addproduct', function (req, res) {
                   containedLiquid,
               })
               product.save().then(result => {
+                Sub.updateOne({
+                    _id: subCategory
+                  }, {
+                    $push: {
+                        product: product._id
+                    }
+                  }, (err) => {
+                    if(err){
+                        req.flash('error', 'Something went wrong')
+                        console.log(err);
+                        return res.redirect('/addproduct')
+                    }
+                  })
                   Product.populate(result, { path: 'customerId' }, (err) => {
                       if (!err) { req.flash('error', 'Product Added Successfully'); return res.redirect('/addproduct') }
                   })
@@ -311,7 +324,7 @@ app.post('/addproduct', function (req, res) {
                   req.flash('error', 'Something went wrong')
                   console.log(err);
                   return res.redirect('/addproduct')
-              })
+              });
     })
   })
 

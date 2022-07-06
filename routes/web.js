@@ -25,10 +25,8 @@ function initRoutes(app) {
     if(auth){
         app.get('/', auth, homeController().grandIndex)
     }
-    else{
-        app.get('/new', homeController().index)
-    }
-    app.get('/new', homeController().index)
+
+    app.get('/home', homeController().index)
 
     app.post('/sub-categories', auth, homeController().grandIndex)
     app.get('/login', guest, authController().login)
@@ -100,7 +98,7 @@ function initRoutes(app) {
     //Product Route
     app.post('/allcategory/products', auth, productController().productfetch)
     app.get('/allcategory/products/:categoryId', auth, productController().catProduct)
-    app.get('/productDetails/:categoryName/:_id', auth, productController().productDetails)
+    app.get('/productDetails/:id/:page', auth, productController().productDetails)
     
     app.get('/brand/:subCategory', auth, productController().brandProduct)
     app.get('/products/:subCategory', auth, productController().productfetchBysubCN)

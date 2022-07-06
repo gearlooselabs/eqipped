@@ -31,10 +31,11 @@ function vendorController() {
             const { id, name, categoryName, brand, price, size, containedLiquid, volume, piecePerPack, netQuantity, HSN, GST, itemWeight, description } = req.body
             Product.findByIdAndUpdate({ _id: id }, { name, categoryName, brand, price, size, GST, HSN, containedLiquid, volume, piecePerPack, netQuantity, description, itemWeight }, (err, data) => {
                 if (!err) {
-                    req.flash('error', 'Update Scessfully')
+                    req.flash('error', 'Update Successfully')
                     return res.redirect('/vendor/listedProduct')
-                } else {
-                    return res.redirect('/forgotpassword')
+                } else {                    
+                    req.flash('error', 'Something went wrong')
+                    return res.redirect('/vendor/listedProduct')
                 }
             })
         }

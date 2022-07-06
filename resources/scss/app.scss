@@ -9,6 +9,8 @@ body{
 }
 
 
+
+
 // nav li:last-child a {
 //     background: $primary;
 //     &:hover {
@@ -17,34 +19,46 @@ body{
 // }
 
 
-.lastli a {
-    background: $primary;
-    &:hover {
-        background: $primary-hover;
-        }
-} 
+// .lastli a {
+//     background: $primary;
+//     &:hover {
+//         background: $primary-hover;
+//         }
+// }
 
 
-.c-card {
-  img {    
-    transition: transform .3s ease-in-out; 
-  }
-  
-  &:hover {
-    img {
-      transform: scale(1.05)
-    }
-  }
-}
-
-
+// Sidebar targeted 
 nav li a {
-    transition: $smooth;
+  transition: $smooth;
 
-    &:hover {
-    color: $primary; 
-    }
+  &:hover {
+  color: $primary;
+  }
 }
+
+// navbar targeted 
+.cherry li a {
+  transition: $smooth;
+
+  &:hover {
+  color: $darkside;
+  }
+}
+
+
+
+
+
+// .c-card {
+//   img {    
+//     transition: transform .3s ease-in-out; 
+//   }
+  
+//   &:hover {
+//     img {
+//       transform: scale(1.05)
+//     }
+
 
 
 section.hero{
