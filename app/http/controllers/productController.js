@@ -25,8 +25,20 @@ function productController() {
             res.locals.session.current_Category = product_Category;
             // const chai = await Menu.find({ 'categoryName': ${product_Category}, 'isverified': 'Yes' })
             // const chai = await Menu.find({ '_id': `${product_Category}`});
-            const chai = await Category.find({}).populate({ path: 'psubcat', populate: [{ path: 'product', model: 'Product'}], model: 'Sub'}).exec();
-            return res.render('menus/product', { chai: chai})
+            const category = await Category.findOne({_id: req.params.categoryId}).populate({ path: 'psubcat', populate: [{ path: 'product', model: 'Product'}], model: 'Sub'}).exec();
+            var perPage = 4
+            var page = req.params.page || 1;
+            Menu.find({ categoryName: product_Category}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, products) {
+                Menu.count().exec(function(err, count) {
+                    if (err) return next(err)
+                    res.render('menus/product', {
+                        products: products,
+                        category: category,
+                        current: page,
+                        pages: Math.ceil(count / perPage)
+                    })
+                })
+            });
         },
 
 
@@ -47,15 +59,25 @@ function productController() {
         },
 
         async productDetails(req, res) {
-            let productKiIdDe = req.params._id;
-            let categoryName = req.params.categoryName;
-            const chai = await Menu.find({ '_id': `${productKiIdDe}` })
-            const samose = await Menu.find({ 'categoryName': `${categoryName}` })
-            return res.render('menus/productdetails', { chai: chai, samose: samose })
+            let productId = req.params.id;
+            var perPage = 4
+            var page = req.params.page || 1;
+            const product = await Menu.findOne({ '_id': productId });
+            Menu.find({ categoryName: product.categoryName, _id: {$ne: product._id}}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, suggested) {
+                Menu.count().exec(function(err, count) {
+                    if (err) return next(err)
+                    res.render('menus/productdetails', {
+                        product: product,
+                        suggested: suggested,
+                        current: page,
+                        pages: Math.ceil(count / perPage)
+                    })
+                })
+            });
         },
     }
 }
-
+ 
 
 
 module.exports = productController

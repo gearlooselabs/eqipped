@@ -98,8 +98,8 @@ function initRoutes(app) {
 
     //Product Route
     app.post('/allcategory/products', auth, productController().productfetch)
-    app.get('/allcategory/products/:categoryId', auth, productController().catProduct)
-    app.get('/productDetails/:categoryName/:_id', auth, productController().productDetails)
+    app.get('/allcategory/products/:categoryId/:page', auth, productController().catProduct)
+    app.get('/productDetails/:id/:page', auth, productController().productDetails)
     
     app.get('/brand/:subCategory', auth, productController().brandProduct)
     app.get('/products/:subCategory', auth, productController().productfetchBysubCN)

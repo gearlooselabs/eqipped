@@ -1,37 +1,88 @@
 <section class="menu container mx-auto py-8">
     <h1 class="text-xl font-bold mt-8 mb-8 heading">Products</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 col-gap-12 row-gap-16">
-        <% chai.forEach(function(chai){ %>
-            <div class="c-card w-full md:w-72 mb-8 mx-auto rounded-2xl border-gray-200 border">
-                <a href="/productDetails/<%= chai.categoryName %>/<%= chai._id %>">
-                    <img class="h-40 mb-4 mx-auto" src="/img/<%= chai.image %>" alt="">
-                </a>
-                    <div class="text-center">
-                        <h2 style="font-family: 'Ubuntu', sans-serif;" class="mb-2 font-bold text-lg">
-                            <%= chai.name %>
-                        </h2>
-                        <div> <span class="text-xs">Brand: </span><span style="font-size: 10px;" class="size py-1 px-2 rounded-full uppercase">
-                                <%= chai.brand %>
-                            </span></div>
-                        <div class="flex items-center justify-around my-4">
-                            <span class="font-bold text-sm">₹<%= chai.price %></span>
-                            <button data-chai="<%= JSON.stringify(chai) %>"
-                                class="add-to-cart py-1 px-2 rounded-full flex items-center font-bold">
-                                <span class="text-sm">+ Add to cart</span>
-                            </button>
-                        </div>
+                <% products.forEach((product) => { %>
+                    <div class="c-card w-full md:w-72 mb-8 mx-auto rounded-2xl border-gray-200 border">
+                        <a href="/productDetails/<%= product._id %>/1">
+                            <img class="h-40 mb-4 mx-auto" src="/img/<%= product.image %>" alt="">
+                        </a>
+                            <div class="text-center">
+                                <h2 style="font-family: 'Ubuntu', sans-serif;" class="mb-2 font-bold text-lg">
+                                    <%= product.name %>
+                                </h2>
+                                <div> <span class="text-xs">Brand: </span><span style="font-size: 10px;" class="size py-1 px-2 rounded-full uppercase">
+                                        <%= product.brand %>
+                                    </span></div>
+                                <div class="flex items-center justify-around my-4">
+                                    <span class="font-bold text-sm">₹<%= product.price %></span>
+                                    <button data-category="<%= JSON.stringify(product) %>"
+                                        class="add-to-cart py-1 px-2 rounded-full flex items-center font-bold">
+                                        <span class="text-sm">+ Add to cart</span>
+                                    </button>
+                                </div>
+                            </div>
+                       
+                        <!-- <div class="text-center">
+                            <div class="flex items-center justify-around mt-">
+                                <button data-category="<%= JSON.stringify(category) %>"
+                                    class="add-to-cart py-1 px-2 rounded-full flex items-center font-bold">
+                                    <span class="text-sm">+ Add to cart</span>
+                                </button>
+                            </div>
+                        </div> -->
                     </div>
-               
-                <!-- <div class="text-center">
-                    <div class="flex items-center justify-around mt-">
-                        <button data-chai="<%= JSON.stringify(chai) %>"
-                            class="add-to-cart py-1 px-2 rounded-full flex items-center font-bold">
-                            <span class="text-sm">+ Add to cart</span>
-                        </button>
-                    </div>
-                </div> -->
-            </div>
-
-            <% }) %>       
+                <% }) %> 
     </div>
+    <div class="bg-white px-4 py-3 flex items-center justify-center border-t border-gray-200 sm:px-6">
+        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-center">
+          <div>
+                <div class = "flex justify-center">
+                    <% if (pages > 0) { %>
+                        <nav aria-label="Page navigation example">
+                            <ul class="flex list-style-none">
+                                <% if (current == 1) { %>
+                                    <li class="page-item active disabled"><a
+                                        class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-500 pointer-events-none focus:shadow-none"
+                                        href="#" tabindex="-1" aria-disabled="true">Previous</a></li>
+                                <% } else { %>
+                                    <li class="page-item active"><a
+                                        class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                        href="/allcategory/products/<%= category._id %>/<%= current-1 %>">Previous</a></li>
+                                <% } %>
+                                <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                                <% if (i !== 1) { %>
+                                    <li class="page-item disabled"><a
+                                        class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                        href="#">...</a></li>
+                                <% } %>
+                                <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                                    <% if (i == current) { %>
+                                        <li class="page-item active"><a
+                                            class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                            href="#"><%= i %></a></li>
+                                    <% } else { %>
+                                        <li class="page-item"><a
+                                            class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                            href="/allcategory/products/<%= category._id %>/<%= i %>"><%= i %></a></li>
+                                    <% } %>
+                                    <% if (i == Number(current) + 4 && i < pages) { %>
+                                        <li class="page-item disabled"><a
+                                            class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                            href="#">...</a></li>
+                                    <% } %>
+                                <% } %>
+                                <% if (current == pages) { %>
+                                    <li class="page-item disabled"><a
+                                        class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                        href="#">Next</a></li>
+                                <% } else { %>
+                                    <li class="page-item"><a
+                                        class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                        href="/allcategory/products/<%= category._id %>/<%= parseInt(current)+1 %>">Next</a></li>
+                                <% } %>
+                            </ul>    
+                        </nav>
+                    <% } %>
+                </div>
+            </div>
 </section>
