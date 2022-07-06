@@ -25,8 +25,20 @@ function productController() {
             res.locals.session.current_Category = product_Category;
             // const chai = await Menu.find({ 'categoryName': ${product_Category}, 'isverified': 'Yes' })
             // const chai = await Menu.find({ '_id': `${product_Category}`});
-            const categories = await Category.find({_id: req.params.categoryId}).populate({ path: 'psubcat', populate: [{ path: 'product', model: 'Product'}], model: 'Sub'}).exec();
-            return res.render('menus/product', { categories: categories})
+            const category = await Category.findOne({_id: req.params.categoryId}).populate({ path: 'psubcat', populate: [{ path: 'product', model: 'Product'}], model: 'Sub'}).exec();
+            var perPage = 4
+            var page = req.params.page || 1;
+            Menu.find({ categoryName: product_Category}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, products) {
+                Menu.count().exec(function(err, count) {
+                    if (err) return next(err)
+                    res.render('menus/product', {
+                        products: products,
+                        category: category,
+                        current: page,
+                        pages: Math.ceil(count / perPage)
+                    })
+                })
+            });
         },
 
 
