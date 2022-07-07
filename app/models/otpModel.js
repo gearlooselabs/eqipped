@@ -7,8 +7,8 @@ const otpSchema = new Schema({
     email: {type: String, required: true},
     eotp: {type: String, required: true},
     attempts: {type: Number},
-    createdAt: {type: Date, default: Date.now, index: {expires: 1080}
-}
+    createdAt: {type: Date, expires: '1m', default: Date.now, index: true}
+
 }, {timestamps: true })
 
 
