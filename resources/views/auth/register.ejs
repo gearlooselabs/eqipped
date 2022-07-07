@@ -27,11 +27,12 @@
         error: function () {
           $('#city').val('');
           $('#state').val('');
-        },
+        }
       })
     }
-
   }
+
+
 </script>
 
 
@@ -126,14 +127,12 @@
         <%= messages.error%>
       </span>
       <% } %>
-
-              
+         
       <% if(messages.OnRegisterDone) { %>
         <script>
           swal("User Successfully Registered", "Thank you", "success")
         </script>
        <% } %>
-
 
     </div>
 
@@ -237,24 +236,24 @@
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
                   placeholder="Area pincode">
               </div>
-            </div>
-            <div class="space-x-0 lg:flex lg:space-x-4 mt-"> -->
+            </div>-->
 
-<!-- <div class="w-full lg:w-80 mt-4">
+<!-- <div class="space-x-0 lg:flex lg:space-x-4 mt-"> 
+              <div class="w-full lg:w-80 mt-4">
                 <label for="city" class="block mb- text-sm font-semibold text-gray-500">
                   City</label>
                 <input id="city" name="city" type="text" required readonly="readonly" value="<%= messages.city%>"
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
                   placeholder=>
-              </div> -->
+              </div>
 
-<!-- <div class="w-full lg:w-80 mt-4">
+              <div class="w-full lg:w-80 mt-4">
                 <label for="state" class="block mb- text-sm font-semibold text-gray-500">
                   State</label>
                 <input id="state" name="state"  type="text" required readonly="readonly" value="<%= messages.state%>"
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm">
-              </div> -->
-<!-- </div> -->
+              </div>
+</div> -->
 
 <!-- <div class="space-x-0 lg:flex lg:space-x-4 mt-">
               <div class="w-full mt-4">
@@ -538,13 +537,13 @@
       <ul class="form-stepper form-stepper-horizontal text-center mx-auto pl-0">
         <!-- Step 1 -->
         <li class="form-stepper-active text-center form-stepper-list" step="1">
-          <a class="mx-2">
+          <a type="button" step_number="1" class="mx-2 btn-navigate-form-step">
             <span class="form-stepper-circle">
               <span>1</span>
             </span>
             <div class="label">Account Details</div>
           </a>
-        </li>
+         </li>
         <!-- Step 2 -->
 
         <!-- Step 3 -->
@@ -557,6 +556,11 @@
           </a>
         </li>
       </ul>
+
+
+    
+
+
       <!-- Step Wise Form Content -->
       <form id="userAccountSetupForm" name="userAccountSetupForm" action="/register" method="POST">
         <!-- Step 1 Content -->
@@ -564,20 +568,37 @@
           <h2 class="font-normal">Account Details</h2>
           <!-- Step 1 input fields -->
 
+
+          <div class="w-3/4 flex mx-auto mt-4">
+          
+            <% if(messages.error) { %>
+            <span class="text-red-600 text-xs mx-auto text-center font-medium">
+              <%= messages.error %>
+            </span>
+            <% } %>
+               
+            <% if(messages.OnRegisterDone) { %>
+              <script>
+                swal("User Successfully Registered", "Thank you", "success")
+              </script>
+             <% } %>
+      
+          </div>
+
+
           <div class="mt-3 pb-12 border-gray-500 ">
 
             <div class="space-x-0 lg:flex lg:space-x-4 mt-2">
               <div class="w-full lg:w-80 mt-4">
                 <label for="first-name" class="sr-onl block mb- text-sm font-semibold text-gray-500">First Name</label>
-                <input id="first-name" name="fname" value="<%= messages.fname%>" type="text"
-                  required
+                <input id="first-name" name="fname" value="<%= messages.fname%>" type="text" required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
                   placeholder="First Name">
               </div>
 
               <div class="w-full lg:w-80 mt-4">
                 <label for="last-name" class="block mb- text-sm font-semibold text-gray-500">
-                 Last Name</label>
+                  Last Name</label>
                 <input id="last-name" name="lname" value="<%= messages.lname%>" type="text" required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
                   placeholder="Last name">
@@ -589,8 +610,7 @@
               <div class="w-full lg:w-80 mt-4">
                 <label class="block mb- text-sm font-semibold text-gray-500" for="phone">Phone</label>
                 <input id="phone" name="phone" type="tel" pattern="[0-9]{10}" value="<%= messages.phone%>" type="text"
-                  required
-                  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  required class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
                   placeholder="Phone">
               </div>
 
@@ -598,9 +618,8 @@
               <div class="w-full lg:w-80 mt-4">
                 <label for="email" class="block mb- text-sm font-semibold text-gray-500">
                   Email</label>
-                <input id="email-address" name="email" value="<%= messages.email%>" type="email" autocomplete="email"
-                  required
-                  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                <input id="email" name="email" value="<%= messages.email%>" type="email" autocomplete="email"
+                  required class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
                   placeholder="Email">
               </div>
             </div>
@@ -630,14 +649,11 @@
             </div>
 
 
-
-
-
             <div class="space-x-0 lg:flex lg:space-x-4">
               <div class="w-full lg:w-80 mt-4">
                 <label for="designation" class="block mb- text-sm font-semibold text-gray-500">
                   Designation</label>
-                <input id="user-designation" name="designation" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)"
+                <input id="user-designation" name="designation"
                   value="<%= messages.designation%>" type="text" required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
                   placeholder="Designation">
@@ -654,24 +670,32 @@
               </div>
             </div>
 
-            <div class="mt-3 space-x-0 lg:flex lg:space-x-4">
+            <div class="space-x-0 lg:flex lg:space-x-4 mt-"> 
+              <div class="w-full lg:w-80 mt-4">
+                <label for="city" class="block mb- text-sm font-semibold text-gray-500">
+                  City</label>
+                <input id="city" name="city" type="text" required readonly="readonly" value="<%= messages.city%>"
+                  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder=>
+              </div>
 
-              <button class="button btn-navigate-form-step group relative w-full flex justify-center py-2 px-4  border border-transparent text-sm font-medium rounded-md text-white btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" type="button" step_number="2">Save & Continue</button>
+              <div class="w-full lg:w-80 mt-4">
+                <label for="state" class="block mb- text-sm font-semibold text-gray-500">
+                  State</label>
+                <input id="state" name="state"  type="text" required readonly="readonly" value="<%= messages.state%>"
+                  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm">
+              </div>
+            </div>
+
+
+            <div class="mt-3 space-x-0 lg:flex lg:space-x-4">
+              <button
+                class="button btn-navigate-form-step group relative w-full flex justify-center py-2 px-4  border border-transparent text-sm font-medium rounded-md text-white btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                type="button" onclick="callAjaxOtp()" step_number="2">Save & Continue</button>
             </div>
         </section>
+        
         <!-- Step 2 Content, default hidden on page load. -->
-        <!-- <section id="step-2" class="form-step d-none">
-              <h2 class="font-normal">Social Profiles</h2>
-              <!-- Step 2 input fields -->
-        <!-- <div class="mt-3">
-                  Step 2 input fields goes here..
-              </div>
-              <div class="mt-3">
-                  <button class="button btn-navigate-form-step" type="button" step_number="1">Prev</button>
-                  <button class="button btn-navigate-form-step" type="button" step_number="3">Next</button>
-              </div>
-          </section> -->
-        <!-- Step 3 Content, default hidden on page load. -->
         <section id="step-2" class="form-step d-none">
           <h2 class="font-normal">Verify</h2>
           <!-- Step 3 input fields -->
@@ -699,7 +723,37 @@
             </div>
           </div>
 
-          <div class="mt-3 flex justify-evenly" >
+
+          
+<div class="space-x-0 lg:flex lg:space-x-4 mt-">
+              <div class="w-full lg:w-80 mt-4">
+                <label for="password" class="block mb- text-sm font-semibold text-gray-500">
+                  Password  
+    
+      <% if(messages.password) { %>        
+        <span style="font-size: 8px;" class="ml-1 text-red-600 text-xs mx-auto text-center font-medium">(Must contain atleast 1 of Upper-Case, Lower-Case Letter, Number & Sepcial Charcter)      
+          <%= messages.password%>
+        </span>
+      <% } %>
+                </label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required
+                  class="appearance-non rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="Example: Jai@1105"><span onclick="myFunction()" class="eye"><i class="fa fa-eye-low-vision"></i></span> 
+              </div>
+
+
+              <div class="w-full lg:w-80 mt-4">
+                <label for="RegisteredAs" class="block mb- text-sm font-semibold text-gray-500">
+                  Confirm Password</label>
+                  <input id="password2" name="password2" type="password" autocomplete="current-password" required
+                  class="appearance-non rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="Example: Jai@1105"><span onclick="myFunction2()" class="eye"><i class="fa fa-eye-low-vision"></i></span>   
+              </div>
+
+</div>
+
+
+          <div class="mt-3 flex justify-evenly">
             <button class="button btn-navigate-form-step mr-3 px-3 py-2" type="button" step_number="1">Back</button>
             <button class="button submit-btn ml-3 px-3 py-2" type="submit">Submit</button>
           </div>
@@ -771,6 +825,7 @@
     formNavigationBtn.addEventListener("click", () => {
       /**
        * Get the value of the step.
+       * 
        */
       const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
       /**
@@ -789,4 +844,44 @@
     else
       x.type = "password";
   }
+
+  function myFunction2() {
+    var x = document.getElementById("password2");
+
+    if (x.type === 'password') {
+      x.type = "text";
+    }
+    else
+      x.type = "password";
+  }
+   
+
+  function callAjaxOtp() {
+    var email = $('#email').val();
+    var phone = $('#phone').val();
+    if(phone == ''){
+      alert("Enter Phone No. First");
+    }
+
+    if(email !== '' || phone !== ''){
+      if ($('#phone').val().length == 10) {
+        $.ajax({
+          url: "/send-otp-on-phone",
+          type: "POST",
+          data: {
+            phone: phone,
+            email: email
+          }
+        }).done(function (data){
+          if(data.msg == "Success"){
+            alert("Otp Send Successfully")
+          }else{
+            alert(data.msg)
+          }
+        })
+      }else{
+      alert("Enter 10 digit phone no.");}
+    }
+  }
+
 </script>

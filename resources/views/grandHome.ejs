@@ -12,7 +12,7 @@
 <div style="justify-content: space-evenly;" class="container hideInPhone flex mx-auto">
 <% const Fake = 'https://fakestoreapi.com/products'; %>
     <% nashta.forEach(function(nashta){ %>      
-        <a href="/allcategory/products/<%= nashta.pcategory %>">
+        <a href="/allcategory/products/<%= nashta._id%>/1">
     <div data-chai="<%= JSON.stringify(nashta) %>" style="display: flex;" class="sub-cat">        
         <div class="dropdown inline-block relative flex justify-center items-center" style="padding: 8px; flex-direction: column;">
             <button class="text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
@@ -70,33 +70,14 @@
 <h1 class="heading">Laboratory Equipment</h1>
 
 <section class="container mx-auto p-8 flex flex-wrap justify-around">
-  <div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
-      <img src="/img/empty-cart.png" alt="" srcset="">
-      <div class="flex border-box p-4 flex-col">
-          <div class="text-center">Category</div>
-      </div>
-  </div> 
-
-  <div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
-      <img src="/img/empty-cart.png" alt="" srcset="">
-      <div class="flex border-box p-4 flex-col">
-          <div class="text-center">Category</div>
-      </div>
-  </div> 
-
-  <div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
-      <img src="/img/empty-cart.png" alt="" srcset="">
-      <div class="flex border-box p-4 flex-col">
-          <div class="text-center">Category</div>
-      </div>
-  </div> 
-
-  <div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
-      <img src="/img/empty-cart.png" alt="" srcset="">
-      <div class="flex border-box p-4 flex-col">
-          <div class="text-center">Category</div>
-      </div>
-  </div> 
+  <% subcats.forEach((subcat) => { %>
+    <div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
+        <img src="/img/empty-cart.png" alt="" srcset="">
+        <div class="flex border-box p-4 flex-col">
+            <div class="text-center"><%= subcat.name %></div>
+        </div>
+    </div> 
+  <% }) %>
 
   <!-- <div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
       <img src="/img/empty-cart.png" alt="" srcset="">
@@ -114,34 +95,16 @@
 <h1 class="heading">Laboratory Chemicals</h1>
 
     <section class="container mx-auto p-8 flex flex-wrap justify-around">
-        <div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
-            <img src="/img/empty-cart.png" alt="" srcset="">
-            <div class="flex border-box p-4 flex-col">
-                <div class="text-center">Category</div>
-            </div>
-        </div> 
-
-        <div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
-            <img src="/img/empty-cart.png" alt="" srcset="">
-            <div class="flex border-box p-4 flex-col">
-                <div class="text-center">Category</div>
-            </div>
-        </div> 
-
-        <div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
-            <img src="/img/empty-cart.png" alt="" srcset="">
-            <div class="flex border-box p-4 flex-col">
-                <div class="text-center">Category</div>
-            </div>
-        </div> 
-
-        <div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
-            <img src="/img/empty-cart.png" alt="" srcset="">
-            <div class="flex border-box p-4 flex-col">
-                <div class="text-center">Category</div>
-            </div>
-        </div> 
-
+        <% chemical.psubcat.forEach((subcat) => { %>
+            <% subcat.product.forEach((product) => { %>
+                <div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
+                    <img src="/img/empty-cart.png" alt="" srcset="">
+                    <div class="flex border-box p-4 flex-col">
+                        <div class="text-center"><%= product.name %></div>
+                    </div>
+                </div> 
+            <% }) %>
+        <% }) %>
     </section>
 
 
@@ -183,98 +146,31 @@
     <section class="bg-[#F3F4F6]">
         <div class="container flex mx-auto">
            <div class="flex flex-wrap -mx-4">
-              <div class="w-full md:w-1/4 xl:w-1/4 px-4">
-                 <div class="bg-white rounded-lg overflow-hidden mb-1">
-                    <img
-                       src="https://cdn.tailgrids.com/1.0/assets/images/cards/card-01/image-01.jpg"
-                       alt="image"
-                       class="w-full"
-                       />
-                    <div class="p-5 sm:p-6 md:p-5 xl:p-7 text-center">
-                       <h3  class="
-                       text-dark text-xl
-                       sm:text-[22px]
-                       md:text-xl
-                       lg:text-[22px]
-                       xl:text-xl
-                       2xl:text-[22px]
-                       mb-1
-                       block
-                       hover:text-primary
-                       "
-                       >Templates</h3>
+              <% products.forEach((product) => { %>
+                <div class="w-full md:w-1/4 xl:w-1/4 px-4">
+                    <div class="bg-white rounded-lg overflow-hidden mb-1">
+                       <img
+                          src="/img/<%= product.image %>"
+                          alt="image"
+                          class="w-full"
+                          />
+                       <div class="p-5 sm:p-6 md:p-5 xl:p-7 text-center">
+                          <h3  class="
+                          text-dark text-xl
+                          sm:text-[22px]
+                          md:text-xl
+                          lg:text-[22px]
+                          xl:text-xl
+                          2xl:text-[22px]
+                          mb-1
+                          block
+                          hover:text-primary
+                          "
+                          ><%= product.name %></h3>
+                       </div>
                     </div>
                  </div>
-              </div>
-              <div class="w-full md:w-1/4 xl:w-1/4 px-4">
-                 <div class="bg-white rounded-lg overflow-hidden mb-1">
-                    <img
-                       src="https://cdn.tailgrids.com/1.0/assets/images/cards/card-01/image-02.jpg"
-                       alt="image"
-                       class="w-full"
-                       />
-                       <div class="p-5 sm:p-6 md:p-5 xl:p-7 text-center">
-                        <h3  class="
-                        text-dark text-xl
-                        sm:text-[22px]
-                        md:text-xl
-                        lg:text-[22px]
-                        xl:text-xl
-                        2xl:text-[22px]
-                        mb-1
-                        block
-                        hover:text-primary
-                        "
-                        >Creative</h3>
-                     </div>
-                 </div>
-              </div>
-              <div class="w-full md:w-1/4 xl:w-1/4 px-4">
-                 <div class="bg-white rounded-lg overflow-hidden mb-1">
-                    <img
-                       src="https://cdn.tailgrids.com/1.0/assets/images/cards/card-01/image-03.jpg"
-                       alt="image"
-                       class="w-full"
-                       />
-                       <div class="p-5 sm:p-6 md:p-5 xl:p-7 text-center">
-                        <h3  class="
-                        text-dark text-xl
-                        sm:text-[22px]
-                        md:text-xl
-                        lg:text-[22px]
-                        xl:text-xl
-                        2xl:text-[22px]
-                        mb-1
-                        block
-                        hover:text-primary
-                        "
-                        >Themes</h3>
-                     </div>
-                 </div>
-              </div>
-              <div class="w-full md:w-1/4 xl:w-1/4 px-4">
-                 <div class="bg-white rounded-lg overflow-hidden mb-1">
-                    <img
-                       src="https://cdn.tailgrids.com/1.0/assets/images/cards/card-01/image-03.jpg"
-                       alt="image"
-                       class="w-full"
-                       />
-                       <div class="p-5 sm:p-6 md:p-5 xl:p-7 text-center">
-                        <h3  class="
-                        text-dark text-xl
-                        sm:text-[22px]
-                        md:text-xl
-                        lg:text-[22px]
-                        xl:text-xl
-                        2xl:text-[22px]
-                        mb-1
-                        block
-                        hover:text-primary
-                        "
-                        >Website</h3>
-                     </div>
-                 </div>
-              </div>
+              <% }) %>
            </div>
         </div>
      </section>
@@ -296,98 +192,31 @@
   <section class="lg:pt-[120px] lg:pb-10 bg-[#F3F4F6]">
       <div class="container flex mx-auto">
          <div class="flex flex-wrap -mx-4">
-            <div class="w-full md:w-1/4 xl:w-1/4 px-4">
-               <div class="bg-white rounded-lg overflow-hidden mb-10">
-                  <img
-                     src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-                     alt="image"
-                     class="w-full"
-                     />
-                  <div class="p-5 sm:p-6 md:p-5 xl:p-7 text-center">
-                     <h3  class="
-                     text-dark text-xl
-                     sm:text-[22px]
-                     md:text-xl
-                     lg:text-[22px]
-                     xl:text-xl
-                     2xl:text-[22px]
-                     mb-4
-                     block
-                     hover:text-primary
-                     "
-                     >Templates</h3>
-                  </div>
-               </div>
-            </div>
-            <div class="w-full md:w-1/4 xl:w-1/4 px-4">
-               <div class="bg-white rounded-lg overflow-hidden mb-10">
-                  <img
-                     src="https://cdn.tailgrids.com/1.0/assets/images/cards/card-01/image-02.jpg"
-                     alt="image"
-                     class="w-full"
-                     />
-                     <div class="p-5 sm:p-6 md:p-5 xl:p-7 text-center">
-                      <h3  class="
-                      text-dark text-xl
-                      sm:text-[22px]
-                      md:text-xl
-                      lg:text-[22px]
-                      xl:text-xl
-                      2xl:text-[22px]
-                      mb-4
-                      block
-                      hover:text-primary
-                      "
-                      >Creative</h3>
-                   </div>
-               </div>
-            </div>
-            <div class="w-full md:w-1/4 xl:w-1/4 px-4">
-               <div class="bg-white rounded-lg overflow-hidden mb-10">
-                  <img
-                     src="https://cdn.tailgrids.com/1.0/assets/images/cards/card-01/image-03.jpg"
-                     alt="image"
-                     class="w-full"
-                     />
-                     <div class="p-5 sm:p-6 md:p-5 xl:p-7 text-center">
-                      <h3  class="
-                      text-dark text-xl
-                      sm:text-[22px]
-                      md:text-xl
-                      lg:text-[22px]
-                      xl:text-xl
-                      2xl:text-[22px]
-                      mb-4
-                      block
-                      hover:text-primary
-                      "
-                      >Themes</h3>
-                   </div>
-               </div>
-            </div>
-            <div class="w-full md:w-1/4 xl:w-1/4 px-4">
-               <div class="bg-white rounded-lg overflow-hidden mb-10">
-                  <img
-                     src="https://cdn.tailgrids.com/1.0/assets/images/cards/card-01/image-03.jpg"
-                     alt="image"
-                     class="w-full"
-                     />
-                     <div class="p-5 sm:p-6 md:p-5 xl:p-7 text-center">
-                      <h3  class="
-                      text-dark text-xl
-                      sm:text-[22px]
-                      md:text-xl
-                      lg:text-[22px]
-                      xl:text-xl
-                      2xl:text-[22px]
-                      mb-4
-                      block
-                      hover:text-primary
-                      "
-                      >Website</h3>
-                   </div>
-               </div>
-            </div>
+            <% latest.forEach((latest) => { %>
+                <div class="w-full md:w-1/4 xl:w-1/4 px-4">
+                    <div class="bg-white rounded-lg overflow-hidden mb-10">
+                       <img
+                          src="/img/<%= latest.image %>"
+                          alt="image"
+                          class="w-full"
+                          />
+                       <div class="p-5 sm:p-6 md:p-5 xl:p-7 text-center">
+                          <h3  class="
+                          text-dark text-xl
+                          sm:text-[22px]
+                          md:text-xl
+                          lg:text-[22px]
+                          xl:text-xl
+                          2xl:text-[22px]
+                          mb-4
+                          block
+                          hover:text-primary
+                          "
+                          ><%= latest.name %></h3>
+                       </div>
+                    </div>
+                 </div>
+            <% }) %>
          </div>
       </div>
    </section>

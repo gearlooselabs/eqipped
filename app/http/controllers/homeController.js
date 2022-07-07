@@ -1,6 +1,8 @@
 const Menu = require('../../models/product');
 const Category = require('../../models/categories')
-const subCategory = require('../../models/subcategory')
+const subCategory = require('../../models/subcategory');
+const Product = require('../../models/product');
+const Sub = require('../../models/subcategories');
 
 
 function homeController() {
@@ -23,10 +25,13 @@ function homeController() {
             } else {
                 // console.log(req.body.pcategory);
             }
-            var parentCat = "Glassware"
-            const nashta = await Category.find()
-            const pani = await subCategory.find({ 'parentCategory': `${parentCat}` })
-            return res.render('grandHome', { nashta: nashta, pani: pani })
+            var parentCat = "Glassware";
+            const nashta = await Category.find();
+            const chemical = await Category.findOne({ pcategory: parentCat }).populate({ path: 'psubcat', populate: [{ path: 'product', model: 'Product'}], model: 'Sub'}).limit(4).exec();
+            const products = await Product.find().limit(4);
+            const latest = await Product.find().limit(4).sort('-created');
+            const subcats = await Sub.find({}).limit(4);
+            return res.render('grandHome', { nashta: nashta, subcats: subcats, chemical: chemical, products: products, latest: latest});
         },
 
         fetch(req, res, next) {
