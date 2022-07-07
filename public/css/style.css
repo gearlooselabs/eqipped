@@ -692,6 +692,18 @@ body.dark .home .text{
 /* -----------------------------------------------------------------------------
                  This div contains background image.
 ----------------------------------------------------------------------------- */
+.atom-width{
+  height: auto;
+  width: 20%;
+}
+.centre-img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-size: cover;
+  background-position: center;
+}
 .contain-img{
   position: absolute;
   top: 58%;
