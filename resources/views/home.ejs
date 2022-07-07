@@ -67,7 +67,9 @@
       
     <script src="/js/gallery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+          AOS.init();
         anime({
             targets: '.atomring1',
         
@@ -83,24 +85,25 @@
             targets: '.atomring0',
             rotate: '-4turn',
         }); 
-            
-        anime.timeline({loop: false})
-       
+        var delayInMilliseconds = 3000; //1 second
 
-      .add({
-        targets: '.bgp .animation-comp',
-        scale: [5,1],
-        opacity: [0,1],
-        easing: "easeOutCirc",
-        duration: 800,
-        delay: (el, i) => 800 * i
-      })
+setTimeout(function() {
+    $('.bgp').css('display', 'block');
+
+    anime.timeline({loop: false})
+       .add({
+         targets: '.bgp .animation-comp',
+         scale: [5,1],
+         opacity: [0,1],
+         easing: "easeOutCirc",
+         duration: 800,
+         delay: (el, i) => 800 * i
+       })
+}, delayInMilliseconds);
 
     </script>
-      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-      <script>
-        AOS.init();
-      </script>
+    
+
 </body>
 </html>
 
