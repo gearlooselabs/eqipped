@@ -37,7 +37,9 @@ function homeController() {
         fetch(req, res, next) {
             var regex = new RegExp(req.query["term"], 'i');
 
-            var productFilter = Menu.find({ $or: [{ "name": { "$in": [regex] } }, { "categoryName": { "$in": [regex] } }] }, { 'categoryName': 1, 'name': 1, }).sort({ "updated_at": -1 }).sort({ "created_at": -1 }).limit(10);
+            var productFilter = Menu.find({ $or: [{ "name": { "$in": [regex] } }] }).sort({ "updated_at": -1 }).sort({ "created_at": -1 }).limit(10);
+            var categoryFilter = Category.find({ $or: [{ "pCategory": { "$in": [regex] } }] }).sort({ "updated_at": -1 }).sort({ "created_at": -1 }).limit(10);
+            var subcatFilter = subCategory.find({ $or: [{ "name": { "$in": [regex] } }] }).sort({ "updated_at": -1 }).sort({ "created_at": -1 }).limit(10);
             productFilter.exec(function (err, data) {
                 var result = [];
                 if (data) {
@@ -45,8 +47,7 @@ function homeController() {
                         data.forEach(product => {
 
                             var label = product.name
-                            var label1 = product.categoryName
-                            result.push(label, label1)
+                            result.push(label)
                         });
 
                     }
