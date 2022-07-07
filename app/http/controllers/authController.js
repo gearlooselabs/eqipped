@@ -38,8 +38,8 @@ function authController() {
         async postedit(req, res) {
             // const { id, institutionName, designation, address } = req.body
             // User.findByIdAndUpdate({ _id: id }, { institutionName, designation, address }, (err, data) => {
-            const { id, institutionName, designation} = req.body
-            User.findByIdAndUpdate({ _id: id }, { institutionName, designation}, (err, data) => {
+            const { id, institutionName, designation } = req.body
+            User.findByIdAndUpdate({ _id: id }, { institutionName, designation }, (err, data) => {
                 if (!err) {
                     return res.redirect('/home')
                 } else {
@@ -106,7 +106,7 @@ function authController() {
                         port: 465,
                         host: "smtp.gmail.com"
                     });
-                    
+
                     const mailOptions = {
                         from: 'equipped.gearloose@gmail.com',
                         to: doc.email,
@@ -198,89 +198,92 @@ function authController() {
 
 
 
-        async forOtpTest(req, res){
-            const user = await User.findOne({
-                phone: req.body.phone,
-                email: req.body.email
-            })
-  
+        async forSendingOtp(req, res) {
+            const user = await User.findOne({ $or: [{ 'phone': req.body.phone }, { 'email': req.body.email }] })
+
+            // const user = await User.findOne({
+            //     phone: req.body.phone,
+            //     email: req.body.email
+            // })
+
             if (user) {
-                return res.json({msg : "User already registered. Login yourself"})
+                return res.json({ msg: "User already registered. Login yourself or Register with new credentials" })
             }
+            else {
+                const checkAttempt = await Otp.findOne({
+                    phone: req.body.phone,
+                    email: req.body.email,
+                    attempts: 1,
+                })
 
-            const checkAttempt = await Otp.findOne({  
-                phone: req.body.phone,
-                email: req.body.email,        
-                attempts: 1,
-            })
-
-            if (checkAttempt) {
-                return res.json({msg : "OTP already send"})
-            }
-            
-            var OTP = Math.floor(10000 + Math.random() * 49999);
-            var EOTP = Math.floor(10000 + Math.random() * 90000);
-            const phone = req.body.phone;
-            const email = req.body.email;
-
-            
-            console.log(phone);            
-            console.log("otp for phone", OTP);
-
-            if (!phone || !email) {
-                return res.json({msg : "Enter phone or email carefully"})
-            }
-
-            await axios
-            .get(`https://www.txtguru.in/imobile/api.php?username=gearloose.lab&password=71703091&source=GRLABS&dmobile=91${phone}&dlttempid=1507165000853446536&message=${OTP} is your eqipped.com verification code. It is valid for only 3 minutes. Do not share it with anyone. GRLABS`)
-            .then(async (res) => {
-                    console.log(`statusCode: ${res.status}`)
-            })
-            .catch(error => {
-               return res.send({ msg: "Major Failure"})
-            })
-
-            console.log(email);
-            console.log("otp for email", EOTP);
-            
-            const mailOptions = {
-                from: 'equipped.gearloose@gmail.com',
-                to: email,
-                subject: 'Verification code by eqipped',
-                text: "Your 5 digit verification code is " + EOTP 
-            };
-
-            const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: 'equipped.gearloose@gmail.com',
-                    pass: 'gzgossoykfwflkrg'
-                    // pass: 'Asdfqwer1234'
-                },
-                port: 465,
-                host: "smtp.gmail.com"
-            });
-
-            transporter.sendMail(mailOptions, function (err, info) {
-                if (err) {
-                    req.flash('success', 'Something Went Wrong')
-                    return;
-                } else {
-                    req.flash('success', 'Code sent successfully')
-                    return;
+                if (checkAttempt) {
+                    return res.json({ msg: "OTP already sent, Wait 3 minutes to continue further." })
                 }
-            })
+                else {
+                    var OTP = Math.floor(10000 + Math.random() * 49999);
+                    var EOTP = Math.floor(10000 + Math.random() * 90000);
+                    const phone = req.body.phone;
+                    const email = req.body.email;
 
-            const otp = new Otp({ phone: phone, otp: OTP, email: email, eotp: EOTP, attempts: 1 })
-            const salt = await bcrypt.genSalt(10)
-            otp.otp = await bcrypt.hash(otp.otp, salt)
-            otp.eotp = await bcrypt.hash(otp.eotp, salt)
-            otp.save().then((user) => {
-                return res.json({msg : "Success"})
-            }).catch(err => {
-                return res.json({msg : "Failure"})
-            });
-            
+                    console.log(phone);
+                    console.log("otp for phone", OTP);
+
+                    if (!phone || !email) {
+                        return res.json({ msg: "Enter phone or email carefully" })
+                    }
+                    else {
+                        // await axios
+                        // .get(`https://www.txtguru.in/imobile/api.php?username=gearloose.lab&password=71703091&source=GRLABS&dmobile=91${phone}&dlttempid=1507165000853446536&message=${OTP} is your eqipped.com verification code. It is valid for only 3 minutes. Do not share it with anyone. GRLABS`)
+                        // .then(async (res) => {
+                        //         console.log(`statusCode: ${res.status}`)
+                        // })
+                        // .catch(error => {
+                        //    return res.send({ msg: "Major Failure"})
+                        // })
+
+                        console.log(email);
+                        console.log("otp for email", EOTP);
+
+                        const mailOptions = {
+                            from: 'equipped.gearloose@gmail.com',
+                            to: email,
+                            subject: 'Verification code by eqipped',
+                            text: "Your 5 digit verification code is " + EOTP
+                        };
+
+                        const transporter = nodemailer.createTransport({
+                            service: 'gmail',
+                            auth: {
+                                user: 'equipped.gearloose@gmail.com',
+                                pass: 'gzgossoykfwflkrg'
+                                // pass: 'Asdfqwer1234'
+                            },
+                            port: 465,
+                            host: "smtp.gmail.com"
+                        });
+
+                            transporter.sendMail(mailOptions, function (err, info) {
+                                if (err) {
+                                    console.log(err)
+                                    return;
+                                } else {
+                                    console.log(info)
+                                    return;
+                                }
+                            })
+
+                        const otp = new Otp({ phone: phone, otp: OTP, email: email, eotp: EOTP, attempts: 1 })
+                        const salt = await bcrypt.genSalt(10)
+                        otp.otp = await bcrypt.hash(otp.otp, salt)
+                        otp.eotp = await bcrypt.hash(otp.eotp, salt)
+                        otp.save().then((user) => {
+                            return res.json({ msg: "Success" })
+                        }).catch(err => {
+                            return res.json({ msg: "Something went wrong. Please try again later" })
+                        });
+                    }  // else end
+                }  // else end
+            }  // else end
         },
 
 
@@ -288,7 +291,7 @@ function authController() {
 
 
         // Verification code sent function start 
-        // async forOtp(req, res) {
+        // async forOtpOld(req, res) {
         //     const user = await User.findOne({
         //         phone: req.body.phone,
         //         email: req.body.email
@@ -395,7 +398,7 @@ function authController() {
             const { fname, lname, phone, email, password, institutionName, designation, role, pincode, city, state, password2 } = req.body
             console.log(fname, lname, phone, email, password, institutionName, designation, role, pincode, city, state, password2);
             // Validate request 
-            if (!fname || !lname || !phone || !email || !password || institutionName || designation || role) {
+            if (!fname || !lname || !phone || !email || !password || !institutionName || !role || !password2 || !pincode || !city || !state || !designation) {
                 req.flash('error', 'Sbb dal')
                 req.flash('fname', fname)
                 req.flash('lname', lname)
@@ -443,10 +446,10 @@ function authController() {
                 return res.redirect('/register')
             }
 
-            
+
             if (password != password2) {
-            req.flash('password', "Password Mismatch")
-            return res.redirect('/register')
+                req.flash('password', "Password Mismatch")
+                return res.redirect('/register')
             }
 
 

@@ -874,13 +874,13 @@
           }
         }).done(function (data){
           if(data.msg == "Success"){
-            var a = a+1;
-            alert("Otp has been sent")
+            alert("Otp Send Successfully")
           }else{
             alert(data.msg)
           }
         })
-      }
+      }else{
+      alert("Enter 10 digit phone no.");}
     }
   }
 
