@@ -16,7 +16,13 @@ const userSchema = new Schema({
     isverified: {type: String, default: 'No'},
     role: {type: String, default: 'customer'},
     isuploded: {type: String, default: 'No'},
-    document: { type: Schema.Types.ObjectId, ref: 'Document'}
+    document: { type: Schema.Types.ObjectId, ref: 'Document'},
+    cart: [
+        {
+            product: {type: Schema.Types.ObjectId, ref: 'Product'},
+            quantity: { type: Number}
+        }
+    ]
     
 }, {timestamps: true })
 

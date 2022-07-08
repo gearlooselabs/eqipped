@@ -32,6 +32,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/owl.carousel.min.css" />
   <!-- <link rel="stylesheet" href="/css/global.css"/> -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -69,7 +70,7 @@
             <li class="nav-link">
               <a href="/cart">
                 <span id="cartCounter" class="font-bold icon">
-                  <%= session.cart ? session.cart.totalQty : '' %>
+                    <span id = "cartcount"></span>
                     <i class='bx bx-cart-alt ico'></i>
                 </span>
                 <span class="text nav-text">My Cart</span>
@@ -407,7 +408,8 @@
     </section>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/app.js"></script>
+    <!-- <script src="/js/app.js"></script> -->
+    <script src="/js/owl.carousel.min.js"></script>
 
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
@@ -440,8 +442,29 @@
           }
         });
       });
-    </script>
 
+      $(document).ready(function(){
+        $(".owl-carousel").owlCarousel({
+          loop: true,
+          responsiveClass:true,
+          responsive:{
+              0:{
+                  items:1.5,
+                  nav:true
+              },
+              600:{
+                  items:2.5,
+                  nav:false
+              },
+              1000:{
+                  items:4.5,
+                  nav:true,
+                  loop:false
+              }
+          }
+        });
+      });
+    </script>
 </body>
 
 </html>

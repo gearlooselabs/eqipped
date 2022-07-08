@@ -1,41 +1,36 @@
-const { json } = require("express")
+const { json } = require("express");
+const Product = require('../../../models/product');
+const User = require('../../../models/user');
 
 
 function cartController() {
     return{
 
-        index(req, res) {
+        async index(req, res) {
+            
             res.render('customers/cart')
         },
 
-        update(req, res) {
-            
-            if (!req.session.cart){
-                req.session.cart = {
-                    items: {},
-                    totalQty: 0,
-                    totalPrice: 0
-                }
-            }
-
-            let cart = req.session.cart
-
-                // Check if item does not exist in cart
-                if(!cart.items[req.body._id]){
-                    cart.items[req.body._id] = {
-                        item: req.body,
-                        qty: 1
+        async update(req, res) {
+            User.updateOne({
+                _id: req.user._id
+            }, {
+                $push: {
+                    cart: {
+                        product: req.body.pid,
+                        quantity: req.body.qty
                     }
-                    cart.totalQty = cart.totalQty + 1;
-                    cart.totalPrice = cart.totalPrice + req.body.price
-                } else {
-                    cart.items[req.body._id].qty = cart.items[req.body._id].qty + 1
-                    cart.totalQty = cart.totalQty + 1
-                    cart.totalPrice = cart.totalPrice + req.body.price  
                 }
+            }, (err) => {
+                if(err) console.log(err);
+            });
 
-                
-            return res.json({ totalQty: req.session.cart.totalQty})
+            const user = await User.findOne({
+                _id: req.user._id
+            });
+
+            console.log(user.cart.length)
+            res.send({"status": "success", items: user.cart.length});
         },
 
         deupdate(req, res) {
