@@ -1,18 +1,20 @@
-<section class="logi">
+<section class="logi min-h-full"  >
 
 
 
-    <h2 class="m-8 text-center text-3xl font-extrabold text-gray-900">
-        List Your Product
-    </h2>
+  
+        <h2 class="m-10 text-center text-3xl font-extrabold text-gray-900 " >
+         List Your Products
+        </h2>
+      
 
     <section class="container flex mx-auto py-8 px-10">
         <div class="flex w-full">
-            <div style="width: 50rem;" class="w-full">
+            <div style="width: 45rem; background-color: white;" class="w-full form-step" >
                 <form class="flex justify-center w-full mx-auto" action="addproduct" method="post"
                     enctype="multipart/form-data">
 
-                    <div class="pb-12 w-full">
+                    <div class=" w-full">
                         <div class="flex mx-auto">
                             
                         <% if(messages.error) { %>
@@ -151,7 +153,7 @@
                                 </div>
 
                                 <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
-                                    <div class="w-full lg:ml-4 lg:w-10/12 mt-4">
+                                    <div class="w-full  lg:w-12/12 mt-4">
                                         <label for="description" class="block mb-3 text-sm font-semibold text-gray-500">
                                             Description</label>
                                         <input name="description" type="text" required placeholder="Description"
@@ -163,7 +165,7 @@
 
                                 <div class="flex justify-center mt-10">
                                     <button type="submit"
-                                        class="group relative 2/3w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Upload
+                                        class="button btn-navigate-form-step group relative w-full flex justify-center py-2 px-4  border border-transparent text-sm font-medium rounded-md text-white btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Upload
                                     </button>
                                 </div>
 
@@ -172,8 +174,8 @@
                 </form>
             </div>
 
-            <div style="width: 35rem;" class="hidden lg:block">
-                <img class="opacity-75" style="z-index: -1; position: absolute; top:12rem; right: 5%; width: 50%;"
+            <div style="width: 45rem;" class="w-full hidden  lg:none xl:block">
+                <img class="opacity-75 min-w-md" 
                     src="/img/addproduct.png" alt="" srcset="">
             </div>
 
