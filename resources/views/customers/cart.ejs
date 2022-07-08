@@ -1,36 +1,36 @@
 <section class="cart py-20">
-    <% if(session.cart) { %>
+    <% if(products) { %>
     <div class="order container mx-auto xl:w-1/2">
         <div class="flex items-center border-b border-gray-300 pb-4">
             <img src="https://svgsilh.com/svg/151889.svg" class="w-10 block pr-2">
             <h1 class="font-bold ml-4 text-2xl">Order summary</h1>
         </div>
-        <% for(let chai of Object.values(session.cart.items)) { %>
-        <div class="pizza-list">                
-            <div class="flex items-center mt-8 mb-2 cursor-pointer">
-                <a class="flex justify-center items-center hover:border-gray-300 hover:bg-gray-200 w-5/12" href="/productDetails/<%= chai.item.categoryName %>/<%= chai.item._id %>">
-                        <img class="w-24" src="/img/<%= chai.item.image %>" alt="">
-                        <div class="flex-1 ml-4">
-                            <h1><%= chai.item.name %></h1>
-                            <span class="text-sm"><%= chai.item.price %></span>
-                        </div>
-                </a>
-                <span class="flex-1 items-center mt-1 ml-12">    
-                    <button data-chai="<%= JSON.stringify(chai.item) %>" class="border sub-to-cart mr-2 py- px-3 rounded-full items-center text-xl font-bold"> - </button>
-                    <span class="flex-1"><%= chai.qty %></span>
-                    <button data-chai="<%= JSON.stringify(chai.item) %>" class="add-to-cart ml-2 py- px-3 rounded-full items-center text-xl font-bold"> + </button>
-                </span>
-                <span class="font-bold text-lg mr-3">₹ <%= chai.item.price * chai.qty %></span>    
+        <% products.cart.forEach((product) => { %>
+            <div class="pizza-list">                
+                <div class="flex items-center mt-8 mb-2 cursor-pointer">
+                    <a class="flex justify-center items-center hover:border-gray-300 hover:bg-gray-200 w-5/12" href="">
+                            <img class="w-24" src="/img/<%= product.product.image %>" alt="">
+                            <div class="flex-1 ml-4">
+                                <h1></h1>
+                                <span class="text-sm"><%= product.product.name %></span>
+                            </div>
+                    </a>
+                    <span class="flex-1 items-center mt-1 ml-12">    
+                        <button class="border sub-to-cart mr-2 py- px-3 rounded-full items-center text-xl font-bold"> - </button>
+                        <span class="flex-1"><%= product.quantity %></span>
+                        <button class="add-to-cart ml-2 py- px-3 rounded-full items-center text-xl font-bold"> + </button>
+                    </span>
+                    <span class="font-bold text-lg mr-3">₹ <%= product.product.price * product.quantity %></span>    
+                </div>
+                <div><button class="remove-to-cart text-red-700 hover:bg-gray-200 py-1 px-2 ml-32">Remove</button></div>
             </div>
-            <div><button data-chai="<%= JSON.stringify(chai.item) %>" class="remove-to-cart text-red-700 hover:bg-gray-200 py-1 px-2 ml-32">Remove</button></div>
-        </div>
-        <hr>
-        <%  } %>
+            <hr>
+        <% }) %>
         <div class="text-right py-6">
             <div>
                 <span class="text-sm float-left mt-1">Congrats your <b>Cart</b> is ready to checkout</span>
                 <span class="text-lg font-bold">Total Amount:</span>
-                <span class="amount text-2xl font-bold ml-2">₹<%= session.cart.totalPrice %></span>
+                <span class="amount text-2xl font-bold ml-2">₹500</span>
             </div>
             <% if(user) { %>
             <div class="flex justify-center">
