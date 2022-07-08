@@ -10,7 +10,6 @@
 
 
 <div style="justify-content: space-evenly;" class="container hideInPhone flex mx-auto">
-<% const Fake = 'https://fakestoreapi.com/products'; %>
     <% nashta.forEach(function(nashta){ %>      
         <a href="/allcategory/products/<%= nashta._id%>/1">
     <div data-chai="<%= JSON.stringify(nashta) %>" style="display: flex;" class="sub-cat">        
@@ -28,7 +27,8 @@
         </div>
     </div>
 </a>
-    <%  }) %>     
+    <%  }) %>
+   
 
 </div>
 
@@ -70,14 +70,16 @@
 <h1 class="heading">Laboratory Equipment</h1>
 
 <section class="container mx-auto p-8 flex flex-wrap justify-around">
-  <% subcats.forEach((subcat) => { %>
-    <div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
-        <img src="/img/empty-cart.png" alt="" srcset="">
-        <div class="flex border-box p-4 flex-col">
-            <div class="text-center"><%= subcat.name %></div>
-        </div>
-    </div> 
-  <% }) %>
+    <div class="owl-carousel">
+        <% subcats.forEach((subcat) => { %>
+            <div><div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
+                <img src="/img/empty-cart.png" alt="" srcset="">
+                <div class="flex border-box p-4 flex-col">
+                    <div class="text-center"><%= subcat.name %></div>
+                </div>
+            </div> </div>
+          <% }) %>
+      </div>  
 
   <!-- <div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
       <img src="/img/empty-cart.png" alt="" srcset="">
@@ -95,16 +97,20 @@
 <h1 class="heading">Laboratory Chemicals</h1>
 
     <section class="container mx-auto p-8 flex flex-wrap justify-around">
-        <% chemical.psubcat.forEach((subcat) => { %>
-            <% subcat.product.forEach((product) => { %>
-                <div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
-                    <img src="/img/empty-cart.png" alt="" srcset="">
-                    <div class="flex border-box p-4 flex-col">
-                        <div class="text-center"><%= product.name %></div>
+        <div class="owl-carousel">
+            <% chemical.psubcat.forEach((subcat) => { %>
+                <% subcat.product.forEach((product) => { %>
+                    <div>
+                        <div class="flex flex-col h-min w-44 p-1 border-box bg-white rounded xl m-5"> 
+                            <img src="/img/empty-cart.png" alt="" srcset="">
+                            <div class="flex border-box p-4 flex-col">
+                                <div class="text-center"><%= product.name %></div>
+                            </div>
+                        </div> 
                     </div>
-                </div> 
+                <% }) %>
             <% }) %>
-        <% }) %>
+          </div> 
     </section>
 
 

@@ -8,12 +8,18 @@ const Brand = require('../../models/brand');
 function productController() {
     return {
         async productfetch(req, res) {
-            var product = req.body.search;
-            if (product != '') {
+            console.log(req.query.search)
+            if (req.query.search != '') {
                 // const chai = await Menu.find({ 'categoryName': `${product}`, 'isverified': 'Yes' },)
-                const chai = await Menu.find( { $or: [{ "categoryName": { "$in": product } }, { "name": { "$in": product } }] , 'isverified': 'Yes' },)
-                const pani = await subCategory.find({ 'parentCategory': `${product}` })
-                return res.render('menus/product', { chai: chai, pani: pani })
+                // const chai = await Menu.find( { $or: [{ "categoryName": { "$in": product } }, { "name": { "$in": product } }] , 'isverified': 'Yes' },)
+                // const pani = await subCategory.find({ 'parentCategory': `${product}` })
+                const products = await Menu.find({ "name": { "$regex": req.query.search, "$options": "i" } });
+                const categories = await Category.find({ "pCategory": { "$regex": req.query.search, "$options": "i" } });
+                const subcats = await subCategory.find({ "name": { "$regex": req.query.search, "$options": "i" } });
+                console.log(products);
+                console.log(categories);
+                console.log(subcats);
+                return res.render('menus/product', { products, categories, subcats});
             }else{
                 return res.redirect('/')
             }

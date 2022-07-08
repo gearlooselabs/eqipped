@@ -97,7 +97,7 @@ function initRoutes(app) {
     app.post('/fetch/subcat/', categoriesController().findSubcat);
 
     //Product Route
-    app.post('/allcategory/products', auth, productController().productfetch)
+    app.get('/allcategory/products', auth, productController().productfetch)
     app.get('/allcategory/products/:categoryId/:page', auth, productController().catProduct)
     app.get('/productDetails/:id/:page', auth, productController().productDetails)
     

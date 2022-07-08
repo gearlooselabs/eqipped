@@ -27,17 +27,19 @@ function homeController() {
             }
             var parentCat = "Glassware";
             const nashta = await Category.find();
-            const chemical = await Category.findOne({ pcategory: parentCat }).populate({ path: 'psubcat', populate: [{ path: 'product', model: 'Product'}], model: 'Sub'}).limit(4).exec();
+            const chemical = await Category.findOne({ pcategory: parentCat }).populate({ path: 'psubcat', populate: [{ path: 'product', model: 'Product'}], model: 'Sub'}).limit(10).exec();
             const products = await Product.find().limit(4);
             const latest = await Product.find().limit(4).sort('-created');
-            const subcats = await Sub.find({}).limit(4);
-            return res.render('grandHome', { nashta: nashta, subcats: subcats, chemical: chemical, products: products, latest: latest});
+            const subcats = await Sub.find({}).limit(12);
+            return res.render('grandHome', { nashta: nashta, subcats: subcats, chemical: chemical, products: products, latest: latest,});
         },
 
         fetch(req, res, next) {
             var regex = new RegExp(req.query["term"], 'i');
 
-            var productFilter = Menu.find({ $or: [{ "name": { "$in": [regex] } }, { "categoryName": { "$in": [regex] } }] }, { 'categoryName': 1, 'name': 1, }).sort({ "updated_at": -1 }).sort({ "created_at": -1 }).limit(10);
+            var productFilter = Menu.find({ $or: [{ "name": { "$in": [regex] } }] }).sort({ "updated_at": -1 }).sort({ "created_at": -1 }).limit(10);
+            var categoryFilter = Category.find({ $or: [{ "pCategory": { "$in": [regex] } }] }).sort({ "updated_at": -1 }).sort({ "created_at": -1 }).limit(10);
+            var subcatFilter = subCategory.find({ $or: [{ "name": { "$in": [regex] } }] }).sort({ "updated_at": -1 }).sort({ "created_at": -1 }).limit(10);
             productFilter.exec(function (err, data) {
                 var result = [];
                 if (data) {
@@ -45,8 +47,7 @@ function homeController() {
                         data.forEach(product => {
 
                             var label = product.name
-                            var label1 = product.categoryName
-                            result.push(label, label1)
+                            result.push(label)
                         });
 
                     }
