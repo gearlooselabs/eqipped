@@ -29,7 +29,7 @@
 
 
 
-        <form id="userKYCForm" name="userKYCForm" action="/documentupload" method="POST">
+        <form id="userKYCForm" name="userKYCForm" action="/complete-kyc" method="POST">
 
           <section class="form-step" style="background-color: white;">
             <h2 class="font-normal">Fill in the details carefully</h2>
@@ -39,7 +39,7 @@
                 <div class="w-full mt-4">
                   <label for="bType" class="block mb- text-sm font-semibold text-gray-500">
                     Register as</label>
-                  <select name="bType" id="bType" required
+                  <select name="bType" id="bType" 
                     class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm">
                     <option style="color:gray" disabled selected hidden>Click to select ▽</option>
                     <option value="School">School / Junior College</option>
@@ -57,7 +57,7 @@
 
               <div class="w-full  mt-4" id="GST" style="display:none;">
                 <label for="first-name" class="sr-onl block mb- text-sm font-semibold text-gray-500">GST Number</label>
-                <input id="GST-Input" name="gst" type="text"
+                <input id="GST-Input" name="gst" type="text" required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
                   placeholder="GST Number">
               </div>
@@ -86,7 +86,7 @@
                   placeholder="MAN Number">
               </div>
 
-              <% if(messages.error) { %>
+              <!-- <% if(messages.error) { %>
                 <span class="text-red-600 mt-1 text-center font-medium">
                     <%= messages.error%>
                 </span>
@@ -111,7 +111,7 @@
                   </div>
                   
                 </div>
-                <% } %>
+                <% } %> -->
 
 
 
@@ -124,14 +124,14 @@
                   class="button btn-navigate-form-step group relative w-full flex justify-center py-2 px-4  border border-transparent text-sm font-medium rounded-md text-white btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   type="submit">Save & Continue</button>
               </div>
-            </div>
+         
 
           </section>
         </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 <script>
   $('#bType').on('change', function () {
@@ -141,14 +141,18 @@
       case "School":
 
         $("#UDISE").show()
-        $("#UDISE-Input").attr("required", "true").attr("placeholder", "U-DISE Number")
+        $("#UDISE-Input").attr("placeholder", "U-DISE Number");
+        document.querySelector('#UDISE-Input').required = true;
         $("#CIN").show()
         $("#PAN").show()
         $("#GST").show()
-        $("#GST-Input").attr("placeholder", "GST Number ( Optional )").attr("required", "false");
-       
+        $("#GST-Input").attr("placeholder", "GST Number ( Optional )");
+        document.querySelector('#GST-Input').required = false;
+
+
         $("#MAN").hide()
-        $("#MAN-Input").attr("required", "false")
+        document.querySelector('#MAN-Input').required = false;
+    
        
         $("#PDF").show()
 
@@ -156,13 +160,17 @@
       case "college":
 
         $("#UDISE").show()
-        $("#UDISE-Input").attr("required", "true").attr("placeholder", "U-DISE Number")
+        $("#UDISE-Input").attr("placeholder", "U-DISE Number");
+        document.querySelector('#UDISE-Input').required = true;
         $("#CIN").show()
         $("#PAN").show()
         $("#GST").show()
-        $("#GST-Input").attr("placeholder", "GST Number ( Optional )").attr("required", "false");
+        $("#GST-Input").attr("placeholder", "GST Number ( Optional )");
+        document.querySelector('#GST-Input').required = false;
         $("#MAN").show()
-        $("#MAN-Input").attr("placeholder", "MAN Number ( Required for Medical Institutes )").attr("required", "false");
+        $("#MAN-Input").attr("placeholder", "MAN Number ( Required for Medical Institutes )");
+        document.querySelector('#MAN-Input').required = false;
+
 
         $("#PDF").show()
 
@@ -175,33 +183,38 @@
         $("#GST").show()
         $("#GST-Input").attr("placeholder", "GST Number").attr("required", "true");
         $("#MAN").show()
-        $("#MAN-Input").attr("placeholder", "MAN Number").attr("required", "true")
+        $("#MAN-Input").attr("placeholder", "MAN Number")
+        document.querySelector('#MAN-Input').required = true;
+
 
         $("#UDISE").hide()
-        $("#UDISE-Input").attr("required", "false")
+        document.querySelector('#UDISE-Input').required = false ;
+
         
         $("#PDF").show()
 
 
         break;
       case "vendor":
-       
+        
         $("#CIN").show()
         $("#PAN").show()
         $("#GST").show()
-        $("#GST-Input").attr("placeholder", "GST Number").attr("required", "true");
+        $("#GST-Input").attr("placeholder", "GST Number lala");
        
         $("#UDISE").hide()
-        $("#UDISE-Input").attr("required", "false")
+        document.querySelector('#UDISE-Input').required = false ;
+
+
         $("#MAN").hide()
-        $("#MAN-Input").attr("required", "false")
+        document.querySelector('#MAN-Input').required = false;
+       
 
         $("#PDF").show()
 
 
         break;
-      default:
-        $("#schoolInput").hide()
+
     }
   });
 </script>
