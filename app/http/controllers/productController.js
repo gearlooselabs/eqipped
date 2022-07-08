@@ -15,7 +15,7 @@ function productController() {
                 const pani = await subCategory.find({ 'parentCategory': `${product}` })
                 return res.render('menus/product', { chai: chai, pani: pani })
             }else{
-                return res.redirect('/home')
+                return res.redirect('/')
             }
         
         },

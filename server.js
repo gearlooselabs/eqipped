@@ -342,7 +342,7 @@ app.post('/addproduct', function (req, res) {
       cb(null, './public/businessDocuments/')
     },
     filename: function (req, file, cb) {
-          const uniqueSuffix = req.user.name + ' from ' + req.user.institutionName
+          const uniqueSuffix = req.user.fname + ' from ' + req.user.institutionName
           cb(null, uniqueSuffix + path.extname(file.originalname)); 
     //   cb(null, file.originalname);   
     }
@@ -370,26 +370,28 @@ const upload2 = multer({ storage: storage2, limits: { fileSize: maxSize }}).sing
       }
      
 
-    const {gst, cin, pan, udise, man} = req.body
-
-    const document = new Document({gst, cin, pan, udise, man})
+    const {registerAs, gst, cin, pan, udise, man} = req.body
+    const document = new Document({registerAs, gst, cin, pan, udise, man})
+    // const {gst} = req.body
+    // const document = new Document({gst})
+     
     document.save().then(result => {
-        req.flash('error', 'Documents Added Successfully')
-        return res.redirect('/documentupload')
-    }).catch(err => {
-        req.flash('error', 'Something went wrong')
-        return res.redirect('/documentupload')
-    });
-
-
-     // Everything went fine.
-     User.findOneAndUpdate({ _id: req.user.id }, { isuploded: "Yes" }, (err, data) => {
+          // Everything went fine.
+       User.findOneAndUpdate({ _id: req.user.id }, { isuploded: "Yes" }, (err, data) => {
         if (err) {
            console.log(err)
         } else {
             console.log("Done")
         }
     })
+    
+        req.flash('error', 'Documents Added Successfully')
+        return res.redirect('/documentupload')
+
+    }).catch(err => {
+        req.flash('error', 'Something went wrong')
+        return res.redirect('/documentupload')
+    });
 
 
     })

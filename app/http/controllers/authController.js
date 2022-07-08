@@ -363,37 +363,6 @@ function authController() {
         // Verification code sent function end
 
 
-
-
-
-
-        async fetchpincode(req, res) {
-            var p_pincode = req.body.pincode
-            let obj = {}
-            await axios
-                .get(`https://api.postalpincode.in/pincode/${p_pincode}`)
-                .then(resp => {
-                    if (resp.data[0].Status == 'Error') {
-                        return res.send(obj)
-                    }
-                    var k = resp.data[0]
-                    obj = {
-                        city: k.PostOffice[0].District,
-                        state: k.PostOffice[0].State
-                    }
-                    console.log(obj)
-                    return res.send(obj)
-                })
-                .catch(error => {
-                    console.error(error)
-                })
-        },
-
-        register(req, res) {
-            res.render('auth/register')
-        },
-
-
         async postRegister(req, res) {
             const { fname, lname, phone, email, password, institutionName, designation, role, pincode, city, state, password2 } = req.body
             console.log(fname, lname, phone, email, password, institutionName, designation, role, pincode, city, state, password2);
@@ -491,7 +460,6 @@ function authController() {
                     email: rightOtpFind.email,
                 })
 
-
                 user.save().then((user) => {
                     req.flash('OnRegisterDone', 'User Successfully Registered')
                     // return res.redirect('/login')
@@ -509,6 +477,35 @@ function authController() {
                 return res.redirect('/register')
             }
         },
+
+        
+
+        async fetchpincode(req, res) {
+            var p_pincode = req.body.pincode
+            let obj = {}
+            await axios
+                .get(`https://api.postalpincode.in/pincode/${p_pincode}`)
+                .then(resp => {
+                    if (resp.data[0].Status == 'Error') {
+                        return res.send(obj)
+                    }
+                    var k = resp.data[0]
+                    obj = {
+                        city: k.PostOffice[0].District,
+                        state: k.PostOffice[0].State
+                    }
+                    console.log(obj)
+                    return res.send(obj)
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+        },
+
+        register(req, res) {
+            res.render('auth/register')
+        },
+
 
         logout(req, res) {
             req.logout()

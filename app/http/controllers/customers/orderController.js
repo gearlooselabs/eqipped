@@ -11,11 +11,11 @@ function orderController() {
     return {
 
         viewdoc(req,res){
-            const {name, insN} = req.params
-            const filename = name + ' from ' + insN + '.pdf';
-            const filepath = 'http://localhost:3300/documents/' + filename
-            return res.render('auth/documentwatch', { path: filepath })
-            // return res.render('auth/documentupload', { path: filepath })
+            const {fname, insN} = req.params
+            const filename = fname + ' from ' + insN + '.pdf';
+            const filepath = 'http://localhost:3000/businessDocuments/' + filename
+            // return res.render('auth/documentwatch', { path: filepath })
+            return res.render('auth/documentupload', { path: filepath })
           },
 
         async index(req, res) {
