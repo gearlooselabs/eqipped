@@ -22,7 +22,8 @@
                     </span>
                     <span class="font-bold text-lg mr-3">₹ <%= product.product.price * product.quantity %></span>    
                 </div>
-                <div><button class="remove-to-cart text-red-700 hover:bg-gray-200 py-1 px-2 ml-32">Remove</button></div>
+                <div>
+                    <button onclick = "removeItem('<%= product.product._id %>')" class="remove-to-cart text-red-700 hover:bg-gray-200 py-1 px-2 ml-32">Remove</button></div>
             </div>
             <hr>
         <% }) %>
@@ -56,6 +57,26 @@
     </div>
     <% } %>
 </section>
+<script>
+    function removeItem(itemId){
+        console.log(itemId);
+        var params = {
+            pid: itemId,
+          }
+  
+          $.ajax({
+          type: 'POST',
+          url: '/remove-cart',
+          data: params, 
+          dataType: 'json',
+          encode: true
+          }).done(function(result){
+            if(result.status == "success"){
+                location.reload();
+            }
+          })
+    }
+</script>
 
 
 

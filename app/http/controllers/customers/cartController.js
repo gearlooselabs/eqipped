@@ -13,7 +13,8 @@ function cartController() {
 
         async update(req, res) {
             User.updateOne({
-                _id: req.user._id
+                _id: req.user._id,
+                'cart.product': { $ne: req.body.pid}
             }, {
                 $push: {
                     cart: {
@@ -61,30 +62,20 @@ function cartController() {
 
 
         removeUpdate(req, res) {
-            let cart = req.session.cart
-
-
-                // Check if item does not exist in cart
-                if(cart.items[req.body._id]){
-                    cart.totalQty = cart.totalQty - cart.items[req.body._id].qty
-                    cart.totalPrice = cart.totalPrice - req.body.price * cart.items[req.body._id].qty
-                    delete cart.items[req.body._id]
-                    }      
-                
-                    
-                    if(cart.totalQty == 0 || cart.totalPrice == 0){
-                        delete req.session.cart
+            console.log(req.body.pid)
+            User.updateOne({
+                _id: req.user._id
+            }, {
+                $pull: {
+                    cart: {
+                        product: req.body.pid
                     }
-
-                    try {
-                        return res.json({ totalQty: req.session.cart.totalQty })
-                    }
-                    catch(err) {
-                        return res.redirect('/cart')                                                
-                      }
-
-
                 }
+            }, (err) => {
+                if(err) res.send({ "status": "error"});
+                res.send({"status": "success"});
+            })
+        }
     }
 }
 
