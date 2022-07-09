@@ -34,30 +34,18 @@ function cartController() {
             res.send({"status": "success", items: user.cart.length});
         },
 
-        deupdate(req, res) {
-
-            let cart = req.session.cart
-
-                // Check if item does not exist in cart
-                if(!cart.items[req.body._id]){
-                    cart.items[req.body._id] = {
-                        item: req.body,
-                        qty: 0
-                    }
-                    // cart.totalQty = cart.totalQty - 1;
-                    // cart.totalPrice = cart.totalPrice - req.body.price;                    
-                } else if(cart.items[req.body._id].qty > 1){
-                    cart.items[req.body._id].qty = cart.items[req.body._id].qty - 1
-                    cart.totalQty = cart.totalQty - 1
-                    cart.totalPrice = cart.totalPrice - req.body.price  
-                // }  else if(cart.items[req.body._id].qty = 1){
-                //     cart.totalQty = cart.totalQty - 1
-                //     cart.totalPrice = cart.totalPrice - req.body.price  
-                //     delete cart.items[req.body._id]
-                }
-                
-                
-            return res.json({ totalQty: req.session.cart.totalQty, specificQty: req.session.cart.items[req.body._id].qty})
+        qtyUpdate(req, res) {
+            const number = parseInt(req.body.number);
+            User.updateOne({ 
+                _id: req.user._id,
+                'cart._id': req.body.pid
+            }, {
+               $inc: {
+                'cart.$.quantity': number
+               }
+            }, () => {
+                res.send({ "status": "success"});
+            })
         },
 
 

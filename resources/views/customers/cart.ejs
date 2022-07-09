@@ -16,9 +16,9 @@
                             </div>
                     </a>
                     <span class="flex-1 items-center mt-1 ml-12">    
-                        <button class="border sub-to-cart mr-2 py- px-3 rounded-full items-center text-xl font-bold"> - </button>
+                        <button onclick = "updateQty('-1', '<%= product._id %>')" class="border sub-to-cart mr-2 py- px-3 rounded-full items-center text-xl font-bold"> - </button>
                         <span class="flex-1"><%= product.quantity %></span>
-                        <button class="add-to-cart ml-2 py- px-3 rounded-full items-center text-xl font-bold"> + </button>
+                        <button onclick = "updateQty('1', '<%= product._id %>')" class="add-to-cart ml-2 py- px-3 rounded-full items-center text-xl font-bold"> + </button>
                     </span>
                     <span class="font-bold text-lg mr-3">₹ <%= product.product.price * product.quantity %></span>    
                 </div>
@@ -31,7 +31,11 @@
             <div>
                 <span class="text-sm float-left mt-1">Congrats your <b>Cart</b> is ready to checkout</span>
                 <span class="text-lg font-bold">Total Amount:</span>
-                <span class="amount text-2xl font-bold ml-2">₹500</span>
+                <% var sum = 0; %>
+                <% products.cart.forEach((product) => { %>
+                    <% sum += product.product.price * product.quantity %> 
+                <% }) %>
+                <span class="amount text-2xl font-bold ml-2">₹<%= sum %></span>
             </div>
             <% if(user) { %>
             <div class="flex justify-center">
@@ -67,6 +71,26 @@
           $.ajax({
           type: 'POST',
           url: '/remove-cart',
+          data: params, 
+          dataType: 'json',
+          encode: true
+          }).done(function(result){
+            if(result.status == "success"){
+                location.reload();
+            }
+          })
+    }
+
+    function updateQty(u, pid){
+        const number = parseInt(u);
+        console.log(number);
+        var params = {
+            number: number,
+            pid: pid
+        }
+        $.ajax({
+          type: 'POST',
+          url: '/qty-cart',
           data: params, 
           dataType: 'json',
           encode: true
