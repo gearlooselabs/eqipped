@@ -21,7 +21,7 @@ function productController() {
                 console.log(subcats);
                 return res.render('menus/product', { products, categories, subcats});
             }else{
-                return res.redirect('/home')
+                return res.redirect('/')
             }
         
         },

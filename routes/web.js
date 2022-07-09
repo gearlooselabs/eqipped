@@ -40,7 +40,7 @@ function initRoutes(app) {
     app.post('/logout', authController().logout)
     app.get('/cart', auth, cartController().index)
     app.post('/update-cart', cartController().update)
-    app.post('/de-update-cart', cartController().deupdate)
+    app.post('/qty-cart', cartController().qtyUpdate)
     app.post('/remove-cart', cartController().removeUpdate)
 
     //PaytmGateway Route
@@ -55,7 +55,7 @@ function initRoutes(app) {
     // Customer routes
     app.post('/callback', auth, orderController().store)
     app.get('/customer/orders', auth, orderController().index)
-    app.get('/view/doc/:name/:insN', auth, orderController().viewdoc)
+    app.get('/view/doc/:fname/:insN', auth, orderController().viewdoc)
     
     //Download PDF in show function
     app.get('/customer/orders/:id', auth, orderController().show)

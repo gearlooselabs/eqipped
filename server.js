@@ -246,6 +246,7 @@ const admin = require('./app/http/middlewares/admin')
 const Product = require('./app/models/product')
 const User = require('./app/models/user')
 const Sub = require('./app/models/subcategories');
+const Document = require('./app/models/Document');
 
 
 var maxiSize = 1000000
@@ -341,7 +342,7 @@ app.post('/addproduct', function (req, res) {
       cb(null, './public/businessDocuments/')
     },
     filename: function (req, file, cb) {
-          const uniqueSuffix = req.user.name + ' from ' + req.user.institutionName
+          const uniqueSuffix = req.user.fname + ' from ' + req.user.institutionName
           cb(null, uniqueSuffix + path.extname(file.originalname)); 
     //   cb(null, file.originalname);   
     }
@@ -349,10 +350,12 @@ app.post('/addproduct', function (req, res) {
 
   
 
-    const upload2 = multer({ storage: storage2, limits: { fileSize: maxSize }}).single('avatar')
+const upload2 = multer({ storage: storage2, limits: { fileSize: maxSize }}).single('avatar')
   
 
   app.post('/complete-your-profile', function (req, res) {
+
+
     upload2(req, res, function (err) {
       if (err instanceof multer.MulterError) {
         // A Multer error occurred when uploading.
@@ -365,15 +368,32 @@ app.post('/addproduct', function (req, res) {
         req.flash('error', 'Something went wrong, Please try again')
         return res.redirect('/documentupload')
       }
-      // Everything went fine.
-      User.findOneAndUpdate({ _id: req.user.id }, { isuploded: "Yes" }, (err, data) => {
+     
+
+    const {registerAs, gst, cin, pan, udise, man} = req.body
+    const document = new Document({registerAs, gst, cin, pan, udise, man})
+    // const {gst} = req.body
+    // const document = new Document({gst})
+     
+    document.save().then(result => {
+          // Everything went fine.
+       User.findOneAndUpdate({ _id: req.user.id }, { isuploded: "Yes" }, (err, data) => {
         if (err) {
-           console.log("Pakarmy")
+           console.log(err)
         } else {
-            console.log("IndianArmy")
+            console.log("Done")
         }
     })
-      return res.redirect('/documentupload')
+    
+        req.flash('error', 'Documents Added Successfully')
+        return res.redirect('/documentupload')
+
+    }).catch(err => {
+        req.flash('error', 'Something went wrong')
+        return res.redirect('/documentupload')
+    });
+
+
     })
   })
 
