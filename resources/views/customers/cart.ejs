@@ -16,9 +16,9 @@
                             </div>
                     </a>
                     <span class="flex-1 items-center mt-1 ml-12">    
-                        <button onclick = "updateQty('-1', '<%= product._id %>')" class="border sub-to-cart mr-2 py- px-3 rounded-full items-center text-xl font-bold"> - </button>
+                        <button onclick = "updateQty('minus', '<%= product._id %>')" class="border sub-to-cart mr-2 py- px-3 rounded-full items-center text-xl font-bold"> - </button>
                         <span class="flex-1"><%= product.quantity %></span>
-                        <button onclick = "updateQty('1', '<%= product._id %>')" class="add-to-cart ml-2 py- px-3 rounded-full items-center text-xl font-bold"> + </button>
+                        <button onclick = "updateQty('plus', '<%= product._id %>')" class="add-to-cart ml-2 py- px-3 rounded-full items-center text-xl font-bold"> + </button>
                     </span>
                     <span class="font-bold text-lg mr-3">₹ <%= product.product.price * product.quantity %></span>    
                 </div>
@@ -81,11 +81,10 @@
           })
     }
 
-    function updateQty(u, pid){
-        const number = parseInt(u);
-        console.log(number);
+    function updateQty(type, pid){
+        console.log("Triggered")
         var params = {
-            number: number,
+            type: type,
             pid: pid
         }
         $.ajax({
