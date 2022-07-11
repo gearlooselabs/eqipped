@@ -3,6 +3,7 @@
         display: block;
     }
 </style>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
 
     <!-- Swiper's CSS -->
@@ -15,7 +16,7 @@
     <div data-chai="<%= JSON.stringify(nashta) %>" style="display: flex;" class="sub-cat">        
         <div class="dropdown inline-block relative flex justify-center items-center" style="padding: 8px; flex-direction: column;">
             <button class="text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
-                <span class="mr-1"><img style="height: 30px; width: 30px" src="/img/melchor.png"/></span>
+                <span class="mr-1"><lottie-player src="<%= nashta.pimage %>"  background="transparent"  speed="1"  style="width: 90px; height: 90px;"  loop  autoplay></lottie-player></span>
                 <!-- <svg class=" h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                 </svg> -->

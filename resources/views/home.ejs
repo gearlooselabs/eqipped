@@ -18,20 +18,18 @@
 </head>
 
 <body>
-<style>
-    
-    .animation-comp{
-  display: inline-block;
-}
-</style>
+    <script type='text/javascript' src='/resources/views/plugin/jquery.particleground.js'></script>
+    <script type='text/javascript' src='/resources/views/plugin/particleEffect.js'></script>
 
     <section class="hero " style="height: 90vh;">
-        <div class="container-fluid" >
+        <div class="container-fluid" style="overflow: contain;">
           
             <div class="my-contain center-text" style="transform: translate(-10rem,8rem);">
-                    <img  data-aos="zoom-in" data-delay="800" class="centre-img atom-width atomring0" src="/img/atomring0.png" alt="atom-nucleus">
-                    <img  data-aos="zoom-in" data-delay="800" class="centre-img atom-width atomring1" src="/img/atomring1.png" alt="atom-ring1">
-                    <img  data-aos="zoom-in" data-delay="800" class="centre-img atom-width atomring2" src="/img/atomring2.png" alt="atom-ring2">
+                <div data-aos="zoom-in" data-aos-duration="1500" data-delay="800" class="centre-img atom-width atomring0">
+                    <img   src="/img/atomring0.png" alt="atom-nucleus">
+                </div>
+                    <img  data-aos="zoom-in" data-aos-duration="1500" data-delay="800" class="centre-img atom-width atomring1" src="/img/atomring1.png" alt="atom-ring1">
+                    <img  data-aos="zoom-in" data-aos-duration="1500" data-delay="800" class="centre-img atom-width atomring2" src="/img/atomring2.png" alt="atom-ring2">
 
             </div>
             </div>
@@ -52,10 +50,10 @@
 
 
 
-        <div class="container-fluid bg " style="align-items: center;">
-            <img class="contain-img" src="/img/flask.png" alt="flask image" srcset="">
+        <div id="particles" class="container-fluid bg " style="align-items: center;">
+            
       
-          <div class="mycontain center-text homehero">
+          <div class="mycontain center-text homehero" style="position: absolute;">
             
               <div class="home-hero-content">
                   <h1 class=" white-heading title"><span>Login<br /> to Place <br/> orders</h1></span>
@@ -63,7 +61,8 @@
 
               </div>
               <a href="/login" class="cta-button light-button w-button">Login / Sign up</a>
-          </div></div>
+          </div>
+        </div>
       
     <script src="/js/gallery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
