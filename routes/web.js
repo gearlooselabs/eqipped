@@ -122,6 +122,8 @@ function initRoutes(app) {
     // Footer documents 
     app.get('/privacy-policy',  homeController().pripolicy)
     app.get('/term-condition',  homeController().termcondition)
+
+    
     
 
 
