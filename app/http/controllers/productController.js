@@ -53,11 +53,7 @@ function productController() {
             // const chai = await Menu.find({ 'brand': `${subCategory}`, 'isverified': 'Yes' })
             const chai = await Menu.find({ 'brand': `${subCategory}`})
             const pani = await Brand.find({ 'subCategory': `${subCategory}` })
-<<<<<<< HEAD
             return res.render('menus/product', { chai: chai, pani: pani})
-=======
-            return res.render('menus/product', { chai: chai, pani: pani })
->>>>>>> c8b95ac50fa3c16e1169369feb680e28bc9cd7ff
         },
 
 
@@ -65,11 +61,7 @@ function productController() {
             let subCN = req.params.subCategory
             const chai = await Menu.find({ subCategory: subCN })
             const pani = await subCategory.find({ 'parentCategory': `${req.session.current_Category}` })
-<<<<<<< HEAD
             return res.render('menus/product', { chai: chai, pani: pani})
-=======
-            return res.render('menus/product', { chai: chai, pani: pani })
->>>>>>> c8b95ac50fa3c16e1169369feb680e28bc9cd7ff
         },
 
         async productDetails(req, res) {
@@ -84,11 +76,7 @@ function productController() {
                         product: product,
                         suggested: suggested,
                         current: page,
-<<<<<<< HEAD
                         pages: Math.ceil(count / perPage),
-=======
-                        pages: Math.ceil(count / perPage)
->>>>>>> c8b95ac50fa3c16e1169369feb680e28bc9cd7ff
                     })
                 })
             });
