@@ -19,7 +19,7 @@ function productController() {
                 console.log(products);
                 console.log(categories);
                 console.log(subcats);
-                return res.render('menus/product', { products, categories, subcats, user: req.user});
+                return res.render('menus/product', { products, categories, subcats});
             }else{
                 return res.redirect('/')
             }
@@ -41,8 +41,7 @@ function productController() {
                         products: products,
                         category: category,
                         current: page,
-                        pages: Math.ceil(count / perPage), 
-                        user: req.user
+                        pages: Math.ceil(count / perPage)
                     })
                 })
             });
@@ -54,7 +53,7 @@ function productController() {
             // const chai = await Menu.find({ 'brand': `${subCategory}`, 'isverified': 'Yes' })
             const chai = await Menu.find({ 'brand': `${subCategory}`})
             const pani = await Brand.find({ 'subCategory': `${subCategory}` })
-            return res.render('menus/product', { chai: chai, pani: pani, user: req.user })
+            return res.render('menus/product', { chai: chai, pani: pani })
         },
 
 
@@ -62,7 +61,7 @@ function productController() {
             let subCN = req.params.subCategory
             const chai = await Menu.find({ subCategory: subCN })
             const pani = await subCategory.find({ 'parentCategory': `${req.session.current_Category}` })
-            return res.render('menus/product', { chai: chai, pani: pani, user: req.user})
+            return res.render('menus/product', { chai: chai, pani: pani })
         },
 
         async productDetails(req, res) {
@@ -77,8 +76,7 @@ function productController() {
                         product: product,
                         suggested: suggested,
                         current: page,
-                        pages: Math.ceil(count / perPage), 
-                        user: req.user
+                        pages: Math.ceil(count / perPage)
                     })
                 })
             });
