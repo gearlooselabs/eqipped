@@ -8,7 +8,7 @@ function cartController() {
 
         async index(req, res) {
             const products = await User.findOne({_id: req.user._id}).populate({ path: 'cart.product', model: 'Product'});
-            res.render('customers/cart', {products: products, user: req.user});
+            res.render('customers/cart', {products: products});
         },
 
         async update(req, res) {
@@ -35,11 +35,9 @@ function cartController() {
         },
 
         qtyUpdate(req, res) {
-            if(req.body.type === 'plus'){
                 User.updateOne({ 
                     _id: req.user._id,
                     'cart._id': req.body.pid,
-                    'cart.quantity': { $gt: 0}
                 }, {
                    $inc: {
                     'cart.$.quantity': 1
@@ -47,19 +45,6 @@ function cartController() {
                 }, () => {
                     res.send({ "status": "success"});
                 })
-            }else{
-                User.updateOne({ 
-                    _id: req.user._id,
-                    'cart._id': req.body.pid,
-                    'cart.quantity': { $gt: 1}
-                }, {
-                   $inc: {
-                    'cart.$.quantity': -1
-                   }
-                }, () => {
-                    res.send({ "status": "success"});
-                })
-            }
         },
 
 
