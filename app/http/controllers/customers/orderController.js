@@ -1,6 +1,7 @@
 const Order = require('../../../models/order')
 const Coupon = require('../../../models/coupon')
 const OrderId = require('../../../models/orderID')
+const User = require('../../../models/user');
 const moment = require('moment')
 const fs = require('fs')
 const pdf = require('pdf-creator-node')
@@ -190,15 +191,24 @@ function orderController() {
             return res.redirect('/')
         },
 
-        checkout(req, res) {
+        async checkout(req, res) {
             const delivery = 250
-            var gst = 0
+            var gst = 0;
 
-            for (let items of Object.values(req.session.cart.items)) {
-                var item_tp = items.item.price * items.qty
-                gst+= (item_tp * items.item.GST)/100
+            const products = await User.findOne({_id: req.user._id}).populate({ path: 'cart.product', model: 'Product'});
+            let total = 0;
+            for (let items of products.cart) {
+                total += parseInt(items.product.price) * parseInt(items.quantity);
+                var item_tp = items.product.price * items.quantity;
+                gst+= (item_tp * items.product.GST)/100
             }
-            var cart_total = req.session.cart.totalPrice
+            // for (let items of Object.values(req.session.cart.items)) {
+            //     var item_tp = items.item.price * items.qty
+            //     gst+= (item_tp * items.item.GST)/100
+            // }
+            console.log(gst);
+            console.log(total);
+            var cart_total = total
             var charges = (cart_total * 10) / 100
             var sub_total = cart_total + charges
             sub_total += delivery + gst
@@ -206,9 +216,10 @@ function orderController() {
             res.locals.session.gst = gst
             res.locals.session.delivery = delivery
             res.locals.session.charges = charges
-            res.locals.session.sub_total = sub_total
+            res.locals.session.sub_total = sub_total;
+            res.locals.session.total = total
 
-            res.render('customers/checkout', { sTotal: sub_total, p_fee: charges, delivery: delivery , taxes : gst })
+            res.render('customers/checkout', { sTotal: sub_total, p_fee: charges, delivery: delivery , taxes : gst, user: products, total: total})
         },
 
         async applycoupon(req, res) {

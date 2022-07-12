@@ -9,7 +9,7 @@ function categoriesController() {
         async categories(req, res) {
             const nashta = await Category.find()
             const brand = await Brand.find()
-            return res.render('allCategories/allCategoriesPage', {nashta: nashta, brand: brand, user: req.user})
+            return res.render('allCategories/allCategoriesPage', {nashta: nashta, brand: brand})
         },
 
         async subcat(req, res){

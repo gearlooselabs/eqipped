@@ -1,8 +1,8 @@
-<% if(session.cart) { %>
+<% if(user.cart.length > 0) { %>
     <div class="container p-12 mx-auto">
         <div class="flex flex-col w-full px-0 mx-auto md:flex-row">
             <div class="flex flex-col md:w-full">
-                <h2 class="mb-5 font-bold md:text-xl text-heading text-center">Shipping Details
+                <h2 class="mb-5 font-bold md:text-xl text-heading text-center">Shipping Details 
                 </h2>
 
                 <form action="/paynow" method="post" class="justify-center w-full mx-auto" id="payment-form">
@@ -95,29 +95,29 @@
                         <div class="flex flex-col space-y-4">
 
 
-                            <% for(let chai of Object.values(session.cart.items)) { %>
+                            <% user.cart.forEach((product) => { %>
                                 <div style="border: 2px solid black;" class="rounded flex space-x-4">
                                     <div class="flex items-center">
-                                        <img src="/img/<%= chai.item.image %>" alt="image" class="w-60">
+                                        <img src="/img/<%= product.product.image %>" alt="image" class="w-60">
                                     </div>
                                     <div class="w-full px-4 py-2">
                                         <h2 class="text-lg font-bold mb-1">
-                                            <%= chai.item.name %>
+                                            <%= product.product.name %>
                                         </h2>
-                                        <p class="text-sm">Size: <%= chai.item.size %>
+                                        <p class="text-sm">Size: <%= product.product.size %>
                                         </p>
                                         <span class="text-red-600">Qty: </span>
                                         <span class="font-bold text-sm">
-                                            <%= chai.qty %>
+                                            <%= product.quantity %>
                                         </span> <br>
                                         <span class="text-red-600">Price: </span>
-                                        <span class="font-bold text-sm">₹ <%= chai.item.price * chai.qty %></span>
+                                        <span class="font-bold text-sm">₹ <%= product.product.price * product.quantity %></span>
                                         <br>
                                         <span class="text-red-600">GST: </span>
-                                        <span class="font-bold text-sm"><%= chai.item.GST %>%</span>
+                                        <span class="font-bold text-sm"><%= product.product.GST %>%</span>
                                     </div>
                                 </div>
-                                <% } %>
+                            <% })%>
                             </div>
                     </div>
 
@@ -150,7 +150,7 @@
 
                     <div class="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
                         <span class=" w-1/2"> Item Total </span>
-                        <span class="pl-2 w-1/2">₹<%= session.cart.totalPrice %></span>
+                        <span class="pl-2 w-1/2">₹<%= session.total %></span>
                     </div>
                     <div class="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
                         <span class=" w-1/2"> Processing Fee </span>

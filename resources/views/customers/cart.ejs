@@ -1,5 +1,5 @@
 <section class="cart py-20">
-    <% if(products) { %>
+    <% if(products.cart.length > 0) { %>
     <div class="order container mx-auto xl:w-1/2">
         <div class="flex items-center border-b border-gray-300 pb-4">
             <img src="https://svgsilh.com/svg/151889.svg" class="w-10 block pr-2">
@@ -11,13 +11,14 @@
                     <a class="flex justify-center items-center hover:border-gray-300 hover:bg-gray-200 w-5/12" href="">
                             <img class="w-24" src="/img/<%= product.product.image %>" alt="">
                             <div class="flex-1 ml-4">
+                                <h1></h1>
                                 <span class="text-sm"><%= product.product.name %></span>
                             </div>
                     </a>
                     <span class="flex-1 items-center mt-1 ml-12">    
-                        <button onclick = "updateQty('minus', '<%= product._id %>')" class="border sub-to-cart mr-2 py- px-3 rounded-full items-center text-xl font-bold"> - </button>
-                        <span class="flex-1"><%= product.quantity %></span>
-                        <button onclick = "updateQty('plus', '<%= product._id %>')" class="add-to-cart ml-2 py- px-3 rounded-full items-center text-xl font-bold"> + </button>
+                        <button onclick = "updateQty('minus', '<%= product.quantity %>')" class="border sub-to-cart mr-2 py- px-3 rounded-full items-center text-xl font-bold"> - </button>
+                        <span class="flex-1"><input id="productQuantity" value="<%=product.quantity%>" type="number"></span>
+                        <button onclick = "updateQty('plus', '<%= product.quantity %>')" class="add-to-cart ml-2 py- px-3 rounded-full items-center text-xl font-bold"> + </button>
                     </span>
                     <span class="font-bold text-lg mr-3">₹ <%= product.product.price * product.quantity %></span>    
                 </div>
@@ -53,7 +54,6 @@
             <h1 class="text-3xl font-bold mb-2">Cart Empty 😕</h1>
             <p class="text-gray-500 text-lg mb-12">You probably haven't ordered anything yet. <br>
                 To order your requirement, go to the main page.</p>
-            <!-- <img class="w-2/5 mx-auto" src="/img/empty-cart.png" alt="empty-cart"> -->
             <img class="w-2/5 mx-auto" src="/img/Emptycart.gif" alt="empty-cart">
             <a href="/grandHome" class="inline-block px-6 py-2 rounded-full btn-primary text-white font-bold mt-12">Go back</a>
         </div>
@@ -61,6 +61,10 @@
     <% } %>
 </section>
 <script>
+
+
+
+
     function removeItem(itemId){
         console.log(itemId);
         var params = {
@@ -79,9 +83,9 @@
             }
           })
     }
-
-    function updateQty(type, pid){
-        console.log("Triggered")
+    function updateQuantity(type, pid){
+        console.log("Triggered");
+        console.log(pid);
         var params = {
             type: type,
             pid: pid
@@ -99,6 +103,3 @@
           })
     }
 </script>
-
-
-

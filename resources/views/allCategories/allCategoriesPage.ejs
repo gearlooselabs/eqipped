@@ -4,9 +4,8 @@
     <% nashta.forEach(function(nashta){ %>
 
         <a href="/allcategory/products/<%= nashta._id%>/1">
-            <div class="flex flex-col h-min w-52 p-1 border-box bg-white rounded xl m-5 cursor-pointer">
-                <lottie-player src="<%= nashta.pimage %>"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
-                <div class="flex border-box p-1 flex-col">
+            <div class="flex flex-col h-min w-40 p-1 border-box bg-white rounded xl m-5 cursor-pointer">
+                <lottie-player src="<%= nashta.pimage %>"  background="transparent"  speed="1"  style="width: 150px; height: 150px;"  loop  autoplay></lottie-player>
                     <div class="text-center">
                         <%= nashta.pcategory %>
                     </div>
