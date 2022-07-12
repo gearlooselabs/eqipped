@@ -70,7 +70,15 @@
             <li class="nav-link">
               <a href="/cart">
                 <span id="cartCounter" class="font-bold icon">
-                    <span id = "cartcount">0</span>
+<<<<<<< HEAD
+                  <% if(user.cart.length > 0) { %>
+                    <span id = "cartcount"><%= user.cart.length %></span>
+                  <% } %>
+=======
+                    <% if(user.cart.length > 0){ %>
+                      <super><span id = "cartcount"><i class = "fa fa-circle" style= "font-size: 10px;color: orange"></i></span></super>
+                    <% } %>
+>>>>>>> e6d8708f4c97166613e9d7a49a501e318967096b
                     <i class='bx bx-cart-alt ico'></i>
                 </span>
                 <span class="text nav-text">My Cart</span>
@@ -406,7 +414,7 @@
     </section>
 
     <script src="/socket.io/socket.io.js"></script>
-    <!-- <script src="/js/app.js"></script> -->
+    <script src="/js/app.js"></script>
     <script src="/js/owl.carousel.min.js"></script>
 
 

@@ -3,7 +3,8 @@ const express = require('express')
 const path = require('path')
 const app = express()
 const ejs = require('ejs')
-const expressLayout = require('express-ejs-layouts')
+const expressLayout = require('express-ejs-layouts');
+const moment = require('moment');
 
 const mongoose = require('mongoose')
 const session = require('express-session')
@@ -25,6 +26,9 @@ const url = 'mongodb+srv://admin:gsk3E1ZwjWwgqAoC@cluster0.9xkoq.mongodb.net/Eui
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 connection.once('open', () => {
+    let weeks = moment().weeks() - moment().startOf('month').weeks() + 1;
+    weeks = (weeks + 52) % 52;
+    console.log(weeks);
     console.log('Database connected...');
 });
 
@@ -107,7 +111,7 @@ const request = require('request')
 const { response } = require('express')
 
 app.post('/paynow', [parseUrl, parseJson], async (req, res) => {
-    if (req.session.cart) {
+    if (req.user.cart.length > 0) {
         const { phone, address, pincode} = req.body
         res.locals.session.phone = phone
         res.locals.session.address = address
@@ -158,17 +162,11 @@ app.post('/paynow', [parseUrl, parseJson], async (req, res) => {
         var oidd = ""
         var oId = "eqp_22" + mnth + "0100"
         let query = { orderID: oId }
-        let resss = await OrderId.find(query)
-        if (resss != "") {
-            var random_4 = Math.floor(Math.random() * (100 - 9995)) + 100;
-            var oidd = "eqp_22" + mnth + -random_4;
-            console.log('g1');
-            
-        } else {
-            oidd = oId;
-            console.log('g2');
-            
-        }
+        let resss = await OrderId.find(query);
+        console.log(resss);
+        var random_4 = Math.floor(Math.random() * (100 - 9995)) + 100;
+        var oidd = "eqp_22" + mnth + -random_4;
+        console.log('g1');
         console.log(oidd)
 
         const https = require('https');
@@ -183,14 +181,14 @@ app.post('/paynow', [parseUrl, parseJson], async (req, res) => {
             // "websiteName": process.env.WEBSITE,
             "websiteName": config.PaytmConfig.website,
             "orderId": oidd,
-            "callbackUrl": "http://localhost:3300/callback",
+            "callbackUrl": "http://localhost:3000/callback",
             "txnAmount": {
                 // "value": subtotal,
                 "value": req.session.sub_total,
                 "currency": "INR",
             },
             "userInfo": {
-                "custId": req.user.id,
+                "custId": req.user._id,
             },
         };
 
@@ -231,7 +229,7 @@ app.post('/paynow', [parseUrl, parseJson], async (req, res) => {
                 var token = post_res.on('end', function () {
                     response = JSON.parse(response);
                     console.log(response)
-                    res.render('payment', { txnToken: response.body.txnToken, amount: req.session.cart.totalPrice, orderID: oidd })
+                    res.render('payment', { txnToken: response.body.txnToken, amount: req.session.total, orderID: oidd })
                 });
             });
             post_req.write(post_data);

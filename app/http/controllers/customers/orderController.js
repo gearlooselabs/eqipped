@@ -1,6 +1,7 @@
 const Order = require('../../../models/order')
 const Coupon = require('../../../models/coupon')
 const OrderId = require('../../../models/orderID')
+const Product = require('../../../models/product');
 const User = require('../../../models/user');
 const moment = require('moment')
 const fs = require('fs')
@@ -28,69 +29,38 @@ function orderController() {
         },
 
         store(req, res) {
+            const orderid = new OrderId({
+                orderID: req.body.ORDERID
 
-            var mnth = ""
-            switch (new Date().getMonth() + 1) {
-                case 1:
-                    mnth = "ja";
-                    break;
-                case 2:
-                    mnth = "fe";
-                    break;
-                case 3:
-                    mnth = "ma";
-                    break;
-                case 4:
-                    mnth = "ap";
-                    break;
-                case 5:
-                    mnth = "my";
-                    break;
-                case 6:
-                    mnth = "ju";
-                    break;
-                case 7:
-                    mnth = "jl";
-                    break;
-                case 8:
-                    mnth = "au";
-                    break;
-                case 9:
-                    mnth = "se";
-                    break;
-                case 10:
-                    mnth = "oc";
-                    break;
-                case 11:
-                    mnth = "no";
-                    break;
-                case 12:
-                    mnth = "de";
-                default:
-                    mnth = "NA"
-            }
-
-            var oId = "eqp_22" + mnth + "0100"
-            if (req.body.ORDERID == oId) {
-
-                const orderid = new OrderId({
-                    orderID: req.body.ORDERID
-
-                })
-                orderid.save().then((user) => {
-                }).catch(err => {
-                    req.flash('error', 'Something went wrong')
-                })
-            }
+            })
+            orderid.save().then((user) => {
+            }).catch(err => {
+                req.flash('error', 'Something went wrong')
+            })
             if (req.body.RESPCODE == '01' && req.body.STATUS == 'TXN_SUCCESS' && req.body.RESPMSG == 'Txn Success') {
-
+                console.log("Reached Here");
+                console.log(req.body.ORDERID)
+                console.log(req.body.TXNDATE)
+                console.log(req.body.TXNAMOUNT)
+                console.log(req.user.cart)
+                console.log(req.session.phone)
+                console.log(req.session.address)
+                console.log(req.session.pincode)
+                console.log(req.body.BANKNAME)
+                console.log(req.body.BANKTXNID)
+                console.log(req.body.GATEWAYNAME)
+                console.log(req.body.PAYMENTMODE)
+                console.log(req.body.RESPCODE)
+                console.log(req.body.STATUS)
+                console.log(req.body.RESPMSG)
+                console.log(req.body.TXNID)
                 const order = new Order({
                     customerId: req.user._id,
-                    customerName: req.user.name,
+                    customerName: req.user.fname,
                     orderId: req.body.ORDERID,
                     txnDate: req.body.TXNDATE,
                     txnAmount: req.body.TXNAMOUNT,
-                    items: req.session.cart.items,
+                    items: req.user.cart,
                     phone: req.session.phone,
                     address: req.session.address,
                     pincode: req.session.pincode,
@@ -107,7 +77,7 @@ function orderController() {
                 order.save().then(result => {
                     Order.populate(result, { path: 'customerId' }, (err, placedOrder) => {
                         req.flash('success', 'Order placed successfully')
-                        delete req.session.cart
+                        delete req.user.cart
                         const eventEmitter = req.app.get('eventEmitter')
                         eventEmitter.emit('orderPlaced', placedOrder)
                         return res.redirect('/customer/orders')
@@ -125,18 +95,18 @@ function orderController() {
         async show(req, res) {
             const html = fs.readFileSync(path.join(__dirname, '../../../../resources/views/invoice.html'), 'utf-8');
             const filename = req.params.id + '.pdf';
-            const order = await Order.findById(req.params.id)
+            const order = await Order.findById(req.params.id).populate({ path: 'items.product', model: 'Product'})
 
             let array = [];
             it = order.items
             Object.values(it).forEach(d => {
                 const prod = {
-                    name: d.item.name,
-                    description: d.item.description,
-                    quantity: d.qty,
-                    price: d.item.price,
-                    total: d.item.price * d.qty,
-                    imgurl: d.item.image
+                    name: d.product.name,
+                    description: d.product.description,
+                    quantity: d.quantity,
+                    price: d.product.price,
+                    total: d.product.price * d.quantity,
+                    imgurl: d.product.image
 
                 }
                 array.push(prod);
@@ -165,6 +135,8 @@ function orderController() {
                 gtotal: grandtotal
             }
 
+            console.log(grandtotal)
+
 
             const document = {
                 html: html,
@@ -180,7 +152,7 @@ function orderController() {
                     console.log(error);
                 });
 
-            const filepath = 'http://localhost:3300/docs/' + filename
+            const filepath = 'http://localhost:3000/docs/' + filename
 
 
 
@@ -198,7 +170,7 @@ function orderController() {
             const products = await User.findOne({_id: req.user._id}).populate({ path: 'cart.product', model: 'Product'});
             let total = 0;
             for (let items of products.cart) {
-                total += parseInt(items.product.price) * parseInt(items.quantity);
+                total += items.product.price * items.quantity;
                 var item_tp = items.product.price * items.quantity;
                 gst+= (item_tp * items.product.GST)/100
             }

@@ -32,7 +32,7 @@ function productController() {
             // const chai = await Menu.find({ 'categoryName': ${product_Category}, 'isverified': 'Yes' })
             // const chai = await Menu.find({ '_id': `${product_Category}`});
             const category = await Category.findOne({_id: req.params.categoryId}).populate({ path: 'psubcat', populate: [{ path: 'product', model: 'Product'}], model: 'Sub'}).exec();
-            var perPage = 4
+            var perPage = 20
             var page = req.params.page || 1;
             Menu.find({ categoryName: product_Category}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, products) {
                 Menu.count().exec(function(err, count) {
@@ -66,7 +66,7 @@ function productController() {
 
         async productDetails(req, res) {
             let productId = req.params.id;
-            var perPage = 4
+            var perPage = 20
             var page = req.params.page || 1;
             const product = await Menu.findOne({ '_id': productId });
             Menu.find({ categoryName: product.categoryName, _id: {$ne: product._id}}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, suggested) {

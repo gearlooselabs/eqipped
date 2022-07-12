@@ -5,10 +5,10 @@ function orderController() {
         index(req, res) {
            order.find({ status: { $ne: 'completed' } }, null, { sort: { 'createdAt': -1 }}).populate('customerId', '-password').exec((err, orders) => { 
                  
-            if(req.xhr) {
+            if(req.xhr) { 
                    return res.json(orders)
                } else {
-                return res.render('admin/orders')
+                return res.render('admin/orders', { orders: orders})
                }
            })
         },
@@ -20,4 +20,4 @@ function orderController() {
     }
 }
 
-module.exports = orderController
+module.exports = orderController  

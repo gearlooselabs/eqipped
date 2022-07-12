@@ -90,5 +90,4 @@ export function initAdmin1(socket) {
         userTableBody.innerHTML = generateMarkup(users)
     })
 
-
 }

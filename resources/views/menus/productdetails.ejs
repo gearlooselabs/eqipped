@@ -119,7 +119,8 @@
         $('#add-cart-btn').click(function(){
           var params = {
             pid: '<%= product._id %>',
-            qty: $('#product-qty').val()
+            qty: $('#product-qty').val(),
+            total: '<%= product.price %>'
           }
   
           $.ajax({
@@ -130,7 +131,7 @@
           encode: true
           }).done(function(result){
             if(result.status == "success"){
-              $('#cartcount').html(result.items);
+              $('#cartcount').html('<super><span id = "cartcount"><i class = "fa fa-circle" style= "font-size: 10px;color: orange"></i></span></super>');
             }
           })
         })
