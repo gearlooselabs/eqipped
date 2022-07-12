@@ -70,7 +70,9 @@
             <li class="nav-link">
               <a href="/cart">
                 <span id="cartCounter" class="font-bold icon">
-                    <span id = "cartcount">0</span>
+                    <% if(user.cart.length > 0){ %>
+                      <super><span id = "cartcount"><i class = "fa fa-circle" style= "font-size: 10px;color: orange"></i></span></super>
+                    <% } %>
                     <i class='bx bx-cart-alt ico'></i>
                 </span>
                 <span class="text nav-text">My Cart</span>

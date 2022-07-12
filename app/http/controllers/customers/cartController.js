@@ -8,6 +8,7 @@ function cartController() {
 
         async index(req, res) {
             const products = await User.findOne({_id: req.user._id}).populate({ path: 'cart.product', model: 'Product'});
+            console.log(req.user.cart);
             res.render('customers/cart', {products: products});
         },
 

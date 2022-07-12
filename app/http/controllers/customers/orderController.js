@@ -170,7 +170,7 @@ function orderController() {
             const products = await User.findOne({_id: req.user._id}).populate({ path: 'cart.product', model: 'Product'});
             let total = 0;
             for (let items of products.cart) {
-                total += parseInt(items.product.price) * parseInt(items.quantity);
+                total += items.product.price * items.quantity;
                 var item_tp = items.product.price * items.quantity;
                 gst+= (item_tp * items.product.GST)/100
             }
