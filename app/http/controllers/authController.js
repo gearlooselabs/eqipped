@@ -14,9 +14,18 @@ const { isBoolean } = require('lodash')
 
 
 function authController() {
-    const _getRedirectUrl = (req) => {
-        return req.user.role === 'admin' ? '/adminpanel' : 'vendor' ? '/addproduct' : 'customer' ? '/' : '/'
+    const _getRedirectUrl = (req, res) => {
+
+        if (req.user.role == 'vendor'){
+            return req.user.role === 'vendor' ? '/addproduct' : '/'
+        }else{
+            return req.user.role ===  'customer' ? '/' : 'admin' ? '/adminpanel' : 'vendor' ? '/addproduct' : '/addproduct'
+        }
+
     }
+
+
+
     return {
 
         login(req, res) {

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import moment from 'moment'
 import Noty from 'noty'
-
+ 
 // export function initAdmin(socket) {
 export function initAdmin2(socket) {
     const userTableBody = document.querySelector('#productTableBody')
@@ -18,7 +18,7 @@ export function initAdmin2(socket) {
         // console.log("hii")
         markups = generateMarkup(users)
         userTableBody.innerHTML = markups
-    }).catch(err => {
+    }).catch(err => {orderTableBody
         console.log(err)
     })
 
@@ -38,7 +38,7 @@ export function initAdmin2(socket) {
             return `
                 <tr>
                 
-                <td class="border px-4 py-2">Name-${user.name} </td>
+                <td class="border px-4 py-2">Name-${user.fname} ${user.lname} </td>
                 
                 <td class="border px-4 py-2">
                     <div class="inline-block relative w-64">

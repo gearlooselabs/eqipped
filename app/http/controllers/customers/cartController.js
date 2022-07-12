@@ -34,6 +34,7 @@ function cartController() {
             res.send({"status": "success", items: user.cart.length});
         },
 
+        
         qtyUpdate(req, res) {
                 User.updateOne({ 
                     _id: req.user._id,

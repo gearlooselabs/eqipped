@@ -1,89 +1,104 @@
 <section class="cart py-20">
-    <% if(products.cart.length > 0) { %>
-    <div class="order container mx-auto xl:w-1/2">
-        <div class="flex items-center border-b border-gray-300 pb-4">
-            <img src="https://svgsilh.com/svg/151889.svg" class="w-10 block pr-2">
-            <h1 class="font-bold ml-4 text-2xl">Order summary</h1>
-        </div>
-        <% products.cart.forEach((product) => { %>
-            <div class="pizza-list">                
-                <div class="flex items-center mt-8 mb-2 cursor-pointer">
-                    <a class="flex justify-center items-center hover:border-gray-300 hover:bg-gray-200 w-5/12" href="">
+    <% if(products.cart.length> 0) { %>
+        <div class="order container mx-auto xl:w-1/2">
+            <div class="flex items-center border-b border-gray-300 pb-4">
+                <img src="https://svgsilh.com/svg/151889.svg" class="w-10 block pr-2">
+                <h1 class="font-bold ml-4 text-2xl">Order summary</h1>
+            </div>
+            <% products.cart.forEach((product)=> { %>
+                <div class="pizza-list">
+                    <div class="flex items-center mt-8 mb-2 cursor-pointer">
+                        <a class="flex justify-center items-center hover:border-gray-300 hover:bg-gray-200 w-5/12"
+                            href="">
                             <img class="w-24" src="/img/<%= product.product.image %>" alt="">
                             <div class="flex-1 ml-4">
                                 <h1></h1>
-                                <span class="text-sm"><%= product.product.name %></span>
+                                <span class="text-sm">
+                                    <%= product.product.name %>
+                                </span>
                             </div>
-                    </a>
-                    <span class="flex-1 items-center mt-1 ml-12">    
-                        <button onclick = "updateQty('minus', '<%= product._id %>')" class="border sub-to-cart mr-2 py- px-3 rounded-full items-center text-xl font-bold"> - </button>
-                        <span class="flex-1"><input id="productQuantity" value="<%= product.quantity %>" type="number"></span>
-                        <button onclick = "updateQty('plus', '<%= product._id %>')" class="add-to-cart ml-2 py- px-3 rounded-full items-center text-xl font-bold"> + </button>
-                    </span>
-                    <span class="font-bold text-lg mr-3">₹ <%= product.product.price * product.quantity %></span>    
+                        </a>
+                        <span class="flex-1 items-center mt-1 ml-12">
+                            <button onclick="updateQty('minus', '<%= product._id %>')"
+                                class="border sub-to-cart mr-2 py- px-3 rounded-full items-center text-xl font-bold"> -
+                            </button>
+
+                            <span class="flex-1"><input class="w-12 px-1" id="productQuantity" value="<%= product.quantity %>"
+                                    type=""></span>
+
+                            <button onclick="updateQty('plus', '<%= product._id %>')"
+                                class="add-to-cart ml-2 py- px-3 rounded-full items-center text-xl font-bold"> +
+                            </button>
+                        </span>
+                        <span class="font-bold text-lg mr-3">₹ <%= product.product.price * product.quantity %></span>
+                    </div>
+                    <div>
+                        <button onclick="removeItem('<%= product.product._id %>')"
+                            class="remove-to-cart text-red-700 hover:bg-gray-200 py-1 px-2 ml-32">Remove</button>
+                    </div>
                 </div>
-                <div>
-                    <button onclick = "removeItem('<%= product.product._id %>')" class="remove-to-cart text-red-700 hover:bg-gray-200 py-1 px-2 ml-32">Remove</button></div>
-            </div>
-            <hr>
-        <% }) %>
-        <div class="text-right py-6">
-            <div>
-                <span class="text-sm float-left mt-1">Congrats your <b>Cart</b> is ready to checkout</span>
-                <span class="text-lg font-bold">Total Amount:</span>
-                <% var sum = 0; %>
-                <% products.cart.forEach((product) => { %>
-                    <% sum += product.product.price * product.quantity %> 
+                <hr>
                 <% }) %>
-                <span class="amount text-2xl font-bold ml-2">₹<%= sum %></span>
+                    <div class="text-right py-6">
+                        <div>
+                            <span class="text-sm float-left mt-1">Congrats your <b>Cart</b> is ready to checkout</span>
+                            <span class="text-lg font-bold">Total Amount:</span>
+                            <% var sum=0; %>
+                                <% products.cart.forEach((product)=> { %>
+                                    <% sum +=product.product.price * product.quantity %>
+                                        <% }) %>
+                                            <span class="amount text-2xl font-bold ml-2">₹<%= sum %></span>
+                        </div>
+                        <% if(user) { %>
+                            <div class="flex justify-center">
+                                <a href="/customer/checkout"><button
+                                        class="btn-primary px-4 py-4 text-white w-full mt-14 rounded-full shadow font-bold">PLACE
+                                        ORDER</button></a>
+                            </div>
+                            <% } else { %>
+                                <a href="/login"
+                                    class="inline-block cursor-pointer btn-primary px-6 py-2 rounded-full text-white font-bold mt-6">Login
+                                    to continue</a>
+                                <% } %>
+                    </div>
+        </div>
+        <% } else { %>
+            <div class="empty-cart py-16">
+                <div class="container mx-auto text-center">
+                    <h1 class="text-3xl font-bold mb-2">Cart Empty 😕</h1>
+                    <p class="text-gray-500 text-lg mb-12">You probably haven't ordered anything yet. <br>
+                        To order your requirement, go to the main page.</p>
+                    <img class="w-2/5 mx-auto" src="/img/Emptycart.gif" alt="empty-cart">
+                    <a href="/grandHome"
+                        class="inline-block px-6 py-2 rounded-full btn-primary text-white font-bold mt-12">Go back</a>
+                </div>
             </div>
-            <% if(user) { %>
-            <div class="flex justify-center">
-                <a href="/customer/checkout"><button class="btn-primary px-4 py-4 text-white w-full mt-14 rounded-full shadow font-bold">PLACE ORDER</button></a>
-            </div>
-            <% } else { %>
-            <a href="/login"
-                class="inline-block cursor-pointer btn-primary px-6 py-2 rounded-full text-white font-bold mt-6">Login
-                to continue</a>
             <% } %>
-        </div>
-    </div>
-    <% } else { %>
-    <div class="empty-cart py-16">
-        <div class="container mx-auto text-center">
-            <h1 class="text-3xl font-bold mb-2">Cart Empty 😕</h1>
-            <p class="text-gray-500 text-lg mb-12">You probably haven't ordered anything yet. <br>
-                To order your requirement, go to the main page.</p>
-            <img class="w-2/5 mx-auto" src="/img/Emptycart.gif" alt="empty-cart">
-            <a href="/grandHome" class="inline-block px-6 py-2 rounded-full btn-primary text-white font-bold mt-12">Go back</a>
-        </div>
-    </div>
-    <% } %>
 </section>
 <script>
 
 
-
-
-    function removeItem(itemId){
+    function removeItem(itemId) {
         console.log(itemId);
         var params = {
             pid: itemId,
-          }
-  
-          $.ajax({
-          type: 'POST',
-          url: '/remove-cart',
-          data: params, 
-          dataType: 'json',
-          encode: true
-          }).done(function(result){
-            if(result.status == "success"){
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/remove-cart',
+            data: params,
+            dataType: 'json',
+            encode: true
+        }).done(function (result) {
+            if (result.status == "success") {
                 location.reload();
             }
-          })
+        })
     }
-    function updateQuantity(type, pid){
+
+
+    function updateQty(type, pid) {
         console.log("Triggered");
         console.log(pid);
         var params = {
@@ -91,15 +106,15 @@
             pid: pid
         }
         $.ajax({
-          type: 'POST',
-          url: '/qty-cart',
-          data: params, 
-          dataType: 'json',
-          encode: true
-          }).done(function(result){
-            if(result.status == "success"){
+            type: 'POST',
+            url: '/qty-cart',
+            data: params,
+            dataType: 'json',
+            encode: true
+        }).done(function (result) {
+            if (result.status == "success") {
                 location.reload();
             }
-          })
+        })
     }
 </script>
