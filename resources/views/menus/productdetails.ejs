@@ -119,7 +119,8 @@
         $('#add-cart-btn').click(function(){
           var params = {
             pid: '<%= product._id %>',
-            qty: $('#product-qty').val()
+            qty: $('#product-qty').val(),
+            total: '<%= product.price %>'
           }
   
           $.ajax({

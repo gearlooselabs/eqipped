@@ -31,7 +31,7 @@
     "flash": "^1.1.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "mongoose": "^6.1.5",
     "multer": "^1.4.4",
     "nodemailer": "^6.7.3",

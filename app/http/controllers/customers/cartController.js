@@ -19,7 +19,8 @@ function cartController() {
                 $push: {
                     cart: {
                         product: req.body.pid,
-                        quantity: req.body.qty
+                        quantity: req.body.qty,
+                        total: parseInt(req.body.total) * parseInt(req.body.qty)
                     }
                 }
             }, (err) => {
@@ -35,9 +36,11 @@ function cartController() {
         },
 
         qtyUpdate(req, res) {
+            if(req.body.type == 'plus'){
                 User.updateOne({ 
                     _id: req.user._id,
                     'cart._id': req.body.pid,
+                    'cart.quantity': { $gte: 1}
                 }, {
                    $inc: {
                     'cart.$.quantity': 1
@@ -45,8 +48,37 @@ function cartController() {
                 }, () => {
                     res.send({ "status": "success"});
                 })
-        },
+            }
 
+            if(req.body.type == 'minus'){
+                User.updateOne({ 
+                    _id: req.user._id,
+                    'cart._id': req.body.pid,
+                    'cart.quantity': { $gte: 2}
+                }, {
+                   $inc: {
+                    'cart.$.quantity': -1
+                   }
+                }, () => {
+                    res.send({ "status": "success"});
+                })
+            }
+
+            if(req.body.type == 'specific'){
+                if(req.body.qty > 0){
+                    User.updateOne({ 
+                        _id: req.user._id,
+                        'cart._id': req.body.pid,
+                    }, {
+                       $set: {
+                        'cart.$.quantity': req.body.qty
+                       }
+                    }, () => {
+                        res.send({ "status": "success"});
+                    })
+                }
+            }
+        },
 
         removeUpdate(req, res) {
             console.log(req.body.pid)

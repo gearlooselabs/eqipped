@@ -16,7 +16,9 @@ const orderSchema = new Schema(
     orderId: { type: String, required: true },
     txnDate: { type: String, required: true },
     txnAmount: { type: String, required: true },
-    items: { type: Object, required: true },
+    items: [
+      { type: Object}
+    ],
     // bankName:{ type: String, required: true },
     bankTxnId: { type: String, required: true },
     gateWayName: { type: String, required: true },
