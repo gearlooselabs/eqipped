@@ -40,7 +40,7 @@ function initRoutes(app) {
     app.post('/logout', authController().logout)
     app.get('/cart', auth, cartController().index)
     app.post('/update-cart', cartController().update)
-    app.post('/qty-cart', cartController().qtyUpdate)
+    app.post('/qty-cart', cartController().qtyUpdate);
     app.post('/remove-cart', cartController().removeUpdate)
 
     //PaytmGateway Route

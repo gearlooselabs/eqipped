@@ -799,6 +799,12 @@ font-display: auto;}
 /* -----------------------------------------------------------------------------
                Responsive Styles
 ----------------------------------------------------------------------------- */
+@media only screen and (max-width: 1920px){
+
+.atom{
+  transform: translate(-10rem,8rem);
+}  
+}
 @media only screen and (max-width: 1022px){
   .white-heading {
       font-size: 50px;
@@ -808,13 +814,20 @@ font-display: auto;}
     height: 70vh;
 }
 
+
+
 }
 @media only screen and (max-width: 888px){
   .white-heading {
       font-size: 50px;
       line-height: 42px;
   }
-
+.atom-width{
+  width: 40%;
+}
+.atom{
+  transform: translate(-10rem,12rem);
+}
 }
 
 @media only screen and (max-width: 498px) {
@@ -827,8 +840,15 @@ font-display: auto;}
       line-height: 18px; 
   }
   .bgp , .bg{
-      height: 70vh;
+      height: 60vh;
   }
+  .atom-width{
+    width: 80%;
+  }
+  .atom{
+    transform: translate(-9.8rem,5rem);
+  }
+
 }
 
 #multi-step-form-container {
@@ -1078,3 +1098,8 @@ product-list * {
   width: 100%;
   height: 100%;
 } */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

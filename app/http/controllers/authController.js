@@ -517,8 +517,10 @@ function authController() {
 
 
         logout(req, res) {
-            req.logout()
-            return res.redirect('/')
+            req.logout(function(err){
+                if(err) console.log(err);
+                res.redirect('/');
+            })
         }
     }
 }

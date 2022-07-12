@@ -1,11 +1,9 @@
 <section class="menu container mx-auto py-8">
     <h1 class="text-xl font-bold mt-8 mb-8 heading">Products</h1>
-    
-    <% if(products.length > 0){ %>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 col-gap-12 row-gap-16">
-            <% products.forEach((product)=> { %>
-                <div class="flex flex-col items-center gap-2 px-2 py-6 relative hover:shadow-lg">
-                    <a href="/productDetails/<%= product._id %>/1" class="flex flex-col items-center text-center group">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 col-gap-12 row-gap-16">
+                <% products.forEach((product) => { %>
+                    <div class="flex flex-col items-center gap-2 px-2 py-6 relative hover:shadow-lg">
+                        <a href="/productDetails/<%= product._id %>/1" class="flex flex-col items-center text-center group">
                         <div class="w-36 h-36">
                             <img draggable="false" class="w-full h-full object-contain" src="/img/<%= product.image %>"
                                 alt="{name}" />
@@ -13,10 +11,10 @@
                         <h2 class="text-sm mt-4 group-hover:text-blue-500">
                             <%= product.name %>
                         </h2>
-
-
+                    
+    
                         <div class="flex flex-col gap-2 items-center">
-
+    
                             <span class="text-sm text-gray-500 font-medium flex gap-2 items-center">
                                 <span style="background-color: #388e3c;"
                                     class="text-xs px-1.5 py-0.5 mt-2 rounded-sm text-white flex items-center gap-0.5">4.5<img
@@ -24,7 +22,7 @@
                                         class="_1wB99o"></span>
                                 <span>(5)</span>
                             </span>
-
+    
                             <div class="flex items-center gap-1.5 text-md font-medium">
                                 <span>₹<%= product.price %></span>
                                 <span class="text-gray-500 line-through text-xs">₹699</span>

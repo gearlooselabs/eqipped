@@ -31,7 +31,7 @@ function homeController() {
             const products = await Product.find().limit(4);
             const latest = await Product.find().limit(4).sort('-created');
             const subcats = await Sub.find({}).limit(12);
-            return res.render('grandHome', { nashta: nashta, subcats: subcats, chemical: chemical, products: products, latest: latest,});
+            return res.render('grandHome', { nashta: nashta, subcats: subcats, chemical: chemical, products: products, latest: latest});
         },
 
         fetch(req, res, next) {
