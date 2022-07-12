@@ -1,5 +1,5 @@
 <section class="cart py-20">
-    <% if(products) { %>
+    <% if(products.cart.length > 0) { %>
     <div class="order container mx-auto xl:w-1/2">
         <div class="flex items-center border-b border-gray-300 pb-4">
             <img src="https://svgsilh.com/svg/151889.svg" class="w-10 block pr-2">
@@ -11,6 +11,7 @@
                     <a class="flex justify-center items-center hover:border-gray-300 hover:bg-gray-200 w-5/12" href="">
                             <img class="w-24" src="/img/<%= product.product.image %>" alt="">
                             <div class="flex-1 ml-4">
+                                <h1></h1>
                                 <span class="text-sm"><%= product.product.name %></span>
                             </div>
                     </a>
@@ -82,9 +83,9 @@
             }
           })
     }
-
-    function updateQty(type, pid){
-        console.log("Triggered")
+    function updateQuantity(type, pid){
+        console.log("Triggered");
+        console.log(pid);
         var params = {
             type: type,
             pid: pid
@@ -102,6 +103,3 @@
           })
     }
 </script>
-
-
-

@@ -129,7 +129,7 @@
           dataType: 'json',
           encode: true
           }).done(function(result){
-            if(result.items){
+            if(result.status == "success"){
               $('#cartcount').html(result.items);
             }
           })

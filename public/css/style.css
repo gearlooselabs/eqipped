@@ -693,11 +693,8 @@ body.dark .home .text{
                  This div contains background image.
 ----------------------------------------------------------------------------- */
 .atom-width{
-  
+  height: auto;
   width: 20%;
-}
-.neucleus-width{
-  width: 100%;
 }
 .centre-img{
   position: absolute;
