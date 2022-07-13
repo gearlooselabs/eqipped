@@ -1,8 +1,8 @@
 <section class="menu container mx-auto py-8">
     <h1 class="text-xl font-bold mt-8 mb-8 heading">Products</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 col-gap-12 row-gap-16">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 col-gap-12 row-gap-16">
         <% products.forEach((product)=> { %>
-            <div class="flex flex-col items-center gap-2 px-2 py-6 relative hover:shadow-lg">
+            <div class="flex flex-col items-center gap-2 px-2 py-6  relative hover:shadow-lg">
                 <a href="/productDetails/<%= product._id %>/1" class="flex flex-col items-center text-center group">
                     <div class="w-36 h-36">
                         <img draggable="false" class="w-full h-full object-contain" src="/img/<%= product.image %>"
@@ -11,7 +11,7 @@
                     <h2 class="text-sm mt-4 group-hover:text-blue-500">
                         <%= product.name %>
                     </h2>
-
+                    <span class="text-gray-400 text-xs ">By: <%= product.brand %></span>
 
                     <div class="flex flex-col gap-2 items-center">
 

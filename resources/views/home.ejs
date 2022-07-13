@@ -28,7 +28,7 @@
     <section class="hero bgp " style="background-color: white;">
         <div class="container-fluid" >
           
-            <div class=" atom my-contain center-text" >
+            <div class="loadAnimation atom my-contain center-text" >
                     <img  data-aos="zoom-in" data-delay="800" class="centre-img atom-width atomring0" src="/img/atomring0.png" alt="atom-nucleus">
                     <img  data-aos="zoom-in" data-delay="800" class="centre-img atom-width atomring1" src="/img/atomring1.png" alt="atom-ring1">
                     <img  data-aos="zoom-in" data-delay="800" class="centre-img atom-width atomring2" src="/img/atomring2.png" alt="atom-ring2">
@@ -52,8 +52,8 @@
 
 
 
-        <div class="container-fluid bg " style="align-items: center;">
-            <img class="contain-img" src="/img/flask.png" alt="flask image" srcset="">
+        <div class="container-fluid bg " style="align-items: center; display: none;">
+            <img class="contain-img opacity-10 sm:opacity-100 " src="/img/flask.png" alt="flask image" srcset="">
       
           <div class="mycontain center-text homehero">
             
@@ -89,6 +89,8 @@
 
 setTimeout(function() {
     $('.bgp').css('display', 'block');
+    $('.loadAnimation').css('display', 'none');
+    $('.bg').css('display', 'block');
 
     anime.timeline({loop: false})
        .add({
