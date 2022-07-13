@@ -244,7 +244,7 @@ const admin = require('./app/http/middlewares/admin')
 const Product = require('./app/models/product')
 const User = require('./app/models/user')
 const Sub = require('./app/models/subcategories');
-const Document = require('./app/models/Document');
+const Document = require('./app/models/document');
 
 
 var maxiSize = 1000000
