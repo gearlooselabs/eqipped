@@ -796,60 +796,11 @@ src: url('https://assets.website-files.com/5f3a64853eba5d020f364879/5f3a6776598c
 font-weight: 300;
 font-style: normal;
 font-display: auto;}
+
+
 /* -----------------------------------------------------------------------------
-               Responsive Styles
+               Registration Form
 ----------------------------------------------------------------------------- */
-@media only screen and (max-width: 1920px){
-
-.atom{
-  transform: translate(-10rem,8rem);
-}  
-}
-@media only screen and (max-width: 1022px){
-  .white-heading {
-      font-size: 50px;
-      line-height: 42px;
-  }
-  .bgp , .bg{
-    height: 70vh;
-}
-
-
-
-}
-@media only screen and (max-width: 888px){
-  .white-heading {
-      font-size: 50px;
-      line-height: 42px;
-  }
-.atom-width{
-  width: 40%;
-}
-.atom{
-  transform: translate(-10rem,12rem);
-}
-}
-
-@media only screen and (max-width: 498px) {
-  .white-heading {
-      font-size: 30px;
-      line-height: 25px;
-  }
-  .desc{
-      font-size: 14px;
-      line-height: 18px; 
-  }
-  .bgp , .bg{
-      height: 60vh;
-  }
-  .atom-width{
-    width: 80%;
-  }
-  .atom{
-    transform: translate(-9.8rem,5rem);
-  }
-
-}
 
 #multi-step-form-container {
   margin-top: 5rem;
@@ -1042,64 +993,67 @@ ul.form-stepper li a .form-stepper-circle {
   cursor: default;
 }
 
-
-    /* -----------------------------------------------------------------------------
-                Product Copytright Card
------------------------------------------------------------------------------ */
-/* 
-@media (max-width: 1120px){
-.prod_grid {
-    width: 25%;
-}
-}
-.prod_grid {
-    width: 20%;
-    float: left;
-}
-.pad-lr-5 {
-    padding-left: 5px!important;
-    padding-right: 5px!important;
-}
-.no-padding {
-    padding: 0!important;
-}
-
-product-list * {
-    text-decoration: none!important;
-}
-.prod_list .prod_block {
-  position: relative;
-  border-radius: 3px;
-  height: 325px;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
-.prod_list .prod_block .prod_image {
-  padding: 5px;
-  position: relative;
-}
-
-.pad-lr-15 {
-  padding-left: 15px!important;
-  padding-right: 15px!important;
-}
-product-list * {
-  text-decoration: none!important;
-} .pad-lr-xs-5 {
-  padding-left: 5px !important;
-  padding-right: 5px !important
-}
-.prod_list .prod_block .prod_image .prodlist-load {
-  height: 160px;
-  background-color: #fff;
-  padding-top: 8px;
-}
-.prod_list .prod_block .prod_image .prodlist-load img {
-  width: 100%;
-  height: 100%;
-} */
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
 }
+
+/* -----------------------------------------------------------------------------
+               Responsive Styles
+----------------------------------------------------------------------------- */
+@media only screen and (max-width: 1920px){
+
+  .atom{
+    transform: translate(-10rem,8rem);
+  }  
+  }
+  @media only screen and (max-width: 1022px){
+    .white-heading {
+        font-size: 50px;
+        line-height: 42px;
+    }
+    .bgp , .bg{
+      height: 70vh;
+  }
+  
+  
+  
+  }
+  @media only screen and (max-width: 888px){
+    .white-heading {
+        font-size: 50px;
+        line-height: 42px;
+    }
+  .atom-width{
+    width: 40%;
+  }
+  .atom{
+    transform: translate(-10rem,12rem);
+  }
+  }
+  
+  @media only screen and (max-width: 498px) {
+    .white-heading {
+        font-size: 30px;
+        line-height: 25px;
+    }
+    .desc{
+        font-size: 14px;
+        line-height: 18px; 
+    }
+    .bgp , .bg{
+        height: 60vh;
+    }
+    .atom-width{
+      width: 80%;
+    }
+    .atom{
+      transform: translate(-9.8rem,5rem);
+    }
+    .form-stepper-horizontal li:not(:last-child):after {
+     
+      left: -7.5%;
+  }
+  
+  }

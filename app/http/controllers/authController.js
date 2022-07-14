@@ -241,14 +241,14 @@ function authController() {
                         return res.json({ msg: "Enter phone or email carefully" })
                     }
                     else {
-                        // await axios
-                        // .get(`https://www.txtguru.in/imobile/api.php?username=gearloose.lab&password=71703091&source=GRLABS&dmobile=91${phone}&dlttempid=1507165000853446536&message=${OTP} is your eqipped.com verification code. It is valid for only 3 minutes. Do not share it with anyone. GRLABS`)
-                        // .then(async (res) => {
-                        //         console.log(`statusCode: ${res.status}`)
-                        // })
-                        // .catch(error => {
-                        //    return res.send({ msg: "Major Failure"})
-                        // })
+                        await axios
+                        .get(`https://www.txtguru.in/imobile/api.php?username=gearloose.lab&password=71703091&source=GRLABS&dmobile=91${phone}&dlttempid=1507165000853446536&message=${OTP} is your eqipped.com verification code. It is valid for only 3 minutes. Do not share it with anyone. GRLABS`)
+                        .then(async (res) => {
+                                console.log(`statusCode: ${res.status}`)
+                        })
+                        .catch(error => {
+                           return res.send({ msg: "Major Failure"})
+                        })
 
                         console.log(email);
                         console.log("otp for email", EOTP);

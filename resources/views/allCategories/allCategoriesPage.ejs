@@ -1,7 +1,7 @@
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <section class="container mx-auto p-8 border flex flex-wrap justify-around">
     
     <% nashta.forEach(function(nashta){ %>
-
         <a href="/allcategory/products/<%= nashta._id%>/1">
             <div class="flex flex-col h-min w-40 p-1 border-box bg-white rounded xl m-5 cursor-pointer">
                 <lottie-player src="<%= nashta.pimage %>"  background="transparent"  speed="1"  style="width: 150px; height: 150px;"  loop  autoplay></lottie-player>
@@ -12,7 +12,6 @@
                 </div>
             </div>
         </a>
-
         <% }) %>
 
 </section>
