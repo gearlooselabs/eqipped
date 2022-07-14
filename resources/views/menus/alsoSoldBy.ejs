@@ -1,5 +1,5 @@
 <section class="menu container mx-auto py-8">
-    <h1 class="text-xl font-bold mt-8 mb-8 heading">Products</h1>
+    <h1 class="text-xl font-bold mt-8 mb-8 heading">Similar Products</h1>
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 col-gap-12 row-gap-16">
         <% products.forEach((product)=> { %>
             <div class="flex flex-col items-center gap-2 px-2 py-6  relative hover:shadow-lg">
@@ -32,13 +32,13 @@
                     </div>
                 </a>
             </div>
-        <% }) %>
+            <% }) %>
     </div>
     <div class="bg-white px-4 py-3 flex items-center justify-center border-t border-gray-200 sm:px-6">
         <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-center">
             <div>
                 <div class="flex justify-center">
-                    <% if (pages > 0) { %>
+                    <% if (pages> 0) { %>
                         <nav aria-label="Page navigation example">
                             <ul class="flex list-style-none">
                                 <% if (current==1) { %>

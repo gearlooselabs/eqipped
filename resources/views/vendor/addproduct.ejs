@@ -153,12 +153,22 @@
                                 </div>
 
                                 <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
-                                    <div class="w-full  lg:w-12/12 mt-4">
+                                    <div class="w-1/2  lg:w-12/12 mt-4">
                                         <label for="description" class="block mb-3 text-sm font-semibold text-gray-500">
                                             Description</label>
                                         <input name="description" type="text" required placeholder="Description"
                                             id="description"
                                             class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
+                                    <div class = "w-1/2">
+                                        <input type="text" name = "vname" placeholder = "Variant Name">
+                                        <input id="my_input" name="test1" type="text" value="">
+
+                                        <button data-toggle="modal" data-target="#myModal" onclick="add_inputs()" id="add_input1" name="" type="button">GO</button>
+
+                                        <div id="rolonum">
+
+                                        </div>
                                     </div>
                                 </div>
 
@@ -227,5 +237,14 @@
     }
     });
     });
-    }); 
+    });
+    function add_inputs() {
+    n = $('#my_input').val();
+    $("#rolonum").html('');
+    for (var i = 1; i <= n; i++) {
+      $("#rolonum").append('<span>Item ' + i + ' </span><input id="rolo_add' + i + '" name="variant"  type="text" value="" required/><br>');
+      
+    }
+
+  }
 </script>

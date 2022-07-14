@@ -25,13 +25,15 @@ function homeController() {
             } else {
                 // console.log(req.body.pcategory);
             }
-            var parentCat = "Glassware";
+            var chemicalCat = "624e86f68964e0a947f59e03"; // Chemicals Id
+            var instrumentCat = "624e86f68964e0a947f59e00"; // Chemicals Id
             const nashta = await Category.find();
-            const chemical = await Category.findOne({ pcategory: parentCat }).populate({ path: 'psubcat', populate: [{ path: 'product', model: 'Product'}], model: 'Sub'}).limit(10).exec();
+            const chemicals = await Menu.find({categoryName: chemicalCat}).limit(10).exec();
+            const instruments = await Menu.find({categoryName: instrumentCat}).limit(10).exec();
             const products = await Product.find().limit(4);
-            const latest = await Product.find().limit(4).sort('-created');
+            const latest = await Menu.find().limit(4).sort('-created');
             const subcats = await Sub.find({}).limit(12);
-            return res.render('grandHome', { nashta: nashta, subcats: subcats, chemical: chemical, products: products, latest: latest});
+            return res.render('grandHome', { nashta: nashta, subcats: subcats, chemicals: chemicals, products: products, latest: latest, instruments: instruments});
         },
 
         fetch(req, res, next) {

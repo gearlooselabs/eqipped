@@ -15,7 +15,7 @@ function orderController() {
         viewdoc(req,res){
             const {fname, insN} = req.params
             const filename = fname + ' from ' + insN + '.pdf';
-            const filepath = 'http://localhost:3000/businessDocuments/' + filename
+            const filepath = 'http://localhost:3300/businessDocuments/' + filename
             // return res.render('auth/documentwatch', { path: filepath })
             return res.render('auth/documentupload', { path: filepath })
           },
@@ -136,7 +136,7 @@ function orderController() {
                     console.log(error);
                 });
 
-            const filepath = 'http://localhost:3000/docs/' + filename
+            const filepath = 'http://localhost:3300/docs/' + filename
 
 
 

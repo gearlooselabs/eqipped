@@ -26,6 +26,12 @@ const productSchema = new Schema(
         netQuantity: {type: String, required: true},
         containedLiquid: {type: String, required: false},
         isverified: {type: String , default: "No"},
+        variations: [
+            {
+                name: { type: String},
+                variants: { type: Object}
+            }
+        ]
     },
     { timestamps: true }
 );

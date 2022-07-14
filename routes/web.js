@@ -102,6 +102,7 @@ function initRoutes(app) {
     app.get('/allcategory/products', auth, productController().productfetch)
     app.get('/allcategory/products/:categoryId/:page', auth, productController().catProduct)
     app.get('/productDetails/:id/:page', auth, productController().productDetails)
+    app.get('/similarproducts', auth, productController().productDetails)
     
     app.get('/brand/:subCategory', auth, productController().brandProduct)
     app.get('/products/:subCategory', auth, productController().productfetchBysubCN)

@@ -1057,3 +1057,15 @@ input[type=number]::-webkit-outer-spin-button {
   }
   
   }
+
+
+
+
+
+  .variantHover:hover {
+    color: #4da3ff;
+    border: 1px solid #4da3ff;
+  }
+  .SeeMore:hover{
+    color: #4da3ff;
+  }
