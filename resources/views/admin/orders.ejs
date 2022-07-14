@@ -4,7 +4,7 @@
         <table class="w-full table-auto bg-white">
             <thead>
                 <tr>
-                    <th class="px-4 py-2 text-left">Orders</th>
+                    <th class="px-4 py-2 text-left">Orderss</th>
                     <th class="px-4 py-2 text-left">Customer</th>
                     <th class="px-4 py-2 text-left">Address</th>
                     <th class="px-4 py-2 text-left">Status</th>
@@ -13,17 +13,8 @@
                 </tr>
             </thead>
             <tbody id="orderTableBody">
-                <% orders.forEach((order) => { %>
-                    <tr>
-                        <th class="px-4 py-2 text-left"><%= order.orderId %></th>
-                        <th class="px-4 py-2 text-left"><%= order.customerName %></th>
-                        <th class="px-4 py-2 text-left"><%= order.address %></th>
-                        <th class="px-4 py-2 text-left"><%= order.status %></th>
-                        <th class="px-4 py-2 text-left"><%= order.txnDate %></th>
-                        <th class="px-4 py-2 text-left"><%= order.txnAmount %></th>
-                    </tr>
-                <% }) %>
+
             </tbody>
         </table>
     </div>
-</section>
+</section> 

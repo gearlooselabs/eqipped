@@ -28,7 +28,6 @@ const connection = mongoose.connection;
 connection.once('open', () => {
     let weeks = moment().weeks() - moment().startOf('month').weeks() + 1;
     weeks = (weeks + 52) % 52;
-    console.log(weeks);
     console.log('Database connected...');
 });
 
@@ -445,10 +444,7 @@ app.use((req, res) => {
     res.status(404).render('errors/404')
 })
 const PORT = process.env.PORT || 3000;
-// const server=
-// app.listen(process.env.PORT || 3000, function(){
-//     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-//   });
+
 const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
 })

@@ -264,7 +264,8 @@ function authController() {
                             service: 'gmail',
                             auth: {
                                 user: 'equipped.gearloose@gmail.com',
-                                pass: 'gzgossoykfwflkrg'
+                                pass: 'gdogwqwavgxkhnsv'
+                                // pass: 'gzgossoykfwflkrg'
                                 // pass: 'Asdfqwer1234'
                             },
                             port: 465,
@@ -517,11 +518,17 @@ function authController() {
 
 
         logout(req, res) {
-            req.logout(function(err){
-                if(err) console.log(err);
+            // req.logout()
+            // return res.redirect('/')
+            req.logout(function(err) {
+                if (err) { return next(err); }
                 res.redirect('/');
-            })
+              });
         }
+
+       
+
+
     }
 }
 

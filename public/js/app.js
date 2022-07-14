@@ -2166,9 +2166,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(noty__WEBPACK_IMPORTED_MODULE_2__);
 
 
- // export function initAdmin(socket) {
 
-function initAdmin(socket) {
+function initAdmin() {
+  // export function initAdmin(socket) {
   var orderTableBody = document.querySelector('#orderTableBody');
   var orders = [];
   var markup;
@@ -2180,34 +2180,34 @@ function initAdmin(socket) {
     orders = res.data;
     markup = generateMarkup(orders);
     orderTableBody.innerHTML = markup;
-  })["catch"](function (err) {// console.log(err)
-  });
-
-  function renderItems(items) {
-    var parsedItems = Object.values(items);
-    return parsedItems.map(function (menuItem) {
-      return "\n                <p>".concat(menuItem.item.name, " - ").concat(menuItem.qty, " pcs </p>\n            ");
-    }).join('');
-  }
+  })["catch"](function (err) {
+    console.log(err);
+  }); // function renderItems(items) {
+  //     let parsedItems = Object.values(items)
+  //     return parsedItems.map((menuItem) => {
+  //         return `
+  //             <p>${ menuItem.item } - ${ menuItem.quantity } pcs </p>
+  //         `
+  //     }).join('')
+  //   }
 
   function generateMarkup(orders) {
     return orders.map(function (order) {
-      return "\n                <tr>\n                <td class=\"border px-4 py-2 text-green-900\">\n                    <p>".concat(order._id, "</p>\n                    <div>").concat(renderItems(order.items), "</div>\n                </td>\n                <td class=\"border px-4 py-2\">Name-").concat(order.customerName, " <br> Phone-").concat(order.phone, "</td>\n                <td class=\"border px-4 py-2\">").concat(order.address, "</td>\n                <td class=\"border px-4 py-2\">\n                    <div class=\"inline-block relative w-64\">\n                        <form action=\"/admin/order/status\" method=\"POST\">\n                            <input type=\"hidden\" name=\"orderId\" value=\"").concat(order._id, "\">\n                            <select name=\"status\" onchange=\"this.form.submit()\"\n                                class=\"block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline\">\n                                <option value=\"order_placed\"\n                                    ").concat(order.status === 'order_placed' ? 'selected' : '', ">\n                                    Placed</option>\n                                <option value=\"confirmed\" ").concat(order.status === 'confirmed' ? 'selected' : '', ">\n                                    Confirmed</option>\n                                <option value=\"prepared\" ").concat(order.status === 'prepared' ? 'selected' : '', ">\n                                    Prepared</option>\n                                <option value=\"delivered\" ").concat(order.status === 'delivered' ? 'selected' : '', ">\n                                    Delivery\n                                </option>\n                                <option value=\"completed\" ").concat(order.status === 'completed' ? 'selected' : '', ">\n                                    Completed\n                                </option>\n                            </select>\n                        </form>\n                        <div\n                            class=\"pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700\">\n                            <svg class=\"fill-current h-4 w-4\" xmlns=\"http://www.w3.org/2000/svg\"\n                                viewBox=\"0 0 20 20\">\n                                <path\n                                    d=\"M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z\" />\n                            </svg>\n                        </div>\n                    </div>\n                </td>\n                <td class=\"border px-4 py-2\">\n                    ").concat(moment__WEBPACK_IMPORTED_MODULE_1___default()(order.createdAt).format('hh:mm A'), "\n                </td>\n\n                <td class=\"border px-4 py-2\">\n                    ").concat(order.txnAmount, "\n                </td>\n\n            </tr>\n        ");
+      return "\n                <tr>\n                <td class=\"border px-4 py-2 text-green-900\">\n                    <p>".concat(order._id, "</p>\n                </td>\n                <td class=\"border px-4 py-2\">Name-").concat(order.customerName, " <br> Phone-").concat(order.phone, "</td>\n                <td class=\"border px-4 py-2\">").concat(order.address, "</td>\n                <td class=\"border px-4 py-2\">\n                    <div class=\"inline-block relative w-64\">\n                        <form action=\"/admin/order/status\" method=\"POST\">\n                            <input type=\"hidden\" name=\"orderId\" value=\"").concat(order._id, "\">\n                            <select name=\"status\" onchange=\"this.form.submit()\"\n                                class=\"block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline\">\n                                <option value=\"order_placed\"\n                                    ").concat(order.status === 'order_placed' ? 'selected' : '', ">\n                                    Placed</option>\n                                <option value=\"confirmed\" ").concat(order.status === 'confirmed' ? 'selected' : '', ">\n                                    Confirmed</option>\n                                <option value=\"prepared\" ").concat(order.status === 'prepared' ? 'selected' : '', ">\n                                    Prepared</option>\n                                <option value=\"delivered\" ").concat(order.status === 'delivered' ? 'selected' : '', ">\n                                    Delivery\n                                </option>\n                                <option value=\"completed\" ").concat(order.status === 'completed' ? 'selected' : '', ">\n                                    Completed\n                                </option>\n                            </select>\n                        </form>\n                        <div\n                            class=\"pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700\">\n                            <svg class=\"fill-current h-4 w-4\" xmlns=\"http://www.w3.org/2000/svg\"\n                                viewBox=\"0 0 20 20\">\n                                <path\n                                    d=\"M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z\" />\n                            </svg>\n                        </div>\n                    </div>\n                </td>\n                <td class=\"border px-4 py-2\">\n                    ").concat(moment__WEBPACK_IMPORTED_MODULE_1___default()(order.createdAt).format('hh:mm A'), "\n                </td>\n\n                <td class=\"border px-4 py-2\">\n                    ").concat(order.txnAmount, "\n                </td>\n\n            </tr>\n        ");
     }).join('');
   } // Socket
+  // socket.on('orderPlaced', (order) => {
+  //     new Noty({
+  //         type: 'success',
+  //         timeout: 1000,
+  //         text: 'New order!',
+  //         progressBar: false,
+  //     }).show();
+  //     orders.unshift(order)
+  //     orderTableBody.innerHTML = ''
+  //     orderTableBody.innerHTML = generateMarkup(orders)
+  // })
 
-
-  socket.on('orderPlaced', function (order) {
-    new (noty__WEBPACK_IMPORTED_MODULE_2___default())({
-      type: 'success',
-      timeout: 1000,
-      text: 'New order!',
-      progressBar: false
-    }).show();
-    orders.unshift(order);
-    orderTableBody.innerHTML = '';
-    orderTableBody.innerHTML = generateMarkup(orders);
-  });
 }
 
 /***/ }),
@@ -2248,6 +2248,7 @@ function initAdmin2(socket) {
     markups = generateMarkup(users);
     userTableBody.innerHTML = markups;
   })["catch"](function (err) {
+    orderTableBody;
     console.log(err);
   });
 
@@ -2260,7 +2261,7 @@ function initAdmin2(socket) {
 
   function generateMarkup(users) {
     return users.map(function (user) {
-      return "\n                <tr>\n                \n                <td class=\"border px-4 py-2\">Name-".concat(user.name, " </td>\n                \n                <td class=\"border px-4 py-2\">\n                    <div class=\"inline-block relative w-64\">\n                        <form action=\"/admin/product/status\" method=\"POST\">\n                            <input type=\"hidden\" name=\"userId\" value=\"").concat(user._id, "\">\n                            <select name=\"isverified\" onchange=\"this.form.submit()\"\n                                class=\"block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline\">\n                                <option value=\"No\"\n                                    ").concat(user.isverified === 'No' ? 'selected' : '', ">\n                                    No</option>\n                                <option value=\"Yes\" ").concat(user.isverified === 'Yes' ? 'selected' : '', ">\n                                    Yes</option>\n                            </select>\n                        </form>\n                        <div\n                            class=\"pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700\">\n                            <svg class=\"fill-current h-4 w-4\" xmlns=\"http://www.w3.org/2000/svg\"\n                                viewBox=\"0 0 20 20\">\n                                <path\n                                    d=\"M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z\" />\n                            </svg>\n                        </div>\n                    </div>\n                </td>\n                 <td class=\"border px-4 py-2\">\n                     ").concat(moment__WEBPACK_IMPORTED_MODULE_1___default()(user.createdAt).format('hh:mm A'), "\n                </td>\n            </tr>\n        ");
+      return "\n                <tr>\n                \n                <td class=\"border px-4 py-2\">Name-".concat(user.fname, " ").concat(user.lname, " </td>\n                \n                <td class=\"border px-4 py-2\">\n                    <div class=\"inline-block relative w-64\">\n                        <form action=\"/admin/product/status\" method=\"POST\">\n                            <input type=\"hidden\" name=\"userId\" value=\"").concat(user._id, "\">\n                            <select name=\"isverified\" onchange=\"this.form.submit()\"\n                                class=\"block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline\">\n                                <option value=\"No\"\n                                    ").concat(user.isverified === 'No' ? 'selected' : '', ">\n                                    No</option>\n                                <option value=\"Yes\" ").concat(user.isverified === 'Yes' ? 'selected' : '', ">\n                                    Yes</option>\n                            </select>\n                        </form>\n                        <div\n                            class=\"pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700\">\n                            <svg class=\"fill-current h-4 w-4\" xmlns=\"http://www.w3.org/2000/svg\"\n                                viewBox=\"0 0 20 20\">\n                                <path\n                                    d=\"M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z\" />\n                            </svg>\n                        </div>\n                    </div>\n                </td>\n                 <td class=\"border px-4 py-2\">\n                     ").concat(moment__WEBPACK_IMPORTED_MODULE_1___default()(user.createdAt).format('hh:mm A'), "\n                </td>\n            </tr>\n        ");
     }).join('');
   }
 
@@ -2309,9 +2310,7 @@ function initAdmin1(socket) {
       "X-Requested-With": "XMLHttpRequest"
     }
   }).then(function (res) {
-    console.log(res.data);
-    users = res.data; // console.log("hii")
-
+    users = res.data;
     markups = generateMarkup(users);
     userTableBody.innerHTML = markups;
   })["catch"](function (err) {
@@ -2327,7 +2326,7 @@ function initAdmin1(socket) {
 
   function generateMarkup(users) {
     return users.map(function (user) {
-      return "\n                <tr>\n                \n                <td class=\"border px-4 py-2\">Name-".concat(user.name, " <br> Phone-").concat(user.phone, "</td>\n                <td class=\"border px-4 py-2\">").concat(user.address, "</td>\n                <td class=\"border px-4 py-2\">\n                    <div class=\"inline-block relative w-64\">\n                        <form action=\"/admin/user/status\" method=\"POST\">\n                            <input type=\"hidden\" name=\"userId\" value=\"").concat(user._id, "\">\n                            <select name=\"isverified\" onchange=\"this.form.submit()\"\n                                class=\"block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline\">\n                                <option value=\"No\"\n                                    ").concat(user.isverified === 'No' ? 'selected' : '', ">\n                                    No</option>\n                                <option value=\"Yes\" ").concat(user.isverified === 'Yes' ? 'selected' : '', ">\n                                    Yes</option>\n                            </select>\n                        </form>\n                        <div\n                            class=\"pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700\">\n                            <svg class=\"fill-current h-4 w-4\" xmlns=\"http://www.w3.org/2000/svg\"\n                                viewBox=\"0 0 20 20\">\n                                <path\n                                    d=\"M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z\" />\n                            </svg>\n                        </div>\n                    </div>\n                </td>\n\n                 <td class=\"border px-4 py-2\">\n                     ").concat(moment__WEBPACK_IMPORTED_MODULE_1___default()(user.createdAt).format('hh:mm A'), "\n                </td>\n\n                <td class=\"border px-4 py-2\">\n                <a class=\"link\" href=\"/view/doc/").concat(user.name, "/").concat(user.institutionName, "\">\n                    <div target=\"_blank\" class=\"inline-block cursor-pointer btn-primary px-2 py-1 rounded-full text-white\" >View Uploaded Documents</div></a>\n               </td>\n               \n            </tr>\n        ");
+      return "\n                <tr>         \n                <td class=\"border px-4 py-2\">Name-".concat(user.lname, " <br> Phone-").concat(user.phone, "</td>\n                <td class=\"border px-4 py-2\">").concat(user.address, "</td>\n                <td class=\"border px-4 py-2\">\n                    <div class=\"inline-block relative w-64\">\n                        <form action=\"/admin/user/status\" method=\"POST\">\n                            <input type=\"hidden\" name=\"userId\" value=\"").concat(user._id, "\">\n                            <select name=\"isverified\" onchange=\"this.form.submit()\"\n                                class=\"block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline\">\n                                <option value=\"No\"\n                                    ").concat(user.isverified === 'No' ? 'selected' : '', ">\n                                    No</option>\n                                <option value=\"Yes\" ").concat(user.isverified === 'Yes' ? 'selected' : '', ">\n                                    Yes</option>\n                            </select>\n                        </form>\n                        <div\n                            class=\"pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700\">\n                            <svg class=\"fill-current h-4 w-4\" xmlns=\"http://www.w3.org/2000/svg\"\n                                viewBox=\"0 0 20 20\">\n                                <path\n                                    d=\"M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z\" />\n                            </svg>\n                        </div>\n                    </div>\n                </td>\n\n                 <td class=\"border px-4 py-2\">\n                     ").concat(moment__WEBPACK_IMPORTED_MODULE_1___default()(user.createdAt).format('hh:mm A'), "\n                </td>\n\n                <td class=\"border px-4 py-2\">\n                <a class=\"link\" href=\"/view/doc/").concat(user.fname, "/").concat(user.institutionName, "\">\n                    <div target=\"_blank\" class=\"inline-block cursor-pointer btn-primary px-2 py-1 rounded-full text-white\" >View Uploaded Documents</div></a>\n               </td>\n               \n            </tr>\n        ");
     }).join('');
   }
 
@@ -2363,115 +2362,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_product__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./admin_product */ "./resources/js/admin_product.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
 
-
-
-var addToCart = document.querySelectorAll('.add-to-cart');
-var subToCart = document.querySelectorAll('.sub-to-cart');
-var removeToCart = document.querySelectorAll('.remove-to-cart');
-var subCat = document.querySelectorAll('.sub-cat');
-var cartCounter = document.querySelector('#cartCounter');
-addToCart.forEach(function (btn) {
-  btn.addEventListener('click', function (e) {
-    var chai = JSON.parse(btn.dataset.chai);
-    updateCart(chai);
-  });
-});
-subToCart.forEach(function (btn) {
-  btn.addEventListener('click', function (e) {
-    var chai = JSON.parse(btn.dataset.chai);
-    deUpdateCart(chai);
-  });
-});
-removeToCart.forEach(function (btn) {
-  btn.addEventListener('click', function (e) {
-    var chai = JSON.parse(btn.dataset.chai);
-    removeUpdateCart(chai);
-  });
-});
-subCat.forEach(function (btn) {
-  btn.addEventListener('click', function (e) {
-    var nashta = JSON.parse(btn.dataset.chai);
-    subcat(nashta);
-  });
-});
-
-function subcat(nashta) {
-  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/sub-categories', nashta).then(function (res) {
-    console.log("hoke agya hu me");
-  });
-}
-
-function removeUpdateCart(chai) {
-  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/remove-cart', chai).then(function (res) {
-    cartCounter.innerText = res.data.totalQty;
-    new (noty__WEBPACK_IMPORTED_MODULE_1___default())({
-      type: 'error',
-      timeout: 1000,
-      progressBar: false,
-      text: 'Items remove from cart'
-    }).show();
-  })["catch"](function (err) {
-    new (noty__WEBPACK_IMPORTED_MODULE_1___default())({
-      type: 'error',
-      timeout: 1000,
-      progressBar: false,
-      text: 'Something went wrong'
-    }).show();
-  });
-  location.reload();
-}
-
-function updateCart(chai) {
-  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/update-cart', chai).then(function (res) {
-    cartCounter.innerText = res.data.totalQty;
-    new (noty__WEBPACK_IMPORTED_MODULE_1___default())({
-      type: 'success',
-      timeout: 1000,
-      progressBar: false,
-      text: 'Item added to cart'
-    }).show();
-  })["catch"](function (err) {
-    new (noty__WEBPACK_IMPORTED_MODULE_1___default())({
-      type: 'error',
-      timeout: 1000,
-      progressBar: false,
-      text: 'Something went wrong'
-    }).show();
-  });
-  location.reload();
-}
-
-function deUpdateCart(chai) {
-  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/de-update-cart', chai).then(function (res) {
-    cartCounter.innerText = res.data.totalQty;
-
-    if (res.data.specificQty > 1) {// new Noty({
-      //     type:'error',
-      //     timeout: 1000,
-      //     progressBar: false,
-      //     text: 'Item remove from cart'
-      // }).show();
-    } else {
-      new (noty__WEBPACK_IMPORTED_MODULE_1___default())({
-        type: 'warning',
-        timeout: 1000,
-        progressBar: false,
-        text: 'Use remove button to remove item from cart'
-      }).show();
-    }
-  });
-  location.reload();
-}
 
 var alertMsg = document.querySelector('#success-alert');
 
@@ -2479,8 +2374,9 @@ if (alertMsg) {
   setTimeout(function () {
     alertMsg.remove();
   }, 2000);
-} // Change order status
+}
 
+(0,_admin__WEBPACK_IMPORTED_MODULE_2__.initAdmin)(); // Change order status
 
 var statuses = document.querySelectorAll('.status_line');
 var hiddenInput = document.querySelector('#hiddenInput');
@@ -2513,39 +2409,28 @@ function updateStatus(order) {
   });
 }
 
-updateStatus(order); // Socket
+updateStatus(order); //join
+// if(order) {
+//     socket.emit('join', `order_${order._id}`)
+// }
+// let adminAreaPath = window.location.pathname
+// if(adminAreaPath.includes('admin')) {
+//     socket.emit('join', 'adminRoom')
+// }
+// socket.on('orderUpdated', (data) => {
+//     const updatedOrder = { ...order }
+//     updatedOrder.updatedAt = moment().format()
+//     updatedOrder.status = data.status
+//     console.log(data);
+//     updateStatus(updatedOrder)
+//     new Noty({
+//         type: 'success',
+//         timeout: 1000,
+//         text: 'Order updated',
+//         progressBar: false,
+//     }).show();
+// })
 
-var socket = io();
-(0,_admin__WEBPACK_IMPORTED_MODULE_2__.initAdmin)(socket);
-var socket1 = io();
-(0,_admin_user__WEBPACK_IMPORTED_MODULE_3__.initAdmin1)(socket);
-var socket2 = io();
-(0,_admin_product__WEBPACK_IMPORTED_MODULE_4__.initAdmin2)(socket); //join
-
-if (order) {
-  socket.emit('join', "order_".concat(order._id));
-}
-
-var adminAreaPath = window.location.pathname;
-
-if (adminAreaPath.includes('admin')) {
-  socket.emit('join', 'adminRoom');
-}
-
-socket.on('orderUpdated', function (data) {
-  var updatedOrder = _objectSpread({}, order);
-
-  updatedOrder.updatedAt = moment__WEBPACK_IMPORTED_MODULE_5___default()().format();
-  updatedOrder.status = data.status;
-  console.log(data);
-  updateStatus(updatedOrder);
-  new (noty__WEBPACK_IMPORTED_MODULE_1___default())({
-    type: 'success',
-    timeout: 1000,
-    text: 'Order updated',
-    progressBar: false
-  }).show();
-});
 var body = document.querySelector("body"),
     sidebar = body.querySelector("nav"),
     toggle = body.querySelector(".toggle"),
@@ -18475,7 +18360,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 /* module decorator */ module = __webpack_require__.nmd(module);
 //! moment.js
-//! version : 2.29.3
+//! version : 2.29.4
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -20929,7 +20814,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     function preprocessRFC2822(s) {
         // Remove comments and folding whitespace and replace multiple-spaces with a single space
         return s
-            .replace(/\([^)]*\)|[\n\t]/g, ' ')
+            .replace(/\([^()]*\)|[\n\t]/g, ' ')
             .replace(/(\s\s+)/g, ' ')
             .replace(/^\s\s*/, '')
             .replace(/\s\s*$/, '');
@@ -24110,7 +23995,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     //! moment.js
 
-    hooks.version = '2.29.3';
+    hooks.version = '2.29.4';
 
     setHookCallback(createLocal);
 

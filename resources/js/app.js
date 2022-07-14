@@ -13,7 +13,6 @@ import moment from 'moment'
  }
 
 
-
 // Change order status
 let statuses = document.querySelectorAll('.status_line')
 let hiddenInput = document.querySelector('#hiddenInput')
@@ -46,40 +45,33 @@ function updateStatus(order) {
 
 updateStatus(order);
 
-// Socket
-let socket = io()
-initAdmin(socket)
 
-let socket1 = io()
-initAdmin1(socket)
-
-let socket2 = io()
-initAdmin2(socket)
+initAdmin()
 
 //join
-if(order) {
-    socket.emit('join', `order_${order._id}`)
-}
+// if(order) {
+//     socket.emit('join', `order_${order._id}`)
+// }
 
-let adminAreaPath = window.location.pathname
-if(adminAreaPath.includes('admin')) {
-    socket.emit('join', 'adminRoom')
-}
+// let adminAreaPath = window.location.pathname
+// if(adminAreaPath.includes('admin')) {
+//     socket.emit('join', 'adminRoom')
+// }
 
 
-socket.on('orderUpdated', (data) => {
-    const updatedOrder = { ...order }
-    updatedOrder.updatedAt = moment().format()
-    updatedOrder.status = data.status
-    console.log(data);
-    updateStatus(updatedOrder)
-    new Noty({
-        type: 'success',
-        timeout: 1000,
-        text: 'Order updated',
-        progressBar: false,
-    }).show();
-})
+// socket.on('orderUpdated', (data) => {
+//     const updatedOrder = { ...order }
+//     updatedOrder.updatedAt = moment().format()
+//     updatedOrder.status = data.status
+//     console.log(data);
+//     updateStatus(updatedOrder)
+//     new Noty({
+//         type: 'success',
+//         timeout: 1000,
+//         text: 'Order updated',
+//         progressBar: false,
+//     }).show();
+// })
 
 
 const body = document.querySelector("body"),

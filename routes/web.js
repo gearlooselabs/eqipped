@@ -64,7 +64,9 @@ function initRoutes(app) {
  
     // Admin routes
     app.get('/adminpanel', admin, adminOrderController().adminpanel)
+
     app.get('/admin/orders', admin, adminOrderController().index)
+    
     app.get('/admin/users', admin, adminUserController().index)
     app.get('/admin/viewcustomer', admin, adminUserController().viewcustomer)
     app.get('/admin/viewvendors', admin, adminUserController().viewvendors)

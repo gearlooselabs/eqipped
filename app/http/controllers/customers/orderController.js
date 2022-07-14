@@ -38,22 +38,6 @@ function orderController() {
                 req.flash('error', 'Something went wrong')
             })
             if (req.body.RESPCODE == '01' && req.body.STATUS == 'TXN_SUCCESS' && req.body.RESPMSG == 'Txn Success') {
-                console.log("Reached Here");
-                console.log(req.body.ORDERID)
-                console.log(req.body.TXNDATE)
-                console.log(req.body.TXNAMOUNT)
-                console.log(req.user.cart)
-                console.log(req.session.phone)
-                console.log(req.session.address)
-                console.log(req.session.pincode)
-                console.log(req.body.BANKNAME)
-                console.log(req.body.BANKTXNID)
-                console.log(req.body.GATEWAYNAME)
-                console.log(req.body.PAYMENTMODE)
-                console.log(req.body.RESPCODE)
-                console.log(req.body.STATUS)
-                console.log(req.body.RESPMSG)
-                console.log(req.body.TXNID)
                 const order = new Order({
                     customerId: req.user._id,
                     customerName: req.user.fname,

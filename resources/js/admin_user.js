@@ -13,9 +13,7 @@ export function initAdmin1(socket) {
             "X-Requested-With": "XMLHttpRequest"
         }
     }).then(res => {
-        console.log(res.data)
         users = res.data
-        // console.log("hii")
         markups = generateMarkup(users)
         userTableBody.innerHTML = markups
     }).catch(err => {
@@ -36,9 +34,8 @@ export function initAdmin1(socket) {
     function generateMarkup(users) {
         return users.map(user => {
             return `
-                <tr>
-                
-                <td class="border px-4 py-2">Name-${user.name} <br> Phone-${user.phone}</td>
+                <tr>         
+                <td class="border px-4 py-2">Name-${user.lname} <br> Phone-${user.phone}</td>
                 <td class="border px-4 py-2">${user.address}</td>
                 <td class="border px-4 py-2">
                     <div class="inline-block relative w-64">
@@ -69,7 +66,7 @@ export function initAdmin1(socket) {
                 </td>
 
                 <td class="border px-4 py-2">
-                <a class="link" href="/view/doc/${user.name}/${user.institutionName}">
+                <a class="link" href="/view/doc/${user.fname}/${user.institutionName}">
                     <div target="_blank" class="inline-block cursor-pointer btn-primary px-2 py-1 rounded-full text-white" >View Uploaded Documents</div></a>
                </td>
                
