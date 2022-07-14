@@ -26,9 +26,6 @@ const url = 'mongodb+srv://admin:gsk3E1ZwjWwgqAoC@cluster0.9xkoq.mongodb.net/Eui
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 connection.once('open', () => {
-    let weeks = moment().weeks() - moment().startOf('month').weeks() + 1;
-    weeks = (weeks + 52) % 52;
-    console.log(weeks);
     console.log('Database connected...');
 });
 
@@ -160,13 +157,16 @@ app.post('/paynow', [parseUrl, parseJson], async (req, res) => {
                 mnth = "NA"
         }
         var oidd = ""
-        var oId = "eqp_22" + mnth + "0100"
-        let query = { orderID: oId }
-        let resss = await OrderId.find(query);
-        console.log(resss);
+        let weeks = moment().weeks() - moment().startOf('month').weeks() + 1;
+        weeks = (weeks + 52) % 52;
         var random_4 = Math.floor(Math.random() * (100 - 9995)) + 100;
-        var oidd = "eqp_22" + mnth + -random_4;
-        console.log('g1');
+        var oidd = "eqp_22" + mnth + -random_4 + weeks;
+        let query = { orderID: oidd }
+        let resss = await OrderId.findOne(query);
+        if(resss){
+            req.flash('error', 'Some Error Ocurred! Please Try Again');
+            return res.redirect('back');
+        }
         console.log(oidd)
 
         const https = require('https');
@@ -181,7 +181,7 @@ app.post('/paynow', [parseUrl, parseJson], async (req, res) => {
             // "websiteName": process.env.WEBSITE,
             "websiteName": config.PaytmConfig.website,
             "orderId": oidd,
-            "callbackUrl": "http://localhost:3000/callback",
+            "callbackUrl": "http://localhost:3300/callback",
             "txnAmount": {
                 // "value": subtotal,
                 "value": req.session.sub_total,
@@ -276,13 +276,14 @@ app.post('/addproduct', function (req, res) {
       }
 
   
-      const { name, price, categoryName, size, itemWeight, volume, brand, piecePerPack, netQuantity, HSN , GST ,containedLiquid, description, subCategory} = req.body
+      const { name, price, categoryName, size, itemWeight, volume, brand, piecePerPack, netQuantity, HSN , GST ,containedLiquid, description, subCategory, vname, variant} = req.body
   
-              if (!name || !price || !categoryName || !size || !itemWeight || !brand || !piecePerPack || !netQuantity || !HSN || !GST || !containedLiquid || !description || !subCategory) {
+              if (!name || !price || !categoryName || !size || !itemWeight || !brand || !piecePerPack || !netQuantity || !HSN || !GST || !containedLiquid || !description || !vname) {
                   req.flash('error', 'All fields are required')
                   return res.redirect('/addproduct')
               }
-  
+
+              const variants = Object.assign({}, variant);
               const product = new Product({
                   customerId: req.user._id,
                   sellerRole: req.user.role,
@@ -294,31 +295,31 @@ app.post('/addproduct', function (req, res) {
                   description,
                   piecePerPack,
                   categoryName,
-                  subCategory,
                   itemWeight,
                   HSN,
                   GST,
                   volume,
                   netQuantity,
                   containedLiquid,
+                  variations: { name: vname, variants: variants}
               })
               product.save().then(result => {
-                Sub.updateOne({
-                    _id: subCategory
-                  }, {
-                    $push: {
-                        product: product._id
-                    }
-                  }, (err) => {
-                    if(err){
-                        req.flash('error', 'Something went wrong')
-                        console.log(err);
-                        return res.redirect('/addproduct')
-                    }
-                  })
-                  Product.populate(result, { path: 'customerId' }, (err) => {
-                      if (!err) { req.flash('error', 'Product Added Successfully'); return res.redirect('/addproduct') }
-                  })
+                // Sub.updateOne({
+                //     _id: subCategory
+                //   }, {
+                //     $push: {
+                //         product: product._id
+                //     }
+                //   }, (err) => {
+                //     if(err){
+                //         req.flash('error', 'Something went wrong')
+                //         console.log(err);
+                //         return res.redirect('/addproduct')
+                //     }
+                //   })
+                Product.populate(result, { path: 'customerId' }, (err) => {
+                    if (!err) { req.flash('error', 'Product Added Successfully'); return res.redirect('/addproduct') }
+                })
               }).catch(err => {
                   req.flash('error', 'Something went wrong')
                   console.log(err);
@@ -444,9 +445,9 @@ require('./routes/web')(app)
 app.use((req, res) => {
     res.status(404).render('errors/404')
 })
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3300;
 // const server=
-// app.listen(process.env.PORT || 3000, function(){
+// app.listen(process.env.PORT || 3300, function(){
 //     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 //   });
 const server = app.listen(PORT, () => {

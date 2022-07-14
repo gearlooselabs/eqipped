@@ -41,8 +41,7 @@ function cartController() {
             if(req.body.type == 'plus'){
                 User.updateOne({ 
                     _id: req.user._id,
-                    'cart._id': req.body.pid,
-                    'cart.quantity': { $gte: 1}
+                    cart: {$elemMatch:{product: req.body.pid, quantity: { $gte: 1}}}
                 }, {
                    $inc: {
                     'cart.$.quantity': 1
@@ -55,8 +54,7 @@ function cartController() {
             if(req.body.type == 'minus'){
                 User.updateOne({ 
                     _id: req.user._id,
-                    'cart._id': req.body.pid,
-                    'cart.quantity': { $gte: 2}
+                    cart: {$elemMatch:{product: req.body.pid, quantity: { $gte: 2}}}
                 }, {
                    $inc: {
                     'cart.$.quantity': -1
@@ -70,7 +68,7 @@ function cartController() {
                 if(req.body.qty > 0){
                     User.updateOne({ 
                         _id: req.user._id,
-                        'cart._id': req.body.pid,
+                        cart: {$elemMatch:{product: req.body.pid}}
                     }, {
                        $set: {
                         'cart.$.quantity': req.body.qty
