@@ -1,0 +1,100 @@
+<section class="menu container mx-auto py-8">
+    <h1 class="text-xl font-bold mt-8 mb-8 heading">Similar Products</h1>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 col-gap-12 row-gap-16">
+        <% products.forEach((product)=> { %>
+            <div class="flex flex-col items-center gap-2 px-2 py-6  relative hover:shadow-lg">
+                <a href="/productDetails/<%= product._id %>/1" class="flex flex-col items-center text-center group">
+                    <div class="w-36 h-36">
+                        <img draggable="false" class="w-full h-full object-contain" src="/img/<%= product.image %>"
+                            alt="{name}" />
+                    </div>
+                    <h2 class="text-sm mt-4 group-hover:text-blue-500">
+                        <%= product.name %>
+                    </h2>
+                    <span class="text-gray-400 text-xs ">By: <%= product.brand %></span>
+
+                    <div class="flex flex-col gap-2 items-center">
+
+                        <span class="text-sm text-gray-500 font-medium flex gap-2 items-center">
+                            <span style="background-color: #388e3c;"
+                                class="text-xs px-1.5 py-0.5 mt-2 rounded-sm text-white flex items-center gap-0.5">4.5<img
+                                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg=="
+                                    class="_1wB99o"></span>
+                            <span>(5)</span>
+                        </span>
+
+                        <div class="flex items-center gap-1.5 text-md font-medium">
+                            <span>₹<%= product.price %></span>
+                            <span class="text-gray-500 line-through text-xs">₹699</span>
+                            <span class="text-xs text-primary-green">30%&nbsp;off</span>
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+            <% }) %>
+    </div>
+    <div class="bg-white px-4 py-3 flex items-center justify-center border-t border-gray-200 sm:px-6">
+        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-center">
+            <div>
+                <div class="flex justify-center">
+                    <% if (pages> 0) { %>
+                        <nav aria-label="Page navigation example">
+                            <ul class="flex list-style-none">
+                                <% if (current==1) { %>
+                                    <li class="page-item active disabled"><a
+                                            class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-500 pointer-events-none focus:shadow-none"
+                                            href="#" tabindex="-1" aria-disabled="true">Previous</a></li>
+                                    <% } else { %>
+                                        <li class="page-item active"><a
+                                                class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                                href="/allcategory/products/<%= category._id %>/<%= current-1 %>">Previous</a>
+                                        </li>
+                                        <% } %>
+                                            <% var i=(Number(current)> 5 ? Number(current) - 4 : 1) %>
+                                                <% if (i !==1) { %>
+                                                    <li class="page-item disabled"><a
+                                                            class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                                            href="#">...</a></li>
+                                                    <% } %>
+                                                        <% for (; i <=(Number(current) + 4) && i <=pages; i++) { %>
+                                                            <% if (i==current) { %>
+                                                                <li class="page-item active"><a
+                                                                        class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                                                        href="#">
+                                                                        <%= i %>
+                                                                    </a></li>
+                                                                <% } else { %>
+                                                                    <li class="page-item"><a
+                                                                            class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                                                            href="/allcategory/products/<%= category._id %>/<%= i %>">
+                                                                            <%= i %>
+                                                                        </a></li>
+                                                                    <% } %>
+                                                                        <% if (i==Number(current) + 4 && i < pages) { %>
+                                                                            <li class="page-item disabled"><a
+                                                                                    class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                                                                    href="#">...</a></li>
+                                                                            <% } %>
+                                                                                <% } %>
+                                                                                    <% if (current==pages) { %>
+                                                                                        <li class="page-item disabled">
+                                                                                            <a class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                                                                                href="#">Next</a>
+                                                                                        </li>
+                                                                                        <% } else { %>
+                                                                                            <li class="page-item"><a
+                                                                                                    class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                                                                                    href="/allcategory/products/<%= category._id %>/<%= parseInt(current)+1 %>">Next</a>
+                                                                                            </li>
+                                                                                            <% } %>
+                            </ul>
+                        </nav>
+                        <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
