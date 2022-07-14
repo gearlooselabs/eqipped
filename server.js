@@ -453,8 +453,13 @@ const server = app.listen(PORT, () => {
 
 const io = require('socket.io')(server)
 io.on('connection', (socket) => {
-    // Join
+    // Join     
     socket.on('join', (orderId) => {
         socket.join(orderId)
     })
+})
+
+
+eventEmitter.on('orderPlaced', (data) => {
+    io.to(`order_${data.id}`).emit('orderUpdated', data)
 })

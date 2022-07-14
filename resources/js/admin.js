@@ -20,15 +20,17 @@ export function initAdmin() {
         console.log(err)
     })
 
+
     function renderItems(items) {
         let parsedItems = Object.values(items)
         return parsedItems.map((menuItem) => {
             console.log(menuItem)
             return `
-                <p>${ menuItem[0].product } - ${ menuItem.quantity } pcs </p>
+                <p>${ menuItem.product.name } - ${ menuItem.quantity } pcs </p>
             `
         }).join('')
       }
+
 
     function generateMarkup(orders) {
         return orders.map(order => {
@@ -38,7 +40,7 @@ export function initAdmin() {
                     <p>${ order._id }</p>
                     <div>${ renderItems(order.items) }</div>
                 </td>
-                <td class="border px-4 py-2">Names-${ order.customerName } <br> Phones-${ order.phone }</td>
+                <td class="border px-4 py-2">Name-${ order.customerName } <br> Phone-${ order.phone }</td>
                 <td class="border px-4 py-2">${ order.address }</td>
                 <td class="border px-4 py-2">
                     <div class="inline-block relative w-64">
@@ -84,6 +86,7 @@ export function initAdmin() {
         }).join('')
         
     }
+
 
 
     // Socket
