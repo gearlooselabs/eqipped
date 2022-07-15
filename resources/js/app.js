@@ -1,9 +1,9 @@
-import axios from 'axios'
 import Noty from 'noty'
 import { initAdmin } from './admin'
 import { initAdmin1 } from './admin_user'
 import { initAdmin2 } from './admin_product'
 import moment from 'moment'
+
 
  const alertMsg = document.querySelector('#success-alert')
  if(alertMsg){
@@ -43,12 +43,14 @@ function updateStatus(order) {
 
 }
 
+
 updateStatus(order);
 
-
-initAdmin()
-
 let socket = io()
+initAdmin(socket)
+
+
+
 
 //join
 if(order) {

@@ -84,14 +84,7 @@ app.set('view engine', 'ejs')
 
 
 
-// require('./routes/web')(app)
-eventEmitter.on('orderUpdated', (data) => {
-    io.to(`order_${data.id}`).emit('orderUpdated', data)
-})
 
-eventEmitter.on('orderPlaced', (data) => {
-    io.to('adminRoom').emit('orderPlaced', data)
-})
 app.use('/docs', express.static('docs'))
 app.use('/documents', express.static('./public/businessDocuments/'))
 
@@ -440,6 +433,17 @@ app.post('/addcategory', upload3, admin, function (req, res) {
 
 
 
+eventEmitter.on('orderUpdated', (data) => {
+    io.to(`order_${data.id}`).emit('orderUpdated', data)
+})
+
+
+eventEmitter.on('orderPlaced', (data) => {
+    io.to('adminRoom').emit('orderPlaced', data)
+})
+
+
+
 
 
 
@@ -456,8 +460,8 @@ const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
 })
 
-// Socket
 
+// Socket
 const io = require('socket.io')(server)
 io.on('connection', (socket) => {
     // Join     
@@ -466,7 +470,3 @@ io.on('connection', (socket) => {
     })
 })
 
-
-eventEmitter.on('orderPlaced', (data) => {
-    io.to(`order_${data.id}`).emit('orderUpdated', data)
-})
