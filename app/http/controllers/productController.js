@@ -69,14 +69,14 @@ function productController() {
             var perPage = 20
             var page = req.params.page || 1;
             const product = await Menu.findOne({ '_id': productId });
+            const products = await Menu.find({ categoryName: product.categoryName});
             Menu.find({ categoryName: product.categoryName, _id: {$ne: product._id}}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, suggested) {
-                Menu.count().exec(function(err, count) {
-                    if (err) return next(err)
+                Menu.count().exec((err, count) => {
                     res.render('menus/productdetails', {
                         product: product,
                         suggested: suggested,
                         current: page,
-                        pages: Math.ceil(count / perPage),
+                        pages: Math.ceil(products.length/perPage),
                     })
                 })
             });
