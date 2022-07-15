@@ -67,7 +67,7 @@ function productController() {
 
         async productDetails(req, res) {
             let productId = req.params.id;
-            var perPage = 20
+            var perPage = 5
             var page = req.params.page || 1;
             const product = await Menu.findOne({ '_id': productId });
             const products = await Menu.find({ categoryName: product.categoryName});
@@ -77,7 +77,7 @@ function productController() {
                         product: product,
                         suggested: suggested,
                         current: page,
-                        pages: Math.ceil(products.length/perPage),
+                        pagesList: Math.ceil(products.length/perPage),
                     })
                 })
             });

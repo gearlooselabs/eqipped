@@ -51,15 +51,15 @@
                                                 href="/allcategory/products/<%= category._id %>/<%= current-1 %>">Previous</a>
                                         </li>
                                         <% } %>
-                                            <% var i=(Number(current)> 5 ? Number(current) - 4 : 1) %>
+                                            <% var i=(Number(current)> 3 ? Number(current) - 2 : 1) %>
                                                 <% if (i !==1) { %>
                                                     <li class="page-item disabled"><a
                                                             class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
                                                             href="#">...</a></li>
                                                     <% } %>
-                                                        <% for (; i <=(Number(current) + 4) && i <=pages; i++) { %>
+                                                        <% for (; i <=(Number(current) + 2) && i <=pages; i++) { %>
                                                             <% if (i==current) { %>
-                                                                <li class="page-item active"><a
+                                                                <li class="page-item activeList"><a
                                                                         class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
                                                                         href="#">
                                                                         <%= i %>
@@ -71,7 +71,7 @@
                                                                             <%= i %>
                                                                         </a></li>
                                                                     <% } %>
-                                                                        <% if (i==Number(current) + 4 && i < pages) { %>
+                                                                        <% if (i==Number(current) + 2 && i < pages) { %>
                                                                             <li class="page-item disabled"><a
                                                                                     class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
                                                                                     href="#">...</a></li>
