@@ -26,6 +26,8 @@ const url = 'mongodb+srv://admin:gsk3E1ZwjWwgqAoC@cluster0.9xkoq.mongodb.net/Eui
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 connection.once('open', () => {
+    let weeks = moment().weeks() - moment().startOf('month').weeks() + 1;
+    weeks = (weeks + 52) % 52;
     console.log('Database connected...');
 });
 
@@ -282,8 +284,6 @@ app.post('/addproduct', function (req, res) {
                   req.flash('error', 'All fields are required')
                   return res.redirect('/addproduct')
               }
-
-              const variants = Object.assign({}, variant);
               const product = new Product({
                   customerId: req.user._id,
                   sellerRole: req.user.role,
@@ -301,7 +301,7 @@ app.post('/addproduct', function (req, res) {
                   volume,
                   netQuantity,
                   containedLiquid,
-                  variations: { name: vname, variants: variants}
+                  variations: { name: vname}
               })
               product.save().then(result => {
                 // Sub.updateOne({
@@ -318,13 +318,34 @@ app.post('/addproduct', function (req, res) {
                 //     }
                 //   })
                 Product.populate(result, { path: 'customerId' }, (err) => {
-                    if (!err) { req.flash('error', 'Product Added Successfully'); return res.redirect('/addproduct') }
+                    if (!err) { req.flash('error', 'Product Added Successfully'); 
+                    }
                 })
               }).catch(err => {
                   req.flash('error', 'Something went wrong')
                   console.log(err);
                   return res.redirect('/addproduct')
               });
+
+              async function something(item){
+                await Product.updateOne({
+                    _id: product._id,
+                    variations: { $elemMatch: { name: vname}}
+                }, {
+                    $push: {
+                        'variations.$.variants': {
+                            name: item,
+                            price: 50
+                        }
+                    }
+                })
+              }
+
+              variant.forEach((variant) =>{
+                something(variant);
+              })
+
+            return res.redirect('/addproduct')
     })
   })
 
@@ -458,8 +479,13 @@ const server = app.listen(PORT, () => {
 
 const io = require('socket.io')(server)
 io.on('connection', (socket) => {
-    // Join
+    // Join     
     socket.on('join', (orderId) => {
         socket.join(orderId)
     })
+})
+
+
+eventEmitter.on('orderPlaced', (data) => {
+    io.to(`order_${data.id}`).emit('orderUpdated', data)
 })

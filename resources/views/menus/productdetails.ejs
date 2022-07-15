@@ -15,9 +15,13 @@
                          <div class="mt-3">
                             <label class="text-gray-700 text-sm" for="count">Variants</label>
                             <div class="flex items-center mt-1">
-                                <button class="variantHover border p-2 m-2 rounded ">250ml</button>
-                                <button class="variantHover border p-2 m-2 rounded ">500ml</button>
-                                <button class="variantHover border p-2 m-2 rounded ">750ml</button>
+                                <% product.variations.forEach((variant) => { %>
+                                    <% for (var prop in variant.variants) {
+                                        if (Object.prototype.hasOwnProperty.call(variant.variants, prop)) { %>
+                                            <button class="variantHover border p-2 m-2 rounded "><%- variant.variants[prop] %></button>
+                                   <%   }
+                                      } %>
+                                <%})%>
                             </div>
                         </div>
                          

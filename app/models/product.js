@@ -29,7 +29,13 @@ const productSchema = new Schema(
         variations: [
             {
                 name: { type: String},
-                variants: { type: Object}
+                variants: [
+                    {
+                        name: { type: String},
+                        price: { type: Number, default: '50'},
+
+                    }
+                ]
             }
         ]
     },

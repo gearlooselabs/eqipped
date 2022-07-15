@@ -2,9 +2,9 @@ import axios from 'axios'
 import moment from 'moment'
 import Noty from 'noty'
 
+export function initAdmin() {
 // export function initAdmin(socket) {
-export function initAdmin(socket) {
-    const orderTableBody = document.querySelector('#orderTableBody')
+    const orderTableBody = document.querySelector('#orderTableBody');
     let orders = []
     let markup
 
@@ -17,17 +17,20 @@ export function initAdmin(socket) {
         markup = generateMarkup(orders)
         orderTableBody.innerHTML = markup
     }).catch(err => {   
-        // console.log(err)
+        console.log(err)
     })
+
 
     function renderItems(items) {
         let parsedItems = Object.values(items)
         return parsedItems.map((menuItem) => {
+            console.log(menuItem)
             return `
-                <p>${ menuItem.item.name } - ${ menuItem.qty } pcs </p>
+                <p>${ menuItem.product.name } - ${ menuItem.quantity } pcs </p>
             `
         }).join('')
       }
+
 
     function generateMarkup(orders) {
         return orders.map(order => {
@@ -81,17 +84,21 @@ export function initAdmin(socket) {
             </tr>
         `
         }).join('')
+        
     }
+
+
+
     // Socket
-    socket.on('orderPlaced', (order) => {
-        new Noty({
-            type: 'success',
-            timeout: 1000,
-            text: 'New order!',
-            progressBar: false,
-        }).show();
-        orders.unshift(order)
-        orderTableBody.innerHTML = ''
-        orderTableBody.innerHTML = generateMarkup(orders)
-    })
+    // socket.on('orderPlaced', (order) => {
+    //     new Noty({
+    //         type: 'success',
+    //         timeout: 1000,
+    //         text: 'New order!',
+    //         progressBar: false,
+    //     }).show();
+    //     orders.unshift(order)
+    //     orderTableBody.innerHTML = ''
+    //     orderTableBody.innerHTML = generateMarkup(orders)
+    // })
 }

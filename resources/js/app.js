@@ -13,7 +13,6 @@ import moment from 'moment'
  }
 
 
-
 // Change order status
 let statuses = document.querySelectorAll('.status_line')
 let hiddenInput = document.querySelector('#hiddenInput')
@@ -46,15 +45,10 @@ function updateStatus(order) {
 
 updateStatus(order);
 
-// Socket
+
+initAdmin()
+
 let socket = io()
-initAdmin(socket)
-
-let socket1 = io()
-initAdmin1(socket)
-
-let socket2 = io()
-initAdmin2(socket)
 
 //join
 if(order) {
