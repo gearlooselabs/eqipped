@@ -500,6 +500,7 @@ function authController() {
                         return res.send(obj)
                     }
                     var k = resp.data[0]
+                    console.log(k)
                     obj = {
                         city: k.PostOffice[0].District,
                         state: k.PostOffice[0].State

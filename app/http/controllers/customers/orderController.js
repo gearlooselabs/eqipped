@@ -61,7 +61,15 @@ function orderController() {
                 order.save().then(result => {
                     Order.populate(result, { path: 'customerId' }, (err, placedOrder) => {
                         req.flash('success', 'Order placed successfully')
-                        delete req.user.cart
+                        User.updateOne({
+                            _id: req.user._id
+                        }, {
+                            $set: {
+                                cart: []
+                            }
+                        }, (err) => {
+                            if(err) console.log("Cant Delete User cart Items");
+                        });
                         const eventEmitter = req.app.get('eventEmitter')
                         eventEmitter.emit('orderPlaced', placedOrder)
                         return res.redirect('/customer/orders')

@@ -84,14 +84,7 @@ app.set('view engine', 'ejs')
 
 
 
-// require('./routes/web')(app)
-eventEmitter.on('orderUpdated', (data) => {
-    io.to(`order_${data.id}`).emit('orderUpdated', data)
-})
 
-eventEmitter.on('orderPlaced', (data) => {
-    io.to('adminRoom').emit('orderPlaced', data)
-})
 app.use('/docs', express.static('docs'))
 app.use('/documents', express.static('./public/businessDocuments/'))
 
@@ -303,30 +296,10 @@ app.post('/addproduct', function (req, res) {
                   containedLiquid,
                   variations: { name: vname}
               })
-              product.save().then(result => {
-                // Sub.updateOne({
-                //     _id: subCategory
-                //   }, {
-                //     $push: {
-                //         product: product._id
-                //     }
-                //   }, (err) => {
-                //     if(err){
-                //         req.flash('error', 'Something went wrong')
-                //         console.log(err);
-                //         return res.redirect('/addproduct')
-                //     }
-                //   })
-                Product.populate(result, { path: 'customerId' }, (err) => {
-                    if (!err) { req.flash('error', 'Product Added Successfully'); 
-                    }
-                })
-              }).catch(err => {
-                  req.flash('error', 'Something went wrong')
-                  console.log(err);
-                  return res.redirect('/addproduct')
-              });
-
+              product.save((err) => {
+                if(err) console.log(err);
+                res.redirect('back');
+              })
               async function something(item){
                 await Product.updateOne({
                     _id: product._id,
@@ -459,6 +432,17 @@ app.post('/addcategory', upload3, admin, function (req, res) {
 
 
 
+eventEmitter.on('orderUpdated', (data) => {
+    io.to(`order_${data.id}`).emit('orderUpdated', data)
+})
+
+
+eventEmitter.on('orderPlaced', (data) => {
+    io.to('adminRoom').emit('orderPlaced', data)
+})
+
+
+
 
 
 
@@ -475,8 +459,8 @@ const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
 })
 
-// Socket
 
+// Socket
 const io = require('socket.io')(server)
 io.on('connection', (socket) => {
     // Join     
@@ -485,7 +469,3 @@ io.on('connection', (socket) => {
     })
 })
 
-
-eventEmitter.on('orderPlaced', (data) => {
-    io.to(`order_${data.id}`).emit('orderUpdated', data)
-})
