@@ -144,9 +144,9 @@
                                     class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
                                     href="">...</a></li>
                             <% } %>
-                            <% for (; i <= (Number(current) + 10) && i <= pagesList; i++) { %>
+                            <% for (; i <= (Number(current) + 2) && i <= pagesList; i++) { %>
 
-                                <p><%= pagesList %></p>
+                                
                                 <%  if (i == current) { %>
                                     <li class="page-item activeList"><a
                                         class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
@@ -157,7 +157,7 @@
                                         href="/productDetails/<%= product._id %>/<%= i %>"><%= i %></a></li>
                                 <% } %>
                                
-                                <% if (i == Number(current) + 10 && i < pagesList) { %>
+                                <% if (i == Number(current) + 2 && i < pagesList) { %>
                                     <li class="page-item disabled" disabled><a
                                         class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
                                         href="">...</a></li>
