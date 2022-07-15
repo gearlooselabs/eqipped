@@ -303,30 +303,10 @@ app.post('/addproduct', function (req, res) {
                   containedLiquid,
                   variations: { name: vname}
               })
-              product.save().then(result => {
-                // Sub.updateOne({
-                //     _id: subCategory
-                //   }, {
-                //     $push: {
-                //         product: product._id
-                //     }
-                //   }, (err) => {
-                //     if(err){
-                //         req.flash('error', 'Something went wrong')
-                //         console.log(err);
-                //         return res.redirect('/addproduct')
-                //     }
-                //   })
-                Product.populate(result, { path: 'customerId' }, (err) => {
-                    if (!err) { req.flash('error', 'Product Added Successfully'); 
-                    }
-                })
-              }).catch(err => {
-                  req.flash('error', 'Something went wrong')
-                  console.log(err);
-                  return res.redirect('/addproduct')
-              });
-
+              product.save((err) => {
+                if(err) console.log(err);
+                res.redirect('back');
+              })
               async function something(item){
                 await Product.updateOne({
                     _id: product._id,
