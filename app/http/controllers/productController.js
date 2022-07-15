@@ -34,6 +34,7 @@ function productController() {
             const category = await Category.findOne({_id: req.params.categoryId}).populate({ path: 'psubcat', populate: [{ path: 'product', model: 'Product'}], model: 'Sub'}).exec();
             var perPage = 20
             var page = req.params.page || 1;
+            const productsShow = await Menu.find({ categoryName: product_Category}).exec();
             Menu.find({ categoryName: product_Category}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, products) {
                 Menu.count().exec(function(err, count) {
                     if (err) return next(err)
@@ -41,7 +42,7 @@ function productController() {
                         products: products,
                         category: category,
                         current: page,
-                        pages: Math.ceil(count / perPage)
+                        pages: Math.ceil(productsShow.length / perPage)
                     })
                 })
             });
@@ -66,17 +67,17 @@ function productController() {
 
         async productDetails(req, res) {
             let productId = req.params.id;
-            var perPage = 20
+            var perPage = 5
             var page = req.params.page || 1;
             const product = await Menu.findOne({ '_id': productId });
+            const products = await Menu.find({ categoryName: product.categoryName});
             Menu.find({ categoryName: product.categoryName, _id: {$ne: product._id}}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, suggested) {
-                Menu.count().exec(function(err, count) {
-                    if (err) return next(err)
+                Menu.count().exec((err, count) => {
                     res.render('menus/productdetails', {
                         product: product,
                         suggested: suggested,
                         current: page,
-                        pages: Math.ceil(count / perPage),
+                        pagesList: Math.ceil(products.length/perPage),
                     })
                 })
             });
