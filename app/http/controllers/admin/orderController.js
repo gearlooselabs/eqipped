@@ -14,8 +14,13 @@ function orderController() {
 
         adminpanel(req, res) {
             return res.render('admin/adminPanel', { layout: 'admin/adminPanel' });
+        },
 
+        async goToVendorNotify(req, res){
+            const orders = await order.find({ status: { $ne: 'completed' } }, null, { sort: { 'createdAt': -1 } }).populate({ path: 'items.product', model: 'Product' }).exec()
+            return res.render('customers/vendornotify')
         }
+
     }
 }
 

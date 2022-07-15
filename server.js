@@ -452,20 +452,6 @@ app.post('/addcategory', upload3, admin, function (req, res) {
 
 
 
-eventEmitter.on('orderUpdated', (data) => {
-    io.to(`order_${data.id}`).emit('orderUpdated', data)
-})
-
-
-eventEmitter.on('orderPlaced', (data) => {
-    io.to('adminRoom').emit('orderPlaced', data)
-})
-
-
-
-
-
-
 require('./routes/web')(app)
 app.use((req, res) => {
     res.status(404).render('errors/404')
@@ -487,5 +473,15 @@ io.on('connection', (socket) => {
     socket.on('join', (orderId) => {
         socket.join(orderId)
     })
+})
+
+
+eventEmitter.on('orderUpdated', (data) => {
+    io.to(`order_${data.id}`).emit('orderUpdated', data)
+})
+
+
+eventEmitter.on('orderPlaced', (data) => {
+    io.to('adminRoom').emit('orderPlaced', data)
 })
 

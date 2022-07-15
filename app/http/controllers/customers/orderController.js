@@ -9,6 +9,7 @@ const pdf = require('pdf-creator-node')
 const path = require('path')
 const utils = require('util')
 const options = require('../../../../helpers/options')
+const axios = require("axios")
 function orderController() {
     return {
 
@@ -61,7 +62,8 @@ function orderController() {
                 order.save().then(result => {
                     Order.populate(result, { path: 'customerId' }, (err, placedOrder) => {
                         req.flash('success', 'Order placed successfully')
-                        delete req.user.cart
+
+
                         const eventEmitter = req.app.get('eventEmitter')
                         eventEmitter.emit('orderPlaced', placedOrder)
                         return res.redirect('/customer/orders')

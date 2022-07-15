@@ -61,12 +61,14 @@ function initRoutes(app) {
     app.get('/customer/orders/:id', auth, orderController().show)
     app.get('/customer/checkout', auth, orderController().checkout)
 
+
+    // Notify
+    app.get('/vendor/notify', adminOrderController().goToVendorNotify)
+
  
     // Admin routes
     app.get('/adminpanel', admin, adminOrderController().adminpanel)
-
-    app.get('/admin/orders', admin, adminOrderController().index)
-    
+    app.get('/admin/orders', admin, adminOrderController().index)  
     app.get('/admin/users', admin, adminUserController().index)
     app.get('/admin/viewcustomer', admin, adminUserController().viewcustomer)
     app.get('/admin/viewvendors', admin, adminUserController().viewvendors)

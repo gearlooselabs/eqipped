@@ -38,7 +38,7 @@ export function initAdmin(socket) {
             return `
                 <tr>
                 <td class="border px-4 py-2 text-green-900">
-                    <p>${ order._id }</p>
+                    <p>${ order.orderId }</p>
                     <div>${ renderItems(order.items) }</div>
                 </td>
                 <td class="border px-4 py-2">Name-${ order.customerName } <br> Phone-${ order.phone }</td>
