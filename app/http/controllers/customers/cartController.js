@@ -94,6 +94,20 @@ function cartController() {
                 if(err) res.send({ "status": "error"});
                 res.send({"status": "success"});
             })
+        },
+
+        async checkout(req, res) {
+            User.updateOne({
+                _id: req.user._id
+            }, {
+                $set: {
+                    cart: []
+                }
+            }, (err) => {
+                if(err)res.send({ "status": "error"});
+                res.send({"status": "success"});
+            });
+
         }
     }
 }
