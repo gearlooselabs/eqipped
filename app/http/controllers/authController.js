@@ -208,11 +208,6 @@ function authController() {
         async forSendingOtp(req, res) {
             const user = await User.findOne({ $or: [{ 'phone': req.body.phone }, { 'email': req.body.email }] })
 
-            // const user = await User.findOne({
-            //     phone: req.body.phone,
-            //     email: req.body.email
-            // })
-
             if (user) {
                 return res.json({ msg: "User already registered. Login yourself or Register with new credentials" })
             }
@@ -441,14 +436,12 @@ function authController() {
         },
 
 
-        logout(req, res) {
-             req.logout()
-             return res.redirect('/')
-            
+        logout(req, res, next) {
+            req.logout(function(err) {
+                if (err) { return next(err); }
+                res.redirect('/');
+            })
         }
-
-       
-
 
     }
 }

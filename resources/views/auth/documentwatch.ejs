@@ -1,13 +1,31 @@
-
-
-<div class="mx-auto max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
    
-    <div class="flex flex-col items-center">
-        <h5 class="m-10 text-xl font-medium text-gray-900 dark:text-white">View/Download Documents</h5>
-        <div class="flex p-8 space-x-3 lg:mt-6">
-            <!-- <a href="#" class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add friend</a> -->
-            <a href="<%= path %>" target="_blank" class="inline-block cursor-pointer btn-primary px-4 py-2 rounded-full text-white" downloa>Download</a>
+    
+
+<% if (userinfo.isuploded == 'Yes'){  %>
+
+    <div
+        class="mx-auto max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 my-24">
+
+        <div class="flex flex-col items-center">
+            <h5 class="m-10 text-xl font-medium text-gray-900 dark:text-white">View/Download Documents</h5>
+            <div class="flex p-10 space-x-3">
+               <a href="<%= path %>" target="_blank"
+                    class="inline-block cursor-pointer btn-primary px-4 py-2 rounded-full text-white"
+                    downloa>Download </a>
+            </div>
         </div>
+
     </div>
 
-</div>
+    
+<% } else { %>
+
+    <div class="text-center my-10 py-36 lg:px-4">
+        <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+          <svg class="fill-current opacity-75 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg>
+          <span class="font-semibold mr-2 text-left flex-auto">Documents not uploaded yet.</span>
+          <span class="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3">Documents verification pending.</span>
+        </div>
+      </div>
+    
+<% } %>

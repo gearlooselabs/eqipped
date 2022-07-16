@@ -54,8 +54,8 @@ export function initAdmin1(socket) {
                      ${moment(user.createdAt).format('hh:mm A')}
                 </td>
 
-                <td class="border flex justify-center py-2">
-                <a class="link" href="/view/doc/${user.fname}/${user.institutionName}">
+                <td class="border flex justify-center py-4 px-4">
+                <a class="link" href="/viewdoc/${user.fname}/${user.institutionName}/${user._id}">
                     <div target="_blank" class="inline-block cursor-pointer btn-primary px-2 py-1 rounded-full text-white" >View Uploaded Documents</div></a>
                </td>
                

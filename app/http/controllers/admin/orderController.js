@@ -18,9 +18,13 @@ function orderController() {
 
         async goToVendorNotify(req, res){
             const orders = await order.find({ status: { $ne: 'completed' } }, null, { sort: { 'createdAt': -1 } }).populate({ path: 'items.product', model: 'Product' }).exec()
-            return res.render('customers/vendornotify')
+            
+            if (req.xhr) {
+                return res.json(orders)
+            } else {
+                return res.render('customers/vendornotify')
+            }
         }
-
     }
 }
 
