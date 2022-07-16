@@ -8,7 +8,7 @@ function cartController() {
 
         async index(req, res) {
             const products = await User.findOne({_id: req.user._id}).populate({ path: 'cart.product', model: 'Product'});
-            console.log(req.user.cart);
+           
             res.render('customers/cart', {products: products});
         },
 
@@ -32,7 +32,6 @@ function cartController() {
                 _id: req.user._id
             });
 
-            console.log(user.cart.length)
             res.send({"status": "success", items: user.cart.length});
         },
 
@@ -81,7 +80,6 @@ function cartController() {
         },
 
         removeUpdate(req, res) {
-            console.log(req.body.pid)
             User.updateOne({
                 _id: req.user._id
             }, {
