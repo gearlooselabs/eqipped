@@ -49,6 +49,8 @@ updateStatus(order);
 let socket = io()
 initAdmin(socket)
 
+initAdmin1(socket)
+
 
 
 
