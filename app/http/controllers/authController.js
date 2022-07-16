@@ -45,8 +45,6 @@ function authController() {
         },
 
         async postedit(req, res) {
-            // const { id, institutionName, designation, address } = req.body
-            // User.findByIdAndUpdate({ _id: id }, { institutionName, designation, address }, (err, data) => {
             const { id, institutionName, designation } = req.body
             User.findByIdAndUpdate({ _id: id }, { institutionName, designation }, (err, data) => {
                 if (!err) {
@@ -396,7 +394,8 @@ function authController() {
 
                 user.save().then((user) => {
                     req.flash('OnRegisterDone', 'User Successfully Registered')
-                    // return res.redirect('/login')
+                    const eventEmitter = req.app.get('eventEmitter')
+                    eventEmitter.emit('userCreated', user)
                     return res.redirect('/register')
                 }).catch(err => {
                     console.log(err);

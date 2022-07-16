@@ -337,7 +337,6 @@ app.post('/addproduct', function (req, res) {
     filename: function (req, file, cb) {
           const uniqueSuffix = req.user.fname + ' from ' + req.user.institutionName
           cb(null, uniqueSuffix + path.extname(file.originalname)); 
-    //   cb(null, file.originalname);   
     }
   })
 
@@ -365,8 +364,6 @@ const upload2 = multer({ storage: storage2, limits: { fileSize: maxSize }}).sing
 
     const {registerAs, gst, cin, pan, udise, man} = req.body
     const document = new Document({registerAs, gst, cin, pan, udise, man})
-    // const {gst} = req.body
-    // const document = new Document({gst})
      
     document.save().then(result => {
           // Everything went fine.
@@ -463,5 +460,10 @@ eventEmitter.on('orderUpdated', (data) => {
 
 eventEmitter.on('orderPlaced', (data) => {
     io.to('adminRoom').emit('orderPlaced', data)
+})
+
+
+eventEmitter.on('userCreated', (data) => {
+    io.to('adminRoom').emit('userCreated', data)
 })
 

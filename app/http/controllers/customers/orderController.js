@@ -17,8 +17,7 @@ function orderController() {
             const {fname, insN} = req.params
             const filename = fname + ' from ' + insN + '.pdf';
             const filepath = 'http://localhost:3300/businessDocuments/' + filename
-            // return res.render('auth/documentwatch', { path: filepath })
-            return res.render('auth/documentupload', { path: filepath })
+            return res.render('auth/documentwatch', { path: filepath })
           },
 
         async index(req, res) {
@@ -69,7 +68,7 @@ function orderController() {
                                 cart: []
                             }
                         }, (err) => {
-                            if(err) console.log("Cant Delete User cart Items");
+                            if(err) console.log("Can't Delete User cart Items");
                         });
                         const eventEmitter = req.app.get('eventEmitter')
                         eventEmitter.emit('orderPlaced', placedOrder)
