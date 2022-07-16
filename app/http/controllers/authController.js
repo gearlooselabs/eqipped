@@ -17,9 +17,9 @@ function authController() {
     const _getRedirectUrl = (req, res) => {
 
         if (req.user.role == 'vendor'){
-            return req.user.role === 'vendor' ? '/addproduct' : '/'
+            return req.user.role === 'vendor' ? '/addproduct' : '/home'
         }else{
-            return req.user.role ===  'customer' ? '/' : 'admin' ? '/adminpanel' : 'vendor' ? '/addproduct' : '/addproduct'
+            return req.user.role ===  'customer' ? '/home' : 'admin' ? '/adminpanel' : 'vendor' ? '/addproduct' : '/home'
         }
 
     }
@@ -50,10 +50,10 @@ function authController() {
                 if (!err) {
                     return res.redirect('/home')
                 } else {
-                    return res.redirect('/register')
+                    return res.redirect('/home')
                 }
             })
-        },
+        }, 
 
         postLogin(req, res, next) {
             const { email, password } = req.body

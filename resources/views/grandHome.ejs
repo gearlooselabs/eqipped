@@ -1,12 +1,9 @@
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-
-
-
 <!-- Swiper's CSS -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
 
-<div style="justify-content: space-evenly; " class="w-full  flex content-center ">
+<div style="justify-content: space-evenly; " class="w-full flex content-center">
     
     <% nashta.forEach(function(nashta){ %>
         <a href="/allcategory/products/<%= nashta._id%>/1">
@@ -35,8 +32,6 @@
     
 
 </div>
-
-
 
 
 <div class="container mx-auto py-9 md:py-12 px-4 md:px-6">
@@ -74,8 +69,6 @@
 
 
 
-
-
 <h1 class="heading">Laboratory Equipment</h1>
 
 
@@ -105,11 +98,14 @@
                                 <span>(5)</span>
                             </span>
 
+                           <% if(user) {%>
                             <div class="flex items-center gap-1.5 text-md font-medium">
-                                <span>₹500</span>
+                                <span>₹<%= product.price %></span>
                                 <span class="text-gray-500 line-through text-xs">₹699</span>
                                 <span style="color: #388e3c;"   class="text-xs font-medium">30%&nbsp;off</span>
                             </div>
+                            <% } %>
+                           
 
                         </div>
                     </a>
@@ -123,10 +119,6 @@
         </div>
     </section>
 </div>
-
-
-
-
 
 
 
@@ -156,11 +148,13 @@
                             <span>(5)</span>
                         </span>
 
+                        <% if(user) {%>
                         <div class="flex items-center gap-1.5 text-md font-medium">
-                            <span>₹500</span>
+                            <span>₹<%= product.price %></span>
                             <span class="text-gray-500 line-through text-xs">₹699</span>
                             <span style="color: #388e3c;"   class="text-xs font-medium">30%&nbsp;off</span>
                         </div>
+                        <% } %>
 
                     </div>
                 </a>
@@ -172,10 +166,6 @@
                 <% }) %>
     </div>
 </section>
-
-
-
-
 
 
 
@@ -197,16 +187,7 @@
 
 
 
-
-
-
-
-
-
-
 <h1 class="heading">Best Selling</h1>
-<!-- <h1 class="heading">Treanding Near You</h1> -->
-
 
 <!-- ====== Cards Section Start -->
 <section class="container mx-auto p-8 flex flex-wrap justify-around">
@@ -232,12 +213,13 @@
                                     class="_1wB99o"></span>
                             <span>(5)</span>
                         </span>
-
+                        <% if(user) {%>
                         <div class="flex items-center gap-1.5 text-md font-medium">
-                            <span>₹500</span>
+                            <span>₹<%= product.price %></span>
                             <span class="text-gray-500 line-through text-xs">₹699</span>
                             <span style="color: #388e3c;"   class="text-xs font-medium">30%&nbsp;off</span>
                         </div>
+                        <% } %>
 
                     </div>
                    
@@ -269,7 +251,7 @@
                     <a href="" class="flex flex-col items-center text-center group">
                     <div class="w-36 h-36">
                         <img draggable="false" class="w-full h-full object-contain" src="/img/flask.png"
-                            alt="{name}" />
+                            alt="homeImg" />
                     </div>
                     <h2 class="text-sm mt-4 group-hover:text-blue-500">
                         <%= latest.name %>
@@ -285,12 +267,14 @@
                                     class="_1wB99o"></span>
                             <span>(5)</span>
                         </span>
-
+                        
+                        <% if(user) {%>
                         <div class="flex items-center gap-1.5 text-md font-medium">
-                            <span>₹500</span>
+                            <span>₹<%= latest.price %></span>
                             <span class="text-gray-500 line-through text-xs">₹699</span>
                             <span style="color: #388e3c;"   class="text-xs font-medium">30%&nbsp;off</span>
                         </div>
+                        <% } %>
 
                     </div>
                    

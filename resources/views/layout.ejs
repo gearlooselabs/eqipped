@@ -62,7 +62,7 @@
 
           <ul class="menu-links">
             <li class="nav-link">
-              <a href="/">
+              <a href="/home">
                 <i class='bx bx-home-alt icon'></i>
                 <span class="text nav-text">Home</span>
               </a>
@@ -141,9 +141,18 @@
 
         <section class="cherry bg-white border-gray-200 px-2 sm:px-4 py-2 sm:py-2.5  rounded dark:bg-gray-800">
           <div class="container flex flex-wrap justify-evenly items-center mx-auto">
+            <% if(user) {%>
+            <a href="/home" class="flex items-center">
+              <img src="/img/NavLogoC.png" class="mr-0 h-10 sm:h-14" alt="Equipped Logo">
+            </a>
+            <% } %>
+
+            <% if(!user) {%>
             <a href="/" class="flex items-center">
               <img src="/img/NavLogoC.png" class="mr-0 h-10 sm:h-14" alt="Equipped Logo">
             </a>
+            <% } %>
+            
 
             <% if(user) { %>
               <div class="flex items-center md:order-2">
@@ -170,7 +179,7 @@
                         </div>
                         <div>
                           <span><%= user.fname %></span>
-                          <% if(user.isverified =='Yes' ) { %> <img src="https://img.icons8.com/material-outlined/24/000000/verified-account.png"/><% } %> <br>
+                          <!-- <% if(user.isverified =='Yes' ) { %> <img src="https://img.icons8.com/material-outlined/24/000000/verified-account.png"/><% } %>  --><br>
                           <span style="font-size: 10px;">(Registered as <%= user.role %>)</span>
                         </div>
                       </a>
