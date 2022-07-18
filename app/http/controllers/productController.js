@@ -73,8 +73,8 @@ function productController() {
             const variant = await Variation.findOne({ '_id': req.params.vid }).populate('product');
             const variants = await Variation.find({ 'product': productId}).populate('product');
             console.log(variants);
-            const products = await Menu.find({ categoryName: variant.category});
-            Variation.find({ category: variant.categoryName, _id: {$ne: variant._id}}).populate('product').skip((perPage * page) - perPage).limit(perPage).exec(function(err, suggested) {
+            const products = await Variation.find({ category: variant.category});
+            Variation.find({ category: variant.category, _id: {$ne: variant._id}}).populate('product').skip((perPage * page) - perPage).limit(perPage).exec(function(err, suggested) {
                 Variation.count().exec((err, count) => {
                     res.render('menus/productdetails', {
                         variants: variants,

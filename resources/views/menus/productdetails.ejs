@@ -1,8 +1,4 @@
-<% include functions %> 
-<%const string = JSON.stringify(product._id);
-console.log(string);
-%>
-    <main class="my-8">
+<main class="my-8">
         <div class="container mx-3 px-6">
             <div class="md:flex ">
                 <div class="w-full h-48 md:w-2/5 lg:h-2/4 border rounded-lg">
@@ -20,8 +16,8 @@ console.log(string);
                             <label class="text-gray-700 text-sm" for="count">Variants</label>
                             <div class="flex items-center mt-1">
                                 <% variants.forEach((variant) => { %>
-                                   <% if(product._id == variant._id){ %>
-                                    <a href = "/productDetails/<%= variant._id %>/<%= variant.product._id %>/1"><button class="variantHover border p-2 m-2 rounded " style = "border: blue;color: blue"><%= variant.name %></button></a>
+                                   <% if(JSON.stringify(product._id) == JSON.stringify(variant._id)){ %>
+                                    <a href = "/productDetails/<%= variant._id %>/<%= variant.product._id %>/1"><button class="variantHover currentVariant border p-2 m-2 rounded "><%= variant.name %></button></a>
                                    <% }else{ %>
                                     <a href = "/productDetails/<%= variant._id %>/<%= variant.product._id %>/1"><button class="variantHover border p-2 m-2 rounded "><%= variant.name %></button></a>
                                    <% } %>

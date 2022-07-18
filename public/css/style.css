@@ -1061,6 +1061,10 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 
+  .currentVariant{
+    color: #4da3ff;
+    border: 1px solid #4da3ff;
+  }
 
   .variantHover:hover {
     color: #4da3ff;
