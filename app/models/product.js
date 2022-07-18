@@ -27,14 +27,8 @@ const productSchema = new Schema(
         containedLiquid: {type: String, required: false},
         isverified: {type: String , default: "No"},
         variations: [
-            {
-                name: { type: String},
-                variants: [
-                    {
-                        name: { type: String},
-                        price: { type: Number, default: '50'},
-                    }
-                ]
+            { 
+                type: Schema.Types.ObjectId, ref: 'Variation'
             }
         ]
     },

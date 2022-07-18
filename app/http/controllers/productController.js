@@ -2,6 +2,7 @@ const Menu = require('../../models/product'); //chai
 const Category = require('../../models/categories');
 const subCategory = require('../../models/subcategory') //pani
 const Brand = require('../../models/brand');
+const Variation = require('../../models/variation');
 // const paginate= require('express-paginate');
 
 
@@ -34,9 +35,9 @@ function productController() {
             const category = await Category.findOne({_id: req.params.categoryId}).populate({ path: 'psubcat', populate: [{ path: 'product', model: 'Product'}], model: 'Sub'}).exec();
             var perPage = 20
             var page = req.params.page || 1;
-            const productsShow = await Menu.find({ categoryName: product_Category}).exec();
-            Menu.find({ categoryName: product_Category}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, products) {
-                Menu.count().exec(function(err, count) {
+            const productsShow = await Variation.find({ category: product_Category}).exec();
+            Variation.find({ category: product_Category}).populate('product').skip((perPage * page) - perPage).limit(perPage).exec(function(err, products) {
+                Variation.count().exec(function(err, count) {
                     if (err) return next(err)
                     res.render('menus/product', {
                         products: products,
@@ -67,14 +68,17 @@ function productController() {
 
         async productDetails(req, res) {
             let productId = req.params.id;
-            var perPage = 5
+            var perPage = 20;
             var page = req.params.page || 1;
-            const product = await Menu.findOne({ '_id': productId });
-            const products = await Menu.find({ categoryName: product.categoryName});
-            Menu.find({ categoryName: product.categoryName, _id: {$ne: product._id}}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, suggested) {
-                Menu.count().exec((err, count) => {
+            const variant = await Variation.findOne({ '_id': req.params.vid }).populate('product');
+            const variants = await Variation.find({ 'product': productId}).populate('product');
+            console.log(variants);
+            const products = await Menu.find({ categoryName: variant.category});
+            Variation.find({ category: variant.categoryName, _id: {$ne: variant._id}}).populate('product').skip((perPage * page) - perPage).limit(perPage).exec(function(err, suggested) {
+                Variation.count().exec((err, count) => {
                     res.render('menus/productdetails', {
-                        product: product,
+                        variants: variants,
+                        product: variant,
                         suggested: suggested,
                         current: page,
                         pagesList: Math.ceil(products.length/perPage),

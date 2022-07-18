@@ -1,13 +1,14 @@
 const { json } = require("express");
 const Product = require('../../../models/product');
 const User = require('../../../models/user');
+const Variation = require('../../../models/variation');
 
 
 function cartController() {
     return{
 
         async index(req, res) {
-            const products = await User.findOne({_id: req.user._id}).populate({ path: 'cart.product', model: 'Product'});
+            const products = await User.findOne({_id: req.user._id}).populate({ path: 'cart.product', populate: [{ path: 'product', model: 'Product'}], model: 'Variation'});
             console.log(req.user.cart);
             res.render('customers/cart', {products: products});
         },

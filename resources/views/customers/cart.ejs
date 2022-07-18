@@ -10,11 +10,11 @@
                     <div class="flex items-center mt-8 mb-2 cursor-pointer">
                         <a class="flex justify-center items-center hover:border-gray-300 hover:bg-gray-200 w-5/12"
                             href="">
-                            <img class="w-24" src="/img/<%= product.product.image %>" alt="">
+                            <img class="w-24" src="/img/<%= product.product.product.image %>" alt="">
                             <div class="flex-1 ml-4">
                                 <h1></h1>
                                 <span class="text-sm">
-                                    <%= product.product.name %>
+                                    <%= product.product.product.name %> - <%= product.product.name %>
                                 </span>
                             </div>
                     </a>
