@@ -6,7 +6,6 @@ function userController() {
         index(req, res) {
             user.find({ isverified: { $ne: 'Yes' } }, null, { sort: { 'createdAt': -1 } }).exec((err, users) => {
                 if (req.xhr) {
-                    // console.log(users)
                     return res.json(users)
                 } else {
                     return res.render('admin/users')

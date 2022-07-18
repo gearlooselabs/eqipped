@@ -33,7 +33,6 @@ function cartController() {
                 _id: req.user._id
             });
 
-            console.log(user.cart.length)
             res.send({"status": "success", items: user.cart.length});
         },
 
@@ -82,7 +81,6 @@ function cartController() {
         },
 
         removeUpdate(req, res) {
-            console.log(req.body.pid)
             User.updateOne({
                 _id: req.user._id
             }, {
@@ -95,6 +93,20 @@ function cartController() {
                 if(err) res.send({ "status": "error"});
                 res.send({"status": "success"});
             })
+        },
+
+        async checkout(req, res) {
+            User.updateOne({
+                _id: req.user._id
+            }, {
+                $set: {
+                    cart: []
+                }
+            }, (err) => {
+                if(err)res.send({ "status": "error"});
+                res.send({"status": "success"});
+            });
+
         }
     }
 }

@@ -22,7 +22,7 @@ const OrderId = require('./app/models/orderID')
 
 // Database connection
 const url = 'mongodb+srv://admin:gsk3E1ZwjWwgqAoC@cluster0.9xkoq.mongodb.net/Euipped_dB'
-// const url = 'mongodb://localhost/abhitbar'
+// const url = 'mongodb://localhost/Euipped_dB'
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 connection.once('open', () => {
@@ -394,7 +394,6 @@ const storage = multer.diskStorage({
     filename: function (req, file, cb) {
           const uniqueSuffix = req.user.fname + ' from ' + req.user.institutionName
           cb(null, uniqueSuffix + path.extname(file.originalname)); 
-    //   cb(null, file.originalname);   
     }
   })
 
@@ -422,8 +421,6 @@ const upload2 = multer({ storage: storage2, limits: { fileSize: maxSize }}).sing
 
     const {registerAs, gst, cin, pan, udise, man} = req.body
     const document = new Document({registerAs, gst, cin, pan, udise, man})
-    // const {gst} = req.body
-    // const document = new Document({gst})
      
     document.save().then(result => {
           // Everything went fine.
@@ -516,6 +513,17 @@ io.on('connection', (socket) => {
 })
 
 
-eventEmitter.on('orderPlaced', (data) => {
+eventEmitter.on('orderUpdated', (data) => {
     io.to(`order_${data.id}`).emit('orderUpdated', data)
 })
+
+
+eventEmitter.on('orderPlaced', (data) => {
+    io.to('adminRoom').emit('orderPlaced', data)
+})
+
+
+eventEmitter.on('userCreated', (data) => {
+    io.to('adminRoom').emit('userCreated', data)
+})
+

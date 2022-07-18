@@ -13,12 +13,12 @@ const Variation = require('../../../models/variation');
 function orderController() {
     return {
 
-        viewdoc(req,res){
-            const {fname, insN} = req.params
+        async viewdoc(req,res){
+            const {fname, insN, id} = req.params
+            const userinfo = await User.findOne({ $and: [{ 'fname': fname }, { 'institutionName': insN }, { '_id': id }] });
             const filename = fname + ' from ' + insN + '.pdf';
             const filepath = 'http://localhost:3300/businessDocuments/' + filename
-            // return res.render('auth/documentwatch', { path: filepath })
-            return res.render('auth/documentupload', { path: filepath })
+            return res.render('auth/documentwatch', { path: filepath, userinfo: userinfo })
           },
 
         async index(req, res) {
@@ -69,7 +69,7 @@ function orderController() {
                                 cart: []
                             }
                         }, (err) => {
-                            if(err) console.log("Cant Delete User cart Items");
+                            if(err) console.log("Can't Delete User cart Items");
                         });
                         const eventEmitter = req.app.get('eventEmitter')
                         eventEmitter.emit('orderPlaced', placedOrder)

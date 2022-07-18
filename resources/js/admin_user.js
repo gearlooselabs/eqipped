@@ -2,7 +2,7 @@ import axios from 'axios'
 import moment from 'moment'
 import Noty from 'noty'
 
-// export function initAdmin(socket) {
+
 export function initAdmin1(socket) {
     const userTableBody = document.querySelector('#userTableBody')
     let users = []
@@ -21,22 +21,11 @@ export function initAdmin1(socket) {
     })
 
 
-
-    function renderItems(items) {
-        let parsedItems = Object.values(items)
-        return parsedItems.map((menuItem) => {
-            return `
-                <p>${menuItem.item.name} - ${menuItem.qty} pcs </p>
-            `
-        }).join('')
-    }
-
     function generateMarkup(users) {
         return users.map(user => {
             return `
                 <tr>         
-                <td class="border px-4 py-2">Name-${user.lname} <br> Phone-${user.phone}</td>
-                <td class="border px-4 py-2">${user.address}</td>
+                <td class="border px-4 py-2">Name-${user.fname} ${user.lname}<br> Phone-${user.phone}</td>
                 <td class="border px-4 py-2">
                     <div class="inline-block relative w-64">
                         <form action="/admin/user/status" method="POST">
@@ -65,8 +54,8 @@ export function initAdmin1(socket) {
                      ${moment(user.createdAt).format('hh:mm A')}
                 </td>
 
-                <td class="border px-4 py-2">
-                <a class="link" href="/view/doc/${user.fname}/${user.institutionName}">
+                <td class="border flex justify-center py-4 px-4">
+                <a class="link" href="/viewdoc/${user.fname}/${user.institutionName}/${user._id}">
                     <div target="_blank" class="inline-block cursor-pointer btn-primary px-2 py-1 rounded-full text-white" >View Uploaded Documents</div></a>
                </td>
                
@@ -75,6 +64,7 @@ export function initAdmin1(socket) {
         }).join('')
     }
 
+    
     socket.on('userCreated', (user) => {
         new Noty({
             type: 'success',

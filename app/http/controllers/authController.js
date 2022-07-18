@@ -17,9 +17,9 @@ function authController() {
     const _getRedirectUrl = (req, res) => {
 
         if (req.user.role == 'vendor'){
-            return req.user.role === 'vendor' ? '/addproduct' : '/'
+            return req.user.role === 'vendor' ? '/addproduct' : '/home'
         }else{
-            return req.user.role ===  'customer' ? '/' : 'admin' ? '/adminpanel' : 'vendor' ? '/addproduct' : '/addproduct'
+            return req.user.role ===  'customer' ? '/home' : 'admin' ? '/adminpanel' : 'vendor' ? '/addproduct' : '/home'
         }
 
     }
@@ -45,17 +45,15 @@ function authController() {
         },
 
         async postedit(req, res) {
-            // const { id, institutionName, designation, address } = req.body
-            // User.findByIdAndUpdate({ _id: id }, { institutionName, designation, address }, (err, data) => {
             const { id, institutionName, designation } = req.body
             User.findByIdAndUpdate({ _id: id }, { institutionName, designation }, (err, data) => {
                 if (!err) {
                     return res.redirect('/home')
                 } else {
-                    return res.redirect('/register')
+                    return res.redirect('/home')
                 }
             })
-        },
+        }, 
 
         postLogin(req, res, next) {
             const { email, password } = req.body
@@ -210,11 +208,6 @@ function authController() {
         async forSendingOtp(req, res) {
             const user = await User.findOne({ $or: [{ 'phone': req.body.phone }, { 'email': req.body.email }] })
 
-            // const user = await User.findOne({
-            //     phone: req.body.phone,
-            //     email: req.body.email
-            // })
-
             if (user) {
                 return res.json({ msg: "User already registered. Login yourself or Register with new credentials" })
             }
@@ -295,82 +288,6 @@ function authController() {
                 }  // else end
             }  // else end
         },
-
-
-
-
-
-        // Verification code sent function start 
-        // async forOtpOld(req, res) {
-        //     const user = await User.findOne({
-        //         phone: req.body.phone,
-        //         email: req.body.email
-        //     })
-
-        //     if (user) {
-        //         req.flash('success', 'User already registered')
-        //         return res.redirect('/register')
-        //     }
-        //     var OTP = Math.floor(10000 + Math.random() * 49999);
-        //     var EOTP = Math.floor(10000 + Math.random() * 90000);
-
-        //     const phone = req.body.phone;
-        //     const email = req.body.email;
-        //     console.log("otp for phone", OTP);
-        //     console.log("otp for email", EOTP);
-
-        //     axios
-        //         .get(`https://www.txtguru.in/imobile/api.php?username=gearloose.lab&password=71703091&source=GRLABS&dmobile=91${phone}&dlttempid=1507165000853446536&message=${OTP} is your eqipped.com verification code. It is valid for only 3 minutes. Do not share it with anyone. GRLABS`)
-        //         .then(res => {
-        //             console.log(`statusCode: ${res.status}`)
-        //         })
-        //         .catch(error => {
-        //             console.error(error)
-        //         })
-
-        //     const mailOptions = {
-        //         from: 'equipped.gearloose@gmail.com',
-        //         to: email,
-        //         subject: 'Verification code by eqipped',
-        //         text: "Your 5 digit verification code is " + EOTP
-
-        //     };
-
-        //     const transporter = nodemailer.createTransport({
-        //         service: 'gmail',
-        //         auth: {
-        //             user: 'equipped.gearloose@gmail.com',
-        //             pass: 'gzgossoykfwflkrg'
-        //         },
-        //         port: 465,
-        //         host: "smtp.gmail.com"
-        //     });
-
-        //     transporter.sendMail(mailOptions, function (err, info) {
-        //         if (err) {
-        //             req.flash('success', 'Something Went Wrong')
-        //             return;
-        //         } else {
-        //             req.flash('success', 'Code sent successfully')
-        //             return;
-        //         }
-        //     })
-
-        //     const otp = new Otp({ phone: phone, otp: OTP, email: email, eotp: EOTP })
-        //     const salt = await bcrypt.genSalt(10)
-        //     otp.otp = await bcrypt.hash(otp.otp, salt)
-        //     otp.eotp = await bcrypt.hash(otp.eotp, salt)
-        //     otp.save().then((user) => {
-        //         req.flash('success', 'Otp send successfully!')
-        //         req.flash('phone', phone)
-        //         req.flash('email', email)
-        //         return res.redirect('/register')
-        //     }).catch(err => {
-        //         req.flash('success', 'Something went wrong please try again later')
-        //         return res.redirect('/register')
-        //     })
-        // },
-        // Verification code sent function end
 
 
         async postRegister(req, res) {
@@ -472,7 +389,8 @@ function authController() {
 
                 user.save().then((user) => {
                     req.flash('OnRegisterDone', 'User Successfully Registered')
-                    // return res.redirect('/login')
+                    const eventEmitter = req.app.get('eventEmitter')
+                    eventEmitter.emit('userCreated', user)
                     return res.redirect('/register')
                 }).catch(err => {
                     console.log(err);
@@ -518,17 +436,12 @@ function authController() {
         },
 
 
-        logout(req, res) {
-            // req.logout()
-            // return res.redirect('/')
+        logout(req, res, next) {
             req.logout(function(err) {
                 if (err) { return next(err); }
                 res.redirect('/');
-              });
+            })
         }
-
-       
-
 
     }
 }

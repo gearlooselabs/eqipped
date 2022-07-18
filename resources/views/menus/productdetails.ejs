@@ -1,3 +1,7 @@
+<% include functions %> 
+<%const string = JSON.stringify(product._id);
+console.log(string);
+%>
     <main class="my-8">
         <div class="container mx-3 px-6">
             <div class="md:flex ">
@@ -27,17 +31,39 @@
                          
                         <div class="mt-3 text-gray-700 text-sm" for="">Piece per pack: <%= product.piecePerPack %></div>
                     </div>
-                   
-                    <div class="flex items-center mt-6">
-                        <label class="text-gray-700 text-sm hidden" for="product-qty">Qty:</label>
-                        <input type="number" class="w-14 p-1 pl-2 mx-2 border rounded hidden" id = "product-qty" placeholder="1" value = "1">
-                         <button id = "add-cart-btn" class="add-to-cart py-2 px-4 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
-                              <span>+</span>
-                              <span class="ml-4">Add to cart</span>
+                
+                    <div class="flex items-center mt-6 justify-center">
+                                    <label class="text-gray-700 text-sm hidden" for="product-qty">Qty:</label>
+                                    <input type="number" class="w-14 p-1 pl-2 mx-2 border rounded hidden" id = "product-qty" placeholder="1" value = "1">
+                                   
+                                       <% if(user.cart.length <= 0){%>
+                                        <button id="add-cart-btn" class=" flex-col mr-4 add-to-cart py-2 px-4 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
+                                            <span><svg class="h-4 w-4 float-left" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                            </span>
+                                            <span class="ml-3">Add to cart</span>
+                                    </button>
+                                    <%} else if(1){%>%>
+                                        
+                                        <button id="add-cart-btn" onclick="location.href='/cart'" class=" flex-col mr-4 add-to-cart py-2 px-4 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
+                                            <span><svg class="h-4 w-4 float-left" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                            </span>
+                                            <span class="ml-3">Go To Cart</span>
+                                        </button>
+                        <%}else {%>
+                            <button id="add-cart-btn" class=" flex-col mr-4 add-to-cart py-2 px-4 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
+                                <span><svg class="h-4 w-4 float-left" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                </span>
+                                <span class="ml-3">Add to cart</span>
+                        </button>
+
+                          <%}%>
+                          
+                          <button id="buy-now-btn"  class="ml-4 flex-col buy-now py-2 px-4 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
+                            <span></span>
+                              <span class="mx-6">Buy Now</span>
                           </button>
-                        <a href="/cart" class="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none">
-                          <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                        </a>
+
+
                     </div>
                 </div>
                 <div class="w-full max-w-md mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/5">
@@ -180,6 +206,8 @@
     </main>
 
     <script>
+         
+
         $('#add-cart-btn').click(function(){
           var params = {
             pid: '<%= product._id %>',
@@ -196,7 +224,30 @@
           }).done(function(result){
             if(result.status == "success"){
               $('#cartcount').html('<super><span id = "cartcount"><i class = "fa fa-circle" style= "font-size: 10px;color: orange"></i></span></super>');
+             
             }
           })
+        })
+        $('#buy-now-btn').click(function(){
+          var params = {
+            pid: '<%= product._id %>',
+            qty: $('#product-qty').val(),
+            total: '<%= product.price %>'
+          }
+  
+          $.ajax({
+          type: 'POST',
+          url: '/update-cart',
+          data: params, 
+          dataType: 'json',
+          encode: true,
+         }).done(function(result){
+            if(result.status == "success"){
+              $('#cartcount').html('<super><span id = "cartcount"><i class = "fa fa-circle" style= "font-size: 10px;color: orange"></i></span></super>');
+              
+            }
+          })
+         
+          console.log(user.cart.length);
         })
       </script>
