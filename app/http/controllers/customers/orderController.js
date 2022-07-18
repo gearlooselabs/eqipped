@@ -13,11 +13,12 @@ const axios = require("axios")
 function orderController() {
     return {
 
-        viewdoc(req,res){
-            const {fname, insN} = req.params
+        async viewdoc(req,res){
+            const {fname, insN, id} = req.params
+            const userinfo = await User.findOne({ $and: [{ 'fname': fname }, { 'institutionName': insN }, { '_id': id }] });
             const filename = fname + ' from ' + insN + '.pdf';
             const filepath = 'http://localhost:3300/businessDocuments/' + filename
-            return res.render('auth/documentwatch', { path: filepath })
+            return res.render('auth/documentwatch', { path: filepath, userinfo: userinfo })
           },
 
         async index(req, res) {

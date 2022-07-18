@@ -22,11 +22,9 @@ const admin = require('../app/http/middlewares/admin')
 
 function initRoutes(app) {
     
-    if(auth){
-        app.get('/', auth, homeController().grandIndex)
-    }
-
-    app.get('/home', homeController().index)
+    app.get('/', guest, homeController().index)
+    
+    app.get('/home', homeController().grandIndex)
 
     app.post('/sub-categories', auth, homeController().grandIndex)
     app.get('/login', guest, authController().login)
@@ -37,7 +35,7 @@ function initRoutes(app) {
     app.get('/register', guest, authController().register)
     app.post('/register', authController().postRegister)
     app.get('/documentupload', auth, authController().uploadDocument)    
-    app.post('/logout', authController().logout)
+    app.post('/logout',auth , authController().logout)
     app.get('/cart', auth, cartController().index)
     app.post('/update-cart', cartController().update)
     app.post('/qty-cart', cartController().qtyUpdate);
@@ -52,19 +50,19 @@ function initRoutes(app) {
     app.get('/addproduct', vendor, vendorController().addproduct)
     app.get('/editproduct/:id', vendor, vendorController().editProduct)
     app.post('/editproducts', vendor, vendorController().posteditProduct)
+    // Notify
+    app.get('/vendor/notify',vendor ,adminOrderController().goToVendorNotify)
 
     // Customer routes
     app.post('/callback', auth, orderController().store)
     app.get('/customer/orders', auth, orderController().index)
-    app.get('/view/doc/:fname/:insN', auth, orderController().viewdoc)
+    app.get('/viewdoc/:fname/:insN/:id', auth, orderController().viewdoc)
     
     //Download PDF in show function
     app.get('/customer/orders/:id', auth, orderController().show)
     app.get('/customer/checkout', auth, orderController().checkout)
 
 
-    // Notify
-    app.get('/vendor/notify', adminOrderController().goToVendorNotify)
 
  
     // Admin routes
@@ -86,7 +84,7 @@ function initRoutes(app) {
 
     // Admin Office
     app.get('/office/editproduct', admin, officeController().index)
-    app.get('/office/edit/products/:_id',admin, officeController().productindex)
+    app.get('/office/edit/products/:_id', admin, officeController().productindex)
     app.post('/office/edit/products', admin, officeController().postproductedit) 
     
     //Coupoun code 
@@ -97,9 +95,9 @@ function initRoutes(app) {
 
     // Categories route
     app.get('/allcategory', auth, categoriesController().categories)
-    app.get('/subcat/', categoriesController().subcat)
-    app.post('/create/subcat/', categoriesController().createSubcat);
-    app.post('/fetch/subcat/', categoriesController().findSubcat);
+    app.get('/subcat/', auth, categoriesController().subcat)
+    app.post('/create/subcat/', auth, categoriesController().createSubcat);
+    app.post('/fetch/subcat/', auth, categoriesController().findSubcat);
 
     //Product Route
     app.get('/allcategory/products', auth, productController().productfetch)
@@ -122,12 +120,12 @@ function initRoutes(app) {
     app.post('/resetpassword/:id/:token', authController().postresetpassword)
 
     // Edit profile 
-    app.get('/edit/:id', authController().edit)
-    app.post('/edit', authController().postedit)
+    app.get('/edit/:id', auth, authController().edit)
+    app.post('/edit', auth, authController().postedit)
 
     // Footer documents 
-    app.get('/privacy-policy',  homeController().pripolicy)
-    app.get('/term-condition',  homeController().termcondition)
+    app.get('/privacy-policy', homeController().pripolicy)
+    app.get('/term-condition', homeController().termcondition)
     
 
 

@@ -17,9 +17,9 @@ function authController() {
     const _getRedirectUrl = (req, res) => {
 
         if (req.user.role == 'vendor'){
-            return req.user.role === 'vendor' ? '/addproduct' : '/'
+            return req.user.role === 'vendor' ? '/addproduct' : '/home'
         }else{
-            return req.user.role ===  'customer' ? '/' : 'admin' ? '/adminpanel' : 'vendor' ? '/addproduct' : '/addproduct'
+            return req.user.role ===  'customer' ? '/home' : 'admin' ? '/adminpanel' : 'vendor' ? '/addproduct' : '/home'
         }
 
     }
@@ -50,10 +50,10 @@ function authController() {
                 if (!err) {
                     return res.redirect('/home')
                 } else {
-                    return res.redirect('/register')
+                    return res.redirect('/home')
                 }
             })
-        },
+        }, 
 
         postLogin(req, res, next) {
             const { email, password } = req.body
@@ -207,11 +207,6 @@ function authController() {
 
         async forSendingOtp(req, res) {
             const user = await User.findOne({ $or: [{ 'phone': req.body.phone }, { 'email': req.body.email }] })
-
-            // const user = await User.findOne({
-            //     phone: req.body.phone,
-            //     email: req.body.email
-            // })
 
             if (user) {
                 return res.json({ msg: "User already registered. Login yourself or Register with new credentials" })
@@ -441,14 +436,12 @@ function authController() {
         },
 
 
-        logout(req, res) {
-             req.logout()
-             return res.redirect('/')
-            
+        logout(req, res, next) {
+            req.logout(function(err) {
+                if (err) { return next(err); }
+                res.redirect('/');
+            })
         }
-
-       
-
 
     }
 }

@@ -22,7 +22,7 @@ const OrderId = require('./app/models/orderID')
 
 // Database connection
 const url = 'mongodb+srv://admin:gsk3E1ZwjWwgqAoC@cluster0.9xkoq.mongodb.net/Euipped_dB'
-// const url = 'mongodb://localhost/abhitbar'
+// const url = 'mongodb://localhost/Euipped_dB'
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 connection.once('open', () => {
