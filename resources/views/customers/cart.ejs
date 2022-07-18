@@ -1,11 +1,44 @@
-<section  class="cart py-20  " style="background-color: white;  ">
+
     <% if(products.cart.length> 0) { %>
-        <div class="order container mx-auto xl:w-2/3">
-            <div class="flex items-center border-b border-gray-300 pb-4">
+        <section  class="cart py-20  " style="background-color: white;  ">
+        <div class="order  container mx-auto xl:w-2/3">
+            <div class="flex items-center  pb-4">
                 <img src="https://svgsilh.com/svg/151889.svg" class="w-10 block pr-2">
-                <h1 class="font-bold ml-4 text-2xl">Order summary</h1>
+                <h1 class="text-xl font-medium ">Order summary</h1>
             </div>
             <% products.cart.forEach((product)=> { %>
+                <div class="flex justify-between items-center mt-6 pt-6">
+                    <div class="flex  items-center">
+                        <img src="/img/<%= product.product.image %>" width="60" class=" ">
+
+                        <div class="flex flex-col ml-3">
+                            <span class="md:text-md font-medium"> <%= product.product.name %></span>
+                            <span class="text-xs font-light text-gray-400">#code</span>
+                            
+                        </div>
+
+                        
+                    </div>
+
+                    <div class="flex justify-center items-center">
+                        
+                        <div class="pr-8 flex ">
+                            <span class="font-semibold">-</span>
+                            <input type="text" class="focus:outline-none bg-gray-100 border h-6 w-8 rounded text-sm px-2 mx-2" value="1">
+                            <span class="font-semibold">+</span>
+                        </div>
+
+                        <div class="pr-8 ">
+                            
+                            <span class="text-xs font-medium">$10.50</span>
+                        </div>
+                        <div>
+                            <button onclick = "removeItem('<%= product.product._id %>')" class="fa fa-close text-xs font-medium"></button>
+                        </div>
+
+                    </div>
+                    
+                </div>
                 <div class="pizza-list">
                     <div class="flex items-center mt-8 mb-2 cursor-pointer">
                         <a class="flex justify-center items-center hover:border-gray-300 hover:bg-gray-200 w-5/12"
@@ -30,7 +63,7 @@
                 <hr>
                 <% }) %>
                     <div class="text-right py-6">
-                        <div>
+                        <!-- <div  >
                             <span class="text-sm float-left mt-1">Congrats your <b>Cart</b> is ready to checkout</span>
                             <span class="text-lg font-bold">Total Amount:</span>
                             <% var sum=0; %>
@@ -38,12 +71,27 @@
                                     <% sum +=product.product.price * product.quantity %>
                                         <% }) %>
                                             <span class="amount text-2xl font-bold ml-2">₹<%= sum %></span>
+                        </div> -->
+                        <div id="subtotal" class=" text-right py-6 items-end">
+                                 <div class="float-left items-center mt-1"> 
+                                                <button class="flex items-center">
+                                                <i class="fa fa-arrow-left text-sm pr-2"></i>
+                                                <span class="text-md  font-medium text-blue-500">Continue Shopping</span>
+                                                </button>
+                                </div>
+                                <div class="float-right">
+                                    <span class="text-sm font-medium text-gray-400 mr-1">Subtotal:</span>
+                                    <% var sum=0; %>
+                                        <% products.cart.forEach((product)=> { %>
+                                            <% sum +=product.product.price * product.quantity %>
+                                                <% }) %>
+                                    <span class="text-lg font-bold text-gray-800 "> ₹<%= sum %></span>
+                                </div>
                         </div>
                         <% if(user) { %>
-                            <div class="flex justify-center">
+                            <div class="flex py-8">
                                 <a href="/customer/checkout"><button
-                                        class="btn-primary px-4 py-4 text-white w-full mt-14 rounded-full shadow font-bold">PLACE
-                                        ORDER</button></a>
+                                        class="h-12 w-48 bg-blue-500 rounded focus:outline-none text-white ">Checkout</button></a>
                             </div>
                             <% } else { %>
                                 <a href="/login"
@@ -51,8 +99,9 @@
                                     to continue</a>
                                 <% } %>
                     </div>
-        </div>
+        </div></section>
         <% } else { %>
+            <section  class="cart py-5  " style="background-color: white;  ">
             <div class="empty-cart py-16">
                 <div class="container mx-auto text-center">
                     <h1 class="text-3xl font-bold mb-2">Cart Empty 😕</h1>
@@ -63,8 +112,10 @@
                         class="inline-block px-6 py-2 rounded-full btn-primary text-white font-bold mt-12">Go back</a>
                 </div>
             </div>
-            <% } %>
-</section>
+
+        </section>
+    <% } %>
+
 <script>
 
 
@@ -104,16 +155,19 @@
                     let value = parseInt(document.getElementById(pid+'1').value);
                     document.getElementById(pid+'1').value = value + 1;
                     $( "#" + pid ).load(window.location.href + " #"+pid );
+                    $( "#subtotal").load(window.location.href + " #subtotal" );
                 }
                 if(type === 'minus'){
                     let value = parseInt(document.getElementById(pid+'1').value);
                     document.getElementById(pid+'1').value = value - 1;
                     $( "#" + pid ).load(window.location.href + " #"+pid );
+                    $( "#subtotal").load(window.location.href + " #subtotal" );
                 }
                 if(type === 'specific'){
                     let value = parseInt(document.getElementById(pid+'1').value);
                     document.getElementById(pid+'1').value = value;
                     $( "#" + pid ).load(window.location.href + " #"+pid );
+                    $( "#subtotal").load(window.location.href + " #subtotal" );
                 }
             }
         })
