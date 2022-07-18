@@ -12,7 +12,7 @@ function homeController() {
         },
 
         pripolicy(req, res) {
-            res.render('footerDocu/privacy & policy')
+            res.render('footerDocu/policies')
         },
 
         termcondition(req, res) {

@@ -1,31 +1,31 @@
 <% include ('function'); %> 
 <%const string = JSON.stringify(product._id);
 %>
-%>
+
     <main class="my-8">
         <div class="container mx-3 px-6">
             <div class="md:flex ">
                 <div class="w-full h-48 md:w-2/5 lg:h-2/4 border rounded-lg">
-                    <img class="h-4/5 w-4/5 p-4 rounded-md object-contain max-w-lg mx-auto " src="/img/<%= product.image %>" alt="<%= product.productCayegory %>">
+                    <img class="h-4/5 w-4/5 rounded-md object-contain max-w-lg mx-auto " src="/img/<%= product.product.image %>" alt="<%= product.productCayegory %>">
                 </div>
                 <div class="w-full max-w-md mx-auto mt-5 md:ml-8 md:mt-0 md:w-2/5">
-                    <h3 style="font-family: ubuntu;" class="text-black-700 font-semibold uppercase text-2xl "><%= product.name %></h3>
+                    <h3 style="font-family: ubuntu;" class="text-black-700 font-semibold uppercase text-2xl "><%= product.product.name %> - <%= product.name %></h3>
                     <span style="font-family: ubuntu;" class="text-black-500 font-bold text-2xl">₹ <%= product.price %></span>
                     <hr class="my-3">
                     <div class="mt-2">
                         <div class="mt-3 text-black-800 text-lg">Product Description</div>
-                         <div class="mt-1 mb-4 text-red-500 text-sm"><%= product.description %> </div>
-                         <div>by: <span class="size py-1 mx-2 px-2 rounded uppercase text-xs"><%= product.brand %></span></div>
+                         <div class="mt-1 mb-4 text-red-500 text-sm"><%= product.product.description %> </div>
+                         <div>by: <span class="size py-1 mx-2 px-2 rounded uppercase text-xs"><%= product.product.brand %></span></div>
                          <div class="mt-3">
                             <label class="text-gray-700 text-sm" for="count">Variants</label>
                             <div class="flex items-center mt-1">
-                                <% product.variations.forEach((variant) => { %>
-                                    <% for (var prop in variant.variants) {
-                                        if (Object.prototype.hasOwnProperty.call(variant.variants, prop)) { %>
-                                            <button class="variantHover border p-2 m-2 rounded "><%- variant.variants[prop] %></button>
-                                   <%   }
-                                      } %>
-                                <%})%>
+                                <% variants.forEach((variant) => { %>
+                                   <% if(JSON.stringify(product._id) == JSON.stringify(variant._id)){ %>
+                                    <a href = "/productDetails/<%= variant._id %>/<%= variant.product._id %>/1"><button class="variantHover currentVariant border p-2 m-2 rounded "><%= variant.name %></button></a>
+                                   <% }else{ %>
+                                    <a href = "/productDetails/<%= variant._id %>/<%= variant.product._id %>/1"><button class="variantHover border p-2 m-2 rounded "><%= variant.name %></button></a>
+                                   <% } %>
+                                <% }) %>
                             </div>
                         </div>
                          
@@ -71,7 +71,7 @@
                     <h3 style="font-family: ubuntu;" class="text-black-700 font-bold uppercase text-lg mb-4">Also Sold By</h3>
                     <div class=" w-full flex border p-2 m-2 rounded">
                         <div class="w-1/3 h-full  md:h-2/2 ">
-                            <img class="h-full w-full rounded-md object-contain max-w-lg mx-auto" src="/img/<%= product.image %>" alt="<%= product.productCayegory %>">
+                            <img class="h-full w-full rounded-md object-contain max-w-lg mx-auto" src="/img/<%= product.product.image %>" alt="<%= product.productCayegory %>">
                         </div>
                         <div class="w-2/3 h-full  md:h-2/2 px-2">
                             <h3 class="text-black-800 text-md "><%= product.name %></h3>
@@ -82,23 +82,23 @@
                     </div>
                     <div class=" w-full flex border p-2 m-2 rounded">
                         <div class="w-1/3 h-full  md:h-2/2 ">
-                            <img class="h-full w-full rounded-md object-contain max-w-lg mx-auto" src="/img/<%= product.image %>" alt="<%= product.productCayegory %>">
+                            <img class="h-full w-full rounded-md object-contain max-w-lg mx-auto" src="/img/<%= product.product.image %>" alt="<%= product.productCayegory %>">
                         </div>
                         <div class="w-2/3 h-full  md:h-2/2 px-2">
-                            <h3 class="text-black-800 text-md "><%= product.name %></h3>
-                            <div class="text-gray-400 text-xs my-1">by: <span class=" py-1 px- rounded uppercase text-xs"><%= product.brand %></span></div>
-                            <span  class="text-black-800 text-md">₹ <%= product.price %></span>
+                            <h3 class="text-black-800 text-md "><%= product.product.name %></h3>
+                            <div class="text-gray-400 text-xs my-1">by: <span class=" py-1 px- rounded uppercase text-xs"><%= product.product.brand %></span></div>
+                            <span  class="text-black-800 text-md">₹ <%= product.product.price %></span>
                         </div>
 
                     </div>
                     <div class=" w-full flex border p-2 m-2 rounded">
                         <div class="w-1/3 h-full  md:h-2/2 ">
-                            <img class="h-full w-full rounded-md object-contain max-w-lg mx-auto" src="/img/<%= product.image %>" alt="<%= product.productCayegory %>">
+                            <img class="h-full w-full rounded-md object-contain max-w-lg mx-auto" src="/img/<%= product.product.image %>" alt="<%= product.productCategory %>">
                         </div>
                         <div class="w-2/3 h-full  md:h-2/2 pl-4">
-                            <h3 class="text-black-800 text-md "><%= product.name %></h3>
-                            <div class="text-gray-400 text-xs my-1">by: <span class=" py-1 px- rounded uppercase text-xs"><%= product.brand %></span></div>
-                            <span  class="text-md font-medium text-black">₹ <%= product.price %></span>
+                            <h3 class="text-black-800 text-md "><%= product.product.name %></h3>
+                            <div class="text-gray-400 text-xs my-1">by: <span class=" py-1 px- rounded uppercase text-xs"><%= product.product.brand %></span></div>
+                            <span  class="text-md font-medium text-black">₹ <%= product.product.price %></span>
                         </div>
 
                     </div>
@@ -115,15 +115,15 @@
             <% suggested.forEach(function(suggested){ %> 
 
                 <div class="flex flex-col items-center gap-2 px-2 py-6  relative hover:shadow-lg">
-                    <a href="/productDetails/<%= suggested._id %>/1" class="flex flex-col items-center text-center group">
+                    <a href="/productDetails/<%= suggested._id %>/<%= suggested.product._id %>/1" class="flex flex-col items-center text-center group">
                         <div class="w-36 h-36">
-                            <img draggable="false" class="w-full h-full object-contain" src="/img/<%= suggested.image %>"
+                            <img draggable="false" class="w-full h-full object-contain" src="/img/<%= suggested.product.image %>"
                                 alt="{name}" />
                         </div>
                         <h2 class="text-sm mt-4 group-hover:text-blue-500">
-                            <%= suggested.name %>
+                            <%= suggested.product.name %> - <%= suggested.name %>
                         </h2>
-                        <span class="text-gray-400 text-xs ">By: <%= suggested.brand %></span>
+                        <span class="text-gray-400 text-xs ">By: <%= suggested.product.brand %></span>
     
                         <div class="flex flex-col gap-2 items-center">
     
@@ -163,7 +163,7 @@
                             <% } else { %>
                                 <li class="page-item active"><a
                                     class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                    href="/productDetails/<%= product._id %>/<%= current-1 %>">Previous</a></li>
+                                    href="/productDetails/<%= product._id %>/<%= product.product._id %>/<%= current-1 %>">Previous</a></li>
                             <% } %>
                             <% var i = (Number(current) > 3 ? Number(current) - 2 :1) %>
                             <% if (i !== 1) { %>
@@ -181,7 +181,7 @@
                                 <% } else { %>
                                     <li class="page-item"><a
                                         class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                        href="/productDetails/<%= product._id %>/<%= i %>"><%= i %></a></li>
+                                        href="/productDetails/<%= product._id %>/<%= product.product._id %>/<%= i %>"><%= i %></a></li>
                                 <% } %>
                                
                                 <% if (i == Number(current) + 2 && i < pagesList) { %>
@@ -197,7 +197,7 @@
                             <% } else { %>
                                 <li class="page-item"><a
                                     class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                    href="/productDetails/<%= product._id %>/<%= parseInt(current)+1 %>">Next</a></li>
+                                    href="/productDetails/<%= product._id %>/<%= product.product._id %>/<%= parseInt(current)+1 %>">Next</a></li>
                             <% } %>
                         </ul>    
                     </nav>

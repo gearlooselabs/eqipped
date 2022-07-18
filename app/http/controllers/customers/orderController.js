@@ -8,8 +8,8 @@ const fs = require('fs')
 const pdf = require('pdf-creator-node')
 const path = require('path')
 const utils = require('util')
-const options = require('../../../../helpers/options')
-const axios = require("axios")
+const options = require('../../../../helpers/options');
+const Variation = require('../../../models/variation');
 function orderController() {
     return {
 
@@ -88,18 +88,18 @@ function orderController() {
         async show(req, res) {
             const html = fs.readFileSync(path.join(__dirname, '../../../../resources/views/invoice.html'), 'utf-8');
             const filename = req.params.id + '.pdf';
-            const order = await Order.findById(req.params.id).populate({ path: 'items.product', model: 'Product'})
+            const order = await Order.findById(req.params.id).populate({ path: 'items.product', populate: [{ path: 'product', model: 'Product'}], model: 'Variation'})
 
             let array = [];
             it = order.items
             Object.values(it).forEach(d => {
                 const prod = {
-                    name: d.product.name,
-                    description: d.product.description,
+                    name: d.product.product.name + " - " + d.product.name,
+                    description: d.product.product.description,
                     quantity: d.quantity,
                     price: d.product.price,
                     total: d.product.price * d.quantity,
-                    imgurl: d.product.image
+                    imgurl: d.product.product.image
 
                 }
                 array.push(prod);
@@ -160,12 +160,12 @@ function orderController() {
             const delivery = 250
             var gst = 0;
 
-            const products = await User.findOne({_id: req.user._id}).populate({ path: 'cart.product', model: 'Product'});
+            const products = await User.findOne({_id: req.user._id}).populate({ path: 'cart.product', populate: [{ path: 'product', model: 'Product'}], model: 'Variation'});
             let total = 0;
             for (let items of products.cart) {
                 total += items.product.price * items.quantity;
                 var item_tp = items.product.price * items.quantity;
-                gst+= (item_tp * items.product.GST)/100
+                gst+= (item_tp * items.product.product.GST)/100
             }
             // for (let items of Object.values(req.session.cart.items)) {
             //     var item_tp = items.item.price * items.qty

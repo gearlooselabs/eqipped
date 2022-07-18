@@ -84,7 +84,14 @@ app.set('view engine', 'ejs')
 
 
 
+// require('./routes/web')(app)
+eventEmitter.on('orderUpdated', (data) => {
+    io.to(`order_${data.id}`).emit('orderUpdated', data)
+})
 
+eventEmitter.on('orderPlaced', (data) => {
+    io.to('adminRoom').emit('orderPlaced', data)
+})
 app.use('/docs', express.static('docs'))
 app.use('/documents', express.static('./public/businessDocuments/'))
 
@@ -236,7 +243,8 @@ app.post('/paynow', [parseUrl, parseJson], async (req, res) => {
 
 // Upload image from vendor or admin add product 
 const admin = require('./app/http/middlewares/admin')
-const Product = require('./app/models/product')
+const Product = require('./app/models/product');
+const Variation = require('./app/models/variation')
 const User = require('./app/models/user')
 const Sub = require('./app/models/subcategories');
 const Document = require('./app/models/document');
@@ -257,7 +265,7 @@ const storage = multer.diskStorage({
   
 
 
-app.post('/addproduct', function (req, res) {
+  app.post('/addproduct', function (req, res) {
     upload(req, res, function (err) {
       if (err instanceof multer.MulterError) {
         // A Multer error occurred when uploading.
@@ -294,34 +302,83 @@ app.post('/addproduct', function (req, res) {
                   volume,
                   netQuantity,
                   containedLiquid,
-                  variations: { name: vname}
-              })
-              product.save((err) => {
-                if(err) console.log(err);
-                res.redirect('back');
-              })
-              async function something(item){
-                await Product.updateOne({
-                    _id: product._id,
-                    variations: { $elemMatch: { name: vname}}
-                }, {
-                    $push: {
-                        'variations.$.variants': {
-                            name: item,
-                            price: 50
-                        }
+              });
+
+              product.save().then(result => {
+                // Sub.updateOne({
+                //     _id: subCategory
+                //   }, {
+                //     $push: {
+                //         product: product._id
+                //     }
+                //   }, (err) => {
+                //     if(err){
+                //         req.flash('error', 'Something went wrong')
+                //         console.log(err);
+                //         return res.redirect('/addproduct')
+                //     }
+                //   })
+                Product.populate(result, { path: 'customerId' }, (err) => {
+                    if (!err) { req.flash('error', 'Product Added Successfully'); 
                     }
                 })
-              }
+              }).catch(err => {
+                  req.flash('error', 'Something went wrong')
+                  console.log(err);
+                  return res.redirect('/addproduct')
+              });
 
-              variant.forEach((variant) =>{
-                something(variant);
-              })
+              async function something(item){
+                    let variation = new Variation({
+                        product: product._id,
+                        variation: vname,
+                        category: categoryName,
+                        name: item,
+                        price: 50
+                    })
+
+                    await variation.save((err) => {
+                        if(err) console.log(err)
+                        console.log("Variation Saved Successfully")
+                    });
+
+                    console.log(variation._id);
+
+                    await Product.updateOne({
+                        _id: product._id
+                    }, {
+                        $push: {
+                            variations: variation._id
+                        }
+                    });
+                }
+
+                variant.forEach((variant) =>{
+                    something(variant);
+                })
+
+
+            //   async function something(item){
+            //     await Product.updateOne({
+            //         _id: product._id,
+            //         variations: { $elemMatch: { name: vname}}
+            //     }, {
+            //         $push: {
+            //             'variations.$.variants': {
+            //                 name: item,
+            //                 price: 50
+            //             }
+            //         }
+            //     })
+            //   }
+
+            //   variant.forEach((variant) =>{
+            //     something(variant);
+            //   })
 
             return res.redirect('/addproduct')
     })
   })
-
 
 
 
@@ -429,6 +486,9 @@ app.post('/addcategory', upload3, admin, function (req, res) {
 
 
 
+
+
+
 require('./routes/web')(app)
 app.use((req, res) => {
     res.status(404).render('errors/404')
@@ -442,8 +502,8 @@ const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
 })
 
-
 // Socket
+
 const io = require('socket.io')(server)
 io.on('connection', (socket) => {
     // Join     

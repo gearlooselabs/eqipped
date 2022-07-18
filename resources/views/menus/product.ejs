@@ -3,15 +3,15 @@
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 col-gap-12 row-gap-16">
         <% products.forEach((product)=> { %>
             <div class="flex flex-col items-center gap-2 px-2 py-6  relative hover:shadow-lg">
-                <a href="/productDetails/<%= product._id %>/1" class="flex flex-col items-center text-center group">
+                <a href="/productDetails/<%= product._id %>/<%= product.product._id %>/1" class="flex flex-col items-center text-center group">
                     <div class="w-36 h-36">
-                        <img draggable="false" class="w-full h-full object-contain" src="/img/<%= product.image %>"
-                            alt="{name}" />
+                        <img draggable="false" class="w-full h-full object-contain" src="/img/<%= product.product.image %>"
+                            alt="<%= product.product.name %>" />
                     </div>
                     <h2 class="text-sm mt-4 group-hover:text-blue-500">
-                        <%= product.name %>
+                        <%= product.product.name %> - <%= product.name %>
                     </h2>
-                    <span class="text-gray-400 text-xs ">By: <%= product.brand %></span>
+                    <span class="text-gray-400 text-xs ">By: <%= product.product.brand %></span>
 
                     <div class="flex flex-col gap-2 items-center">
 
@@ -37,7 +37,7 @@
     <div class="bg-white px-4 py-3 flex items-center justify-center border-t border-gray-200 sm:px-6">
         <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-center">
             <div>
-                <div class="flex justify-center">
+                <div class="flex justify-center"> 
                     <% if (pages > 0) { %>
                         <nav aria-label="Page navigation example">
                             <ul class="flex list-style-none">
