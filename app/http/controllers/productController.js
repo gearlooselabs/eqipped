@@ -14,13 +14,12 @@ function productController() {
                 // const chai = await Menu.find({ 'categoryName': `${product}`, 'isverified': 'Yes' },)
                 // const chai = await Menu.find( { $or: [{ "categoryName": { "$in": product } }, { "name": { "$in": product } }] , 'isverified': 'Yes' },)
                 // const pani = await subCategory.find({ 'parentCategory': `${product}` })
-                const products = await Menu.find({ "name": { "$regex": req.query.search, "$options": "i" } });
+                const products = await Menu.find({ "name": { "$regex": req.query.search, "$options": "i" } })
+                const variations = await Variation.find({ "name": { "$regex": req.query.search, "$options": "i" } });
                 const categories = await Category.find({ "pCategory": { "$regex": req.query.search, "$options": "i" } });
                 const subcats = await subCategory.find({ "name": { "$regex": req.query.search, "$options": "i" } });
-                console.log(products);
-                console.log(categories);
-                console.log(subcats);
-                return res.render('menus/product', { products, categories, subcats});
+                console.log(variations)
+                return res.render('menus/search', { products, variations: variations, categories, subcats});
             }else{
                 return res.redirect('/')
             }

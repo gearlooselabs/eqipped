@@ -68,7 +68,8 @@
                     </div>
                 </div>
                 <div class="w-full max-w-md mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/5">
-                    <h3 style="font-family: ubuntu;" class="text-black-700 font-bold uppercase text-lg mb-4">Also Sold By</h3>
+                    <% if(alsoSoldBy.length > 0){ %>
+                        <h3 style="font-family: ubuntu;" class="text-black-700 font-bold uppercase text-lg mb-4">Also Sold By</h3>
                     <% alsoSoldBy.forEach((item) => { %>
                        <a href = "/productDetails/<%= item._id %>/<%= item.product._id %>/1">
                         <div class=" w-full flex border p-2 m-2 rounded">
@@ -85,8 +86,8 @@
                         </div>
                        </a>
                     <% }) %>
-                  
-                    <a href="/similarproducts" class="text-sm float-right hover:underline SeeMore" >See more</a>
+                    <a href="/allcategory" class="text-sm float-right hover:underline SeeMore" >See more</a>
+                <% } %>
                 </div>
             </div>
 
