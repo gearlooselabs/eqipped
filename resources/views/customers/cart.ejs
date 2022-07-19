@@ -1,13 +1,16 @@
+
+
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <% if(products.cart.length> 0) { %>
         <section  class="cart py-20  " style="background-color: white;  ">
         <div class="order  container mx-auto xl:w-2/3">
             <div class="flex items-center  pb-4">
-                <img src="https://svgsilh.com/svg/151889.svg" class="w-10 block pr-2">
-                <h1 class="text-xl font-medium ">Order summary</h1>
+                <!-- <img src="https://svgsilh.com/svg/151889.svg" class="w-10 block pr-2"> -->
+                <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_bpoxfowy.json" background="transparent" speed="1" style="width: 100px; height: 100px;" loop autoplay></lottie-player>
+                <h1 class="text-xl font-medium -ml-5 ">Order summary</h1>
             </div>
             <% products.cart.forEach((product)=> { %>
-                <div class="flex justify-between items-center mt-6 pt-6">
+                <div class="flex justify-between items-center">
                     <div class="flex  items-center">
                         <img src="/img/<%= product.product.product.image %>" width="60" class=" ">
 
@@ -28,9 +31,9 @@
                             <button onclick = "updateQuantity('plus', '<%= product.product._id %>', '0')" class="font-semibold">+</button>
                         </div>
 
-                        <div class="pr-8 ">
+                        <div class="pr-6 ">
                             
-                            <span class="subtotal text-xs font-medium" id="<%= product.product._id %>" >₹ <%= product.product.price * product.quantity %></span>
+                            <span class="subtotal text-xs font-medium" id="<%= product.product._id %>" >₹<%= product.product.price * product.quantity %></span>
                         </div>
                         <div>
                             <button onclick = "removeItem('<%= product.product._id %>')" class="fa fa-close text-xs font-medium"></button>
@@ -39,8 +42,8 @@
                     </div>
                     
                 </div>
-                <div class="pizza-list">
-                    <div class="flex items-center mt-8 mb-2 cursor-pointer">
+                <div >
+                    <!-- <div id="cartDesktop" class="flex items-center mt-8 mb-2 cursor-pointer">
                         <a class="flex justify-center items-center hover:border-gray-300 hover:bg-gray-200 w-5/12"
                             href="">
                             <img class="w-24" src="/img/<%= product.product.product.image %>" alt="">
@@ -62,8 +65,8 @@
                         <button onclick = "updateQuantity('plus', '<%= product.product._id %>', '0')" class="add-to-cart ml-2 py- px-3 rounded-full items-center text-xl font-bold"> + </button>
                     </span>
                     <span id = "<%= product.product._id %>" class="font-bold text-lg mr-3">₹ <%= product.product.price * product.quantity %></span>    
-                </div>
-                <hr>
+                     </div> -->
+                <hr class="mt-6">
                 <% }) %>
                     <div class="text-right py-6 ">
                         <!-- <div  >
@@ -102,7 +105,9 @@
                                     to continue</a>
                                 <% } %>
                     </div>
-        </div></section>
+                </div>
+        </div>
+    </section>
         <% } else { %>
             <section  class="cart py-1  " style="background-color: white;  ">
             <div class="empty-cart py-8">
