@@ -1,19 +1,17 @@
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <% include ('function'); %>
     <%const string=JSON.stringify(product._id); %>
 
-
         <main class="my-8">
-
             <div class="container mx-3 px-6">
-
                 <div class="md:flex ">
                     <div class="w-full h-48 md:w-2/5 lg:h-2/4 border rounded-lg">
                         <img class="h-4/5 w-4/5 rounded-md object-contain max-w-lg mx-auto "
                             src="/img/<%= product.product.image %>" alt="<%= product.productCayegory %>">
                     </div>
                     <div class="w-full max-w-md mx-auto mt-5 md:ml-8 md:mt-0 md:w-2/5">
-                        <h3 style="font-family: ubuntu;" class="text-black-700 font-semibold uppercas text-2xl ">
+                        <h3 style="font-family: ubuntu;" class="text-black-700 font-semibold uppercase text-2xl ">
                             <%= product.product.name %> - <%= product.name %>
                         </h3>
                         <span style="font-family: ubuntu;" class="text-black-500 font-bold text-2xl">₹ <%= product.price
@@ -24,7 +22,7 @@
                             <div class="mt-1 mb-4 text-red-500 text-sm">
                                 <%= product.product.description %>
                             </div>
-                            <div>Brand: <span class="size py-1 mx-2 px-2 rounded uppercas text-xs">
+                            <div>by: <span class="size py-1 mx-2 px-2 rounded uppercase text-xs">
                                     <%= product.product.brand %>
                                 </span></div>
                             <div class="mt-3">
@@ -52,6 +50,7 @@
                         </div>
 
                         <% if(user) { %>
+
                             <div class="flex items-center mt-6 justify-center">
                                 <label class="text-gray-700 text-sm hidden" for="product-qty">Qty:</label>
                                 <input type="number" class="w-14 p-1 pl-2 mx-2 border rounded hidden" id="product-qty"
@@ -70,7 +69,7 @@
                                             </span>
                                             <span class="ml-3">Add to cart</span>
                                         </button>
-                                        <%} else if(checkCart(user.cart, string)){ %>
+                                        <%} else if(checkCart(user.cart, string)){%>%>
 
                                             <button id="add-cart-btn" onclick="location.href='/cart'"
                                                 class=" flex-col mr-4 add-to-cart py-2 px-4 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
@@ -84,7 +83,6 @@
                                                 </span>
                                                 <span class="ml-3">Go To Cart</span>
                                             </button>
-
                                             <%}else {%>
                                                 <button id="add-cart-btn"
                                                     class=" flex-col mr-4 add-to-cart py-2 px-4 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
@@ -110,6 +108,7 @@
 
 
                             </div>
+
                             <% } else { %>
 
                                 <div class="flex justify-end w-full mt-10 pr-2" onclick="alertToLogIn()">
@@ -133,71 +132,45 @@
                                     </button>
                                 </div>
 
-                                <% } %>
+                        <% } %>
 
                     </div>
-
                     <div class="w-full max-w-md mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/5">
-                        <h3 style="font-family: ubuntu;" class="text-black-700 font-bold uppercas text-lg mb-4">Also
-                            Sold By</h3>
-                        <div class=" w-full flex border p-2 m-2 rounded">
-                            <div class="w-1/3 h-full  md:h-2/2 ">
-                                <img class="h-full w-full rounded-md object-contain max-w-lg mx-auto"
-                                    src="/img/<%= product.product.image %>" alt="<%= product.productCayegory %>">
-                            </div>
-                            <div class="w-2/3 h-full  md:h-2/2 px-2">
-                                <h3 class="text-black-800 text-md ">
-                                    <%= product.name %>
-                                </h3>
-                                <div class="text-gray-400 text-xs my-1">by: <span
-                                        class=" py-1 px- rounded uppercas text-xs">
-                                        <%= product.brand %>
-                                    </span></div>
-                                <span class="text-black-800 text-md">₹ <%= product.price %></span>
-                            </div>
+                        <% if(alsoSoldBy.length> 0){ %>
+                            <h3 style="font-family: ubuntu;" class="text-black-700 font-bold uppercase text-lg mb-4">
+                                Also Sold By</h3>
+                            <% alsoSoldBy.forEach((item)=> { %>
+                                <a href="/productDetails/<%= item._id %>/<%= item.product._id %>/1">
+                                    <div class=" w-full flex border p-2 m-2 rounded">
+                                        <div class="w-1/3 h-full  md:h-2/2 ">
+                                            <img class="h-full w-full rounded-md object-contain max-w-lg mx-auto"
+                                                src="/img/<%= item.product.image %>"
+                                                alt="<%= product.productCayegory %>">
+                                        </div>
+                                        <div class="w-2/3 h-full  md:h-2/2 px-2">
+                                            <h3 class="text-black-800 text-md ">
+                                                <%= item.vendor.fname %>
+                                            </h3>
+                                            <h3 class="text-black-800 text-md ">
+                                                <%= item.product.name %> - <%= item.name %>
+                                            </h3>
+                                            <div class="text-gray-400 text-xs my-1">by: <span
+                                                    class=" py-1 px- rounded uppercase text-xs">
+                                                    <%= item.brand %>
+                                                </span></div>
+                                            <span class="text-black-800 text-md">₹ <%= item.price %></span>
+                                        </div>
 
-                        </div>
-
-                        <div class=" w-full flex border p-2 m-2 rounded">
-                            <div class="w-1/3 h-full  md:h-2/2 ">
-                                <img class="h-full w-full rounded-md object-contain max-w-lg mx-auto"
-                                    src="/img/<%= product.product.image %>" alt="<%= product.productCayegory %>">
-                            </div>
-                            <div class="w-2/3 h-full  md:h-2/2 px-2">
-                                <h3 class="text-black-800 text-md ">
-                                    <%= product.product.name %>
-                                </h3>
-                                <div class="text-gray-400 text-xs my-1">Brand: <span
-                                        class=" py-1 px- rounded uppercas text-xs">
-                                        <%= product.product.brand %>
-                                    </span></div>
-                                <span class="text-black-800 text-md">₹ <%= product.product.price %></span>
-                            </div>
-
-                        </div>
-
-                        <div class=" w-full flex border p-2 m-2 rounded">
-                            <div class="w-1/3 h-full  md:h-2/2 ">
-                                <img class="h-full w-full rounded-md object-contain max-w-lg mx-auto"
-                                    src="/img/<%= product.product.image %>" alt="<%= product.productCategory %>">
-                            </div>
-
-                            <div class="w-2/3 h-full  md:h-2/2 pl-4">
-                                <h3 class="text-black-800 text-md ">
-                                    <%= product.product.name %>
-                                </h3>
-                                <div class="text-gray-400 text-xs my-1">Brand:
-                                    <span class=" py-1 px- rounded uppercas text-xs">
-                                        <%= product.product.brand %>
-                                    </span>
-                                </div>
-                                <span class="text-md font-medium text-black">₹ <%= product.product.price %></span>
-                            </div>
-                        </div>
-
-                        <a href="/similarproducts" class="text-sm float-right hover:underline SeeMore">See more</a>
+                                    </div>
+                                </a>
+                                <% }) %>
+                                    <a href="/allcategory" class="text-sm float-right hover:underline SeeMore">See
+                                        more</a>
+                                    <% } %>
                     </div>
                 </div>
+
+
 
                 <div class="mt-16">
                     <h3 class="text-gray-600 text-2xl font-medium">Related Products</h3>
@@ -239,91 +212,120 @@
 
                             <% }) %>
                     </div>
-                </div>
-
-                <div>
-                    <div class="bg-white px-4 py-3 flex items-center justify-center border-t border-gray-200 sm:px-6">
-                        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-center">
-                            <div>
-                                <div class="flex justify-center">
-                                    <% if (pagesList> 0) { %>
-                                        <nav aria-label="Page navigation example">
-                                            <ul class="flex list-style-none">
-                                                <% if (current==1) { %>
-                                                    <li class="page-item active disabled"><a
-                                                            class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-500 pointer-events-none focus:shadow-none"
-                                                            href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                                    </li>
-                                                    <% } else { %>
-                                                        <li class="page-item active"><a
-                                                                class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                                                href="/productDetails/<%= product._id %>/<%= product.product._id %>/<%= current-1 %>">Previous</a>
+                    <div>
+                        <!-- This example requires Tailwind CSS v2.0+ -->
+                        <div
+                            class="bg-white px-4 py-3 flex items-center justify-center border-t border-gray-200 sm:px-6">
+                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-center">
+                                <div>
+                                    <div class="flex justify-center">
+                                        <% if (pagesList> 0) { %>
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="flex list-style-none">
+                                                    <% if (current==1) { %>
+                                                        <li class="page-item active disabled"><a
+                                                                class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-500 pointer-events-none focus:shadow-none"
+                                                                href="#" tabindex="-1" aria-disabled="true">Previous</a>
                                                         </li>
-                                                        <% } %>
-                                                            <% var i=(Number(current)> 3 ? Number(current) - 2 :1)
-                                                                %>
-                                                                <% if (i !==1) { %>
-                                                                    <li class="page-item disabled"><a
-                                                                            class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                                                            href="">...</a></li>
-                                                                    <% } %>
-                                                                        <% for (; i <=(Number(current) + 2) && i
-                                                                            <=pagesList; i++) { %>
+                                                        <% } else { %>
+                                                            <li class="page-item active"><a
+                                                                    class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                                                    href="/productDetails/<%= product._id %>/<%= product.product._id %>/<%= current-1 %>">Previous</a>
+                                                            </li>
+                                                            <% } %>
+                                                                <% var i=(Number(current)> 3 ? Number(current) - 2 :1)
+                                                                    %>
+                                                                    <% if (i !==1) { %>
+                                                                        <li class="page-item disabled"><a
+                                                                                class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                                                                href="">...</a></li>
+                                                                        <% } %>
+                                                                            <% for (; i <=(Number(current) + 2) && i
+                                                                                <=pagesList; i++) { %>
 
 
-                                                                            <% if (i==current) { %>
-                                                                                <li class="page-item activeList"><a
-                                                                                        class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                                                                        href="#">
-                                                                                        <%= i %>
-                                                                                    </a></li>
-                                                                                <% } else { %>
-                                                                                    <li class="page-item"><a
+                                                                                <% if (i==current) { %>
+                                                                                    <li class="page-item activeList"><a
                                                                                             class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                                                                            href="/productDetails/<%= product._id %>/<%= product.product._id %>/<%= i %>">
+                                                                                            href="#">
                                                                                             <%= i %>
                                                                                         </a></li>
-                                                                                    <% } %>
+                                                                                    <% } else { %>
+                                                                                        <li class="page-item"><a
+                                                                                                class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                                                                                href="/productDetails/<%= product._id %>/<%= product.product._id %>/<%= i %>">
+                                                                                                <%= i %>
+                                                                                            </a></li>
+                                                                                        <% } %>
 
-                                                                                        <% if (i==Number(current) + 2 &&
-                                                                                            i < pagesList) { %>
-                                                                                            <li class="page-item disabled"
-                                                                                                disabled><a
-                                                                                                    class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                                                                                    href="">...</a>
-                                                                                            </li>
-                                                                                            <% } %>
+                                                                                            <% if (i==Number(current) +
+                                                                                                2 && i < pagesList) { %>
+                                                                                                <li class="page-item disabled"
+                                                                                                    disabled><a
+                                                                                                        class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                                                                                        href="">...</a>
+                                                                                                </li>
                                                                                                 <% } %>
-                                                                                                    <% if
-                                                                                                        (current==pagesList)
-                                                                                                        { %>
-                                                                                                        <li
-                                                                                                            class="page-item ">
-                                                                                                            <a class=" page-link  relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                                                                                                href="#">Next</a>
-                                                                                                        </li>
-                                                                                                        <% } else { %>
+                                                                                                    <% } %>
+                                                                                                        <% if
+                                                                                                            (current==pagesList)
+                                                                                                            { %>
                                                                                                             <li
-                                                                                                                class="page-item">
-                                                                                                                <a class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                                                                                                    href="/productDetails/<%= product._id %>/<%= product.product._id %>/<%= parseInt(current)+1 %>">Next</a>
+                                                                                                                class="page-item ">
+                                                                                                                <a class=" page-link  relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                                                                                                    href="#">Next</a>
                                                                                                             </li>
-                                                                                                            <% } %>
-                                            </ul>
-                                        </nav>
-                                        <% } %>
+                                                                                                            <% } else {
+                                                                                                                %>
+                                                                                                                <li
+                                                                                                                    class="page-item">
+                                                                                                                    <a class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                                                                                                                        href="/productDetails/<%= product._id %>/<%= product.product._id %>/<%= parseInt(current)+1 %>">Next</a>
+                                                                                                                </li>
+                                                                                                                <% } %>
+                                                </ul>
+                                            </nav>
+                                            <% } %>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
         </main>
 
-
         <script>
+
+
+
+            function alertToLogIn() {
+
+                swal({
+                    title: "Register/Login",
+                    text: "Authorize user have permission to place order.",
+                    buttons: {
+                        Register: {
+                            text: "Register",
+                            value: "/register",
+                            className: "swal-icon5",
+                        },
+                        Login: {
+                            text: "Login",
+                            value: "/login",
+                            className: "swal-icon5",
+                            html: true
+                        },
+                        Login1: {
+                            text: "Hidden Button",
+                            className: "swal-icon1",
+                        },
+                    },
+                    icon: "info",
+                }).then(function (value) {
+                    if (value == "login") {
+                        window.location = value;
+                    } else {
+                        window.location = value;
+                    }
+                });
+            }
+
 
             $('#add-cart-btn').click(function () {
                 var params = {
@@ -371,40 +373,6 @@
                 setTimeout(function () { window.location = url; }, 500);
 
             })
-
-
-
-            function alertToLogIn() {
-
-                swal({
-                    title: "Register/Login",
-                    text: "Authorize users have permission to place order.",
-                    buttons: {
-                        Register: {
-                            text: "Register",
-                            value: "/register",
-                            className: "swal-icon5",
-                        },
-                        Login: {
-                            text: "Login",
-                            value: "/login",
-                            className: "swal-icon5",
-                            html: true
-                        },
-                        Login1: {
-                            text: "Hidden Button",
-                            className: "swal-icon1",
-                        },
-                    },
-                    icon: "info",
-                }).then(function (value) {
-                    if (value == "login") {
-                        window.location = value;
-                    } else {
-                        window.location = value;
-                    }
-                });
-            }
 
 
         </script>

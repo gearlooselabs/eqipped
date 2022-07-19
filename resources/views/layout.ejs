@@ -467,13 +467,15 @@
 
       $(document).ready(function(){
         $(".owl-carousel").owlCarousel({
+          
           loop: true,
+         
           responsiveClass:true,
-          navigation : false,
+          
           responsive:{
               0:{
-                  items:1.5,
-                  nav:true
+                  items:3,
+                  nav:false
               },
               600:{
                   items:2.5,
@@ -481,7 +483,7 @@
               },
               1000:{
                   items:4.5,
-                  nav:true,
+                  nav:false,
                   loop:false
               }
           }
