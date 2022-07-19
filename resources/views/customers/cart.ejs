@@ -1,11 +1,44 @@
-<section  class="cart py-20  " style="background-color: white;  ">
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <% if(products.cart.length> 0) { %>
-        <div class="order container mx-auto xl:w-2/3">
-            <div class="flex items-center border-b border-gray-300 pb-4">
+        <section  class="cart py-20  " style="background-color: white;  ">
+        <div class="order  container mx-auto xl:w-2/3">
+            <div class="flex items-center  pb-4">
                 <img src="https://svgsilh.com/svg/151889.svg" class="w-10 block pr-2">
-                <h1 class="font-bold ml-4 text-2xl">Order summary</h1>
+                <h1 class="text-xl font-medium ">Order summary</h1>
             </div>
             <% products.cart.forEach((product)=> { %>
+                <div class="flex justify-between items-center mt-6 pt-6">
+                    <div class="flex  items-center">
+                        <img src="/img/<%= product.product.product.image %>" width="60" class=" ">
+
+                        <div class="flex flex-col ml-3">
+                            <span class="text-sm md:text-md font-medium">  <%= product.product.product.name %> - <%= product.product.name %></span>
+                            <span class="text-xs font-light text-gray-400"></span>
+                            
+                        </div>
+
+                        
+                    </div>
+
+                    <div class="flex justify-center items-center">
+                        
+                        <div class="pr-8 flex ">
+                            <button onclick = "updateQuantity('minus', '<%= product.product._id %>', '0')"  class="font-semibold">-</button>
+                            <input type="text" class="focus:outline-none bg-gray-100 border h-6 w-8 rounded text-sm px-2 mx-2" id = "<%= product.product._id %>1" onfocusout = "updateQuantity('specific', '<%= product.product._id %>', this.value)" value = "<%= product.quantity %>">
+                            <button onclick = "updateQuantity('plus', '<%= product.product._id %>', '0')" class="font-semibold">+</button>
+                        </div>
+
+                        <div class="pr-8 ">
+                            
+                            <span class="subtotal text-xs font-medium" id="<%= product.product._id %>" >₹ <%= product.product.price * product.quantity %></span>
+                        </div>
+                        <div>
+                            <button onclick = "removeItem('<%= product.product._id %>')" class="fa fa-close text-xs font-medium"></button>
+                        </div>
+
+                    </div>
+                    
+                </div>
                 <div class="pizza-list">
                     <div class="flex items-center mt-8 mb-2 cursor-pointer">
                         <a class="flex justify-center items-center hover:border-gray-300 hover:bg-gray-200 w-5/12"
@@ -18,19 +51,22 @@
                                 </span>
                             </div>
                     </a>
-                    <span class="flex-1 items-center mt-1 ml-12">    
+                    <span class="flex-1 items-center mt-1 ml-12">   
+                      
+                            <button onclick = "removeItem('<%= product.product._id %>')" class=" px-3 h-1 ">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0xOSAyNGgtMTRjLTEuMTA0IDAtMi0uODk2LTItMnYtMTdoLTF2LTJoNnYtMS41YzAtLjgyNy42NzMtMS41IDEuNS0xLjVoNWMuODI1IDAgMS41LjY3MSAxLjUgMS41djEuNWg2djJoLTF2MTdjMCAxLjEwNC0uODk2IDItMiAyem0wLTE5aC0xNHYxNi41YzAgLjI3Ni4yMjQuNS41LjVoMTNjLjI3NiAwIC41LS4yMjQuNS0uNXYtMTYuNXptLTkgNGMwLS41NTItLjQ0OC0xLTEtMXMtMSAuNDQ4LTEgMXY5YzAgLjU1Mi40NDggMSAxIDFzMS0uNDQ4IDEtMXYtOXptNiAwYzAtLjU1Mi0uNDQ4LTEtMS0xcy0xIC40NDgtMSAxdjljMCAuNTUyLjQ0OCAxIDEgMXMxLS40NDggMS0xdi05em0tMi03aC00djFoNHYtMXoiLz48L3N2Zz4=">
+                            </button>
+                         
                         <button onclick = "updateQuantity('minus', '<%= product.product._id %>', '0')" class="border sub-to-cart mr-2 py- px-3 rounded-full items-center text-xl font-bold"> - </button>
                         <input class="w-10 pl-2 border" type="number" id = "<%= product.product._id %>1" onfocusout = "updateQuantity('specific', '<%= product.product._id %>', this.value)" value = "<%= product.quantity %>" >
                         <button onclick = "updateQuantity('plus', '<%= product.product._id %>', '0')" class="add-to-cart ml-2 py- px-3 rounded-full items-center text-xl font-bold"> + </button>
                     </span>
                     <span id = "<%= product.product._id %>" class="font-bold text-lg mr-3">₹ <%= product.product.price * product.quantity %></span>    
                 </div>
-                <div>
-                    <button onclick = "removeItem('<%= product.product._id %>')" class="remove-to-cart text-red-700 hover:bg-gray-200 py-1 px-2 ml-32">Remove</button></div>
                 <hr>
                 <% }) %>
-                    <div class="text-right py-6">
-                        <div>
+                    <div class="text-right py-6 ">
+                        <!-- <div  >
                             <span class="text-sm float-left mt-1">Congrats your <b>Cart</b> is ready to checkout</span>
                             <span class="text-lg font-bold">Total Amount:</span>
                             <% var sum=0; %>
@@ -38,12 +74,27 @@
                                     <% sum +=product.product.price * product.quantity %>
                                         <% }) %>
                                             <span class="amount text-2xl font-bold ml-2">₹<%= sum %></span>
+                        </div> -->
+                        <div  class=" text-right py-6 items-end">
+                                 <div class="float-left items-center mt-1"> 
+                                                <button class="flex items-center">
+                                                <i class="fa fa-arrow-left text-sm pr-2"></i>
+                                                <span class="text-md  font-medium text-blue-500">Continue Shopping</span>
+                                                </button>
+                                </div>
+                                <div id="subtotal" class="float-right">
+                                    <span class="text-sm font-medium text-gray-400 mr-1">Subtotal:</span>
+                                    <% var sum=0; %>
+                                        <% products.cart.forEach((product)=> { %>
+                                            <% sum +=product.product.price * product.quantity %>
+                                                <% }) %>
+                                    <span class="text-lg font-bold text-gray-800 "> ₹<%= sum %></span>
+                                </div>
                         </div>
                         <% if(user) { %>
-                            <div class="flex justify-center">
+                            <div class="flex justify-center py-8">
                                 <a href="/customer/checkout"><button
-                                        class="btn-primary px-4 py-4 text-white w-full mt-14 rounded-full shadow font-bold">PLACE
-                                        ORDER</button></a>
+                                        class="h-12 w-48 bg-blue-500 rounded focus:outline-none text-white ">Checkout</button></a>
                             </div>
                             <% } else { %>
                                 <a href="/login"
@@ -51,20 +102,27 @@
                                     to continue</a>
                                 <% } %>
                     </div>
-        </div>
+        </div></section>
         <% } else { %>
-            <div class="empty-cart py-16">
-                <div class="container mx-auto text-center">
+            <section  class="cart py-1  " style="background-color: white;  ">
+            <div class="empty-cart py-8">
+                <div class=" container mx-auto text-center">
                     <h1 class="text-3xl font-bold mb-2">Cart Empty 😕</h1>
-                    <p class="text-gray-500 text-lg mb-12">You probably haven't ordered anything yet. <br>
+                    <p class="text-gray-500 text-md">You probably haven't ordered anything yet. <br>
                         To order your requirement, go to the main page.</p>
-                    <img class="w-2/5 mx-auto" src="/img/Emptycart.gif" alt="empty-cart">
-                    <a href="/grandHome"
-                        class="inline-block px-6 py-2 rounded-full btn-primary text-white font-bold mt-12">Go back</a>
+                        <div class="flex justify-center">
+                        <lottie-player class="w-64 sm:w-96 md:w-4/12 " src="https://assets3.lottiefiles.com/private_files/lf30_oqpbtola.json"  background="transparent"  speed="1"   loop autoplay></lottie-player>
+                    </div>
+                        <div class="" >
+                        <a href="/allcategory"><button
+                                class="h-12 w-56 bg-blue-500 rounded focus:outline-none text-white ">Continue Shopping</button></a>
+                    </div>
                 </div>
             </div>
-            <% } %>
-</section>
+
+        </section>
+    <% } %>
+
 <script>
 
 
@@ -104,17 +162,21 @@
                     let value = parseInt(document.getElementById(pid+'1').value);
                     document.getElementById(pid+'1').value = value + 1;
                     $( "#" + pid ).load(window.location.href + " #"+pid );
+                  
                 }
                 if(type === 'minus'){
                     let value = parseInt(document.getElementById(pid+'1').value);
                     document.getElementById(pid+'1').value = value - 1;
                     $( "#" + pid ).load(window.location.href + " #"+pid );
+                  
                 }
                 if(type === 'specific'){
                     let value = parseInt(document.getElementById(pid+'1').value);
                     document.getElementById(pid+'1').value = value;
                     $( "#" + pid ).load(window.location.href + " #"+pid );
+                   
                 }
+                $( "#subtotal").load(window.location.href + " #subtotal" );
             }
         })
     }
