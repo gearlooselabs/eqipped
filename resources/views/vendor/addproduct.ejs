@@ -242,7 +242,7 @@
     n = $('#my_input').val();
     $("#rolonum").html('');
     for (var i = 1; i <= n; i++) {
-      $("#rolonum").append('<span>Item ' + i + ' </span><input id="rolo_add' + i + '" name="variant"  type="text" value="" required/><br>');
+      $("#rolonum").append('<span>Variant ' + i + ' </span><input id="rolo_code' + i + '" name="vcodes" placeholder = "Enter Variant Code" type="text" style = "border: 2px solid black" value="" required/> <input id="rolo_add' + i + '" name="variant" placeholder = " Enter Variant Name"  type="text" style = "border: 2px solid black" value="" required/> <input id="rolo_price' + i + '" name="prices" placeholder = "Enter Variant Price"  type="number" value="" style = "border: 2px solid black" required/><br><br>');
       
     }
 
