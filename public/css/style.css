@@ -1077,3 +1077,28 @@ input[type=number]::-webkit-outer-spin-button {
     color: #4da3ff;
     border: 1px solid #4da3ff;
   }
+
+
+  .swal-icon5 {
+    background-color: #695cfe;
+}
+
+.swal-icon5:hover {
+    color: black;
+}
+
+.swal-icon--info:after,
+.swal-icon--info:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    background-color: #FE5F1E;
+}
+
+.swal-icon--info {
+    border-color: #FE5F1E;
+}
+
+.swal-icon1 {
+    display: none;
+}
