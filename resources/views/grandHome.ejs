@@ -34,24 +34,24 @@
 </div>
 
 
-<div class="container mx-auto py-9 md:py-12 px-4 md:px-6">
+<div class="container mx-auto py-0 sm:py-9 md:py-12 px-4 md:px-6">
     <div class="flex items-strech justify-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 lg:space-x-8">
         <div
-            class="flex flex-col md:flex-row items-strech justify-between bg-gray-50 dark:bg-gray-800 py-6 px-6 md:py-1 lg:px-8 md:w-8/12 lg:w-7/12 xl:w-8/12 2xl:w-9/12">
+            class="flex sm:flex-col md:flex-row items-strech justify-between bg-gray-50 dark:bg-gray-800 py-6 px-6 md:py-1 lg:px-8 md:w-8/12 lg:w-7/12 xl:w-8/12 2xl:w-9/12">
             <div class="flex flex-col justify-center md:w-3/5">
-                <h1 class="text-3xl lg:text-2xl font-semibold text-gray-800 dark:text-white">Best Deal For Laboratory
+                <h1 class="text-l lg:text-2xl font-semibold text-gray-800 dark:text-white">Best Deals <br/> On Laboratory
                     Supplies...</h1>
-                <p class="text-base lg:text-xl text-gray-800 dark:text-white mt-8">
+                <p class="text-base lg:text-xl text-gray-800 dark:text-white mt-4 sm:mt-8">
                     <a href="/allcategory"
-                        class="px-4 py-2 ml-10 rounded-full text-white text-sm font-bold btn-primary">Buy Now</a>
+                        class="px-4 py-2 sm:ml-10 rounded-full text-white text-sm font-bold btn-primary">Buy Now</a>
                 </p>
             </div>
-            <div class="md:w-1/2 xl:w-1/2 mt-8 md:mt-0 flex justify-center md:justify-end">
+            <div class="w-2/5 sm:w-1/2 md:w-1/2 xl:w-1/2 sm:mt-8 md:mt-0 flex justify-center md:justify-end">
                 <img src="/img/banner.png" alt="bannerUp" class="md:w-26 md:h-26 lg:w-60 lg:h-60" />
             </div>
         </div>
         <div
-            class="md:w-4/12 lg:w-5/12 xl:w-4/12 2xl:w-3/12 bg-gray-50 dark:bg-gray-800 py-6 px-6 md:py-0 md:px-4 lg:px-6 flex flex-col justify-center">
+            class="hidden sm:flex  md:w-4/12 lg:w-5/12 xl:w-4/12 2xl:w-3/12 bg-gray-50 dark:bg-gray-800 py-6 px-6 md:py-0 md:px-4 lg:px-6 flex-col justify-center">
             <div class="flex flex-col justify-center">
                 <img src="/img/postquery.png" alt="postQueryImg" class="md:w-26 md:h-26 lg:w-56 lg:h-56 mx-auto" />
                 <p class="absolute ml-28 mt-48 text-base lg:text-xl text-gray-800 dark:text-white">
@@ -72,14 +72,14 @@
 <h1 class="heading">Laboratory Equipment</h1>
 
 
-<div class="container mx-auto py-9 md:pt-12 md:px-6">
+<div class="w-full sm:container mx-auto sm:py-9 md:pt-12 md:px-6">
     <section class="bg-[#F3F4F6]">
-        <div  class="container flex justify-evenly mx-auto">
+        <div  class=" sm:container flex justify-evenly mx-auto">
             <div class="owl-carousel owl-theme">
             <% instruments.forEach((product) => { %>
                 <div class="flex flex-col items-center gap-2 px-2 py-6 relative">
                         <a href="/productDetails/<%= product._id %>/1" class="flex flex-col items-center text-center group">
-                        <div class="w-36 h-36">
+                        <div class="w-20 w-20 sm:w-36 sm:h-36">
                             <img draggable="false" class="w-full h-full object-contain" src="/img/flask.png"
                                 alt="{name}" />
                         </div>
@@ -124,12 +124,12 @@
 
 <h1 class="heading">Laboratory Chemicals</h1>
 
-<section class="container mx-auto p-8 flex flex-wrap justify-around">
+<section class=" mx-auto p-0 sm:p-8 flex flex-wrap justify-around">
     <div class="owl-carousel">
         <% chemicals.forEach((product) => { %>
             <div class="flex flex-col items-center gap-2 px-2 py-6 relative">
                     <a href="/productDetails/<%= product._id %>/1" class="flex flex-col items-center text-center group">
-                    <div class="w-36 h-36">
+                    <div class="w-20 w-20 sm:w-36 sm:h-36">
                         <img draggable="false" class="w-full h-full object-contain" src="/img/flask.png"
                             alt="{name}" />
                     </div>
@@ -169,16 +169,16 @@
 
 
 
-<div class="container mx-auto pb-10 py-9 md:py-12 px-4 md:px-6">
+<div class="container sm:mx-auto pb-10 py-9 md:py-12 px-4 md:px-6">
     <div class="flex items-strech justify-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 lg:space-x-8">
         <div
-            class="flex flex-col md:flex-row items-strech justify-between bg-gray-50 dark:bg-gray-800 py-6 px-6 md:py-12 lg:px-12 md:w-9/12 lg:w-8/12 xl:w-9/12 2xl:w-10/12">
-            <div class="flex flex-col justify-center md:w-1/2">
+            class="flex sm:flex-col md:flex-row items-strech justify-between bg-gray-50 dark:bg-gray-800 py-6 px-6 md:py-12 lg:px-12 md:w-9/12 lg:w-8/12 xl:w-9/12 2xl:w-10/12">
+            <div class="flex flex-col justify-center md:w-1/2 float-left">
                 <h1 class="text-3xl lg:text-4xl font-semibold text-gray-800 dark:text-white">Best Deal</h1>
                 <p class="text-base lg:text-xl text-gray-800 dark:text-white mt-2">Save upto <span
                         class="font-bold">50%</span></p>
             </div>
-            <div class="md:w-1/2 mt-8 md:mt-0 flex justify-center md:justify-end">
+            <div class="w-2/5 md:w-1/2 mt-8 md:mt-0 flex justify-center md:justify-end float-right">
                 <img src="https://i.ibb.co/J2BtZdg/Rectangle-56-1.png" alt="" class="" />
             </div>
         </div>
@@ -190,13 +190,13 @@
 <h1 class="heading">Best Selling</h1>
 
 <!-- ====== Cards Section Start -->
-<section class="container mx-auto p-8 flex flex-wrap justify-around">
+<section class="sm:container mx-auto sm:p-8 flex flex-wrap justify-around">
     <div class="owl-carousel">
        
         <% products.forEach((product) => { %>
                 <div class="flex flex-col items-center gap-2 px-2 py-6 relative">
                     <a href="" class="flex flex-col items-center text-center group">
-                    <div class="w-36 h-36">
+                    <div class="w-20 w-20 sm:w-36 sm:h-36">
                         <img draggable="false" class="w-full h-full object-contain" src="/img/flask.png"
                             alt="{name}" />
                     </div>
@@ -243,13 +243,13 @@
 
 
 <!-- ====== Cards Section Start -->
-<section class="container mx-auto p-8 flex flex-wrap justify-around">
+<section class="sm:container mx-auto sm:p-8 flex flex-wrap justify-around">
     <div class="owl-carousel">
        
             <% latest.forEach((latest)=> { %>
                 <div class="flex flex-col items-center gap-2 px-2 py-6 relative">
                     <a href="" class="flex flex-col items-center text-center group">
-                    <div class="w-36 h-36">
+                    <div class="w-20 w-20 sm:w-36 sm:h-36">
                         <img draggable="false" class="w-full h-full object-contain" src="/img/flask.png"
                             alt="homeImg" />
                     </div>
@@ -295,8 +295,8 @@
 
 <h1 class="heading">Brands</h1>
 
-<section class="container mx-auto mb-14 p-8 flex flex-wrap justify-around">
-    <div style="justify-content: center; align-items: center;"
+<section class="container mx-auto mb-14 sm:p-8 flex flex-wrap justify-around">
+    <div style="justify-content: left; align-items: center;"
         class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5">
 
         <img src="/img/thermofisher.png" alt="" srcset=""></a>
