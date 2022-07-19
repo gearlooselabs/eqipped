@@ -3,6 +3,7 @@ const Category = require('../../models/categories')
 const subCategory = require('../../models/subcategory');
 const Product = require('../../models/product');
 const Sub = require('../../models/subcategories');
+const Variation = require('../../models/variation');
 
 
 function homeController() {
@@ -39,7 +40,7 @@ function homeController() {
         fetch(req, res, next) {
             var regex = new RegExp(req.query["term"], 'i');
 
-            var productFilter = Menu.find({ $or: [{ "name": { "$in": [regex] } }] }).sort({ "updated_at": -1 }).sort({ "created_at": -1 }).limit(10);
+            var productFilter = Variation.find({ $or: [{ "name": { "$in": [regex] } }] }).sort({ "updated_at": -1 }).sort({ "created_at": -1 }).populate('product').limit(10);
             var categoryFilter = Category.find({ $or: [{ "pCategory": { "$in": [regex] } }] }).sort({ "updated_at": -1 }).sort({ "created_at": -1 }).limit(10);
             var subcatFilter = subCategory.find({ $or: [{ "name": { "$in": [regex] } }] }).sort({ "updated_at": -1 }).sort({ "created_at": -1 }).limit(10);
             productFilter.exec(function (err, data) {
@@ -48,7 +49,7 @@ function homeController() {
                     if (data && data.length && data.length > 0) {
                         data.forEach(product => {
 
-                            var label = product.name
+                            var label = product.product.name + " - " + product.name
                             result.push(label)
                         });
 

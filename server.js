@@ -279,7 +279,7 @@ const storage = multer.diskStorage({
       }
 
   
-      const { name, price, categoryName, size, itemWeight, volume, brand, piecePerPack, netQuantity, HSN , GST ,containedLiquid, description, subCategory, vname, variant} = req.body
+      const { name, price, categoryName, size, itemWeight, volume, brand, piecePerPack, netQuantity, HSN , GST ,containedLiquid, description, subCategory, vname, variant, prices} = req.body
   
               if (!name || !price || !categoryName || !size || !itemWeight || !brand || !piecePerPack || !netQuantity || !HSN || !GST || !containedLiquid || !description || !vname) {
                   req.flash('error', 'All fields are required')
@@ -328,13 +328,13 @@ const storage = multer.diskStorage({
                   return res.redirect('/addproduct')
               });
 
-              async function something(item){
+              async function something(item, price){
                     let variation = new Variation({
                         product: product._id,
                         variation: vname,
                         category: categoryName,
                         name: item,
-                        price: 50
+                        price: price
                     })
 
                     await variation.save((err) => {
@@ -353,8 +353,9 @@ const storage = multer.diskStorage({
                     });
                 }
 
-                variant.forEach((variant) =>{
-                    something(variant);
+                variant.forEach((variant, index) =>{
+                    var price = prices[index]
+                    something(variant, price);
                 })
 
 
