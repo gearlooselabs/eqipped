@@ -89,8 +89,8 @@ function orderController() {
             const html = fs.readFileSync(path.join(__dirname, '../../../../resources/views/invoice.html'), 'utf-8');
             const filename = req.params.id + '.pdf';
             // const order = await Order.findById(req.params.id).populate({ path: 'items.product', populate: [{ path: 'items.product', model: 'Product'}], model: 'Variation'})
-            // const order = await Order.findById(req.params.id).populate({ path: 'items.product', model: 'Variation'})
-            const order = await Order.findById(req.params.id).populate({ path: 'items.product', model: 'Product'})
+            const order = await Order.findById(req.params.id).populate({ path: 'items.product', model: 'Variation'})
+            // const order = await Order.findById(req.params.id).populate({ path: 'items.product', model: 'Product'})
 
             let array = [];
             it = order.items
