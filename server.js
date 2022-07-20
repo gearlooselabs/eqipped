@@ -85,13 +85,14 @@ app.set('view engine', 'ejs')
 
 
 // require('./routes/web')(app)
-eventEmitter.on('orderUpdated', (data) => {
-    io.to(`order_${data.id}`).emit('orderUpdated', data)
-})
+// eventEmitter.on('orderUpdated', (data) => {
+//     io.to(`order_${data.id}`).emit('orderUpdated', data)
+// })
 
-eventEmitter.on('orderPlaced', (data) => {
-    io.to('adminRoom').emit('orderPlaced', data)
-})
+// eventEmitter.on('orderPlaced', (data) => {
+//     io.to('adminRoom').emit('orderPlaced', data)
+// })
+
 app.use('/docs', express.static('docs'))
 app.use('/documents', express.static('./public/businessDocuments/'))
 
@@ -490,10 +491,7 @@ app.use((req, res) => {
     res.status(404).render('errors/404')
 })
 const PORT = process.env.PORT || 3300;
-// const server=
-// app.listen(process.env.PORT || 3300, function(){
-//     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-//   });
+
 const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
 })

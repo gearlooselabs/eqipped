@@ -304,28 +304,14 @@ section.hero {
 }
 
 .add-to-cart {
+  border: 1px solid #FE5F1E;
+  color: #FE5F1E;
+  transition: all 0.3s ease-in-out;
+}
+.add-to-cart:hover {
   background: #FE5F1E;
   border-color: #fff;
   color: #fff;
-}
-.add-to-cart:hover {
-  border: 1px solid #FE5F1E;
-  background: white;
-  color: #FE5F1E;
-  transition: all 0.3s ease-in-out;
-  
-}
-.buy-now {
-  background: #695CFE;
-  border-color: #fff;
-  color: #fff;
-}
-.buy-now:hover {
-  border: 1px solid #695CFE;
-  background: white;
-  color: #695CFE;
-  transition: all 0.3s ease-in-out;
-  
 }
 
 .btn-primary {
@@ -337,7 +323,7 @@ section.hero {
 }
 
 .empty-cart {
-  background: white;
+  background: #f8f8f8;
 }
 
 section.cart {
