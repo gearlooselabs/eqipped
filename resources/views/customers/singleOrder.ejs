@@ -5,7 +5,7 @@
         <div class="status-box w-full lg:w-2/3 mx-auto">
             <div class="flex items-center justify-between mb-12">
                 <h1 class="text-xl font-bold">Track delivery status</h1>
-                <h6 class="bg-white py-1 rounded-full px-4 text-green-600 text-xs"><%= order._id %></h6>
+                <h6 class="bg-white py-1 rounded-full px-4 text-green-600 text-xs"><%= order.orderId %></h6>
                 <input id="hiddenInput" type="hidden" value="<%= JSON.stringify(order) %>">
                 <!-- See magic with complete download  -->
             <div><a href="<%= path %>" target="_blank" class="inline-block cursor-pointer btn-primary px-4 py-2 rounded-full text-white" downloa>Download Invoice</a> </div>

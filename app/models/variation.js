@@ -14,4 +14,4 @@ const variationSchema = new Schema({
 }, {timestamps: true })
 
 
-module.exports = mongoose.model('Variation', variationSchema);
+module.exports = mongoose.model('Variation', variationSchema); 

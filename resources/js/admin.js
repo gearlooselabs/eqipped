@@ -2,7 +2,7 @@ import axios from 'axios'
 import moment from 'moment'
 import Noty from 'noty'
 
-// export function initAdmin() {
+// export function initAdmin() {  
 export function initAdmin(socket) {
     const orderTableBody = document.querySelector('#orderTableBody');
     let orders = []
@@ -21,16 +21,16 @@ export function initAdmin(socket) {
     })
 
 
-    function renderItems(items) {
-        let parsedItems = Object.values(items)
-        return parsedItems.map((menuItem) => {
-            console.log(menuItem)
-            console.log(menuItem.product)
-            return `
-                <p>${ menuItem.product.name } - ${ menuItem.quantity } pcs </p>
-            `
-        }).join('')
-      }
+    // function renderItems(items) {
+    //     let parsedItems = Object.values(items)
+    //     return parsedItems.map((menuItem) => {
+    //         console.log(menuItem)
+    //         console.log(menuItem.product)
+    //         return `
+    //             <p>${ menuItem.product.name } - ${ menuItem.quantity } pcs </p>
+    //         `
+    //     }).join('')
+    //   }
 
 
     function generateMarkup(orders) {
@@ -39,7 +39,6 @@ export function initAdmin(socket) {
                 <tr>
                 <td class="border px-4 py-2 text-green-900">
                     <p>${ order.orderId }</p>
-                    <div>${ renderItems(order.items) }</div>
                 </td>
                 <td class="border px-4 py-2">Name-${ order.customerName } <br> Phone-${ order.phone }</td>
                 <td class="border px-4 py-2">${ order.address }</td>
