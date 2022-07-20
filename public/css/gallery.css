@@ -7,13 +7,12 @@
   }
   
   .heading {
-    text-align: center;
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
-    font-size: 4ex;
-    padding: 20px;
-    text-decoration-line: underline;
-    text-decoration-thickness: 3px;
+    font-size: 3ex;
+    padding-left: 60px;
+    padding-bottom: 20px;
+    
   }
   
 
