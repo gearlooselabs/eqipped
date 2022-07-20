@@ -331,6 +331,7 @@ const storage = multer.diskStorage({
               async function something(item, price, code){
                     let variation = new Variation({
                         product: product._id,
+                        pname: name,
                         variation: vname,
                         vcode: code,
                         category: categoryName,
