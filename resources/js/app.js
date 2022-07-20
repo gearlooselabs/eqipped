@@ -2,6 +2,7 @@ import Noty from 'noty'
 import { initAdmin } from './admin'
 import { initAdmin1 } from './admin_user'
 import { initAdmin2 } from './admin_product'
+import { initVendor } from './vendor_notification'
 import moment from 'moment'
 
 
@@ -51,6 +52,8 @@ initAdmin(socket)
 
 initAdmin1(socket)
 
+initVendor(socket)
+
 
 
 
@@ -62,6 +65,11 @@ if(order) {
 let adminAreaPath = window.location.pathname
 if(adminAreaPath.includes('admin')) {
     socket.emit('join', 'adminRoom')
+}
+
+let vendorAreaPath = window.location.pathname
+if(vendorAreaPath.includes('vendor')) {
+    socket.emit('join', 'vendorRoom')
 }
 
 

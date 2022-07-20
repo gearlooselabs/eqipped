@@ -89,8 +89,8 @@ function orderController() {
             const html = fs.readFileSync(path.join(__dirname, '../../../../resources/views/invoice.html'), 'utf-8');
             const filename = req.params.id + '.pdf';
             // const order = await Order.findById(req.params.id).populate({ path: 'items.product', populate: [{ path: 'items.product', model: 'Product'}], model: 'Variation'})
-            const order = await Order.findById(req.params.id).populate({ path: 'items.product', model: 'Variation'})
-            // const order = await Order.findById(req.params.id).populate({ path: 'items.product', model: 'Product'})
+            // const order = await Order.findById(req.params.id).populate({ path: 'items.product', model: 'Variation'})
+            const order = await Order.findById(req.params.id).populate({ path: 'items.product', model: 'Product'})
 
             let array = [];
             it = order.items
@@ -98,12 +98,15 @@ function orderController() {
                 const prod = {
                     // name: d.product.product.name + " - " + d.product.name,
                     // description: d.product.description,
+
+                    name: d.product.name,
                     quantity: d.quantity,
+
                     // price: d.product.price,
-                    total: d.total,
                     // total: d.product.price * d.quantity,
                     // imgurl: d.product.image
                 }
+
                 console.log(prod)
                 array.push(prod);
             });
@@ -131,7 +134,7 @@ function orderController() {
                 gtotal: grandtotal
             }
 
-            console.log(grandtotal)
+            // console.log(grandtotal)
 
 
             const document = {

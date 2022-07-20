@@ -517,6 +517,11 @@ eventEmitter.on('orderPlaced', (data) => {
 })
 
 
+eventEmitter.on('orderPlaced', (data) => {
+    io.to('vendorRoom').emit('notifyVendor', data)
+})
+
+
 eventEmitter.on('userCreated', (data) => {
     io.to('adminRoom').emit('userCreated', data)
 })
