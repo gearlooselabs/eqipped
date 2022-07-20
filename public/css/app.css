@@ -627,3 +627,15 @@ section.status {
     font-size: 14px;
   }
 }
+.buy-now {
+  background: #695CFE;
+  border-color: #fff;
+  color: #fff;
+}
+.buy-now:hover {
+  border: 1px solid #695CFE;
+  background: white;
+  color: #695CFE;
+  transition: all 0.3s ease-in-out;
+  
+}
