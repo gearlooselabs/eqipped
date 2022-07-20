@@ -1,6 +1,6 @@
-<% include ('function'); %> 
-<%const string = JSON.stringify(product._id);
-%>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<% include ('function'); %>
+    <%const string=JSON.stringify(product._id); %>
 
     <main class="my-8">
         <div class="container mx-3 px-6">
@@ -92,151 +92,85 @@
 
 
 
-            <div class="mt-16">
-                <h3 class="text-gray-600 text-2xl font-medium">Related Products</h3>
-                <div class="grid gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-6">
-                  
-            <% suggested.forEach(function(suggested){ %> 
+            function alertToLogIn() {
 
-                <div class="flex flex-col items-center gap-2 px-2 py-6  relative hover:shadow-lg">
-                    <a href="/productDetails/<%= suggested._id %>/<%= suggested.product._id %>/1" class="flex flex-col items-center text-center group">
-                        <div class="w-36 h-36">
-                            <img draggable="false" class="w-full h-full object-contain" src="/img/<%= suggested.product.image %>"
-                                alt="{name}" />
-                        </div>
-                        <h2 class="text-sm mt-4 group-hover:text-blue-500">
-                            <%= suggested.product.name %> - <%= suggested.name %>
-                        </h2>
-                        <span class="text-gray-400 text-xs ">By: <%= suggested.product.brand %></span>
-    
-                        <div class="flex flex-col gap-2 items-center">
-    
-                            <span class="text-sm text-gray-500 font-medium flex gap-2 items-center">
-                                <span style="background-color: #388e3c;"
-                                    class="text-xs px-1.5 py-0.5 mt-2 rounded-sm text-white flex items-center gap-0.5">4.5<img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg=="
-                                        class="_1wB99o"></span>
-                                <span>(5)</span>
-                            </span>
-    
-                            <div class="flex items-center gap-1.5 text-md font-medium">
-                                <span>₹<%= suggested.price %></span>
-                                <span class="text-gray-500 line-through text-xs">₹699</span>
-                                <span class="text-xs text-primary-green">30%&nbsp;off</span>
-                            </div>
-    
-                        </div>
-                    </a>
-                </div>
-            
-            <% }) %>
-        </div>
-        <div>
-            <!-- This example requires Tailwind CSS v2.0+ -->
-<div class="bg-white px-4 py-3 flex items-center justify-center border-t border-gray-200 sm:px-6">
-    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-center">
-      <div>
-            <div class = "flex justify-center">
-                <% if (pagesList > 0) { %>
-                    <nav aria-label="Page navigation example">
-                        <ul class="flex list-style-none">
-                            <% if (current == 1) { %>
-                                <li class="page-item active disabled"><a
-                                    class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-500 pointer-events-none focus:shadow-none"
-                                    href="#" tabindex="-1" aria-disabled="true">Previous</a></li>
-                            <% } else { %>
-                                <li class="page-item active"><a
-                                    class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                    href="/productDetails/<%= product._id %>/<%= product.product._id %>/<%= current-1 %>">Previous</a></li>
-                            <% } %>
-                            <% var i = (Number(current) > 3 ? Number(current) - 2 :1) %>
-                            <% if (i !== 1) { %>
-                                <li class="page-item disabled"><a
-                                    class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                    href="">...</a></li>
-                            <% } %>
-                            <% for (; i <= (Number(current) + 2) && i <= pagesList; i++) { %>
-
-                                
-                                <%  if (i == current) { %>
-                                    <li class="page-item activeList"><a
-                                        class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                        href="#"><%= i %></a></li>
-                                <% } else { %>
-                                    <li class="page-item"><a
-                                        class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                        href="/productDetails/<%= product._id %>/<%= product.product._id %>/<%= i %>"><%= i %></a></li>
-                                <% } %>
-                               
-                                <% if (i == Number(current) + 2 && i < pagesList) { %>
-                                    <li class="page-item disabled" disabled><a
-                                        class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                        href="">...</a></li>
-                                <% } %>
-                            <% } %>
-                            <% if (current == pagesList) { %>
-                                <li class="page-item "><a
-                                    class=" page-link  relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                    href="#">Next</a></li>
-                            <% } else { %>
-                                <li class="page-item"><a
-                                    class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                    href="/productDetails/<%= product._id %>/<%= product.product._id %>/<%= parseInt(current)+1 %>">Next</a></li>
-                            <% } %>
-                        </ul>    
-                    </nav>
-                <% } %>
-            </div>
-        </div>
-    </main>
-
-    <script>
-         
-
-        $('#add-cart-btn').click(function(){
-          var params = {
-            pid: '<%= product._id %>',
-            qty: $('#product-qty').val(),
-            total: '<%= product.price %>'
-          }
-  
-          $.ajax({
-          type: 'POST',
-          url: '/update-cart',
-          data: params, 
-          dataType: 'json',
-          encode: true
-          }).done(function(result){
-            if(result.status == "success"){
-               
-              $('#cartcount').html('<super><span id = "cartcount"><i class = "fa fa-circle" style= "font-size: 10px;color: orange"></i></span></super>');
-              alert('Product added to cart');
-              $( "#buttonSection" ).load(window.location.href + " #buttonSection" );
+                swal({
+                    title: "Register/Login",
+                    text: "Authorize user have permission to place order.",
+                    buttons: {
+                        Register: {
+                            text: "Register",
+                            value: "/register",
+                            className: "swal-icon5",
+                        },
+                        Login: {
+                            text: "Login",
+                            value: "/login",
+                            className: "swal-icon5",
+                            html: true
+                        },
+                        Login1: {
+                            text: "Hidden Button",
+                            className: "swal-icon1",
+                        },
+                    },
+                    icon: "info",
+                }).then(function (value) {
+                    if (value == "login") {
+                        window.location = value;
+                    } else {
+                        window.location = value;
+                    }
+                });
             }
-          })
-        })
-        $('#buy-now-btn').click(function(){
-          var params = {
-            pid: '<%= product._id %>',
-            qty: $('#product-qty').val(),
-            total: '<%= product.price %>'
-          }
-  
-          $.ajax({
-          type: 'POST',
-          url: '/update-cart',
-          data: params, 
-          dataType: 'json',
-          encode: true,
-         }).done(function(result){
-            if(result.status == "success"){
-              $('#cartcount').html('<super><span id = "cartcount"><i class = "fa fa-circle" style= "font-size: 10px;color: orange"></i></span></super>');
-              
-            }
-          })
-          var url= '/customer/checkout';
-    document.write("");
-    setTimeout(function(){window.location = url;}, 500);
-        
-        })
-      </script>
+
+
+            $('#add-cart-btn').click(function () {
+                var params = {
+                    pid: '<%= product._id %>',
+                    qty: $('#product-qty').val(),
+                    total: '<%= product.price %>'
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/update-cart',
+                    data: params,
+                    dataType: 'json',
+                    encode: true
+                }).done(function (result) {
+                    if (result.status == "success") {
+
+                        $('#cartcount').html('<super><span id = "cartcount"><i class = "fa fa-circle" style= "font-size: 10px;color: orange"></i></span></super>');
+                        alert('Product added to cart');
+                        $("#buttonSection").load(window.location.href + " #buttonSection");
+                    }
+                })
+            })
+            $('#buy-now-btn').click(function () {
+                var params = {
+                    pid: '<%= product._id %>',
+                    qty: $('#product-qty').val(),
+                    total: '<%= product.price %>'
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/update-cart',
+                    data: params,
+                    dataType: 'json',
+                    encode: true,
+                }).done(function (result) {
+                    if (result.status == "success") {
+                        $('#cartcount').html('<super><span id = "cartcount"><i class = "fa fa-circle" style= "font-size: 10px;color: orange"></i></span></super>');
+
+                    }
+                })
+                var url = '/customer/checkout';
+                document.write("");
+                setTimeout(function () { window.location = url; }, 500);
+
+            })
+
+
+        </script>

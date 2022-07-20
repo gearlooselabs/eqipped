@@ -3,10 +3,11 @@
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 col-gap-12 row-gap-16">
         <% products.forEach((product)=> { %>
             <div class="flex flex-col items-center gap-2 px-2 py-6  relative hover:shadow-lg">
-                <a href="/productDetails/<%= product._id %>/<%= product.product._id %>/1" class="flex flex-col items-center text-center group">
+                <a href="/productDetails/<%= product._id %>/<%= product.product._id %>/1"
+                    class="flex flex-col items-center text-center group">
                     <div class="w-36 h-36">
-                        <img draggable="false" class="w-full h-full object-contain" src="/img/<%= product.product.image %>"
-                            alt="<%= product.product.name %>" />
+                        <img draggable="false" class="w-full h-full object-contain"
+                            src="/img/<%= product.product.image %>" alt="<%= product.product.name %>" />
                     </div>
                     <h2 class="text-sm mt-4 group-hover:text-blue-500">
                         <%= product.product.name %> - <%= product.name %>
@@ -22,23 +23,25 @@
                                     class="_1wB99o"></span>
                             <span>(5)</span>
                         </span>
-
-                        <div class="flex items-center gap-1.5 text-md font-medium">
-                            <span>₹<%= product.price %></span>
-                            <span class="text-gray-500 line-through text-xs">₹699</span>
-                            <span class="text-xs text-primary-green">30%&nbsp;off</span>
-                        </div>
+                        
+                        <% if(user){ %>
+                            <div class="flex items-center gap-1.5 text-md font-medium">
+                                <span>₹<%= product.price %></span>
+                                <span class="text-gray-500 line-through text-xs">₹699</span>
+                                <span class="text-xs text-primary-green">30%&nbsp;off</span>
+                            </div>
+                        <% } %>
 
                     </div>
                 </a>
             </div>
-        <% }) %>
+            <% }) %>
     </div>
     <div class="bg-white px-4 py-3 flex items-center justify-center border-t border-gray-200 sm:px-6">
         <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-center">
             <div>
-                <div class="flex justify-center"> 
-                    <% if (pages > 0) { %>
+                <div class="flex justify-center">
+                    <% if (pages> 0) { %>
                         <nav aria-label="Page navigation example">
                             <ul class="flex list-style-none">
                                 <% if (current==1) { %>

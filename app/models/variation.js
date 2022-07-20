@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const variationSchema = new Schema({
     product: { type: Schema.Types.ObjectId, ref: 'Product'},
+    pname: { type: String},
     vcode: { type: String},
     variation: { type: String},
     brand: { type: String},
@@ -14,4 +15,4 @@ const variationSchema = new Schema({
 }, {timestamps: true })
 
 
-module.exports = mongoose.model('Variation', variationSchema);
+module.exports = mongoose.model('Variation', variationSchema); 

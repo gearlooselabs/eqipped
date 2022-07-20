@@ -10,18 +10,43 @@ function productController() {
     return {
         async productfetch(req, res) {
             console.log(req.query.search)
+            const squeries = req.query.search.split(' ');
+            console.log(squeries);
             if (req.query.search != '') {
                 
                 // const chai = await Menu.find({ 'categoryName': `${product}`, 'isverified': 'Yes' },)
                 // const chai = await Menu.find( { $or: [{ "categoryName": { "$in": product } }, { "name": { "$in": product } }] , 'isverified': 'Yes' },)
                 // const pani = await subCategory.find({ 'parentCategory': `${product}` })
-                const products = await Menu.find({ "name": { "$regex": req.query.search, "$options": "i" } });
-                const categories = await Category.find({ "pCategory": { "$regex": req.query.search, "$options": "i" } });
-                const subcats = await subCategory.find({ "name": { "$regex": req.query.search, "$options": "i" } });
-                console.log(products);
-                console.log(categories);
-                console.log(subcats);
-                return res.render('menus/product', { products, categories, subcats});
+                const rproducts = [];
+                const rvariations = [];
+                const rcategories = [];
+                const rbrands = [];
+
+                for(var i=0; i<=squeries.length; i++){
+                    const item = squeries[i];
+                    const brands = await Variation.find({ "brand": { "$regex": `${item}`, "$options": "i" } }).populate('product');
+                    if(brands.length > 0){
+                        brands.forEach((brand) => {
+                            rbrands.push(brand);
+                        })
+                    }
+                    const variations = await Variation.find({ $or: [{"name": { "$regex": `${item}`, "$options": "i" }}, { "pname": { "$regex": `${item}`, "$options": "i" }}] }).populate('product');
+                    if(variations.length > 0){
+                        variations.forEach((product) => { 
+                            rvariations.push(product);
+                        })
+                    }
+                    const categories = await Category.find({ "pCategory": { "$regex": `${item}`, "$options": "i" } });
+                    if(categories.length > 0){
+                        categories.forEach((product) => {
+                            rcategories.push(product);
+                        })
+                    }
+                }
+
+                console.log(rvariations);
+
+                return res.render('menus/search', { products: rvariations, categories: rcategories, brands: rbrands});
             }else{
                 return res.redirect('/')
             }
