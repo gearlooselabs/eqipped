@@ -11,6 +11,7 @@ function productController() {
         async productfetch(req, res) {
             console.log(req.query.search)
             if (req.query.search != '') {
+                
                 // const chai = await Menu.find({ 'categoryName': `${product}`, 'isverified': 'Yes' },)
                 // const chai = await Menu.find( { $or: [{ "categoryName": { "$in": product } }, { "name": { "$in": product } }] , 'isverified': 'Yes' },)
                 // const pani = await subCategory.find({ 'parentCategory': `${product}` })
@@ -26,6 +27,7 @@ function productController() {
             }
         
         },
+        
 
         async catProduct(req, res) {
             let product_Category = req.params.categoryId;

@@ -414,3 +414,14 @@ section.status {
       font-size: 14px;
     }
   }
+  .rainbow-text{
+    background-image: var($rainbow-gradient,#fff);
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    filter: drop-shadow(0 0 2rem #000);
+    text-shadow: none!important;
+}
