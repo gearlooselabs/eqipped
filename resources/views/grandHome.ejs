@@ -68,14 +68,14 @@
         <div  class=" sm:container flex justify-evenly mx-auto">
             <div class="owl-carousel owl-theme">
             <% instruments.forEach((product) => { %>
-                <div class="flex flex-col items-center gap-2 px-2 relative">
-                        <a href="/productDetails/<%= product._id %>/1" class="flex flex-col items-center text-center group">
+                <div class="flex flex-col items-center gap-2 px-2 py-6 relative">
+                        <a href="/productDetails/<%= product._id %>/<%= product.product._id %>/1" class="flex flex-col items-center text-center group">
                         <div class="w-20 w-20 sm:w-36 sm:h-36">
-                            <img draggable="false" class="w-full h-full object-contain" src="/img/<%= product.image %>"
-                                alt=" <%= product.name %>" />
+                            <img draggable="false" class="w-full h-full object-contain" src="/img/<%= product.product.image %>"
+                                alt="{name}" />
                         </div>
                         <h2 class="text-sm mt-4 group-hover:text-blue-500">
-                            <%= product.name %>
+                            <%= product.product.name %> - <%= product.name %>
                         </h2>
                     
 
@@ -92,7 +92,7 @@
                            <% if(user) {%>
                             <div class="flex items-center gap-1.5 text-md font-medium">
                                 <span>₹<%= product.price %></span>
-                                <span class="text-gray-500 line-through text-xs">₹699</span>
+                                <span class="text-gray-500 line-through text-xs">₹ <%= Math.floor(product.price/0.3) %></span>
                                 <span style="color: #388e3c;"   class="text-xs font-medium">30%&nbsp;off</span>
                             </div>
                             <% } %>
@@ -119,13 +119,13 @@
     <div class="owl-carousel">
         <% chemicals.forEach((product) => { %>
             <div class="flex flex-col items-center gap-2 px-2 py-6 relative">
-                    <a href="/productDetails/<%= product._id %>/1" class="flex flex-col items-center text-center group">
+                    <a href="/productDetails/<%= product._id %>/<%= product.product._id %>/1" class="flex flex-col items-center text-center group">
                     <div class="w-20 w-20 sm:w-36 sm:h-36">
-                        <img draggable="false" class="w-full h-full object-contain" src="/img/flask.png"
+                        <img draggable="false" class="w-full h-full object-contain" src="/img/<%= product.product.image %>"
                             alt="{name}" />
                     </div>
                     <h2 class="text-sm mt-4 group-hover:text-blue-500">
-                        <%= product.name %>
+                        <%= product.product.name %> - <%= product.name %>
                     </h2>
                 
 
@@ -142,7 +142,7 @@
                         <% if(user) {%>
                         <div class="flex items-center gap-1.5 text-md font-medium">
                             <span>₹<%= product.price %></span>
-                            <span class="text-gray-500 line-through text-xs">₹699</span>
+                            <span class="text-gray-500 line-through text-xs">₹ <%= Math.floor(product.price/0.3) %></span>
                             <span style="color: #388e3c;"   class="text-xs font-medium">30%&nbsp;off</span>
                         </div>
                         <% } %>
@@ -182,13 +182,13 @@
        
         <% products.forEach((product) => { %>
                 <div class="flex flex-col items-center gap-2 px-2 py-6 relative">
-                    <a href="" class="flex flex-col items-center text-center group">
+                    <a href="/productDetails/<%= product._id %>/<%= product.product._id %>/1" class="flex flex-col items-center text-center group">
                     <div class="w-20 w-20 sm:w-36 sm:h-36">
-                        <img draggable="false" class="w-full h-full object-contain" src="/img/flask.png"
+                        <img draggable="false" class="w-full h-full object-contain" src="/img/<%= product.product.image %>"
                             alt="{name}" />
                     </div>
                     <h2 class="text-sm mt-4 group-hover:text-blue-500">
-                        <%= product.name %>
+                        <%= product.product.name %> - <%= product.name %>
                     </h2>
                 
                     <div class="flex flex-col gap-2 items-center">
@@ -203,7 +203,7 @@
                         <% if(user) {%>
                         <div class="flex items-center gap-1.5 text-md font-medium">
                             <span>₹<%= product.price %></span>
-                            <span class="text-gray-500 line-through text-xs">₹699</span>
+                            <span class="text-gray-500 line-through text-xs">₹<%= Math.floor(product.price/0.3) %></span>
                             <span style="color: #388e3c;"   class="text-xs font-medium">30%&nbsp;off</span>
                         </div>
                         <% } %>
@@ -235,13 +235,13 @@
        
             <% latest.forEach((latest)=> { %>
                 <div class="flex flex-col items-center gap-2 px-2 py-6 relative">
-                    <a href="" class="flex flex-col items-center text-center group">
+                    <a href="/productDetails/<%= latest._id %>/<%= latest.product._id %>/1" class="flex flex-col items-center text-center group">
                     <div class="w-20 w-20 sm:w-36 sm:h-36">
-                        <img draggable="false" class="w-full h-full object-contain" src="/img/flask.png"
+                        <img draggable="false" class="w-full h-full object-contain" src="/img/<%= latest.product.image %>"
                             alt="homeImg" />
                     </div>
                     <h2 class="text-sm mt-4 group-hover:text-blue-500">
-                        <%= latest.name %>
+                        <%= latest.product.name %> - <%= latest.name %>
                     </h2>
                
 
@@ -258,7 +258,7 @@
                         <% if(user) {%>
                         <div class="flex items-center gap-1.5 text-md font-medium">
                             <span>₹<%= latest.price %></span>
-                            <span class="text-gray-500 line-through text-xs">₹699</span>
+                            <span class="text-gray-500 line-through text-xs">₹<%= Math.floor(latest.price/0.3) %></span>
                             <span style="color: #388e3c;"   class="text-xs font-medium">30%&nbsp;off</span>
                         </div>
                         <% } %>

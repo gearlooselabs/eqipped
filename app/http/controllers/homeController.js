@@ -29,10 +29,10 @@ function homeController() {
             var chemicalCat = "624e86f68964e0a947f59e03"; // Chemicals Id
             var instrumentCat = "624e86f68964e0a947f59e00"; // Chemicals Id
             const nashta = await Category.find();
-            const chemicals = await Menu.find({categoryName: chemicalCat}).limit(10).exec();
-            const instruments = await Menu.find({categoryName: instrumentCat}).limit(10).exec();
-            const products = await Product.find().limit(4);
-            const latest = await Menu.find().limit(4).sort('-created');
+            const chemicals = await Variation.find({category: chemicalCat}).populate('product').limit(10).exec();
+            const instruments = await Variation.find({category: instrumentCat}).populate('product').limit(10).exec();
+            const products = await Variation.find().populate('product').limit(10);
+            const latest = await Variation.find().limit(10).populate('product').sort('-createdAt');
             const subcats = await Sub.find({}).limit(12);
             return res.render('grandHome', { nashta: nashta, subcats: subcats, chemicals: chemicals, products: products, latest: latest, instruments: instruments});
         },
