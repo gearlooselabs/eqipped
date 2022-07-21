@@ -1,5 +1,5 @@
 
-<section class="orders light-section">
+<section class="orders light-section min-h-full">
     <div class="container mx-auto px-20 pt-12">
         <h1 class="font-bold text-lg mb-4">All orders</h1>
         <% if(messages.success) { %>
@@ -28,9 +28,10 @@
                             <% orders.forEach((order)=> { %>
                                 <tr>
                                     <td class="border px-4 py-2">
-                                        <a class="link" href="/customer/orders/<%= order._id %>">
-                                        <%= moment(order.createdAt).format('DD:MM:YYYY') %>
-                                        <i style="color: black; margin-left: 30px;" class="las la-external-link-square-alt"></i>
+                                        
+                                        <%= moment(order.createdAt).format('DD-MM-YYYY') %>
+                                        <a class="link  group" href="/customer/orders/<%= order._id %>">
+                                        <i style=" margin-left: 30px;" class="group-hover:text-blue-500 underline">check status</i>
                                         </a>
                                     </td>
                                     <td class="border px-4 py-2">
@@ -43,6 +44,7 @@
                                         <%= moment(order.createdAt).format('hh:mm A') %>
                                     </td>
                                 </tr>
+                                
                                 <% }) %>
                                     <% } else { %>
                                         <tr>
@@ -52,4 +54,8 @@
                     </tbody>
                 </table>
     </div>
+    <div class="flex justify-center py-8">
+        <a href="/customer/checkout"><button
+                class="h-12 w-48 bg-blue-500 rounded focus:outline-none text-white ">Continue Shopping</button></a>
+    </div>  
 </section>

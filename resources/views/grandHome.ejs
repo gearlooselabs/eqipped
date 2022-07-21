@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
 
-<div style="justify-content: space-evenly; " class="w-full h-28 flex content-center">
+<div style="justify-content: space-evenly; " class="w-full h-20 sm:h-28 flex content-center">
     
     <% nashta.forEach(function(nashta){ %>
         <a href="/allcategory/products/<%= nashta._id%>/1">
@@ -16,7 +16,7 @@
                                  loop autoplay></lottie-player>
                         </span>
                     </button>
-                    <h1 class="text-center font-medium text-xs hideInPhone">
+                    <h1 class="text-center font-medium text-xxs sm:text-xs ">
                         <%= nashta.pcategory %>
                     </h1>
                     <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
@@ -31,23 +31,23 @@
 </div>
 
 
-    <div class="container px-4 pb-10  mx-auto ">
+    <div class="sm:container am:px-4 pb-6 sm:pb-10  mx-auto ">
         <div class="flex flex-col items-strech  contain   md:flex-row space-y-4md:space-y-0 md:space-x-3 ">
         <div class="w-full sm:w-9/12" >
             <a href="">
                 <img class="" src="/img/banners/banner1.jpg" alt="promotional-banner" srcset="">
             </a>
         </div>
-        <div class="sm:w-3/12" >
+        <div class="sm:w-3/12 hideInPhone" >
             <a  href="">
-        <div style="height: 155px;" class="  bg-black flex items-center justify-center mb-1" >
+        <div style="max-height: 155px;" class="  bg-black flex items-center justify-center mb-1" >
            
                 <img style="object-fit: cover; height:155px; width:auto;" class=" " src="/img/banners/banner1.jpg" alt="promotional-banner" srcset="">
            
         </div>
     </a>
         <a href="">
-        <div style="height: 155px;" class="bg-black flex items-center justify-center mt-1" >
+        <div style="max-height: 155px;" class="bg-black flex items-center justify-center mt-1" >
             
                 <img style="object-fit: cover; height:155px; width:auto;" class="" src="/img/banners/banner1.jpg" alt="promotional-banner" srcset="">
            
@@ -161,11 +161,11 @@
 
 
 
-<div class="container px-4 pt-6 pb-6  mx-auto ">
+<div class="sm:container  pt-6 pb-6  mx-auto ">
     <div class="flex flex-col justify-center items-strech  contain   md:flex-row space-y-4md:space-y-0 md:space-x-3 ">
     <div class="w-full  >
         <a href="">
-            <img style="object-fit: cover; height:255px; width:100%;" class="" src="/img/banners/banner1.jpg" alt="promotional-banner" srcset="">
+            <img style="object-fit: cover; width:100%;" class="h-1/4 sm:h-72 " src="/img/banners/banner1.jpg" alt="promotional-banner" srcset="">
         </a>
     </div>
 </div>
@@ -181,7 +181,7 @@
     <div class="owl-carousel">
        
         <% products.forEach((product) => { %>
-                <div class="flex flex-col items-center gap-2 px-2 py-6 relative">
+                <div class="flex flex-col items-center gap-2 px-2  relative">
                     <a href="/productDetails/<%= product._id %>/<%= product.product._id %>/1" class="flex flex-col items-center text-center group">
                     <div class="w-20 w-20 sm:w-36 sm:h-36">
                         <img draggable="false" class="w-full h-full object-contain" src="/img/<%= product.product.image %>"
@@ -234,7 +234,7 @@
     <div class="owl-carousel">
        
             <% latest.forEach((latest)=> { %>
-                <div class="flex flex-col items-center gap-2 px-2 py-6 relative">
+                <div class="flex flex-col items-center gap-2 px-2  relative">
                     <a href="/productDetails/<%= latest._id %>/<%= latest.product._id %>/1" class="flex flex-col items-center text-center group">
                     <div class="w-20 w-20 sm:w-36 sm:h-36">
                         <img draggable="false" class="w-full h-full object-contain" src="/img/<%= latest.product.image %>"
@@ -284,33 +284,33 @@
 
 <section class="container mx-auto mb-14  flex flex-wrap justify-around">
     <div style="justify-content: left; align-items: center;"
-        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5">
+        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5 shadow-md">
 
         <img src="/img/thermofisher.png" alt="" srcset=""></a>
     </div>
 
     <div style="justify-content: center; align-items: center;"
-        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5">
+        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5 shadow-md">
         <img src="/img/remi.png" alt="" srcset="">
     </div>
 
     <div style="justify-content: center; align-items: center;"
-        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5">
+        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5 shadow-md">
         <img src="/img/polylab.png" alt="" srcset="">
     </div>
 
     <div style="justify-content: center; align-items: center;"
-        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5">
+        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5 shadow-md">
         <img src="/img/borosil.jpg" alt="" srcset="">
     </div>
 
     <div style="justify-content: center; align-items: center;"
-        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5">
+        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5 shadow-md">
         <img src="/img/tarson.png" alt="" srcset="">
     </div>
 
     <div style="justify-content: center; align-items: center;"
-        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5">
+        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5 shadow-md">
         <img src="/img/merck.svg" alt="" srcset="">
     </div>
 </section>
