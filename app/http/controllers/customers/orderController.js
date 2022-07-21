@@ -88,22 +88,20 @@ function orderController() {
         async show(req, res) {
             const html = fs.readFileSync(path.join(__dirname, '../../../../resources/views/invoice.html'), 'utf-8');
             const filename = req.params.id + '.pdf';
-            // const order = await Order.findById(req.params.id).populate({ path: 'items.product', populate: [{ path: 'items.product', model: 'Product'}], model: 'Variation'})
-            const order = await Order.findById(req.params.id).populate({ path: 'items.product', model: 'Variation'})
-            // const order = await Order.findById(req.params.id).populate({ path: 'items.product', model: 'Product'})
-
+            const order = await Order.findById(req.params.id).populate({ path: 'items.product', populate: [{ path: 'product', model: 'Product'}], model: 'Variation'})
+      
             let array = [];
             it = order.items
             Object.values(it).forEach(d => {
                 const prod = {
-                    // name: d.product.product.name + " - " + d.product.name,
-                    // description: d.product.description,
+                    name: d.product.product.name + " - " + d.product.name,
+                    description: d.product.description,
                     quantity: d.quantity,
-                    // price: d.product.price,
-                    total: d.total,
-                    // total: d.product.price * d.quantity,
-                    // imgurl: d.product.image
+                    price: d.product.price,
+                    total: d.product.price * d.quantity,
+                    imgurl: d.product.image
                 }
+
                 console.log(prod)
                 array.push(prod);
             });
@@ -131,7 +129,7 @@ function orderController() {
                 gtotal: grandtotal
             }
 
-            console.log(grandtotal)
+            // console.log(grandtotal)
 
 
             const document = {
@@ -170,10 +168,7 @@ function orderController() {
                 var item_tp = items.product.price * items.quantity;
                 gst+= (item_tp * items.product.product.GST)/100
             }
-            // for (let items of Object.values(req.session.cart.items)) {
-            //     var item_tp = items.item.price * items.qty
-            //     gst+= (item_tp * items.item.GST)/100
-            // }
+
             console.log(gst);
             console.log(total);
             var cart_total = total
@@ -216,7 +211,6 @@ function orderController() {
             else {
 
                 return res.redirect('customer/checkout')
-                // res.render('customers/checkout', { sTotal: sub_total, p_fee: charg, delivery: delivery })
             }
 
 

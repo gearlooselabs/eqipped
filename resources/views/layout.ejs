@@ -86,12 +86,34 @@
               </a>
             </li>
 
+
+            
+            <% if(user.role=='vendor' ) { %>
             <li class="nav-link">
-              <a href="#">
+              <a href="/vendor/notify">
                 <i class='bx bx-bell icon'></i>
                 <span class="text nav-text">Notifications</span>
               </a>
             </li>
+            <% } %>
+
+            <% if(user.role=='admin' ) { %>
+            <li class="nav-link">
+              <a href="/home">
+                <i class='bx bx-bell icon'></i>
+                <span class="text nav-text">Notifications</span>
+              </a>
+            </li>
+            <% } %>
+
+            <% if(user.role=='customer' ) { %>
+            <li class="nav-link">
+              <a href="/home">
+                <i class='bx bx-bell icon'></i>
+                <span class="text nav-text">Notifications</span>
+              </a>
+            </li>
+            <% } %>
 
 
 

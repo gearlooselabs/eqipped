@@ -31,7 +31,6 @@ function initRoutes(app) {
     app.post('/login', authController().postLogin)
     // verification
     app.post('/send-otp-on-phone', authController().forSendingOtp)
-    // app.post('/send-otp-on-phone', authController().forOtpOld)
     app.get('/register', guest, authController().register)
     app.post('/register', authController().postRegister)
     app.get('/documentupload', auth, authController().uploadDocument)    
