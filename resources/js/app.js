@@ -52,7 +52,7 @@ initAdmin(socket)
 
 initAdmin1(socket)
 
-initVendor(socket)
+// initVendor(socket)
 
 
 
@@ -67,10 +67,10 @@ if(adminAreaPath.includes('admin')) {
     socket.emit('join', 'adminRoom')
 }
 
-let vendorAreaPath = window.location.pathname
-if(vendorAreaPath.includes('vendor')) {
-    socket.emit('join', 'vendorRoom')
-}
+// let vendorAreaPath = window.location.pathname
+// if(vendorAreaPath.includes('vendor')) {
+//     socket.emit('join', 'vendorRoom')
+// }
 
 
 socket.on('orderUpdated', (data) => {
