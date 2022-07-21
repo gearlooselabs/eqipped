@@ -14,34 +14,34 @@
                 </p>
             </div>
             <% } %>
-                <table class="w-full table-auto bg-white">
-                    <thead>
+                <table class="min-w-full">
+                    <thead class="bg-white border-b">
                         <tr>
-                            <th class="px-4 py-2 text-left">Date</th>
-                            <th class="px-4 py-2 text-left">Amount</th>
-                            <th class="px-4 py-2 text-left">Address</th>
-                            <th class="px-4 py-2 text-left">Time</th>
+                            <th scope="col" class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">Order Id</th>
+                            <th scope="col" class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">Amount</th>
+                            <th scope="col" class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">Date</th>
+                            <th scope="col" class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% if(orders.length) { %>
                             <% orders.forEach((order)=> { %>
-                                <tr>
-                                    <td class="border px-4 py-2">
+                                <tr class="hover:shadow">
+                                    <td class="  px-4 py-2">
                                         
-                                        <%= moment(order.createdAt).format('DD-MM-YYYY') %>
+                                        <%= order.bankTxnId%>
                                         <a class="link  group" href="/customer/orders/<%= order._id %>">
                                         <i style=" margin-left: 30px;" class="group-hover:text-blue-500 underline">check status</i>
                                         </a>
                                     </td>
-                                    <td class="border px-4 py-2">
+                                    <td class=" px-4 py-2">
                                         ₹ <%= order.txnAmount %>
                                     </td>
-                                    <td class="border px-4 py-2">
-                                        <%= order.address %>, <%= order.pincode %>
+                                    <td class=" px-4 py-2">
+                                        <%= moment(order.createdAt).format('DD-MM-YYYY') +"  :     " + moment(order.createdAt).format('hh:mm A') %>
                                     </td>
-                                    <td class="border px-4 py-2">
-                                        <%= moment(order.createdAt).format('hh:mm A') %>
+                                    <td class=" px-4 py-2">
+                                        <%= order.status%>
                                     </td>
                                 </tr>
                                 
