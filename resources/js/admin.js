@@ -21,16 +21,14 @@ export function initAdmin(socket) {
     })
 
 
-    // function renderItems(items) {
-    //     let parsedItems = Object.values(items)
-    //     return parsedItems.map((menuItem) => {
-    //         console.log(menuItem)
-    //         console.log(menuItem.product)
-    //         return `
-    //             <p>${ menuItem.product.name } - ${ menuItem.quantity } pcs </p>
-    //         `
-    //     }).join('')
-    //   }
+    function renderItems(items) {
+        let parsedItems = Object.values(items)
+        return parsedItems.map((menuItem) => {
+            return `
+                <p> ${menuItem.product.product.name} ${ menuItem.product.name } - ${ menuItem.quantity } pcs </p>
+            `
+        }).join('')
+      }
 
 
     function generateMarkup(orders) {
@@ -38,7 +36,8 @@ export function initAdmin(socket) {
             return `
                 <tr>
                 <td class="border px-4 py-2 text-green-900">
-                    <p>${ order.orderId }</p>
+                    <p class="underline"> ${ order.orderId }</p>
+                    <p>${ renderItems(order.items) }</p>
                 </td>
                 <td class="border px-4 py-2">Name-${ order.customerName } <br> Phone-${ order.phone }</td>
                 <td class="border px-4 py-2">${ order.address }</td>
