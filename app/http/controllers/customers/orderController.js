@@ -30,14 +30,17 @@ function orderController() {
         },
 
         store(req, res) {
+
             const orderid = new OrderId({
                 orderID: req.body.ORDERID
-
             })
+
+
             orderid.save().then((user) => {
             }).catch(err => {
                 req.flash('error', 'Something went wrong')
             })
+
             if (req.body.RESPCODE == '01' && req.body.STATUS == 'TXN_SUCCESS' && req.body.RESPMSG == 'Txn Success') {
                 const order = new Order({
                     customerId: req.user._id,
@@ -58,6 +61,7 @@ function orderController() {
                     respmsg: req.body.RESPMSG,
                     txnID: req.body.TXNID,
                 })
+
 
                 order.save().then(result => {
                     Order.populate(result, { path: 'customerId' }, (err, placedOrder) => {
@@ -102,7 +106,6 @@ function orderController() {
                     imgurl: d.product.image
                 }
 
-                console.log(prod)
                 array.push(prod);
             });
             array.forEach(i => {
@@ -129,7 +132,6 @@ function orderController() {
                 gtotal: grandtotal
             }
 
-            // console.log(grandtotal)
 
 
             const document = {
@@ -169,8 +171,6 @@ function orderController() {
                 gst+= (item_tp * items.product.product.GST)/100
             }
 
-            console.log(gst);
-            console.log(total);
             var cart_total = total
             var charges = (cart_total * 10) / 100
             var sub_total = cart_total + charges

@@ -37,16 +37,16 @@ function orderController() {
                
                 order.items.forEach((items) => {
 
-                    if(JSON.stringify(req.user._id) == JSON.stringify(items.product.vendor._id)){
-                        var element = {}
-                        element.name = items.product.product.name + ' ' + items.product.name;
-                        element.quantity = items.quantity;
-                        itemss.push(element);
-                        orderIds.push(order);
+                    // if(JSON.stringify(req.user._id) == JSON.stringify(items.product.vendor._id)){
+                    //     var element = {}
+                    //     element.name = items.product.product.name + ' ' + items.product.name;
+                    //     element.quantity = items.quantity;
+                    //     itemss.push(element);
+                    //     orderIds.push(order);
                         
-                        // console.log(items.product.product.name +' '+ items.product.name + ' ' + items.quantity)
-                        // console.log(items.product.vendor.fname + ' vendorId ' + items.product.vendor._id)
-                    }
+                    //     // console.log(items.product.product.name +' '+ items.product.name + ' ' + items.quantity)
+                    //     // console.log(items.product.vendor.fname + ' vendorId ' + items.product.vendor._id)
+                    // }
 
                     return
 
