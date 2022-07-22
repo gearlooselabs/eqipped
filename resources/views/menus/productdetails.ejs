@@ -45,43 +45,110 @@
                                 </div>
                             </div>
 
-                            <div class="mt-3 text-gray-700 text-sm" for="">Piece per pack: <%= product.piecePerPack %>
-                            </div>
-                        </div>
+                        <% if(user) {%>
+                            <span style="font-family: ubuntu;" class="text-black-500 font-bold text-2xl">₹ <%=
+                                    product.price %></span>
+                            <% } else { %>
+                                <a href="/login">
+                                    <span style="font-family: ubuntu;" class="text-red-500 font-bold text-lg">Login to
+                                        check price</span>
+                                </a>
+                                <% } %>
 
-                        <% if(user) { %>
+                                    <hr class="my-3">
+                                    <div class="mt-2">
+                                        <div class="mt-3 text-black-800 text-lg">Product Description</div>
+                                        <div class="mt-1 mb-4 text-red-500 text-sm">
+                                            <%= product.product.description %>
+                                        </div>
+                                        <div> <span class="text-gray-700 text-sm"> Brand: </span><span
+                                                class="size py-1 mx-2 px-2 rounded uppercase text-xs">
+                                                <%= product.product.brand %>
+                                            </span></div>
+                                        <div class="mt-3">
+                                            <label class="text-gray-700 text-sm" for="count">Variants:</label>
+                                            <div class="flex items-center mt-1">
+                                                <% variants.forEach((variant)=> { %>
+                                                    <% if(JSON.stringify(product._id)==JSON.stringify(variant._id)){ %>
+                                                        <a
+                                                            href="/productDetails/<%= variant._id %>/<%= variant.product._id %>/1"><button
+                                                                class="variantHover currentVariant border p-1.5 m-2 rounded text-xs">
+                                                                <%= variant.name %>
+                                                            </button></a>
+                                                        <% }else{ %>
+                                                            <a
+                                                                href="/productDetails/<%= variant._id %>/<%= variant.product._id %>/1"><button
+                                                                    class="variantHover border p-1.5 m-2 rounded text-xs">
+                                                                    <%= variant.name %>
+                                                                </button></a>
+                                                            <% } %>
+                                                                <% }) %>
+                                            </div>
+                                        </div>
 
-                            <div class="flex items-center mt-6 justify-center">
-                                <label class="text-gray-700 text-sm hidden" for="product-qty">Qty:</label>
-                                <input type="number" class="w-14 p-1 pl-2 mx-2 border rounded hidden" id="product-qty"
-                                    placeholder="1" value="1">
-                                <div id="buttonSection">
-                                    <% if(user.cart.length <=0){%>
-                                        <button id="add-cart-btn"
-                                            class=" flex-col mr-4 add-to-cart py-2 px-4 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
-                                            <span><svg class="h-4 w-4 float-left" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
-                                                    stroke="currentColor">
-                                                    <path
-                                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                            <span class="ml-3">Add to cart</span>
-                                        </button>
-                                        <%} else if(checkCart(user.cart, string)){%>%>
+                                        <div class="mt-3 text-gray-700 text-sm" for="">Piece per pack: <%=
+                                                product.piecePerPack %>
+                                        </div>
+                                    </div>
 
-                                            <button id="add-cart-btn" onclick="location.href='/cart'"
-                                                class=" flex-col mr-4 add-to-cart py-2 px-4 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
-                                                <span><svg class="h-4 w-4 float-left" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
-                                                        stroke="currentColor">
-                                                        <path
-                                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
-                                                        </path>
-                                                    </svg>
-                                                </span>
-                                                <span class="ml-3">Go To Cart</span>
+                                    <% if(user) { %>
+
+                                        <div class="flex items-center mt-6 justify-center">
+                                            <label class="text-gray-700 text-sm hidden" for="product-qty">Qty:</label>
+                                            <input type="number" class="w-14 p-1 pl-2 mx-2 border rounded hidden"
+                                                id="product-qty" placeholder="1" value="1">
+                                            <div id="buttonSection">
+                                                <% if(user.cart.length <=0){%>
+                                                    <button id="add-cart-btn"
+                                                        class=" flex-col mr-4 add-to-cart py-2 px-4 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
+                                                        <span><svg class="h-4 w-4 float-left" fill="none"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2" viewBox="0 0 24 24"
+                                                                stroke="currentColor">
+                                                                <path
+                                                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                                                </path>
+                                                            </svg>
+                                                        </span>
+                                                        <span class="ml-3">Add to cart</span>
+                                                    </button>
+                                                    <%} else if(checkCart(user.cart, string)){%>%>
+
+                                                        <button id="add-cart-btn" onclick="location.href='/cart'"
+                                                            class=" flex-col mr-4 add-to-cart py-2 px-4 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
+                                                            <span><svg class="h-4 w-4 float-left" fill="none"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2" viewBox="0 0 24 24"
+                                                                    stroke="currentColor">
+                                                                    <path
+                                                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                                                    </path>
+                                                                </svg>
+                                                            </span>
+                                                            <span class="ml-3">Go To Cart</span>
+                                                        </button>
+                                                        <%}else {%>
+                                                            <button id="add-cart-btn"
+                                                                class=" flex-col mr-4 add-to-cart py-2 px-4 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
+                                                                <span><svg class="h-4 w-4 float-left" fill="none"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2" viewBox="0 0 24 24"
+                                                                        stroke="currentColor">
+                                                                        <path
+                                                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                                                        </path>
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="ml-3">Add to cart</span>
+                                                            </button>
+
+                                                            <%}%>
+                                            </div>
+
+                                            <button id="buy-now-btn"
+                                                class="ml-4 flex-col buy-now py-2 px-4 bg-white-600 text-white text-sm font-medium rounded focus:outline-none focus:bg-white-500">
+                                                <span></span>
+                                                <span class="mx-6">Buy Now</span>
                                             </button>
                                             <%}else {%>
                                                 <button id="add-cart-btn"

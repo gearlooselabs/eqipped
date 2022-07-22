@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
 :root{
     /* ===== Colors ===== */
     /* --body-color: #E4E9F7; */
@@ -142,7 +143,9 @@ body.dark{
   } 
 
 
-
+.text-xxs{
+  font-size: 0.7rem;
+}
 
 
 
@@ -270,6 +273,10 @@ header .image-text .profession{
   cursor: pointer;
   transition: var(--tran-05);
   margin-top: 510px;
+}
+
+.text-xxs{
+  font-size: 0.5rem;
 }
 
 
@@ -671,6 +678,13 @@ body.dark .home .text{
   cursor: pointer;
   z-index: 10;
 }
+}
+@media only screen and (min-width: 1027px) {
+  
+.text-xxs{
+  font-size: 0.7rem;
+}
+
 }
 
 /* cherry (base landing page css /new) */

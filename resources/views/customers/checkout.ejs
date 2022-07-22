@@ -1,12 +1,13 @@
 <% if(user.cart.length > 0) { %>
-    <div class="container p-12 mx-auto">
+    <div class="container p-12 mx-auto bg-gray-50 ">
         <div class="flex flex-col w-full px-0 mx-auto md:flex-row">
             <div class="flex flex-col md:w-full">
-                <h2 class="mb-5 font-bold md:text-xl text-heading text-center">Shipping Details 
-                </h2>
+                <!-- <h2 class="mb-5 font-bold md:text-xl text-heading text-center">Shipping Details 
+                </h2> -->
 
-                <form action="/paynow" method="post" class="justify-center w-full mx-auto" id="payment-form">
-                    <div class="">
+                <form action="/paynow" method="post" class="justify-center  w-full mx-auto max-w-2/3" id="payment-form">
+                    <div class="form-step bg-white shadow-sm">
+                        <h2 style="font-family: 'Abel', sans-serif;" class="font-semibold">Shipping Details</h2>
                         <% if(user) { %>
                             <div class="space-x-0 lg:flex lg:space-x-4">
                             </div>
@@ -21,62 +22,62 @@
                                 </div>
                             </div> -->
 
-                            <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="space-x-0 lg:flex lg:space-x-4 mt-4 px-10">
 
                                 <div class="w-full lg:w-100 mt-4">
                                     <label for="Name" class="block mb-3 text-sm font-semibold text-gray-500">
                                         Name</label>
-                                    <input value="<%= user.fname %> <%= user.lname %>" disabled  class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    <input value="<%= user.fname %> <%= user.lname %>" disabled  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm">
                                 </div>
                                 
                                 <div class="w-full lg:w-100 mt-4">
                                     <label for="Email" class="block mb-3 text-sm font-semibold text-gray-500">
                                         Email</label>
-                                    <input value="<%= user.email %>" disabled  class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    <input value="<%= user.email %>" disabled  class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm">
                                 </div>
 
                             </div>
 
 
-                            <div class="mt-4">
+                            <div class="mt-4 px-10">
                                 <div class="w-full">
                                     <label for="Phone"
                                         class="block mb-3 text-sm font-semibold text-gray-500">Phone</label>
                                     <input name="phone" id="phone" type="text" value="<%= user.phone %>"
                                         placeholder="Phone"
-                                        class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                        class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm">
                                 </div>
                             </div>
 
-                            <div class="mt-4">
+                            <div class="mt-4 px-10">
                                 <div class="w-full">
                                     <label for="Address"
                                         class="block mb-3 text-sm font-semibold text-gray-500">Address</label>
                                     <input
-                                        class="w-full px-4 py-3 text-xs border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                                        class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
                                         id="address" name="address" value="<%= user.address %>"
-                                        placeholder="Address"></input>
+                                        placeholder="Address" required></input>
                                 </div>
                             </div>
-                            <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="space-x-0 lg:flex lg:space-x-4 mt-4 px-10">
                                 <div class="w-full lg:w-1/2 ">
                                     <label for="postcode" class="block mb-3 text-sm font-semibold text-gray-500">
                                         Area pincode</label>
                                     <input name="pincode" value="<%= user.pincode %>" type="text" required
                                         placeholder="Pin-Code" id="pincode"
-                                        class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                        class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm">
                                 </div>
                             </div>
 
 
 
 
-                            <div class="flex justify-between items-center pt-2 mt-12">
+                            <div class="flex justify-between items-center pt-2 mt-12 px-10 pb-10">
                                 <a href="/cart"> <button type="button"
-                                        class="inline-block cursor-pointer btn-primary px-4 py-2 rounded-full text-white">Return
+                                        class="inline-block cursor-pointer btn-primary px-10 py-2 rounded-lg text-white">Return
                                         to cart</button></a>
 
-                                <button class="btn-primary w-1/4 px-2 py-2 rounded-full text-white font-semibold"
+                                <button class="btn-primary w-1/4 px-1 py-2 rounded-lg text-white "
                                     type="submit">Pay to Order</button>
 
                             </div>
@@ -89,7 +90,32 @@
 
             <div class="flex flex-col w-full ml-0 lg:ml-12 lg:w-2/5">
                 <div class="pt-12 md:pt-0 2xl:ps-4">
-                    <h2 class="text-xl font-bold">Order Summary
+                    <section style="font-family: 'Abel', sans-serif;" class="form-step shadow-sm bg-white">
+                        <h2 class="font-semibold">Payment Summary</h2>
+    
+                        <div class="flex items-center w-full py-4  text-sm font-black border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
+                            <span class=" w-1/2"> Item Total </span>
+                            <span class="pl-2 w-1/2">₹<%= session.total %></span>
+                        </div>
+                        <div class="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
+                            <span class=" w-1/2"> Processing Fee </span>
+                            <span class="pl-2 w-1/2">₹<%= p_fee %></span>
+                        </div>
+                        <div class="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
+                            <span class=" w-1/2"> Taxes </span>
+                            <span class="pl-2 w-1/2">₹<%= taxes %></span>
+                        </div>
+                        <div class="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
+                            <span class=" w-1/2"> Delivery Charges </span>
+                            <span class="pl-2 w-1/2">₹<%= session.delivery %></span>
+                        </div>
+                        <div class="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
+                            <span class=" w-1/2"> Total </span>
+                            <span class="pl-2 w-1/2">₹<%= sTotal %></span>
+                        </div>
+    
+                    </section>
+                    <!-- <h2 class="text-xl font-bold">Order Summary
                     </h2>
                     <div class="mt-8">
                         <div class="flex flex-col space-y-4">
@@ -119,57 +145,31 @@
                                 </div>
                             <% })%>
                             </div>
-                    </div>
+                    </div> -->
 
-
-                    <div class="flex p-4 mt-4">
+                    <div class="form-step mt-4 bg-white shadow-sm">
+                    <div class="flex  ">
                         <h2 class="text-xl font-bold">Coupon code</h2>
                     </div>
 
 
-                    <div>
-                        <form class="space-y-3" action="/applycoupon" method="post">
+                    
+                        <form class="space-y-3 " action="/applycoupon" method="post">
                             <div class="w-full">
                                 <input name="coupon" id="coupon" type="text" placeholder="coupon"
-                                    class="w-full px-3 py-1 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    class="appearance-none rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm">
                             </div>
 
                             <div class="flex justify-center">
                                 <button type="submit" style="font-size: 11px;"
-                                    class="inline-block cursor-pointer btn-primary px-3 py-1 rounded-full text-white">Apply
+                                    class="inline-block cursor-pointer btn-primary px-10 py-2 rounded-lg text-white">Apply
                                 </button>
                             </div>
 
                         </form>
                     </div>
 
-                <section>
-                    <div class="flex p-4 mt-4">
-                        <h2 class="text-xl font-bol2 float-right">Payment Summary</h2>
-                    </div>
-
-                    <div class="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
-                        <span class=" w-1/2"> Item Total </span>
-                        <span class="pl-2 w-1/2">₹<%= session.total %></span>
-                    </div>
-                    <div class="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
-                        <span class=" w-1/2"> Processing Fee </span>
-                        <span class="pl-2 w-1/2">₹<%= p_fee %></span>
-                    </div>
-                    <div class="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
-                        <span class=" w-1/2"> Taxes </span>
-                        <span class="pl-2 w-1/2">₹<%= taxes %></span>
-                    </div>
-                    <div class="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
-                        <span class=" w-1/2"> Delivery Charges </span>
-                        <span class="pl-2 w-1/2">₹<%= session.delivery %></span>
-                    </div>
-                    <div class="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
-                        <span class=" w-1/2"> Total </span>
-                        <span class="pl-2 w-1/2">₹<%= sTotal %></span>
-                    </div>
-
-                </section>
+         
 
                 </div>
             </div>
@@ -178,7 +178,7 @@
     <% } else { %>
         <div class="empty-cart py-16">
             <div class="container mx-auto text-center">
-                <h1 class="text-3xl font-bold mb-2">Everyday do something, <br> That's why Add some products in cart
+                <h1 class="text-3xl font-bold mb-2">Oh my friend  <br> You've Hacked Us ..<br/><span >🤯</span>
                 </h1>
                 <a href="/allcategory"
                     class="inline-block px-6 py-2 rounded-full btn-primary text-white font-bold mt-12">Show Products</a>

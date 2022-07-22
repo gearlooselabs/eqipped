@@ -5,17 +5,33 @@
     width: 80%;
     margin: auto;
   }
+  .heading-font{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+ 
+    font-size: 3ex;
+    
+  }
   
   .heading {
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
+ 
     font-size: 3ex;
-    padding-left: 60px;
-    padding-bottom: 20px;
+    padding-left: 25px;
+    padding-bottom: 15px;
+    padding-top: 18px;
     
   }
-  
-
+  @media only screen and (min-width: 600px) {
+    .heading {
+        font-size: 3ex;
+        padding-left: 60px;
+        padding-bottom: 30px;
+        padding-top: 30px;
+        
+      }
+  }
   
 
 

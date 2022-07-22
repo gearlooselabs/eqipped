@@ -516,6 +516,11 @@ eventEmitter.on('orderPlaced', (data) => {
     io.to('adminRoom').emit('orderPlaced', data)
 })
 
+// Hatana nhi
+// eventEmitter.on('orderPlaced', (data) => {
+//     io.to('vendorRoom').emit('notifyVendor', data)
+// })
+
 
 eventEmitter.on('userCreated', (data) => {
     io.to('adminRoom').emit('userCreated', data)

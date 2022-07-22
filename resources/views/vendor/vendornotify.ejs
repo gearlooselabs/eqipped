@@ -1,0 +1,127 @@
+<section class="orders light-section">
+    <div class="container mx-auto pt-12 px-10">
+        <h1 class="font-bold text-lg mb-4">All orders</h1>
+        <table class="w-full table-auto bg-white">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 text-left">OrderIds</th>
+                    <th class="px-4 py-2 text-left">Ordered Items</th>
+                    <th class="px-4 py-2 text-left">Notifications</th>
+                    <th class="px-4 py-2 text-left">Status</th>
+                    <th class="px-4 py-2 text-left">Placed at</th>
+                    <th class="px-4 py-2 text-left">Contact Us</th>
+                </tr>
+            </thead>
+            <!-- <tbody id="notificationTableBody"> -->
+
+            <tbody class="">
+
+                <% orders.forEach((order, index)=> { %>
+                    <tr>
+                        <td class="border px-4 py-2 text-green-900">
+                            <p>
+                                <%= time[index].orderId %>
+                            </p>
+                        </td>
+
+                        <td class="border px-4 py-2 text-green-900 text-sm">
+                                <p>
+                               <span>Item: </span><%= order.name %> <br>
+                                    <span>Qty:</span>  <%= order.quantity %>
+                                </p>
+                        </td>
+                        <td class="border px-4 py-2 text-gray-700 text-sm">Mentioned items has been sold by eqipped. Please pack krke rakho jaldi se.</td>
+
+                        <td class="border px-4 py-2">
+                            <div class="inline-block relative w-64">
+                                <form action="" method="">
+                                    <input type="hidden" name="orderId" value="">
+                                    <!-- <select name="status" onchange="this.form.submit()" -->
+                                    <select name="status"
+                                        class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                        <option value="order_placed">Order Placed</option>
+                                        <option value="confirmed"> Notification received</option>
+                                        <option value="prepared">Ready to pick</option>
+                                    </select>
+                                </form>
+                                <div
+                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td class="border px-4 py-2">
+                                <p>
+                                    <%= moment(time[index].createdAt).format('hh:mm A') %>
+                                </p>
+                        </td>
+
+                        <td class="border px-4 py-2">
+                            <a href="#"> Contact Admin </a>
+                        </td>
+
+                    </tr>
+                <% }) %>
+
+                        <!-- <tr>
+                    <td class="border px-4 py-2 text-green-900">
+                        <% orders.forEach((order, index)=> { %>
+                            <p>
+                                <%= time[index].orderId %>
+                            </p>
+                            <% }) %>
+                    </td>
+                    <td class="border px-4 py-2 text-green-900">
+                        <% orders.forEach((order, index)=> { %>
+                            <p>
+                                <%= order.name %>
+                                    <%= order.quantity %>
+                            </p>
+                            <% }) %>
+                    </td>
+                    <td class="border px-4 py-2">Mentioned items has been sold by eqipped. Please pack krke rakho jaldi
+                        se.</td>
+                    <td class="border px-4 py-2">
+                        <div class="inline-block relative w-64">
+                            <form action="" method="POST">
+                                <input type="hidden" name="orderId" value="">
+                                <select name="status" onchange="this.form.submit()"
+                                    class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                    <option value="order_placed">Order Placed</option>
+                                    <option value="confirmed"> Notification received</option>
+                                    <option value="prepared">Ready to pick</option>
+                                </select>
+                            </form>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="border px-4 py-2">
+                        <% orders.forEach((order, index)=> { %>
+                            <p>
+                                <%= moment(time[index].createdAt).format('hh:mm A') %>
+                            </p>
+                            <% }) %>
+                    </td>
+
+                    <td class="border px-4 py-2">
+                        <a href="#"> Contact Admin </a>
+                    </td>
+
+                </tr> -->
+
+            </tbody>
+        </table>
+    </div>
+</section>

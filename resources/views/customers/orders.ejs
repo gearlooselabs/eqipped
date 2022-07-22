@@ -1,5 +1,5 @@
 
-<section class="orders light-section">
+<section class="orders light-section min-h-full">
     <div class="container mx-auto px-20 pt-12">
         <h1 class="font-bold text-lg mb-4">All orders</h1>
         <% if(messages.success) { %>
@@ -14,35 +14,37 @@
                 </p>
             </div>
             <% } %>
-                <table class="w-full table-auto bg-white">
-                    <thead>
+                <table class="min-w-full">
+                    <thead class="bg-white border-b">
                         <tr>
-                            <th class="px-4 py-2 text-left">Date</th>
-                            <th class="px-4 py-2 text-left">Amount</th>
-                            <th class="px-4 py-2 text-left">Address</th>
-                            <th class="px-4 py-2 text-left">Time</th>
+                            <th scope="col" class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">Order Id</th>
+                            <th scope="col" class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">Amount</th>
+                            <th scope="col" class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">Date</th>
+                            <th scope="col" class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% if(orders.length) { %>
                             <% orders.forEach((order)=> { %>
-                                <tr>
-                                    <td class="border px-4 py-2">
-                                        <a class="link" href="/customer/orders/<%= order._id %>">
-                                        <%= moment(order.createdAt).format('DD:MM:YYYY') %>
-                                        <i style="color: black; margin-left: 30px;" class="las la-external-link-square-alt"></i>
+                                <tr class="hover:shadow">
+                                    <td class="  px-4 py-2">
+                                        
+                                        <%= order.bankTxnId%>
+                                        <a class="link  group" href="/customer/orders/<%= order._id %>">
+                                        <i style=" margin-left: 30px;" class="group-hover:text-blue-500 underline">check status</i>
                                         </a>
                                     </td>
-                                    <td class="border px-4 py-2">
+                                    <td class=" px-4 py-2">
                                         ₹ <%= order.txnAmount %>
                                     </td>
-                                    <td class="border px-4 py-2">
-                                        <%= order.address %>, <%= order.pincode %>
+                                    <td class=" px-4 py-2">
+                                        <%= moment(order.createdAt).format('DD-MM-YYYY') +"  :     " + moment(order.createdAt).format('hh:mm A') %>
                                     </td>
-                                    <td class="border px-4 py-2">
-                                        <%= moment(order.createdAt).format('hh:mm A') %>
+                                    <td class=" px-4 py-2">
+                                        <%= order.status%>
                                     </td>
                                 </tr>
+                                
                                 <% }) %>
                                     <% } else { %>
                                         <tr>
@@ -52,4 +54,8 @@
                     </tbody>
                 </table>
     </div>
+    <div class="flex justify-center py-8">
+        <a href="/customer/checkout"><button
+                class="h-12 w-48 bg-blue-500 rounded focus:outline-none text-white ">Continue Shopping</button></a>
+    </div>  
 </section>
