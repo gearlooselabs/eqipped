@@ -2343,6 +2343,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin_user */ "./resources/js/admin_user.js");
 /* harmony import */ var _admin_product__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./admin_product */ "./resources/js/admin_product.js");
 /* harmony import */ var _vendor_notification__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./vendor_notification */ "./resources/js/vendor_notification.js");
+/* harmony import */ var _vendor_notification__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_vendor_notification__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -2400,8 +2401,8 @@ function updateStatus(order) {
 updateStatus(order);
 var socket = io();
 (0,_admin__WEBPACK_IMPORTED_MODULE_1__.initAdmin)(socket);
-(0,_admin_user__WEBPACK_IMPORTED_MODULE_2__.initAdmin1)(socket);
-(0,_vendor_notification__WEBPACK_IMPORTED_MODULE_4__.initVendor)(socket); //join
+(0,_admin_user__WEBPACK_IMPORTED_MODULE_2__.initAdmin1)(socket); // initVendor(socket)
+//join
 
 if (order) {
   socket.emit('join', "order_".concat(order._id));
@@ -2411,13 +2412,11 @@ var adminAreaPath = window.location.pathname;
 
 if (adminAreaPath.includes('admin')) {
   socket.emit('join', 'adminRoom');
-}
+} // let vendorAreaPath = window.location.pathname
+// if(vendorAreaPath.includes('vendor')) {
+//     socket.emit('join', 'vendorRoom')
+// }
 
-var vendorAreaPath = window.location.pathname;
-
-if (vendorAreaPath.includes('vendor')) {
-  socket.emit('join', 'vendorRoom');
-}
 
 socket.on('orderUpdated', function (data) {
   var updatedOrder = _objectSpread({}, order);
@@ -2450,66 +2449,91 @@ searchBtn.addEventListener("click", function () {
 /*!*********************************************!*\
   !*** ./resources/js/vendor_notification.js ***!
   \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "initVendor": () => (/* binding */ initVendor)
-/* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! noty */ "./node_modules/noty/lib/noty.js");
-/* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(noty__WEBPACK_IMPORTED_MODULE_2__);
-
-
- // export function initAdmin() {  
-
-function initVendor(socket) {
-  var orderTableBody = document.querySelector('#notificationTableBody');
-  var orders = [];
-  var markup;
-  axios__WEBPACK_IMPORTED_MODULE_0___default().get('/vendor/notify', {
-    headers: {
-      "X-Requested-With": "XMLHttpRequest"
-    }
-  }).then(function (res) {
-    orders = res.data;
-    markup = generateMarkup(orders);
-    notificationTableBody.innerHTML = markup;
-  })["catch"](function (err) {
-    console.log(err);
-  });
-
-  function renderItems(items) {
-    var parsedItems = Object.values(items);
-    return parsedItems.map(function (menuItem) {
-      return "\n            <p>".concat(menuItem.product.product.name, " ").concat(menuItem.product.name, " - ").concat(menuItem.quantity, " pcs </p>\n            ");
-    }).join('');
-  }
-
-  function generateMarkup(orders) {
-    return orders.map(function (order) {
-      return "\n                <tr>\n                <td class=\"border px-4 py-2 text-green-900\">\n                    <p class=\"underline\" >".concat(order.orderId, "</p>\n                    <p>").concat(renderItems(order.items), "</p>\n                </td>\n                <td class=\"border px-4 py-2\">Mentioned items has been sold by eqipped. Please pack krke rakho jaldi se.</td>\n                <td class=\"border px-4 py-2\">\n                    <div class=\"inline-block relative w-64\">\n                        <form action=\"/admin/order/status\" method=\"POST\">\n                            <input type=\"hidden\" name=\"orderId\" value=\"").concat(order._id, "\">\n                            <select name=\"status\" onchange=\"this.form.submit()\"\n                                class=\"block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline\">\n                                <option value=\"order_placed\"\n                                    ").concat(order.status === 'order_placed' ? 'selected' : '', ">\n                                    Order Placed</option>\n                                <option value=\"confirmed\" ").concat(order.status === 'confirmed' ? 'selected' : '', ">\n                                Notification received</option>\n                                <option value=\"prepared\" ").concat(order.status === 'prepared' ? 'selected' : '', ">\n                                Ready to pick</option>\n                            </select>\n                        </form>\n                        <div\n                            class=\"pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700\">\n                            <svg class=\"fill-current h-4 w-4\" xmlns=\"http://www.w3.org/2000/svg\"\n                                viewBox=\"0 0 20 20\">\n                                <path\n                                    d=\"M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z\" />\n                            </svg>\n                        </div>\n                    </div>\n                </td>\n                <td class=\"border px-4 py-2\">\n                    ").concat(moment__WEBPACK_IMPORTED_MODULE_1___default()(order.createdAt).format('hh:mm A'), "\n                </td>\n\n                <td class=\"border px-4 py-2\">\n                    ").concat(order.txnAmount, "\n                </td>\n\n            </tr>\n        ");
-    }).join('');
-  } // Socket
-
-
-  socket.on('notifyVendor', function (order) {
-    new (noty__WEBPACK_IMPORTED_MODULE_2___default())({
-      type: 'success',
-      timeout: 1000,
-      text: 'Notification!',
-      progressBar: false
-    }).show();
-    console.log(order);
-    orders.unshift(order);
-    notificationTableBody.innerHTML = '';
-    notificationTableBody.innerHTML = generateMarkup(orders);
-  });
-}
+// import axios from 'axios'
+// import moment from 'moment'
+// import Noty from 'noty'
+// export function initVendor(socket) {
+//     const orderTableBody = document.querySelector('#notificationTableBody');
+//     let orders = []
+//     let markup
+//     axios.get('/vendor/notify', {
+//         headers: {
+//             "X-Requested-With": "XMLHttpRequest"
+//         }
+//     }).then(res => {
+//         orders = res.data
+//         markup = generateMarkup(orders)
+//         notificationTableBody.innerHTML = markup
+//     }).catch(err => {
+//         console.log(err)
+//     })
+//     function renderItems(items) {
+//         let parsedItems = Object.values(items)
+//         return parsedItems.map((menuItem) => {
+//             return `
+//             <p>${menuItem.product.product.name} ${ menuItem.product.name } - ${ menuItem.quantity } pcs </p>
+//             `
+//         }).join('')
+//       }
+//     function generateMarkup(orders) {
+//         return orders.map(order => {
+//             return `
+//                 <tr>
+//                 <td class="border px-4 py-2 text-green-900">
+//                     <p class="underline" >${order.orderId}</p>
+//                     <p>${renderItems(order.items)}</p>
+//                 </td>
+//                 <td class="border px-4 py-2">Mentioned items has been sold by eqipped. Please pack krke rakho jaldi se.</td>
+//                 <td class="border px-4 py-2">
+//                     <div class="inline-block relative w-64">
+//                         <form action="/admin/order/status" method="POST">
+//                             <input type="hidden" name="orderId" value="${order._id}">
+//                             <select name="status" onchange="this.form.submit()"
+//                                 class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+//                                 <option value="order_placed"
+//                                     ${order.status === 'order_placed' ? 'selected' : ''}>
+//                                     Order Placed</option>
+//                                 <option value="confirmed" ${order.status === 'confirmed' ? 'selected' : ''}>
+//                                 Notification received</option>
+//                                 <option value="prepared" ${order.status === 'prepared' ? 'selected' : ''}>
+//                                 Ready to pick</option>
+//                             </select>
+//                         </form>
+//                         <div
+//                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+//                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+//                                 viewBox="0 0 20 20">
+//                                 <path
+//                                     d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+//                             </svg>
+//                         </div>
+//                     </div>
+//                 </td>
+//                 <td class="border px-4 py-2">
+//                     ${moment(order.createdAt).format('hh:mm A')}
+//                 </td>
+//                 <td class="border px-4 py-2">
+//                     ${order.txnAmount}
+//                 </td>
+//             </tr>
+//         `
+//         }).join('')
+//     }
+//     socket.on('notifyVendor', (order) => {
+//         new Noty({
+//             type: 'success',
+//             timeout: 1000,
+//             text: 'Notification!',
+//             progressBar: false,
+//         }).show();
+//         console.log(order)
+//         orders.unshift(order)
+//         notificationTableBody.innerHTML = ''
+//         notificationTableBody.innerHTML = generateMarkup(orders)
+//     })
+// }
 
 /***/ }),
 
