@@ -43,9 +43,23 @@ function orderController() {
                             itemss.push(element);
                             orderIds.push(order);
 
+<<<<<<< HEAD
                             // console.log(items.product.product.name +' '+ items.product.name + ' ' + items.quantity)
                             // console.log(items.product.vendor.fname + ' vendorId ' + items.product.vendor._id)
                         }
+=======
+                    // if(JSON.stringify(req.user._id) == JSON.stringify(items.product.vendor._id)){
+                    //     var element = {}
+                    //     element.name = items.product.product.name + ' ' + items.product.name;
+                    //     element.quantity = items.quantity;
+                    //     itemss.push(element);
+                    //     orderIds.push(order);
+                        
+                    //     // console.log(items.product.product.name +' '+ items.product.name + ' ' + items.quantity)
+                    //     // console.log(items.product.vendor.fname + ' vendorId ' + items.product.vendor._id)
+                    // }
+
+>>>>>>> e115faffd763190ae5485df4deeb92b68f2e03be
                     return
 
                 })

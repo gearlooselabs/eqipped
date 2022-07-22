@@ -17,7 +17,7 @@
                   ],
                   "GST": 18,
                   "HSN": 39269099,
-                  "codeNo.": [
+                  "code": [
                     11101,
                     11102,
                     11104,
@@ -27,7 +27,7 @@
                   ],
                   "image": "",
                   "brand": "Polylab",
-                  "categoryName": "Plasticware",
+                  "categoryName": "624e86f68964e0a947f59e02",
                   "containedLiquid": "No",
                   "description": "",
                   "itemWeight": "",
@@ -53,7 +53,7 @@
                   ],
                   "GST": 18,
                   "HSN": 39269099,
-                  "codeNo.": [
+                  "code": [
                     11110,
                     11111,
                     11112,
@@ -65,7 +65,7 @@
                   ],
                   "image": "",
                   "brand": "Polylab",
-                  "categoryName": "Plasticware",
+                  "categoryName": "624e86f68964e0a947f59e02",
                   "containedLiquid": "No",
                   "description": "",
                   "itemWeight": "",
@@ -75,79 +75,42 @@
                   "volume": "",
                   "subCategory": "",
                   "isverified": "Yes"
-                },
-                {
-                  "sellerRole": "",
-                  "name": "Breakers (Printed Graduation)",
-                  "price": [
-                    14,
-                    16,
-                    27,
-                    42,
-                    80,
-                    140,
-                    300,
-                    600
-                  ],
-                  "GST": 18,
-                  "HSN": 39269099,
-                  "codeNo.": [11151, 11152, 11153, 11154, 11155, 11156, 11157, 11158],
-                  "image": "",
-                  "brand": "Polylab",
-                  "categoryName": "Plasticware",
-                  "containedLiquid": "No",
-                  "description": "",
-                  "itemWeight": "",
-                  "netQuantity": "",
-                  "piecePerPack": "[12pcs, 12pcs, 12pcs, 12pcs, 6pcs, 6pcs, 2pcs, 2pcs]",
-                  "size": "[50ml, 100ml, 250ml, 500ml, 1000ml, 2000ml, 5000ml, 10000ml]",
-                  "volume": "",
-                  "subCategory": "",
-                  "isverified": "Yes"
-                },
-                {
-                  "sellerRole": "",
-                  "name": "Burette",
-                  "price": [
-                    210,
-                    235,
-                    380
-                  ],
-                  "GST": 18,
-                  "HSN": 39269099,
-                  "codeNo.": [
-                    11501,
-                    11502,
-                    11503
-                  ],
-                  "image": "",
-                  "brand": "Polylab",
-                  "categoryName": "Plasticware",
-                  "containedLiquid": "No",
-                  "description": "",
-                  "itemWeight": "",
-                  "netQuantity": "",
-                  "piecePerPack": "[10pcs, 10pcs, 10pcs]",
-                  "size": "[25ml, 50ml, 100ml]",
-                  "volume": "",
-                  "subCategory": "",
-                  "isverified": "Yes"
-                },
+                }
               ];
 
         json.forEach((item) => {
-            console.log(item);
-            // $.ajax({
-            //         type: 'POST',
-            //         url: '/update-cart',
-            //         data: params,
-            //         dataType: 'json',
-            //         encode: true,
-            //     }).done(function (result) {
-            //         if (result.status == "success") {
-            //             $('#cartcount').html('<super><span id = "cartcount"><i class = "fa fa-circle" style= "font-size: 10px;color: orange"></i></span></super>');
+            console.log(JSON.stringify(item.categoryName));
+            var params = {
+                "sellerRole": "admin",
+                "name": item.name,
+                "price": JSON.stringify(item.price),
+                "GST": item.GST,
+                "image": "",
+                "HSN": item.HSN,
+                "vcode": JSON.stringify(item.code),
+                "brand": item.brand,
+                "categoryName": item.categoryName,
+                "containedLiquid": item.containedLiquid,
+                "description": "",
+                "itemWeight": "",
+                "netQuantity": "",
+                "piecePerPack": item.piecePerPack,
+                "size": item.size,
+                "volume": "",
+                "subCategory": "",
+                "isverified": "Yes"
+            }
+            $.ajax({
+                    type: 'POST',
+                    url: '/upload-product',
+                    data: params,
+                    dataType: 'json',
+                    encode: true,
+                }).done(function (result) {
+                    if (result.status == "success") {
+                      alert('success');
 
-            //         }
-            //     })
+                    }
+                })
         })
 </script>

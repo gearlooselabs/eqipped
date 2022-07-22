@@ -81,7 +81,8 @@
             </li>
 
             <li class="nav-link">
-              <a href="/customer/orders">
+              <a id="ordercount" href="/customer/orders" >
+              
                 <i class="icon fa-brands fa-first-order-alt"></i>
                 <span class="text nav-text">My Orders</span>
               </a>
@@ -468,7 +469,7 @@
     </section>
 
     <script src="/socket.io/socket.io.js"></script>
-    <!-- <script src="/js/app.js"></script> -->
+    <script src="/js/app.js"></script>
     <script src="/js/owl.carousel.min.js"></script>
 
 
@@ -478,6 +479,7 @@
 
     <!-- autocomplete script for search-bar  -->
     <script>
+     
       $(function () {
         $('#searchProduct').autocomplete({
           source: function (req, res) {

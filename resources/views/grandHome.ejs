@@ -31,65 +31,28 @@
 </div>
 
 
-
-
-<div class="container mx-auto py-9 md:py-12 px-4 md:px-6">
-    <div class="flex items-strech justify-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 lg:space-x-8">
-        <div
-            class="flex flex-col md:flex-row items-strech justify-between bg-gray-50 dark:bg-gray-800 py-6 px-6 md:py-1 lg:px-8 md:w-8/12 lg:w-7/12 xl:w-8/12 2xl:w-9/12">
-            <div class="flex flex-col justify-center md:w-3/5">
-                <h1 class="text-3xl lg:text-2xl font-semibold text-gray-800 dark:text-white">Best Deal For Laboratory
-                    Supplies...</h1>
-                <p class="text-base lg:text-xl text-gray-800 dark:text-white mt-8">
-                    <a href="/allcategory"
-                        class="px-4 py-2 ml-10 rounded-full text-white text-sm font-bold btn-primary">Buy Now</a>
-                </p>
-            </div>
-            <div class="md:w-1/2 xl:w-1/2 mt-8 md:mt-0 flex justify-center md:justify-end">
-                <img src="/img/banner.png" alt="bannerUp" class="md:w-26 md:h-26 lg:w-60 lg:h-60" />
-            </div>
-        </div>
-        <div
-            class="md:w-4/12 lg:w-5/12 xl:w-4/12 2xl:w-3/12 bg-gray-50 dark:bg-gray-800 py-6 px-6 md:py-0 md:px-4 lg:px-6 flex flex-col justify-center">
-            <div class="flex flex-col justify-center">
-                <img src="/img/postquery.png" alt="postQueryImg" class="md:w-26 md:h-26 lg:w-56 lg:h-56 mx-auto" />
-                <p class="absolute ml-28 mt-48 text-base lg:text-xl text-gray-800 dark:text-white">
-                    <a href="#" class="px-3 py-2 rounded-lg text-white text-xs btn-primary"><i
-                            class="fa-solid fa-book-medical"></i> Post Your Query</a>
-                </p>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- <div class="sm:container am:px-4 pb-6 sm:pb-10  mx-auto ">
-    <div class="flex flex-col items-strech  contain   md:flex-row space-y-4md:space-y-0 md:space-x-3 ">
-        <div class="w-full sm:w-9/12">
+    <div class="sm:container am:px-4 pb-6 sm:pb-10  mx-auto ">
+        <div class="flex flex-col items-strech contain  md:flex-row space-y-4md:space-y-0 md:space-x-3 ">
+        <div class="w-full sm:w-9/12" >
             <a href="">
-                <img class="" src="/img/banners/banner1.jpg" alt="promotional-banner" srcset="">
+                <img style="object-fit: cover;  width: 110%;" class="" src="/img/banners/bighulk1.jpg" alt="promotional-banner" srcset="">
             </a>
         </div>
-        <div class="sm:w-3/12 hideInPhone">
-            <a href="">
-                <div style="max-height: 155px;" class="  bg-black flex items-center justify-center mb-1">
-
-                    <img style="object-fit: cover; height:155px; width:auto;" class=" " src="/img/banners/banner1.jpg"
-                        alt="promotional-banner" srcset="">
-
-                </div>
-            </a>
-            <a href="">
-                <div style="max-height: 155px;" class="bg-black flex items-center justify-center mt-1">
-
-                    <img style="object-fit: cover; height:155px; width:auto;" class="" src="/img/banners/banner1.jpg"
-                        alt="promotional-banner" srcset="">
-
-                </div>
-            </a>
+        <div class="sm:w-3/12 hideInPhone" >
+            <a  href="">
+        <div style="max-height: 155px;" class="   bg-black flex items-center justify-center mb-1" >
+           
+                <img style="object-fit: cover; height: 155px; width: 110%;" class=" " src="/img/banners/sidebanner2.jpg" alt="promotional-banner" srcset="">
+           
         </div>
-
+    </a>
+        <a href="">
+        <div style="max-height: 155px;" class="bg-black flex items-center justify-center mt-1" >
+            
+                <img style="object-fit: cover; height:155px; width: 110%;" class="" src="/img/banners/sidebanner3.jpg" alt="promotional-banner" srcset="">
+           
+        </div>
+    </a>
     </div>
 </div> -->
 
@@ -149,20 +112,61 @@
 </div>
 
 
-<!-- Banner Middle  -->
-<div class="container mx-auto pb-10 py-9 md:py-12 px-4 md:px-6">
-    <div class="flex items-strech justify-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 lg:space-x-8">
-        <div
-            class="flex flex-col md:flex-row items-strech justify-between bg-gray-50 dark:bg-gray-800 py-6 px-6 md:py-12 lg:px-12 md:w-9/12 lg:w-8/12 xl:w-9/12 2xl:w-10/12">
-            <div class="flex flex-col justify-center md:w-1/2">
-                <h1 class="text-3xl lg:text-4xl font-semibold text-gray-800 dark:text-white">Best Deal</h1>
-                <p class="text-base lg:text-xl text-gray-800 dark:text-white mt-2">Save upto <span
-                        class="font-bold">50%</span></p>
-            </div>
-            <div class="md:w-1/2 mt-8 md:mt-0 flex justify-center md:justify-end">
-                <img src="https://i.ibb.co/J2BtZdg/Rectangle-56-1.png" alt="" class="" />
-            </div>
-        </div>
+
+<!-- <h1 class="heading">Laboratory Chemicals</h1>
+
+<section class=" mx-auto p-0 sm:p-8 flex flex-wrap justify-around">
+    <div class="owl-carousel">
+        <% chemicals.forEach((product) => { %>
+            <div class="flex flex-col items-center gap-2 px-2 py-6 relative">
+                    <a href="/productDetails/<%= product._id %>/<%= product.product._id %>/1" class="flex flex-col items-center text-center group">
+                    <div class="w-20 w-20 sm:w-36 sm:h-36">
+                        <img draggable="false" class="w-full h-full object-contain" src="/img/<%= product.product.image %>"
+                            alt="{name}" />
+                    </div>
+                    <h2 class="text-sm mt-4 group-hover:text-blue-500">
+                        <%= product.product.name %> - <%= product.name %>
+                    </h2>
+                
+
+                    <div class="flex flex-col gap-2 items-center">
+
+                        <span class="text-sm text-gray-500 font-medium flex gap-2 items-center">
+                            <span style="background-color: #388e3c;"
+                                class="text-xs px-1.5 py-0.5  rounded-sm text-white flex items-center gap-0.5">4.5<img
+                                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg=="
+                                    class="_1wB99o"></span>
+                            <span>(5)</span>
+                        </span>
+
+                        <% if(user) {%>
+                        <div class="flex items-center gap-1.5 text-md font-medium">
+                            <span>₹<%= product.price %></span>
+                            <span class="text-gray-500 line-through text-xs">₹ <%= Math.floor(product.price/0.3) %></span>
+                            <span style="color: #388e3c;"   class="text-xs font-medium">30%&nbsp;off</span>
+                        </div>
+                        <% } %>
+
+                    </div>
+                </a>
+                       <span onClick={addToWishlistHandler} class={`${itemInWishlist ? "text-red-500" : "hover:text-red-500 text-gray-300"} absolute top-5 right-2 cursor-pointer`}><svg xmlns="http://www.w3.org/2000/svg" class="_1l0elc" width="16" height="16" viewBox="0 0 20 16"><path d="M8.695 16.682C4.06 12.382 1 9.536 1 6.065 1 3.219 3.178 1 5.95 1c1.566 0 3.069.746 4.05 1.915C10.981 1.745 12.484 1 14.05 1 16.822 1 19 3.22 19 6.065c0 3.471-3.06 6.316-7.695 10.617L10 17.897l-1.305-1.215z" fill="#2874F0" class="eX72wL" stroke="#FFF" fill-rule="evenodd" opacity=".9"></path></svg></span>
+
+
+                </div>
+
+                <% }) %>
+    </div>
+</section> -->
+
+
+
+
+<div class="sm:container  pt-6 pb-6  mx-auto ">
+    <div class="flex flex-col justify-center items-strech  contain   md:flex-row space-y-4md:space-y-0 md:space-x-3 ">
+    <div class="w-full  >
+        <a href="">
+            <img style="object-fit: cover; width:100%;" class="h-1/4 sm:h-72 " src="/img/banners/bannerbig.webp" alt="promotional-banner" srcset="">
+        </a>
     </div>
 </div>
 
@@ -171,7 +175,7 @@
 <h1 class="heading shadow-sm">Best Selling</h1>
 
 <!-- ====== Cards Section Start -->
-<section class="sm:container mx-auto flex flex-wrap justify-around shadow-sm">
+<section class="sm:container pt-4 mx-auto flex flex-wrap justify-around shadow-sm">
     <div class="owl-carousel">
 
         <% products.forEach((product)=> { %>
@@ -226,7 +230,7 @@
 
 
 <!-- ====== Cards Section Start -->
-<section class="sm:container shadow-sm mx-auto  flex flex-wrap justify-around">
+<section class="sm:container pt-4  shadow-sm mx-auto  flex flex-wrap justify-around">
     <div class="owl-carousel">
 
         <% latest.forEach((latest)=> { %>
@@ -282,33 +286,33 @@
 
 <section class="container mx-auto mb-14  flex flex-wrap justify-around">
     <div style="justify-content: left; align-items: center;"
-        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5 shadow-md">
+        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl p-3 m-3 shadow-md hover:shadow-lg ">
 
         <img src="/img/thermofisher.png" alt="" srcset=""></a>
     </div>
 
     <div style="justify-content: center; align-items: center;"
-        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5 shadow-md">
+        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl p-3 m-3 shadow-md hover:shadow-lg">
         <img src="/img/remi.png" alt="" srcset="">
     </div>
 
     <div style="justify-content: center; align-items: center;"
-        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5 shadow-md">
+        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl p-3 m-3 shadow-md hover:shadow-lg">
         <img src="/img/polylab.png" alt="" srcset="">
     </div>
 
     <div style="justify-content: center; align-items: center;"
-        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5 shadow-md">
+        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl p-3 m-3 shadow-md hover:shadow-lg">
         <img src="/img/borosil.jpg" alt="" srcset="">
     </div>
 
     <div style="justify-content: center; align-items: center;"
-        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5 shadow-md">
+        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl p-3 m-3 shadow-md hover:shadow-lg">
         <img src="/img/tarson.png" alt="" srcset="">
     </div>
 
     <div style="justify-content: center; align-items: center;"
-        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl m-5 shadow-md">
+        class="flex flex-col h-min w-36 p-1 border-box bg-white rounded xl p-3 m-3 shadow-md hover:shadow-lg">
         <img src="/img/merck.svg" alt="" srcset="">
     </div>
 </section>

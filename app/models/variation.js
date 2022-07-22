@@ -11,6 +11,7 @@ const variationSchema = new Schema({
     sub: { type: Schema.Types.ObjectId, ref: 'Sub'},
     name: { type: String},
     price: { type: Number},
+    piecePerPack: { type: String},
     vendor: { type: Schema.Types.ObjectId, ref: 'User'}
 }, {timestamps: true })
 
