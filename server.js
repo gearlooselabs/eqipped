@@ -68,8 +68,12 @@ app.use(express.json())
 app.use((req, res, next) => {
     res.locals.session = req.session
     res.locals.user = req.user
+    res.locals.order = req.order
     next()
 })
+
+
+
 
 // Render html page 
 app.get('/pls', (req, res) => {
@@ -112,7 +116,7 @@ const { response } = require('express')
 
 app.post('/paynow', [parseUrl, parseJson], async (req, res) => {
     if (req.user.cart.length > 0) {
-        const { phone, address, pincode} = req.body
+        const { phone, address, pincode } = req.body
         res.locals.session.phone = phone
         res.locals.session.address = address
         res.locals.session.pincode = pincode
@@ -170,7 +174,6 @@ app.post('/paynow', [parseUrl, parseJson], async (req, res) => {
             req.flash('error', 'Some Error Ocurred! Please Try Again');
             return res.redirect('back');
         }
-        console.log(oidd)
 
         const https = require('https');
         const PaytmChecksum = require('./routes/Paytm/checksum');
@@ -231,7 +234,7 @@ app.post('/paynow', [parseUrl, parseJson], async (req, res) => {
 
                 var token = post_res.on('end', function () {
                     response = JSON.parse(response);
-                    console.log(response)
+                    // console.log(response)
                     res.render('payment', { txnToken: response.body.txnToken, amount: req.session.total, orderID: oidd })
                 });
             });
