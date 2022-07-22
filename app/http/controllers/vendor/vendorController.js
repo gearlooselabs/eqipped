@@ -38,6 +38,80 @@ function vendorController() {
                     return res.redirect('/vendor/listedProduct')
                 }
             })
+        },
+
+        uploadJsonPage(req, res){
+            res.render('upload-product-page');
+        },
+
+        async uploadJson(req, res){
+                      const product = new Product({
+                          customerId: req.user._id,
+                          sellerRole: req.user.role,
+                          name,
+                          image: req.file.filename,
+                          price,
+                          size,
+                          brand,
+                          description,
+                          piecePerPack,
+                          categoryName,
+                          itemWeight,
+                          HSN,
+                          GST,
+                          volume,
+                          netQuantity,
+                          containedLiquid,
+                      });
+        
+                      product.save().then(result => {
+                        // Sub.updateOne({
+                        //     _id: subCategory
+                        //   }, {
+                        //     $push: {
+                        //         product: product._id
+                        //     }
+                        //   }, (err) => {
+                        //     if(err){
+                        //         req.flash('error', 'Something went wrong')
+                        //         console.log(err);
+                        //         return res.redirect('/addproduct')
+                        //     }
+                        //   })
+                        Product.populate(result, { path: 'customerId' }, (err) => {
+                            if (!err) { req.flash('error', 'Product Added Successfully'); 
+                            }
+                        })
+                      }).catch(err => {
+                          req.flash('error', 'Something went wrong')
+                          console.log(err);
+                          return res.redirect('/addproduct')
+                      });
+        
+                      async function something(item, price, code){
+                            let variation = new Variation({
+                                product: product._id,
+                                pname: name,
+                                variation: vname,
+                                vcode: code,
+                                category: categoryName,
+                                brand: brand,
+                                name: item,
+                                price: price,
+                                vendor: req.user._id
+                            })
+        
+                            await variation.save((err) => {
+                                if(err) console.log(err)
+                                console.log("Variation Saved Successfully")
+                            });
+                        }
+        
+                        variant.forEach((variant, index) =>{
+                            var price = prices[index];
+                            var code = vcodes[index];
+                            something(variant, price, code);
+                        })
         }
 
     }

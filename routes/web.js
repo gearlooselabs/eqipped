@@ -48,7 +48,10 @@ function initRoutes(app) {
     app.get('/vendor/listedProduct', vendor, vendorController().index)
     app.get('/addproduct', vendor, vendorController().addproduct)
     app.get('/editproduct/:id', vendor, vendorController().editProduct)
-    app.post('/editproducts', vendor, vendorController().posteditProduct)
+    app.get('/upload-product-page', vendorController().uploadJsonPage);
+    app.get('/upload-product', vendor, vendorController().uploadJson);
+    app.post('/editproducts', vendor, vendorController().posteditProduct);
+
     // Notify
     app.get('/vendor/notify',vendor ,adminOrderController().goToVendorNotify)
 
