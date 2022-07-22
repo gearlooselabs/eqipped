@@ -98,11 +98,11 @@
                             <% user.cart.forEach((product) => { %>
                                 <div style="border: 2px solid black;" class="rounded flex space-x-4">
                                     <div class="flex items-center">
-                                        <img src="/img/<%= product.product.image %>" alt="image" class="w-60">
+                                        <img src="/img/<%= product.product.product.image %>" alt="image" class="w-60">
                                     </div>
                                     <div class="w-full px-4 py-2">
                                         <h2 class="text-lg font-bold mb-1">
-                                            <%= product.product.name %>
+                                            <%= product.product.product.name %> - <%= product.product.name %>
                                         </h2>
                                         <p class="text-sm">Size: <%= product.product.size %>
                                         </p>
@@ -114,7 +114,7 @@
                                         <span class="font-bold text-sm">₹ <%= product.product.price * product.quantity %></span>
                                         <br>
                                         <span class="text-red-600">GST: </span>
-                                        <span class="font-bold text-sm"><%= product.product.GST %>%</span>
+                                        <span class="font-bold text-sm"><%= product.product.product.GST %>%</span>
                                     </div>
                                 </div>
                             <% })%>
