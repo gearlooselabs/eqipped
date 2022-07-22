@@ -1116,3 +1116,6 @@ input[type=number]::-webkit-outer-spin-button {
 .swal-icon1 {
     display: none;
 }
+#ordercount active{
+border: 2px solid red;
+}
